@@ -146,12 +146,12 @@ namespace BlockEngine
             if (flag)
             {
                 sprite.Sprite.IsVisible = false;
-                this.VisibleSprites.Remove(sprite);
+                sprite.IsRendered = false;
             }
             else
             {
                 sprite.Sprite.position = new PixBlocks.PythonIron.Tools.Integration.Vector(sprite.X, sprite.Y);
-                bool flag2 = !sprite.IsVisible;
+                bool flag2 = !sprite.Sprite.IsVisible;
                 if (flag2)
                 {
                     this.addSpriteToGame(sprite);
@@ -162,10 +162,9 @@ namespace BlockEngine
         // Token: 0x0600001A RID: 26 RVA: 0x000026D8 File Offset: 0x000008D8
         private void addSpriteToGame(SpriteOverlay sprite)
         {
-            bool flag = !this.VisibleSprites.Contains(sprite);
-            if (flag)
+            if (!sprite.IsRendered)
             {
-                this.VisibleSprites.Add(sprite);
+                sprite.IsRendered = true;
                 GameScene.gameSceneStatic.add(sprite.Sprite);
             }
         }
@@ -190,9 +189,6 @@ namespace BlockEngine
 
         // Token: 0x04000008 RID: 8
         public List<Block> Blocks = new List<Block>();
-
-        // Token: 0x0400000A RID: 10
-        public List<SpriteOverlay> VisibleSprites = new List<SpriteOverlay>();
 
         // Token: 0x0400000C RID: 12
         public List<Foliage> Toppings = new List<Foliage>();

@@ -16,31 +16,10 @@ namespace BlockEngine
             Engine = engine;
         }
 
-        // Token: 0x17000003 RID: 3
-        // (get) Token: 0x06000008 RID: 8 RVA: 0x00002188 File Offset: 0x00000388
         public Sprite Sprite { get; }
-
-        // Token: 0x17000004 RID: 4
-        // (get) Token: 0x06000009 RID: 9 RVA: 0x00002190 File Offset: 0x00000390
         public int Id { get; }
-
+        public bool IsRendered = false;
         public IDrawer Engine { get; }
-
-        // Token: 0x17000005 RID: 5
-        // (get) Token: 0x0600000A RID: 10 RVA: 0x00002198 File Offset: 0x00000398
-        // (set) Token: 0x0600000B RID: 11 RVA: 0x000021B0 File Offset: 0x000003B0
-        public bool IsVisible
-        {
-            get
-            {
-                return this.isVisible;
-            }
-            set
-            {
-                this.isVisible = value;
-                this.Sprite.IsVisible = value;
-            }
-        }
 
         // Token: 0x0600000C RID: 12 RVA: 0x000021C7 File Offset: 0x000003C7
         public virtual void Move(double roation, double lenght)
@@ -65,8 +44,5 @@ namespace BlockEngine
 
         // Token: 0x04000005 RID: 5
         public double Y;
-
-        // Token: 0x04000006 RID: 6
-        private bool isVisible = false;
     }
 }
