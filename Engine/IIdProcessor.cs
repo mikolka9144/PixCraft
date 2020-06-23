@@ -18,6 +18,9 @@ namespace BlockEngine
                 case 2:
                     overlay.Sprite.color = new Color(200, 100, 50);
                     break;
+                case 3:
+                    overlay.Sprite.color = new Color(156, 159, 161);
+                    break;
             }
         }
     }

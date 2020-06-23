@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace BlockEngine
 {
-    public class Engine : IDrawer
+    public class Engine : IDrawer, ITileManager
     {
         public SpriteOverlay Center;
 
@@ -67,9 +67,10 @@ namespace BlockEngine
         // Token: 0x06000013 RID: 19 RVA: 0x00002444 File Offset: 0x00000644
         public void CreateGenerator(int seed, int size)
         {
-                this.randomizer = new Random(seed);
-                GenerateNext(true, size / 2);
-                this.GenerateNext(false, size / 2);
+            this.randomizer = new Random(seed);
+            var generator = new Generator(seed,this);
+            generator.GenerateTerrian(size);
+            generator.CreateUnderGround(size);
         }
 
         // Token: 0x06000014 RID: 20 RVA: 0x0000246C File Offset: 0x0000066C
@@ -81,49 +82,7 @@ namespace BlockEngine
             this.Toppings.Remove(tile.foliage);
         }
 
-        // Token: 0x06000015 RID: 21 RVA: 0x000024C0 File Offset: 0x000006C0
-        internal void GenerateNext(bool right, int blocks)
-        {
-            if (right)
-            {
-                for (int i = -blocks; i < 0; i++)
-                {
-                    var random = randomizer.Next(1, 5);
-                    for (int j = 0; j < random; j++)
-                    {
-                        if (random-1==j)
-                        {
-                            this.AddBlockTile(20 * i, 20 * j + (int)this.Center.Y, 1, 20, false);
-                        }
-                        else
-                        {
 
-                        this.AddBlockTile(20 * i, 20 * j + (int)this.Center.Y, 2, 20, false);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                for (int k = 0; k < blocks; k++)
-                {
-                    var random = randomizer.Next(1, 5);
-                    for (int l = 0; l < random; l++)
-                    {
-                        if (random-1==l)
-                        {
-                            this.AddBlockTile(20 * k, 20 * l + (int)this.Center.Y, 1, 20, false);
-
-                        }
-                        else
-                        {
-
-                        this.AddBlockTile(20 * k, 20 * l + (int)this.Center.Y, 2, 20, false);
-                        }
-                    }
-                }
-            }
-        }
 
         // Token: 0x06000016 RID: 22 RVA: 0x0000258D File Offset: 0x0000078D
         private void MoveScene(int X, int Y)
@@ -141,7 +100,7 @@ namespace BlockEngine
         // Token: 0x06000018 RID: 24 RVA: 0x000025D0 File Offset: 0x000007D0
         public void AddBlockTile(int X, int Y, int Id, int size, bool SholdDraw)
         {
-            Block block = new Block(X, Y, Id, size, this,IdProcessor);
+            Block block = new Block(X, Y, Id, size, this, IdProcessor);
             this.Blocks.Add(block);
             Toppings.Add(block.foliage);
             if (SholdDraw)

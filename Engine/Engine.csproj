@@ -48,8 +48,10 @@
     <Compile Include="Center.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Foliage.cs" />
+    <Compile Include="Generator.cs" />
     <Compile Include="IDrawer.cs" />
     <Compile Include="IIdProcessor.cs" />
+    <Compile Include="ITileManager.cs" />
     <Compile Include="Pointer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpriteOverlay.cs" />
