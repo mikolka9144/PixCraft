@@ -67,16 +67,9 @@ namespace BlockEngine
         // Token: 0x06000013 RID: 19 RVA: 0x00002444 File Offset: 0x00000644
         public void CreateGenerator(int seed, int size)
         {
-            try
-            {
                 this.randomizer = new Random(seed);
-                GenerateNext(0, size / 2);
-                this.GenerateNext(-1, size / 2);
-            }
-            catch (Exception x)
-            {
-                MessageBox.Show(x.Message);
-            }
+                GenerateNext(true, size / 2);
+                this.GenerateNext(false, size / 2);
         }
 
         // Token: 0x06000014 RID: 20 RVA: 0x0000246C File Offset: 0x0000066C
@@ -89,25 +82,44 @@ namespace BlockEngine
         }
 
         // Token: 0x06000015 RID: 21 RVA: 0x000024C0 File Offset: 0x000006C0
-        internal void GenerateNext(int offset, int blocks)
+        internal void GenerateNext(bool right, int blocks)
         {
-            if (offset < 0)
+            if (right)
             {
-                for (int i = -blocks; i < offset; i++)
+                for (int i = -blocks; i < 0; i++)
                 {
-                    for (int j = 0; j < randomizer.Next(1, 5); j++)
+                    var random = randomizer.Next(1, 5);
+                    for (int j = 0; j < random; j++)
                     {
-                        this.AddBlockTile(20 * i, 20 * j + (int)this.Center.Y, 1, 20, false);
+                        if (random-1==j)
+                        {
+                            this.AddBlockTile(20 * i, 20 * j + (int)this.Center.Y, 1, 20, false);
+                        }
+                        else
+                        {
+
+                        this.AddBlockTile(20 * i, 20 * j + (int)this.Center.Y, 2, 20, false);
+                        }
                     }
                 }
             }
             else
             {
-                for (int k = offset; k < blocks; k++)
+                for (int k = 0; k < blocks; k++)
                 {
-                    for (int l = 0; l < this.randomizer.Next(1, 5); l++)
+                    var random = randomizer.Next(1, 5);
+                    for (int l = 0; l < random; l++)
                     {
-                        this.AddBlockTile(20 * k, 20 * l + (int)this.Center.Y, 1, 20, false);
+                        if (random-1==l)
+                        {
+                            this.AddBlockTile(20 * k, 20 * l + (int)this.Center.Y, 1, 20, false);
+
+                        }
+                        else
+                        {
+
+                        this.AddBlockTile(20 * k, 20 * l + (int)this.Center.Y, 2, 20, false);
+                        }
                     }
                 }
             }
@@ -164,8 +176,8 @@ namespace BlockEngine
         {
             if (!sprite.IsRendered)
             {
-                sprite.IsRendered = true;
                 GameScene.gameSceneStatic.add(sprite.Sprite);
+                sprite.IsRendered = true;
             }
         }
 
