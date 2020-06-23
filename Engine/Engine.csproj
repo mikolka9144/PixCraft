@@ -49,6 +49,7 @@
     <Compile Include="Engine.cs" />
     <Compile Include="Foliage.cs" />
     <Compile Include="IDrawer.cs" />
+    <Compile Include="IIdProcessor.cs" />
     <Compile Include="Pointer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpriteOverlay.cs" />

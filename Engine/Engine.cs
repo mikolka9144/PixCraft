@@ -129,7 +129,7 @@ namespace BlockEngine
         // Token: 0x06000018 RID: 24 RVA: 0x000025D0 File Offset: 0x000007D0
         public void AddBlockTile(int X, int Y, int Id, int size, bool SholdDraw)
         {
-            Block block = new Block(X, Y, Id, size, this);
+            Block block = new Block(X, Y, Id, size, this,IdProcessor);
             this.Blocks.Add(block);
             Toppings.Add(block.foliage);
             if (SholdDraw)
@@ -196,6 +196,8 @@ namespace BlockEngine
 
         // Token: 0x0400000C RID: 12
         public List<Foliage> Toppings = new List<Foliage>();
+
+        public BlockIdProcessor IdProcessor = new BlockIdProcessor();
 
         // Token: 0x0400000D RID: 13
         public List<SpriteOverlay> Sprites = new List<SpriteOverlay>();
