@@ -7,7 +7,7 @@ namespace BlockEngine
     public class SpriteOverlay
     {
         // Token: 0x06000007 RID: 7 RVA: 0x00002158 File Offset: 0x00000358
-        public SpriteOverlay(Sprite sprite, int x, int y, int Id, Engine engine)
+        public SpriteOverlay(Sprite sprite, int x, int y, int Id, IDrawer engine)
         {
             this.Sprite = sprite;
             this.X = (double)x;
@@ -24,7 +24,7 @@ namespace BlockEngine
         // (get) Token: 0x06000009 RID: 9 RVA: 0x00002190 File Offset: 0x00000390
         public int Id { get; }
 
-        public Engine Engine { get; }
+        public IDrawer Engine { get; }
 
         // Token: 0x17000005 RID: 5
         // (get) Token: 0x0600000A RID: 10 RVA: 0x00002198 File Offset: 0x00000398

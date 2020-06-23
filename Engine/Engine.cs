@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace BlockEngine
 {
-    public class Engine
+    public class Engine : IDrawer
     {
         public SpriteOverlay Center;
 
@@ -131,16 +131,16 @@ namespace BlockEngine
         {
             Block block = new Block(X, Y, Id, size, this);
             this.Blocks.Add(block);
-            this.Toppings.Add(block.foliage);
+            Toppings.Add(block.foliage);
             if (SholdDraw)
             {
-                this.Draw(block);
+                Draw(block);
                 this.Draw(block.foliage);
             }
         }
 
         // Token: 0x06000019 RID: 25 RVA: 0x00002628 File Offset: 0x00000828
-        internal void Draw(SpriteOverlay sprite)
+        public void Draw(SpriteOverlay sprite)
         {
             bool flag = sprite.X > 100.0 || sprite.X < -100.0 || sprite.Y > 100.0 || sprite.Y < -100.0;
             if (flag)
