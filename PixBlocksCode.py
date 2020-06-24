@@ -15,14 +15,14 @@ class Player(Sprite):
 		if game.key('a'):
 			self.flip = True
 			self.manager.Move(0,5);
-			for b in self.manager.Blocks:	
+			for b in self.manager.ActiveBlocks:	
 				if self.collide(b.Sprite):
 					self.manager.Move(-180,5);
 					break;
 		elif game.key('d'):
 			self.flip = False
 			self.manager.Move(-180,5);
-			for b in self.manager.Blocks:	
+			for b in self.manager.ActiveBlocks:	
 				if self.collide(b.Sprite):
 					self.manager.Move(0,5);
 					break;
@@ -30,7 +30,7 @@ class Player(Sprite):
 			self.Grounded = False;
 			self.speed = 6;
 			###
-		for block in self.manager.Toppings:		
+		for block in self.manager.ActiveToppings:		
 			if self.collide(block.Sprite):
 				self.Grounded = True;
 				self.pointer.LastFoliage = block;
@@ -42,7 +42,7 @@ class Player(Sprite):
 		if self.speed>-6:
 			self.speed =self.speed - 1
 			
-			for b in self.manager.Blocks:	
+			for b in self.manager.ActiveBlocks:	
 				if(self.collide(b.Sprite) and self.speed>0):
 					self.speed = -self.speed;
 					self.manager.Move(90,1);
@@ -67,12 +67,12 @@ class Pointer(Sprite):
 		elif(game.key("down")):
 			self.point.Move(-90,20);
 		elif(game.key("m")):
-			for b in self.manager.Blocks:	
+			for b in self.manager.ActiveBlocks:	
 				if(self.point.Sprite.collide(b.Sprite)):
 					self.manager.RemoveTile(b);
 					break;
 		elif(game.key("n")):
-			for b in self.manager.Blocks:	
+			for b in self.manager.ActiveBlocks:	
 					if(self.point.Sprite.collide(b.Sprite)):
 						return;
 			manager.AddBlockTile(self.point.X,self.point.Y,1,size,True);

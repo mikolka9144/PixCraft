@@ -160,10 +160,11 @@ namespace BlockEngine
 
         // Token: 0x04000008 RID: 8
         public List<Block> Blocks = new List<Block>();
+        public List<Block> ActiveBlocks => Blocks.FindAll(s => s.IsRendered).ToList();
 
         // Token: 0x0400000C RID: 12
         public List<Foliage> Toppings = new List<Foliage>();
-
+        public List<Foliage> ActiveToppings => Toppings.FindAll(s => s.IsRendered).ToList();
         public BlockIdProcessor IdProcessor = new BlockIdProcessor();
 
         // Token: 0x0400000D RID: 13
