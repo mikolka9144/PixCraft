@@ -3,6 +3,7 @@ using PixBlocks.PythonIron.Tools.Integration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 
 namespace BlockEngine
@@ -67,7 +68,6 @@ namespace BlockEngine
         // Token: 0x06000013 RID: 19 RVA: 0x00002444 File Offset: 0x00000644
         public void CreateGenerator(int seed, int size)
         {
-            this.randomizer = new Random(seed);
             var generator = new Generator(seed,this);
             generator.GenerateTerrian(size);
             generator.CreateUnderGround(size);
@@ -113,7 +113,7 @@ namespace BlockEngine
         // Token: 0x06000019 RID: 25 RVA: 0x00002628 File Offset: 0x00000828
         public void Draw(SpriteOverlay sprite)
         {
-            bool flag = sprite.X > 100.0 || sprite.X < -100.0 || sprite.Y > 100.0 || sprite.Y < -100.0;
+            bool flag = sprite.X > border || sprite.X < -border || sprite.Y > border || sprite.Y < -border;
             if (flag)
             {
                 sprite.Sprite.IsVisible = false;
@@ -127,6 +127,7 @@ namespace BlockEngine
                 {
                     this.addSpriteToGame(sprite);
                 }
+                
             }
         }
 
@@ -135,6 +136,7 @@ namespace BlockEngine
         {
             if (!sprite.IsRendered)
             {
+                Thread.Sleep(BlockAddDelay);
                 GameScene.gameSceneStatic.add(sprite.Sprite);
                 sprite.IsRendered = true;
             }
@@ -157,23 +159,25 @@ namespace BlockEngine
             }
             this.Center.Move(roation, lenght);
         }
+        private bool IsActiveBlock(SpriteOverlay sprite)
+        {
+            var isActive = sprite.IsRendered;
+            var IsNotInRange = sprite.X > hitboxArea || sprite.X < -hitboxArea || sprite.Y > hitboxArea || sprite.Y < hitboxArea;
+            return isActive && IsNotInRange;
+        }
 
-        // Token: 0x04000008 RID: 8
         public List<Block> Blocks = new List<Block>();
-        public List<Block> ActiveBlocks => Blocks.FindAll(s => s.IsRendered).ToList();
+        public List<Block> ActiveBlocks => Blocks.FindAll(s => IsActiveBlock(s)).ToList();
 
-        // Token: 0x0400000C RID: 12
         public List<Foliage> Toppings = new List<Foliage>();
-        public List<Foliage> ActiveToppings => Toppings.FindAll(s => s.IsRendered).ToList();
-        public BlockIdProcessor IdProcessor = new BlockIdProcessor();
+        public List<Foliage> ActiveToppings => Toppings.FindAll(s => IsActiveBlock(s)).ToList();
 
-        // Token: 0x0400000D RID: 13
+        public BlockIdProcessor IdProcessor = new BlockIdProcessor();
         public List<SpriteOverlay> Sprites = new List<SpriteOverlay>();
 
-        // Token: 0x0400000E RID: 14
-        private Random randomizer;
-
-        // Token: 0x0400000F RID: 15
+        private const int BlockAddDelay = 5;
         private const int border = 100;
+        private const int hitboxArea = 20;
+        
     }
 }

@@ -43,11 +43,12 @@ class Player(Sprite):
 			self.speed =self.speed - 1
 			
 			for b in self.manager.ActiveBlocks:	
-				if(self.collide(b.Sprite) and self.speed>0):
-					self.speed = -self.speed;
-					self.manager.Move(90,1);
-				if self.collide(b.Sprite) and self.collide(b.foliage.Sprite): 				 
-					self.manager.Move(-90,3);		
+				if self.collide(b.Sprite):
+					if self.speed>0:
+						self.speed = -self.speed;
+						self.manager.Move(90,1);
+					if self.collide(b.foliage.Sprite): 				 
+						self.manager.Move(-90,3);		
 class Pointer(Sprite):
 	def __init__(self,point,manager):
 		self.manager = manager;
@@ -80,7 +81,6 @@ class Pointer(Sprite):
 manager = code.CreateInstance("BlockEngine.Engine",True);
 pointer = Pointer(manager.GetPointer(),manager)
 player = Player(manager,pointer);
-#manager.LoadMap(input[0])
 manager.CreateGenerator(164,1000)
 
 game.add(pointer);
