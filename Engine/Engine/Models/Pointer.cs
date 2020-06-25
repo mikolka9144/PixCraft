@@ -1,6 +1,6 @@
 ﻿using PixBlocks.PythonIron.Tools.Integration;
 
-namespace BlockEngine
+namespace Engine.Engine.models
 {
     // Token: 0x02000007 RID: 7
     public class Pointer : SpriteOverlay
@@ -23,5 +23,6 @@ namespace BlockEngine
             base.Move(roation, lenght);
             this.Active = base.Sprite.IsVisible;
         }
+
     }
 }

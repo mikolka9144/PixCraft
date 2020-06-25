@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlockEngine
+namespace Engine.Engine
 {
     internal class Generator
     {

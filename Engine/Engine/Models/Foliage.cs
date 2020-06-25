@@ -1,12 +1,12 @@
 ﻿using PixBlocks.PythonIron.Tools.Integration;
 
-namespace BlockEngine
+namespace Engine.Engine.models
 {
     // Token: 0x02000004 RID: 4
     public class Foliage : SpriteOverlay
     {
         // Token: 0x06000005 RID: 5 RVA: 0x000020D8 File Offset: 0x000002D8
-        public Foliage(int x, int y, int id, Block block) : base(new Sprite(), x, y, id, block.Engine)
+        public Foliage(double x, double y, int id, Block block) : base(new Sprite(), x, y, id, block.Engine)
         {
             base.Sprite.size = block.Sprite.size;
             base.Sprite.image = 65;

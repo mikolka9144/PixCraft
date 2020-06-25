@@ -1,4 +1,5 @@
-﻿using PixBlocks.PythonIron.Tools.Game;
+﻿using Engine.Engine.models;
+using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
 using System;
 using System.Collections.Generic;
@@ -6,14 +7,15 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 
-namespace BlockEngine
+namespace Engine.Engine
 {
     public class Engine : IDrawer, ITileManager
     {
         public SpriteOverlay Center;
 
-        public Engine()
+        public Engine(int timeout)
         {
+            BlockAddDelay = timeout;
             Center = new Center(this);
         }
 
@@ -98,7 +100,7 @@ namespace BlockEngine
         }
 
         // Token: 0x06000018 RID: 24 RVA: 0x000025D0 File Offset: 0x000007D0
-        public void AddBlockTile(int X, int Y, int Id, int size, bool SholdDraw)
+        public void AddBlockTile(double X, double Y, int Id, int size, bool SholdDraw)
         {
             Block block = new Block(X, Y, Id, size, this, IdProcessor);
             this.Blocks.Add(block);
@@ -175,7 +177,7 @@ namespace BlockEngine
         public BlockIdProcessor IdProcessor = new BlockIdProcessor();
         public List<SpriteOverlay> Sprites = new List<SpriteOverlay>();
 
-        private const int BlockAddDelay = 5;
+        private int BlockAddDelay;
         private const int border = 100;
         private const int hitboxArea = 20;
         

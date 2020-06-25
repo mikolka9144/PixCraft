@@ -1,13 +1,13 @@
 ﻿using PixBlocks.PythonIron.Tools.Integration;
 using System;
 
-namespace BlockEngine
+namespace Engine.Engine.models
 {
     // Token: 0x02000005 RID: 5
     public class SpriteOverlay
     {
         // Token: 0x06000007 RID: 7 RVA: 0x00002158 File Offset: 0x00000358
-        public SpriteOverlay(Sprite sprite, int x, int y, int Id, IDrawer engine)
+        public SpriteOverlay(Sprite sprite, double x, double y, int Id, IDrawer engine)
         {
             this.Sprite = sprite;
             this.X = (double)x;
