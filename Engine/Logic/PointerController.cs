@@ -26,10 +26,10 @@ namespace Engine.Engine.models
 				point.X = LastFoliage.Block.X;
 				point.Y = LastFoliage.Block.Y + 19;
 			}
-			else if (game.key("left")) point.Move(-180, 20);
-			else if (game.key("right")) point.Move(0, 20);
-			else if (game.key("up")) point.Move(90, 20);
-			else if (game.key("down")) point.Move(-90, 20);
+			else if (game.key("left")) point.Move(roation.Left, 20);
+			else if (game.key("right")) point.Move(roation.Right, 20);
+			else if (game.key("up")) point.Move(roation.Up, 20);
+			else if (game.key("down")) point.Move(roation.Down, 20);
 			else if (game.key("m"))
 			{
 				foreach (var b in Engine.ActiveBlocks)

@@ -18,7 +18,7 @@ namespace Engine.Engine.models
         public bool Active { get; private set; }
 
         // Token: 0x0600001F RID: 31 RVA: 0x0000285F File Offset: 0x00000A5F
-        public override void Move(double roation, double lenght)
+        public override void Move(roation roation, int lenght)
         {
             base.Move(roation, lenght);
             this.Active = base.Sprite.IsVisible;

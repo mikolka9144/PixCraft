@@ -7,11 +7,11 @@ namespace Engine.Engine.models
     public class SpriteOverlay
     {
         // Token: 0x06000007 RID: 7 RVA: 0x00002158 File Offset: 0x00000358
-        public SpriteOverlay(Sprite sprite, double x, double y, int Id, IDrawer engine)
+        public SpriteOverlay(Sprite sprite, int x, int y, int Id, IDrawer engine)
         {
             this.Sprite = sprite;
-            this.X = (double)x;
-            this.Y = (double)y;
+            this.X = x;
+            this.Y = y;
             this.Id = Id;
             Engine = engine;
         }
@@ -22,27 +22,37 @@ namespace Engine.Engine.models
         public IDrawer Engine { get; }
 
         // Token: 0x0600000C RID: 12 RVA: 0x000021C7 File Offset: 0x000003C7
-        public virtual void Move(double roation, double lenght)
+        public virtual void Move(roation roation, int lenght)
         {
             this.SetPosition(roation, lenght);
             Engine.Draw(this);
         }
 
         // Token: 0x0600000D RID: 13 RVA: 0x000021E0 File Offset: 0x000003E0
-        protected void SetPosition(double roation, double lenght)
+        protected void SetPosition(roation roation, int lenght)
         {
-            double num = 0.017453292519944;
-            double num2 = -roation + 90.0;
-            double num3 = lenght * Math.Sin(num * num2);
-            double num4 = lenght * Math.Cos(num * num2);
-            this.X += num3;
-            this.Y += num4;
+            switch (roation)
+            {
+                case roation.Up:
+                    Y += lenght;
+                    break;
+                case roation.Left:
+                    X -= lenght;
+                    break;
+                case roation.Right:
+                    X += lenght;
+                    break;
+                case roation.Down:
+                    Y -= lenght;
+                    break;
+                
+            }
         }
 
         // Token: 0x04000004 RID: 4
-        public double X;
+        public int X;
 
         // Token: 0x04000005 RID: 5
-        public double Y;
+        public int Y;
     }
 }

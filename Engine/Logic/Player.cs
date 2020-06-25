@@ -1,4 +1,5 @@
-﻿using Engine.Engine;
+﻿using Engine;
+using Engine.Engine;
 using Engine.Engine.models;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
@@ -32,12 +33,12 @@ namespace Logic
             {
 
 				flip = true;
-				Engine.Move(0, 5);
+				Engine.Move(roation.Right, 5);
                 foreach (var b in Engine.ActiveBlocks)
                 {
 					if (collide(b.Sprite))
 					{
-						Engine.Move(-180, 5);
+						Engine.Move(roation.Left, 5);
 						break;
 					}
 				} 
@@ -46,12 +47,12 @@ namespace Logic
             {
 
 				flip = false;
-				Engine.Move(-180, 5);
+				Engine.Move(roation.Left, 5);
 				foreach (var b in Engine.ActiveBlocks)
 				{
 					if (collide(b.Sprite))
 					{
-						Engine.Move(0, 5);
+						Engine.Move(roation.Right, 5);
 						break;
 					}
 				}
@@ -74,7 +75,7 @@ namespace Logic
                 }
 
             }		
-			Engine.Move(-90, speed);
+			Engine.Move(roation.Down, speed);
 
 			if (speed > -6) speed -=1;
 
@@ -85,9 +86,9 @@ namespace Logic
 					if (speed > 0) 
 					{
 						speed = -speed;
-						Engine.Move(90, 1); 
+						Engine.Move(roation.Up, 1); 
 					}
-					if (collide(b.foliage.Sprite)) Engine.Move(-90, 3); 
+					if (collide(b.foliage.Sprite)) Engine.Move(roation.Down, 3); 
 				}
 			}
 		}

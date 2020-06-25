@@ -89,8 +89,8 @@ namespace Engine.Engine
         // Token: 0x06000016 RID: 22 RVA: 0x0000258D File Offset: 0x0000078D
         private void MoveScene(int X, int Y)
         {
-            this.Move(-180.0, X);
-            this.Move(-90.0, Y);
+            this.Move(roation.Right, X);
+            this.Move(roation.Down, Y);
         }
 
         // Token: 0x06000017 RID: 23 RVA: 0x000025BE File Offset: 0x000007BE
@@ -100,7 +100,7 @@ namespace Engine.Engine
         }
 
         // Token: 0x06000018 RID: 24 RVA: 0x000025D0 File Offset: 0x000007D0
-        public void AddBlockTile(double X, double Y, int Id, int size, bool SholdDraw)
+        public void AddBlockTile(int X, int Y, int Id, int size, bool SholdDraw)
         {
             Block block = new Block(X, Y, Id, size, this, IdProcessor);
             this.Blocks.Add(block);
@@ -145,7 +145,7 @@ namespace Engine.Engine
         }
 
         // Token: 0x0600001B RID: 27 RVA: 0x0000271C File Offset: 0x0000091C
-        public void Move(double roation, double lenght)
+        public void Move(roation roation, int lenght)
         {
             foreach (Block block in this.Blocks)
             {
