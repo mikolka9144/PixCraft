@@ -1,4 +1,5 @@
 # Block-engine
+![Screenshot](Cover.png)
 Jest to port gry Minecraft w programie PixBlocks.
 # Sterowanie
 A,D: Poruszanie postacią na bok.
