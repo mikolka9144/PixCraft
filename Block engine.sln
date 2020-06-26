@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CA28ECC7-F0D5-41C5-B5CF-221ED662BF15}"
 	ProjectSection(SolutionItems) = preProject
 		PixBlocksCode.py = PixBlocksCode.py
+		PixBlocksCodeDEV.py = PixBlocksCodeDEV.py
 	EndProjectSection
 EndProject
 Global

@@ -17,7 +17,6 @@ namespace Engine.Engine
 
         public BlockIdProcessor IdProcessor = new BlockIdProcessor();
         public List<SpriteOverlay> Sprites = new List<SpriteOverlay>();
-        private int BlockAddDelay;
         
 
         public SpriteOverlay Center;
@@ -32,7 +31,7 @@ namespace Engine.Engine
         // Token: 0x06000013 RID: 19 RVA: 0x00002444 File Offset: 0x00000644
         public void CreateGenerator(int seed, int size)
         {
-            var generator = new Generator(seed, this);
+            var generator = new Generator(seed, this,paramters);
             generator.GenerateTerrian(size);
             generator.CreateUnderGround(size);
         }
@@ -68,7 +67,7 @@ namespace Engine.Engine
             if (SholdDraw)
             {
                 Draw(block);
-                this.Draw(block.foliage);
+                Draw(block.foliage);
             }
         }
 
@@ -88,17 +87,17 @@ namespace Engine.Engine
                 bool flag2 = !sprite.Sprite.IsVisible;
                 if (flag2)
                 {
-                    this.addSpriteToGame(sprite);
+                    AddSpriteToGame(sprite);
                 }
             }
         }
 
         // Token: 0x0600001A RID: 26 RVA: 0x000026D8 File Offset: 0x000008D8
-        private void addSpriteToGame(SpriteOverlay sprite)
+        private void AddSpriteToGame(SpriteOverlay sprite)
         {
             if (!sprite.IsRendered)
             {
-                Thread.Sleep(BlockAddDelay);
+                Thread.Sleep(paramters.Delay);
                 GameScene.gameSceneStatic.add(sprite.Sprite);
                 sprite.IsRendered = true;
             }
@@ -124,7 +123,8 @@ namespace Engine.Engine
         private bool IsActiveBlock(SpriteOverlay sprite)
         {
             var isActive = sprite.IsRendered;
-            var IsNotInRange = sprite.X > hitboxArea || sprite.X < -hitboxArea || sprite.Y > hitboxArea || sprite.Y < hitboxArea;
+            var IsNotInRange = sprite.X > paramters.hitboxArea.Right || sprite.X < -paramters.hitboxArea.Left 
+                || sprite.Y > paramters.hitboxArea.Up || sprite.Y < paramters.hitboxArea.Down;
             return isActive && IsNotInRange;
         }
     }

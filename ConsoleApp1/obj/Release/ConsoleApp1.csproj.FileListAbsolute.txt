@@ -8,3 +8,4 @@ C:\Users\mikol\source\repos\Block engine\ConsoleApp1\obj\Release\ConsoleApp1.csp
 C:\Users\mikol\source\repos\Block engine\ConsoleApp1\obj\Release\ConsoleApp1.csproj.CopyComplete
 C:\Users\mikol\source\repos\Block engine\ConsoleApp1\obj\Release\ConsoleApp1.exe
 C:\Users\mikol\source\repos\Block engine\ConsoleApp1\obj\Release\ConsoleApp1.pdb
+C:\Users\mikol\source\repos\Block engine\ConsoleApp1\bin\Release\Engine.dll.config

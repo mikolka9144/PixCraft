@@ -1,5 +1,6 @@
 ﻿using Engine.Engine.models;
 using Engine.GUI;
+using IronPython.Compiler.Ast;
 using Logic;
 using PixBlocks.PythonIron.Tools.Game;
 using System;
@@ -16,9 +17,10 @@ namespace Engine.Logic
         private bool IsWorldGenerated = false;
         private Engine.Engine engine;
 
-        public void Init(int timeout)
+        public void Init()
         {
-            engine = new Engine.Engine(timeout);
+            var parameters = new Paramters();
+            engine = new Engine.Engine(parameters);
             var pointer = new Pointer(engine);
             var moveDefiner = new PlayerMoveDefiner();
             var pointerController = new PointerController(pointer, engine,moveDefiner);
@@ -38,11 +40,6 @@ namespace Engine.Logic
             IsWorldGenerated = true;
             engine.CreateGenerator(seed,size);
 
-        }
-
-        public void Lock()
-        {
-            Thread.Sleep(Timeout.Infinite);
         }
     }
 }
