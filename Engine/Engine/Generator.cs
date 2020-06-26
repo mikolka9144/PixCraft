@@ -6,6 +6,7 @@ namespace Engine.Engine
     {
         private Random randomizer;
         private int CanGenerateTree = 3;
+        private const int BlockSize = 20;
         private readonly ITileManager manager;
         private const int sizeOfCollumn = 10;
         public Generator(int seed, ITileManager manager)
@@ -41,14 +42,14 @@ namespace Engine.Engine
         {
             if (random - 1 == BlockY)
             {
-                manager.AddBlockTile(20 * BlockX, 20 * BlockY, 1, 20, false);
+                manager.AddBlockTile(BlockSize * BlockX, BlockSize * BlockY, BlockType.Grass, BlockSize, false);
                 if (randomizer.Next(0, 4) == 3 && random >= 3 && CanGenerateTree == 3) generateTree(BlockX, BlockY);
                 else if (CanGenerateTree != 3) CanGenerateTree++;
             }
             else
             {
 
-                manager.AddBlockTile(20 * BlockX, 20 * BlockY, 2, 20, false);
+                manager.AddBlockTile(20 * BlockX, BlockSize * BlockY, BlockType.Dirt, 20, false);
             }
         }
 
@@ -56,11 +57,11 @@ namespace Engine.Engine
         {
             for (int i = Y+1; i < Y+4; i++)
             {
-                manager.AddBlockTile(20 * X, 20 * i, 4, 20, false);
+                manager.AddBlockTile(20 * X, 20 * i, BlockType.Wood, 20, false);
             }
-            manager.AddBlockTile(20 * X, 20 * (Y+4), 5, 20, false);
-            manager.AddBlockTile(20 * (X-1), 20 * (Y+3), 5, 20, false);
-            manager.AddBlockTile(20 * (X+1), 20 * (Y +3), 5, 20, false);
+            manager.AddBlockTile(BlockSize * X, BlockSize * (Y+4), BlockType.Leaves, BlockSize, false);
+            manager.AddBlockTile(BlockSize * (X-1), BlockSize * (Y+3), BlockType.Leaves, BlockSize, false);
+            manager.AddBlockTile(BlockSize * (X+1), BlockSize * (Y +3), BlockType.Leaves, BlockSize, false);
             CanGenerateTree = 0;
         }
 
@@ -68,12 +69,12 @@ namespace Engine.Engine
         {
             for (int i = -size; i < 0; i++)
             {
-                GenerateCollumnOfStone(i * 20);
+                GenerateCollumnOfStone(i * BlockSize);
             }
 
             for (int i = 0; i < size; i++)
             {
-                GenerateCollumnOfStone(i * 20);
+                GenerateCollumnOfStone(i * BlockSize);
             }
         }
 
@@ -81,7 +82,7 @@ namespace Engine.Engine
         {
             for (int i = -1; i > -sizeOfCollumn; i--)
             {
-                manager.AddBlockTile(X, i * 20, 3, 20, false);
+                manager.AddBlockTile(X, i * BlockSize, BlockType.Stone, BlockSize, false);
             }
         }
     }

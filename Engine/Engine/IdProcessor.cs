@@ -1,7 +1,7 @@
 ﻿using Engine.Engine.models;
 using PixBlocks.PythonIron.Tools.Integration;
 
-namespace Engine.Engine
+namespace Engine
 {
     public interface IIdProcessor
     {
@@ -13,22 +13,31 @@ namespace Engine.Engine
         {
             switch (overlay.Id)
             {
-                case 1:
+                case BlockType.Grass:
                     overlay.Sprite.color = new Color(100, 200, 50);
                     break;
-                case 2:
+                case BlockType.Dirt:
                     overlay.Sprite.color = new Color(200, 100, 50);
                     break;
-                case 3:
+                case BlockType.Stone:
                     overlay.Sprite.color = new Color(156, 159, 161);
                     break;
-                case 4:
+                case BlockType.Wood:
                     overlay.Sprite.color = new Color(153, 51, 0);
                     break;
-                case 5:
+                case BlockType.Leaves:
                     overlay.Sprite.color = new Color(102, 153, 51);
                     break;
             }
         }
+    }
+    public enum BlockType
+    {
+        None,
+        Grass,
+        Dirt,
+        Stone,
+        Wood,
+        Leaves
     }
 }

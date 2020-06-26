@@ -20,8 +20,9 @@ namespace Engine.Logic
         {
             engine = new Engine.Engine(timeout);
             var pointer = new Pointer(engine);
-            var pointerController = new PointerController(GameScene.gameSceneStatic, pointer, engine);
-            var player = new Player(engine, pointerController,GameScene.gameSceneStatic);
+            var moveDefiner = new PlayerMoveDefiner();
+            var pointerController = new PointerController(pointer, engine,moveDefiner);
+            var player = new Player(engine,engine,pointerController,moveDefiner);
             var game = GameScene.gameSceneStatic;
 
             var MainMenu = new Main_Menu(this);

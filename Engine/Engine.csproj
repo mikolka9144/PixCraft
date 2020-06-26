@@ -57,9 +57,7 @@
     <Compile Include="Engine\Engine.cs" />
     <Compile Include="Engine\Models\Foliage.cs" />
     <Compile Include="Engine\Generator.cs" />
-    <Compile Include="Engine\IDrawer.cs" />
-    <Compile Include="Engine\IIdProcessor.cs" />
-    <Compile Include="Engine\ITileManager.cs" />
+    <Compile Include="Engine\IdProcessor.cs" />
     <Compile Include="Engine\Models\Pointer.cs" />
     <Compile Include="GUI\IInit.cs" />
     <Compile Include="GUI\Main Menu.cs">
@@ -74,10 +72,20 @@
     <Compile Include="GUI\NewWorld.Designer.cs">
       <DependentUpon>NewWorld.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\PauseMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\PauseMenu.Designer.cs">
+      <DependentUpon>PauseMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logic\IActiveElements.cs" />
+    <Compile Include="Logic\IMoveDefiner.cs" />
+    <Compile Include="Logic\Movable object.cs" />
     <Compile Include="Logic\Player.cs" />
     <Compile Include="Logic\PointerController.cs" />
     <Compile Include="Logic\StartUp.cs" />
     <Compile Include="Engine\Models\directions.cs" />
+    <Compile Include="Paramters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Engine\Models\SpriteOverlay.cs" />
   </ItemGroup>
@@ -87,6 +95,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\NewWorld.resx">
       <DependentUpon>NewWorld.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\PauseMenu.resx">
+      <DependentUpon>PauseMenu.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

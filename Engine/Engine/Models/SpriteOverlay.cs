@@ -7,17 +7,18 @@ namespace Engine.Engine.models
     public class SpriteOverlay
     {
         // Token: 0x06000007 RID: 7 RVA: 0x00002158 File Offset: 0x00000358
-        public SpriteOverlay(Sprite sprite, int x, int y, int Id, IDrawer engine)
+        public SpriteOverlay(Sprite sprite, int x, int y, BlockType Id, IDrawer engine,IIdProcessor processor)
         {
             this.Sprite = sprite;
             this.X = x;
             this.Y = y;
             this.Id = Id;
             Engine = engine;
+            if(processor != null) processor.ProcessSprite(this);
         }
 
         public Sprite Sprite { get; }
-        public int Id { get; }
+        public BlockType Id { get; }
         public bool IsRendered = false;
         public IDrawer Engine { get; }
 

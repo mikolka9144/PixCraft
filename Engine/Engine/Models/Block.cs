@@ -6,12 +6,12 @@ namespace Engine.Engine.models
     public class Block : SpriteOverlay
     {
         // Token: 0x06000002 RID: 2 RVA: 0x00002078 File Offset: 0x00000278
-        public Block(int x, int y, int Id, int size, IDrawer engine,IIdProcessor processor) : base(new Sprite(), x, y, Id, engine)
+        public Block(int x, int y, BlockType Id, int size, IDrawer engine,IIdProcessor processor) : base(new Sprite(), x, y, Id, engine,processor)
         {
-            processor.ProcessSprite(this);
+            
             Sprite.image = 63;
             Sprite.size = size;
-            foliage = new Foliage(x, y + size / 3, Id, this);
+            foliage = new Foliage(x, y + size / 3, Id, this,processor);
         }
 
         public Foliage foliage { get; private set; }
