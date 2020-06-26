@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.btnStart = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnStart
@@ -41,11 +42,22 @@
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
+            // btnSettings
+            // 
+            this.btnSettings.Location = new System.Drawing.Point(12, 42);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(224, 23);
+            this.btnSettings.TabIndex = 1;
+            this.btnSettings.Text = "Settings";
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
             // Main_Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(248, 314);
+            this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.btnStart);
             this.Name = "Main_Menu";
             this.Text = "PixCraft";
@@ -56,5 +68,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnSettings;
     }
 }

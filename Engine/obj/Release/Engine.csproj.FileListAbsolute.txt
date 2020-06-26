@@ -20,3 +20,4 @@ C:\Users\mikol\source\repos\Block engine\Engine\obj\Release\Engine.GUI.NewWorld.
 C:\Users\mikol\source\repos\Block engine\Engine\obj\Release\Engine.csproj.GenerateResource.cache
 C:\Users\mikol\source\repos\Block engine\Engine\obj\Release\Engine.GUI.PauseMenu.resources
 C:\Users\mikol\source\repos\Block engine\Engine\bin\Release\Engine.dll.config
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Release\Engine.GUI.Settings_Form.resources

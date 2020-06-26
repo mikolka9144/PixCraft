@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Engine
 {
-    public class Paramters
+    public class Parameters
     {
         public (int Up,int Left,int Right,int Down) border = (100,100,100,100);
         public (int Up,int Left,int Right,int Down) hitboxArea = (20,20,20,20);
@@ -18,6 +18,8 @@ namespace Engine
         public int TreeSpread = 3;
         public int minimumFillarHeightForTree = 3;
         public int treeChance = 5;
+        public int moveSpeed = 5;
+        public int MaxFallSpeed = 6;
     }
 
 }

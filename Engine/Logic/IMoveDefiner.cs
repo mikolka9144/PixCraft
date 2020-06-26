@@ -21,7 +21,8 @@ namespace Engine.Logic
         cameraCast,
         cameraLeft,
         cameraRight,
-        cameraDown
+        cameraDown,
+        Pause
     }
     public class PlayerMoveDefiner : IMoveDefiner
     {
@@ -37,7 +38,7 @@ namespace Engine.Logic
             switch (command)
             {
                 case command.Up:
-                    return game.key("w"); 
+                    return game.key("w");
                 case command.Left:
                     return game.key("a");
                 case command.Right:
@@ -60,6 +61,8 @@ namespace Engine.Logic
                     return game.key("right");
                 case command.cameraDown:
                     return game.key("down");
+                case command.Pause:
+                    return game.key("p");
             }
             return false;
         }

@@ -1,5 +1,7 @@
 ﻿using Engine.Engine;
 using Engine.Engine.models;
+using Engine.GUI;
+using PixBlocks.Properties;
 using PixBlocks.PythonIron.Tools.Integration;
 using System;
 using System.Collections.Generic;
@@ -13,17 +15,21 @@ namespace Engine.Logic
     {
         private readonly ITileManager tileManager;
         private readonly IMoveDefiner moveDefiner;
+        private readonly Parameters paramters;
         private bool Grounded;
+        private Settings_Form settingsForm;
         private int speed;
 
-        public Movable_object(IActiveElements ActiveElements,ITileManager tileManager,IMoveDefiner moveDefiner,PointerController pointer)
+        public Movable_object(IActiveElements ActiveElements,ITileManager tileManager,IMoveDefiner moveDefiner,PointerController pointer,Parameters paramters)
         {
             this.Engine = ActiveElements;
             this.tileManager = tileManager;
             this.moveDefiner = moveDefiner;
             Pointer = pointer;
-			speed = 0;
+            this.paramters = paramters;
+            speed = 0;
 			Grounded = false;
+			settingsForm = new Settings_Form(paramters);
 		}
 
         public IActiveElements Engine { get; }
@@ -35,12 +41,12 @@ namespace Engine.Logic
 			{
 
 				flip = true;
-				tileManager.Move(roation.Right, 5);
+				tileManager.Move(roation.Right, paramters.moveSpeed);
 				foreach (var b in Engine.ActiveBlocks)
 				{
 					if (collide(b.Sprite))
 					{
-						tileManager.Move(roation.Left, 5);
+						tileManager.Move(roation.Left, paramters.moveSpeed);
 						break;
 					}
 				}
@@ -54,16 +60,21 @@ namespace Engine.Logic
 				{
 					if (collide(b.Sprite))
 					{
-						tileManager.Move(roation.Right, 5);
+						tileManager.Move(roation.Right, paramters.moveSpeed);
 						break;
 					}
 				}
 			}
+            if (moveDefiner.key(command.Pause))
+            {
+				
+				settingsForm.ShowDialog();
+            }
 			if (moveDefiner.key(command.Jump) && Grounded)
 			{
 
 				Grounded = false;
-				speed = 6;
+				speed = paramters.MaxFallSpeed;
 			}
 			foreach (var block in Engine.ActiveToppings)
 			{
@@ -79,7 +90,7 @@ namespace Engine.Logic
 			}
 			tileManager.Move(roation.Down, speed);
 
-			if (speed > -6) speed -= 1;
+			if (speed > -paramters.MaxFallSpeed) speed -= 1;
 
 			foreach (var b in Engine.ActiveBlocks)
 			{

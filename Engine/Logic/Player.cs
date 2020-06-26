@@ -15,7 +15,7 @@ namespace Logic
 {
     class Player:Movable_object
     {
-        public Player(IActiveElements activeElements,ITileManager manager,PointerController pointer,IMoveDefiner definer):base(activeElements,manager,definer,pointer)
+        public Player(Parameters paramters,IActiveElements activeElements,ITileManager manager,PointerController pointer,IMoveDefiner definer):base(activeElements,manager,definer,pointer,paramters)
         {
             position = new Vector(0, 0);
             size = 10;

@@ -10,25 +10,22 @@ using System.Windows.Forms;
 
 namespace Engine.GUI
 {
-    public partial class PauseMenu : Form
+    public partial class Settings_Form : Form
     {
         private readonly Parameters paramters;
 
-        public PauseMenu(Parameters paramters)
+        public Settings_Form(Parameters paramters)
         {
-            InitializeComponent();
             this.paramters = paramters;
+            InitializeComponent();
+            numericGrid.Value = paramters.border.Up;
         }
 
-        private void btnResume_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
+            var v = (int)numericGrid.Value;
+            paramters.border = (v, v, v, v);
             Close();
-        }
-
-        private void btnSettings_Click(object sender, EventArgs e)
-        {
-            var settingsWindow = new Settings_Form(paramters);
-            settingsWindow.ShowDialog();
         }
     }
 }

@@ -19,15 +19,15 @@ namespace Engine.Logic
 
         public void Init()
         {
-            var parameters = new Paramters();
+            var parameters = new Parameters();
             engine = new Engine.Engine(parameters);
             var pointer = new Pointer(engine);
             var moveDefiner = new PlayerMoveDefiner();
             var pointerController = new PointerController(pointer, engine,moveDefiner);
-            var player = new Player(engine,engine,pointerController,moveDefiner);
+            var player = new Player(parameters,engine,engine,pointerController,moveDefiner);
             var game = GameScene.gameSceneStatic;
 
-            var MainMenu = new Main_Menu(this);
+            var MainMenu = new Main_Menu(this,parameters);
             MainMenu.ShowDialog();
             if (!IsWorldGenerated) return;
             game.add(pointerController);

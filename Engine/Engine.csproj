@@ -78,6 +78,12 @@
     <Compile Include="GUI\PauseMenu.Designer.cs">
       <DependentUpon>PauseMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Settings Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Settings Form.Designer.cs">
+      <DependentUpon>Settings Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Logic\IActiveElements.cs" />
     <Compile Include="Logic\IMoveDefiner.cs" />
     <Compile Include="Logic\Movable object.cs" />
@@ -98,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\PauseMenu.resx">
       <DependentUpon>PauseMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Settings Form.resx">
+      <DependentUpon>Settings Form.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

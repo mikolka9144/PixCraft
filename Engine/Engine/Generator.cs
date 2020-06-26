@@ -8,9 +8,9 @@ namespace Engine.Engine
         private int CanGenerateTree;
         
         private readonly ITileManager manager;
-        private readonly Paramters parameters;
+        private readonly Parameters parameters;
 
-        public Generator(int seed, ITileManager manager,Paramters paramters)
+        public Generator(int seed, ITileManager manager,Parameters paramters)
         {
             randomizer = new Random(seed);
             this.manager = manager;

@@ -20,9 +20,9 @@ namespace Engine.Engine
         
 
         public SpriteOverlay Center;
-        private readonly Paramters paramters;
+        private readonly Parameters paramters;
 
-        public Engine(Paramters paramters)
+        public Engine(Parameters paramters)
         {
             Center = new Center(this);
             this.paramters = paramters;
