@@ -2,6 +2,7 @@
 using Engine.Engine.models;
 using Engine.GUI;
 using PixBlocks.Properties;
+using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Engine.Logic
         private readonly IMoveDefiner moveDefiner;
         private readonly Parameters paramters;
         private bool Grounded;
-        private Settings_Form settingsForm;
+        private PauseMenu settingsForm;
         private int speed;
 
         public Movable_object(IActiveElements ActiveElements,ITileManager tileManager,IMoveDefiner moveDefiner,PointerController pointer,Parameters paramters)
@@ -29,7 +30,7 @@ namespace Engine.Logic
             this.paramters = paramters;
             speed = 0;
 			Grounded = false;
-			settingsForm = new Settings_Form(paramters);
+			settingsForm = new PauseMenu(paramters);
 		}
 
         public IActiveElements Engine { get; }
@@ -65,11 +66,6 @@ namespace Engine.Logic
 					}
 				}
 			}
-            if (moveDefiner.key(command.Pause))
-            {
-				
-				settingsForm.ShowDialog();
-            }
 			if (moveDefiner.key(command.Jump) && Grounded)
 			{
 
@@ -103,6 +99,10 @@ namespace Engine.Logic
 					}
 					if (collide(b.foliage.Sprite)) tileManager.Move(roation.Down, 3);
 				}
+			}
+			if (moveDefiner.key(command.Pause))
+			{
+				settingsForm.ShowDialog();
 			}
 		}
 	}

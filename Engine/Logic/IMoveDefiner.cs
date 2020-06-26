@@ -26,6 +26,8 @@ namespace Engine.Logic
     }
     public class PlayerMoveDefiner : IMoveDefiner
     {
+        private bool PauseWasPressed;
+
         public PlayerMoveDefiner()
         {
             game = GameScene.gameSceneStatic;
@@ -62,7 +64,18 @@ namespace Engine.Logic
                 case command.cameraDown:
                     return game.key("down");
                 case command.Pause:
-                    return game.key("p");
+                    var state = game.key("p");
+                    if (state)
+                    {
+                        if (PauseWasPressed == true) return false;
+                        PauseWasPressed = true;
+                        return state;
+                    }
+                    else
+                    {
+                        PauseWasPressed = false;
+                        return state;
+                    }
             }
             return false;
         }
