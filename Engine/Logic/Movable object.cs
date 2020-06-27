@@ -19,7 +19,9 @@ namespace Engine.Logic
         private readonly Parameters paramters;
         private bool Grounded;
         private PauseMenu settingsForm;
+        private int TicksElapsed;
         private int speed;
+        private int TicksElapsedForMove;
 
         public Movable_object(IActiveElements ActiveElements,ITileManager tileManager,IMoveDefiner moveDefiner,PointerController pointer,Parameters paramters)
         {
@@ -30,6 +32,8 @@ namespace Engine.Logic
             this.paramters = paramters;
             speed = 0;
 			Grounded = false;
+			TicksElapsed = paramters.BlocksCollisionDelay;
+			TicksElapsedForMove = paramters.MoveDelay;
 			settingsForm = new PauseMenu(paramters);
 		}
 
@@ -38,7 +42,7 @@ namespace Engine.Logic
 
         public override void update()
 		{
-			if (moveDefiner.key(command.Left))
+			if (moveDefiner.key(command.Left) && TicksElapsedForMove >= paramters.MoveDelay)
 			{
 
 				flip = true;
@@ -52,7 +56,7 @@ namespace Engine.Logic
 					}
 				}
 			}
-			else if (moveDefiner.key(command.Right))
+			else if (moveDefiner.key(command.Right) && TicksElapsedForMove >= paramters.MoveDelay)
 			{
 
 				flip = false;
@@ -75,11 +79,11 @@ namespace Engine.Logic
 			foreach (var block in Engine.ActiveToppings)
 			{
 
-				if (collide(block.Sprite))
+				if (collide(block.Sprite) && TicksElapsed >= paramters.BlocksCollisionDelay)
 				{
 					Grounded = true;
 					Pointer.LastFoliage = block;
-					if (speed < 0) speed = 0;
+					if (speed < 0 ) speed = 0;
 					break;
 				}
 
@@ -94,16 +98,19 @@ namespace Engine.Logic
 				{
 					if (speed > 0)
 					{
+						TicksElapsed = 0;
+						TicksElapsedForMove = 0;
 						speed = -speed;
-						tileManager.Move(roation.Up, 1);
 					}
-					if (collide(b.foliage.Sprite)) tileManager.Move(roation.Down, 3);
+					else if (collide(b.foliage.Sprite)&&TicksElapsed==paramters.BlocksCollisionDelay) tileManager.Move(roation.Down, 3);
 				}
 			}
 			if (moveDefiner.key(command.Pause))
 			{
 				settingsForm.ShowDialog();
 			}
+			if (TicksElapsed != paramters.BlocksCollisionDelay) TicksElapsed++;
+			if (TicksElapsedForMove != paramters.MoveDelay) TicksElapsedForMove++;
 		}
 	}
 }

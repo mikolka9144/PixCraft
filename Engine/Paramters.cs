@@ -20,6 +20,9 @@ namespace Engine
         public int treeChance = 5;
         public int moveSpeed = 5;
         public int MaxFallSpeed = 6;
+        //Gameplay
+        public int BlocksCollisionDelay = 2;
+        public int MoveDelay = 3;
     }
 
 }
