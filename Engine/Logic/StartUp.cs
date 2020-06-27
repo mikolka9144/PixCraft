@@ -1,14 +1,8 @@
-﻿using Engine.Engine.models;
+﻿using Engine.Engine;
+using Engine.Engine.models;
 using Engine.GUI;
-using IronPython.Compiler.Ast;
 using Logic;
 using PixBlocks.PythonIron.Tools.Game;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Engine.Logic
 {
@@ -16,16 +10,22 @@ namespace Engine.Logic
     {
         private bool IsWorldGenerated = false;
         private Engine.Engine engine;
+        private Parameters parameters;
+        private TileManager tileManager;
 
         public void Init()
         {
-            var parameters = new Parameters();
-            engine = new Engine.Engine(parameters);
-            var pointer = new Pointer(engine);
+            var game = GameScene.gameSceneStatic;
+            var IdProcessor = new BlockIdProcessor();
             var moveDefiner = new PlayerMoveDefiner();
+
+            parameters = new Parameters();
+            engine = new Engine.Engine(parameters);
+            tileManager = new TileManager(parameters, engine, IdProcessor);
+
+            var pointer = new Pointer(engine);
             var pointerController = new PointerController(pointer, engine,moveDefiner);
             var player = new Player(parameters,engine,engine,pointerController,moveDefiner);
-            var game = GameScene.gameSceneStatic;
 
             var MainMenu = new Main_Menu(this,parameters);
             MainMenu.ShowDialog();
@@ -35,11 +35,22 @@ namespace Engine.Logic
             game.start();
         }
 
-        public void InitWithParameters(int seed, int size)
+        public void GenerateWorld(int seed, int size)
         {
             IsWorldGenerated = true;
-            engine.CreateGenerator(seed,size);
+            var oreTable = new OreTable();
 
+            var generator = new Generator(seed, tileManager, parameters, oreTable,size,engine);
+            ExecuteGeneration(generator);
+
+        }
+        private void ExecuteGeneration(Generator generator)
+        {
+            generator.GenerateTerrian();
+            generator.CreateUnderGround();
+            generator.GenerateTrees();
+            generator.GenerateOres(BlockType.Leaves);
+            generator.Render();
         }
     }
 }

@@ -9,18 +9,24 @@ namespace Engine.Engine
         
         private readonly ITileManager manager;
         private readonly Parameters parameters;
+        private readonly IOreTable oreTable;
+        private readonly int size;
+        private readonly Engine engine;
 
-        public Generator(int seed, ITileManager manager,Parameters paramters)
+        public Generator(int seed, ITileManager manager,Parameters paramters,IOreTable oreTable,int size,Engine engine)
         {
             randomizer = new Random(seed);
             this.manager = manager;
             parameters = paramters;
+            this.oreTable = oreTable;
+            this.size = size;
+            this.engine = engine;
             CanGenerateTree = parameters.TreeSpread;
         }
         // Token: 0x06000015 RID: 21 RVA: 0x000024C0 File Offset: 0x000006C0
-        public void GenerateTerrian(int blocks)
+        public void GenerateTerrian()
         {
-            for (int i = -blocks; i < 0; i++)
+            for (int i = -size; i < 0; i++)
             {
                 var random = randomizer.Next(1, 5);
                 for (int j = 0; j < random; j++)
@@ -30,7 +36,7 @@ namespace Engine.Engine
                 }
             }
             //reverse
-            for (int k = 0; k < blocks; k++)
+            for (int k = 0; k < size; k++)
             {
                 var random = randomizer.Next(1, 5);
                 for (int l = 0; l < random; l++)
@@ -45,48 +51,92 @@ namespace Engine.Engine
         {
             if (random - 1 == BlockY)
             {
-                manager.AddBlockTile(parameters.BlockSize * BlockX, parameters.BlockSize * BlockY, BlockType.Grass, parameters.BlockSize, false);
-                if (randomizer.Next(0,parameters.treeChance) == 0 && random >= parameters.minimumFillarHeightForTree && CanGenerateTree == 3) generateTree(BlockX, BlockY);
-                else if (CanGenerateTree != parameters.TreeSpread) CanGenerateTree++;
+                manager.AddBlockTile(BlockX,BlockY, BlockType.Grass, true);
             }
             else
             {
 
-                manager.AddBlockTile(parameters.BlockSize * BlockX, parameters.BlockSize * BlockY, BlockType.Dirt, parameters.BlockSize, false);
+                manager.AddBlockTile(BlockX,BlockY, BlockType.Dirt, true);
             }
         }
 
+        internal void Render()
+        {
+            foreach (var item in manager.Blocks)
+            {
+                engine.AddBlockTile(item, true);
+            }
+        }
+
+        public void GenerateTrees()
+        {
+            foreach (var item in manager.Blocks.FindAll(s => s.Id == BlockType.Grass))
+            {
+                var size = parameters.BlockSize;
+                var ranSel = randomizer.Next(0, parameters.treeChance) == 0;
+                var HasSize = item.Y >= parameters.minimumFillarHeightForTree*parameters.BlockSize;
+                var IsAwayFromTrees = CanGenerateTree == 3;
+
+                if(ranSel&&HasSize&&IsAwayFromTrees) generateTree(item.X/size, item.Y/size);
+                else if (CanGenerateTree != parameters.TreeSpread) CanGenerateTree++;
+            }
+        }
         private void generateTree(int X, int Y)
         {
             for (int i = Y+1; i < Y+4; i++)
             {
-                manager.AddBlockTile(parameters.BlockSize * X, parameters.BlockSize * i, BlockType.Wood, parameters.BlockSize, false);
+                manager.AddBlockTile(X,i, BlockType.Wood,false);
             }
-            manager.AddBlockTile(parameters.BlockSize * X, parameters.BlockSize * (Y+4), BlockType.Leaves, parameters.BlockSize, false);
-            manager.AddBlockTile(parameters.BlockSize * (X-1), parameters.BlockSize * (Y+3), BlockType.Leaves, parameters.BlockSize, false);
-            manager.AddBlockTile(parameters.BlockSize * (X+1), parameters.BlockSize * (Y +3), BlockType.Leaves, parameters.BlockSize, false);
+            manager.AddBlockTile(X, (Y+4), BlockType.Leaves, false);
+            manager.AddBlockTile((X-1),(Y+3), BlockType.Leaves, false);
+            manager.AddBlockTile((X+1),(Y +3), BlockType.Leaves, false);
             CanGenerateTree = 0;
         }
 
-        public void CreateUnderGround(int size)
+        public void CreateUnderGround()
         {
-            for (int i = -size; i < 0; i++)
+            for (int X = -size; X < 0; X++)
             {
-                GenerateCollumnOfStone(i * parameters.BlockSize);
+                GenerateCollumnOfStone(X);
             }
 
-            for (int i = 0; i < size; i++)
+            for (int X = 0; X < size; X++)
             {
-                GenerateCollumnOfStone(i * parameters.BlockSize);
+                GenerateCollumnOfStone(X);
             }
         }
 
         private void GenerateCollumnOfStone(int X)
         {
-            for (int i = -1; i > -parameters.sizeOfStoneCollumn; i--)
+            for (int Y = -1; Y > -parameters.sizeOfStoneCollumn; Y--)
             {
-                manager.AddBlockTile(X, i * parameters.BlockSize, BlockType.Stone, parameters.BlockSize, false);
+                manager.AddBlockTile(X, Y, BlockType.Stone, true);
             }
+        }
+        public void GenerateOres(BlockType type)
+        {
+            var count = oreTable.GetCount(type,size * 2);
+            for (int i = 0; i < count; i++)
+            {
+                var X = randomizer.Next(-size, size - 1);
+                var Y = randomizer.Next(-parameters.sizeOfStoneCollumn, -oreTable.GetMinimumDepth(type));
+                GenerateOre(X, Y, type,oreTable.GetChance(type));
+            }
+        }
+        private void GenerateOre(int X, int Y,BlockType type,int bitSpawnChance)
+        {
+            manager.AddBlockTile(X, Y, type, true, true);
+            for (int x = -1; x < 2; x++)
+            {
+                for (int y = -1; y < 2; y++)
+                {
+                    GenerateBit(X-x, Y-y, type, bitSpawnChance);
+                }
+            }
+        }
+        private void GenerateBit(int X, int Y, BlockType type,int spawnChance)
+        {
+            if (randomizer.Next(0, spawnChance) == 0) manager.AddBlockTile(X, Y, type, true, true);
         }
     }
 }

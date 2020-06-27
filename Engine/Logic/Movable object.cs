@@ -14,7 +14,7 @@ namespace Engine.Logic
 {
     abstract class Movable_object:Sprite
     {
-        private readonly ITileManager tileManager;
+        private readonly IMover tileManager;
         private readonly IMoveDefiner moveDefiner;
         private readonly Parameters paramters;
         private bool Grounded;
@@ -23,9 +23,9 @@ namespace Engine.Logic
         private int speed;
         private int TicksElapsedForMove;
 
-        public Movable_object(IActiveElements ActiveElements,ITileManager tileManager,IMoveDefiner moveDefiner,PointerController pointer,Parameters paramters)
+        public Movable_object(IActiveElements ActiveElements,IMover tileManager,IMoveDefiner moveDefiner,PointerController pointer,Parameters paramters)
         {
-            this.Engine = ActiveElements;
+            this.ActiveElements = ActiveElements;
             this.tileManager = tileManager;
             this.moveDefiner = moveDefiner;
             Pointer = pointer;
@@ -37,7 +37,7 @@ namespace Engine.Logic
 			settingsForm = new PauseMenu(paramters);
 		}
 
-        public IActiveElements Engine { get; }
+        public IActiveElements ActiveElements { get; }
         public PointerController Pointer { get; }
 
         public override void update()
@@ -47,7 +47,7 @@ namespace Engine.Logic
 
 				flip = true;
 				tileManager.Move(roation.Right, paramters.moveSpeed);
-				foreach (var b in Engine.ActiveBlocks)
+				foreach (var b in ActiveElements.ActiveBlocks)
 				{
 					if (collide(b.Sprite))
 					{
@@ -61,7 +61,7 @@ namespace Engine.Logic
 
 				flip = false;
 				tileManager.Move(roation.Left, 5);
-				foreach (var b in Engine.ActiveBlocks)
+				foreach (var b in ActiveElements.ActiveBlocks)
 				{
 					if (collide(b.Sprite))
 					{
@@ -76,7 +76,7 @@ namespace Engine.Logic
 				Grounded = false;
 				speed = paramters.MaxFallSpeed;
 			}
-			foreach (var block in Engine.ActiveToppings)
+			foreach (var block in ActiveElements.ActiveToppings)
 			{
 
 				if (collide(block.Sprite) && TicksElapsed >= paramters.BlocksCollisionDelay)
@@ -92,7 +92,7 @@ namespace Engine.Logic
 
 			if (speed > -paramters.MaxFallSpeed) speed -= 1;
 
-			foreach (var b in Engine.ActiveBlocks)
+			foreach (var b in ActiveElements.ActiveBlocks)
 			{
 				if (collide(b.Sprite))
 				{

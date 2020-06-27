@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Engine.Engine
 {
-    public class Engine : IDrawer, ITileManager,IActiveElements
+    public class Engine : IDrawer,IActiveElements,IMover
     {
         public List<Block> Blocks = new List<Block>();
         public List<Block> ActiveBlocks => Blocks.FindAll(s => IsActiveBlock(s)).ToList();
@@ -20,7 +20,7 @@ namespace Engine.Engine
         
 
         public SpriteOverlay Center;
-        private readonly Parameters paramters;
+        public readonly Parameters paramters;
 
         public Engine(Parameters paramters)
         {
@@ -28,15 +28,6 @@ namespace Engine.Engine
             this.paramters = paramters;
         }
 
-        // Token: 0x06000013 RID: 19 RVA: 0x00002444 File Offset: 0x00000644
-        public void CreateGenerator(int seed, int size)
-        {
-            var generator = new Generator(seed, this,paramters);
-            generator.GenerateTerrian(size);
-            generator.CreateUnderGround(size);
-        }
-
-        // Token: 0x06000014 RID: 20 RVA: 0x0000246C File Offset: 0x0000066C
         public void RemoveTile(Block tile)
         {
             GameScene.gameSceneStatic.remove(tile.Sprite);
@@ -62,9 +53,13 @@ namespace Engine.Engine
         public void AddBlockTile(int X, int Y, BlockType Id, int size, bool SholdDraw)
         {
             Block block = new Block(X, Y, Id, size, this, IdProcessor);
+            AddBlockTile(block, SholdDraw);
+        }
+        public void AddBlockTile(Block block,bool ShouldDraw)
+        {
             this.Blocks.Add(block);
             Toppings.Add(block.foliage);
-            if (SholdDraw)
+            if (ShouldDraw)
             {
                 Draw(block);
                 Draw(block.foliage);
@@ -131,13 +126,8 @@ namespace Engine.Engine
 
     public interface ITileManager
     {
-        void Add(SpriteOverlay sprite);
-
-        void Move(roation roation, int lenght);
-
-        void AddBlockTile(int X, int Y, BlockType Id, int size, bool SholdDraw);
-
-        void RemoveTile(Block tile);
+        void AddBlockTile(int BlockX, int BlockY, BlockType Id,bool replace, bool forceReplace = false);
+        List<Block> Blocks { get; }
     }
 
     public interface IDrawer

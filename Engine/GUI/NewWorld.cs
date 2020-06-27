@@ -22,7 +22,7 @@ namespace Engine.GUI
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            init.InitWithParameters((int)numericSeed.Value, (int)numericSize.Value);
+            init.GenerateWorld((int)numericSeed.Value, (int)numericSize.Value);
             Close();
         }
     }

@@ -13,7 +13,7 @@ namespace Engine
         public int Delay = 0;
         //Generator Parameters
         public int BlockSize = 20;
-        public int sizeOfStoneCollumn = 10;
+        public int sizeOfStoneCollumn = 20;
 
         public int TreeSpread = 3;
         public int minimumFillarHeightForTree = 3;

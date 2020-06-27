@@ -2,6 +2,6 @@
 {
     public interface IInit
     {
-        void InitWithParameters(int seed, int size);
+        void GenerateWorld(int seed, int size);
     }
 }
