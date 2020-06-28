@@ -17,19 +17,21 @@ namespace Engine.Logic
         private readonly IMover tileManager;
         private readonly IMoveDefiner moveDefiner;
         private readonly Parameters paramters;
+        private readonly PlayerStatus status;
         private bool Grounded;
         private PauseMenu settingsForm;
         private int TicksElapsed;
         private int speed;
         private int TicksElapsedForMove;
 
-        public Movable_object(IActiveElements ActiveElements,IMover tileManager,IMoveDefiner moveDefiner,PointerController pointer,Parameters paramters)
+        public Movable_object(IActiveElements ActiveElements,IMover tileManager,IMoveDefiner moveDefiner,PointerController pointer,Parameters paramters,PlayerStatus status)
         {
             this.ActiveElements = ActiveElements;
             this.tileManager = tileManager;
             this.moveDefiner = moveDefiner;
             Pointer = pointer;
             this.paramters = paramters;
+            this.status = status;
             speed = 0;
 			Grounded = false;
 			TicksElapsed = paramters.BlocksCollisionDelay;
@@ -41,76 +43,97 @@ namespace Engine.Logic
         public PointerController Pointer { get; }
 
         public override void update()
-		{
-			if (moveDefiner.key(command.Left) && TicksElapsedForMove >= paramters.MoveDelay)
-			{
+        {
+            if (moveDefiner.key(command.Left) && TicksElapsedForMove >= paramters.MoveDelay)
+            {
+                MoveLeft();
+            }
+            else if (moveDefiner.key(command.Right) && TicksElapsedForMove >= paramters.MoveDelay)
+            {
+                MoveRight();
+            }
+            ApplyGravity();
+            ApplyBlocksCollisions();
+            if (moveDefiner.key(command.Pause)) Pause();
+            if (moveDefiner.key(command.OpenInventory)) status.OpenInventory();
+            
+        }
 
-				flip = true;
-				tileManager.Move(roation.Right, paramters.moveSpeed);
-				foreach (var b in ActiveElements.ActiveBlocks)
-				{
-					if (collide(b.Sprite))
-					{
-						tileManager.Move(roation.Left, paramters.moveSpeed);
-						break;
-					}
-				}
-			}
-			else if (moveDefiner.key(command.Right) && TicksElapsedForMove >= paramters.MoveDelay)
-			{
+        private void ApplyBlocksCollisions()
+        {
+            foreach (var b in ActiveElements.ActiveBlocks)
+            {
+                if (collide(b.Sprite))
+                {
+                    if (speed > 0)
+                    {
+                        TicksElapsed = 0;
+                        TicksElapsedForMove = 0;
+                        speed = -speed;
+                    }
+                    else if (collide(b.foliage.Sprite) && TicksElapsed == paramters.BlocksCollisionDelay) tileManager.Move(roation.Down, 3);
+                }
+            }
+            if (TicksElapsed != paramters.BlocksCollisionDelay) TicksElapsed++;
+            if (TicksElapsedForMove != paramters.MoveDelay) TicksElapsedForMove++;
+        }
 
-				flip = false;
-				tileManager.Move(roation.Left, 5);
-				foreach (var b in ActiveElements.ActiveBlocks)
-				{
-					if (collide(b.Sprite))
-					{
-						tileManager.Move(roation.Right, paramters.moveSpeed);
-						break;
-					}
-				}
-			}
-			if (moveDefiner.key(command.Jump) && Grounded)
-			{
+        private void Pause()
+        {
+            settingsForm.ShowDialog();
+        }
 
-				Grounded = false;
-				speed = paramters.MaxFallSpeed;
-			}
-			foreach (var block in ActiveElements.ActiveToppings)
-			{
+        private void ApplyGravity()
+        {
+            if (moveDefiner.key(command.Jump) && Grounded)
+            {
 
-				if (collide(block.Sprite) && TicksElapsed >= paramters.BlocksCollisionDelay)
-				{
-					Grounded = true;
-					Pointer.LastFoliage = block;
-					if (speed < 0 ) speed = 0;
-					break;
-				}
+                Grounded = false;
+                speed = paramters.MaxFallSpeed;
+            }
+            foreach (var block in ActiveElements.ActiveToppings)
+            {
 
-			}
-			tileManager.Move(roation.Down, speed);
+                if (collide(block.Sprite) && TicksElapsed >= paramters.BlocksCollisionDelay)
+                {
+                    Grounded = true;
+                    Pointer.LastFoliage = block;
+                    if (speed < 0) speed = 0;
+                    break;
+                }
 
-			if (speed > -paramters.MaxFallSpeed) speed -= 1;
+            }
+            tileManager.Move(roation.Down, speed);
 
-			foreach (var b in ActiveElements.ActiveBlocks)
-			{
-				if (collide(b.Sprite))
-				{
-					if (speed > 0)
-					{
-						TicksElapsed = 0;
-						TicksElapsedForMove = 0;
-						speed = -speed;
-					}
-					else if (collide(b.foliage.Sprite)&&TicksElapsed==paramters.BlocksCollisionDelay) tileManager.Move(roation.Down, 3);
-				}
-			}
-			if (moveDefiner.key(command.Pause))
-			{
-				settingsForm.ShowDialog();
-			}
-			if (TicksElapsed != paramters.BlocksCollisionDelay) TicksElapsed++;
-			if (TicksElapsedForMove != paramters.MoveDelay) TicksElapsedForMove++;
-		}
-	}
+            if (speed > -paramters.MaxFallSpeed) speed -= 1;
+        }
+
+        private void MoveRight()
+        {
+            flip = false;
+            tileManager.Move(roation.Left, 5);
+            foreach (var b in ActiveElements.ActiveBlocks)
+            {
+                if (collide(b.Sprite))
+                {
+                    tileManager.Move(roation.Right, paramters.moveSpeed);
+                    break;
+                }
+            }
+        }
+
+        private void MoveLeft()
+        {
+            flip = true;
+            tileManager.Move(roation.Right, paramters.moveSpeed);
+            foreach (var b in ActiveElements.ActiveBlocks)
+            {
+                if (collide(b.Sprite))
+                {
+                    tileManager.Move(roation.Left, paramters.moveSpeed);
+                    break;
+                }
+            }
+        }
+    }
 }

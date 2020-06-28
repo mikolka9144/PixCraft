@@ -22,11 +22,13 @@ namespace Engine.Logic
         cameraLeft,
         cameraRight,
         cameraDown,
-        Pause
+        Pause,
+        OpenInventory
     }
     public class PlayerMoveDefiner : IMoveDefiner
     {
         private bool PauseWasPressed;
+        private bool InventoryWasPressed;
 
         public PlayerMoveDefiner()
         {
@@ -75,6 +77,20 @@ namespace Engine.Logic
                     {
                         PauseWasPressed = false;
                         return state;
+                    }
+
+                case command.OpenInventory:
+                    var State = game.key("e");
+                    if (State)
+                    {
+                        if (InventoryWasPressed == true) return false;
+                        InventoryWasPressed = true;
+                        return State;
+                    }
+                    else
+                    {
+                        InventoryWasPressed = false;
+                        return State;
                     }
             }
             return false;

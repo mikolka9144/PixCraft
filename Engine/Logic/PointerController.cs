@@ -4,14 +4,16 @@ using PixBlocks.PythonIron.Tools.Integration;
 
 namespace Engine.Engine.models
 {
-    public class PointerController:Sprite
+    internal class PointerController:Sprite
     {
+        private readonly PlayerStatus status;
         private readonly IMoveDefiner moveDefiner;
         private readonly Parameters paramters;
 
-        public PointerController(Pointer pointer,Engine engine,IMoveDefiner moveDefiner,Parameters paramters)
+        public PointerController(PlayerStatus status,Pointer pointer,Engine engine,IMoveDefiner moveDefiner,Parameters paramters)
         {
             size = 0;
+            this.status = status;
             point = pointer;
             Engine = engine;
             this.moveDefiner = moveDefiner;
@@ -43,6 +45,7 @@ namespace Engine.Engine.models
 					
 					if (this.point.Sprite.collide(b.Sprite))
 					{
+						status.AddElement(new Item(true, 1, b.Id));
                         Engine.RemoveTile(b);
 						break;
 					}
@@ -54,7 +57,8 @@ namespace Engine.Engine.models
 				{
 					if (point.Sprite.collide(b.Sprite)) return;
 				}
-				Engine.AddBlockTile(point.X, point.Y, BlockType.Dirt,20, true); 
+				var blockType = status.GetBlockToPlace();
+				if(blockType != BlockType.None) Engine.AddBlockTile(point.X, point.Y,blockType, 20, true); 
 			}
 			if (IsNotInRange)
             {

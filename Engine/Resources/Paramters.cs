@@ -25,6 +25,8 @@ namespace Engine
         public int MoveDelay = 3;
         public int ChunkSize = 20;
         public int breakingRange = 50;
+        internal int BaseHealth = 20;
+        internal int MaxSlotCapatility = 64;
     }
 
 }

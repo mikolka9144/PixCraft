@@ -3,6 +3,7 @@ using Engine.Engine.models;
 using Engine.GUI;
 using Logic;
 using PixBlocks.PythonIron.Tools.Game;
+using System.Threading.Tasks;
 
 namespace Engine.Logic
 {
@@ -15,17 +16,18 @@ namespace Engine.Logic
 
         public void Init()
         {
+            parameters = new Parameters();
             var game = GameScene.gameSceneStatic;
             var IdProcessor = new BlockIdProcessor();
             var moveDefiner = new PlayerMoveDefiner();
-
-            parameters = new Parameters();
+            var StatusWindow = new StatusDisplay(parameters);
             engine = new Engine.Engine(parameters);
             tileManager = new TileManager(parameters, engine, IdProcessor);
 
+            var playerstatus = new PlayerStatus(parameters, StatusWindow);
             var pointer = new Pointer(engine);
-            var pointerController = new PointerController(pointer, engine,moveDefiner,parameters);
-            var player = new Player(parameters,engine,engine,pointerController,moveDefiner);
+            var pointerController = new PointerController(playerstatus,pointer, engine,moveDefiner,parameters);
+            var player = new Player(parameters,engine,engine,pointerController,moveDefiner,playerstatus);
 
             var MainMenu = new Main_Menu(this,parameters);
             MainMenu.ShowDialog();

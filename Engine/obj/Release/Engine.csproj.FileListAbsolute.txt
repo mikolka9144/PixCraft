@@ -21,3 +21,4 @@ C:\Users\mikol\source\repos\Block engine\Engine\obj\Release\Engine.csproj.Genera
 C:\Users\mikol\source\repos\Block engine\Engine\obj\Release\Engine.GUI.PauseMenu.resources
 C:\Users\mikol\source\repos\Block engine\Engine\bin\Release\Engine.dll.config
 C:\Users\mikol\source\repos\Block engine\Engine\obj\Release\Engine.GUI.Settings_Form.resources
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Release\Engine.GUI.StatusDisplay.resources
