@@ -51,13 +51,16 @@ namespace Engine.Logic
         private void ExecuteGeneration(Generator generator,ProgressBar progress)
         {
             generator.GenerateTerrian();
-            progress.Value = 20;
+            progress.Value = 25;
             generator.CreateUnderGround();
+            progress.Value = 50;
             generator.GenerateTrees();
+            progress.Value = 75;
             generator.GenerateOres(BlockType.CoalOre);
             generator.GenerateOres(BlockType.IronOre);
             generator.GenerateOres(BlockType.GoldOre);
             generator.GenerateOres(BlockType.DiamondOre);
+            progress.Value = 100;
             generator.Render();
         }
     }
