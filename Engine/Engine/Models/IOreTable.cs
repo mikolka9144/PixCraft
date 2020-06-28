@@ -3,7 +3,7 @@
     public interface IOreTable
     {
         int GetChance(BlockType type);
-        int GetCount(BlockType type,int worldSize);
+        int GetCount(BlockType type);
         int GetMinimumDepth(BlockType type);
     }
 }

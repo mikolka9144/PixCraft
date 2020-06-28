@@ -115,12 +115,19 @@ namespace Engine.Engine
         }
         public void GenerateOres(BlockType type)
         {
-            var count = oreTable.GetCount(type,size * 2);
-            for (int i = 0; i < count; i++)
+            var count = oreTable.GetCount(type);
+            var pointer = -size;
+            var chunks = size*2/20;
+            if (size % 10 != 0) chunks++;
+            for (int c = 0; c < chunks; c++)
             {
-                var X = randomizer.Next(-size, size - 1);
-                var Y = randomizer.Next(-parameters.sizeOfStoneCollumn, -oreTable.GetMinimumDepth(type));
-                GenerateOre(X, Y, type,oreTable.GetChance(type));
+                for (int i = 0; i < count; i++)
+                {
+                    var X = randomizer.Next(pointer, pointer + 20);
+                    var Y = randomizer.Next(-parameters.sizeOfStoneCollumn, -oreTable.GetMinimumDepth(type));
+                    GenerateOre(X, Y, type, oreTable.GetChance(type));
+                }
+                pointer += 20;
             }
         }
         private void GenerateOre(int X, int Y,BlockType type,int bitSpawnChance)

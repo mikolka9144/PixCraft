@@ -15,9 +15,10 @@ namespace Engine.Resources
         {
             var list = new OreEntry[]
             {
-                new OreEntry(2,6,10,BlockType.Dirt),
-                new OreEntry(4,4,10,BlockType.Leaves),
-                new OreEntry(18,2,10,BlockType.Wood)
+                new OreEntry(1,3,4,BlockType.CoalOre),
+                new OreEntry(1,4,3,BlockType.IronOre),
+                new OreEntry(10,5,2,BlockType.GoldOre),
+                new OreEntry(15,6,1,BlockType.DiamondOre)
             };
             table.Entries.AddRange(list);
         }

@@ -2,10 +2,10 @@
 {
     public class OreEntry
     {
-        public OreEntry(int minimumDepth, int chanceOfSpawn,int oresPerXBlocks, BlockType type)
+        public OreEntry(int minimumDepth, int howOftenGenerateBits,int oresPerXBlocks, BlockType type)
         {
             MinimumDepth = minimumDepth;
-            ChanceOfSpawn = chanceOfSpawn;
+            ChanceOfSpawn = howOftenGenerateBits;
             OresPerXBlocks = oresPerXBlocks;
             Type = type;
         }

@@ -28,6 +28,18 @@ namespace Engine
                 case BlockType.Leaves:
                     overlay.Sprite.color = new Color(102, 153, 51);
                     break;
+                case BlockType.CoalOre:
+                    overlay.Sprite.color = new Color(0, 0, 0);
+                    break;
+                case BlockType.IronOre:
+                    overlay.Sprite.color = new Color(203,205,205);
+                    break;
+                case BlockType.GoldOre:
+                    overlay.Sprite.color = new Color(153, 153, 0);
+                    break;
+                case BlockType.DiamondOre:
+                    overlay.Sprite.color = new Color(134, 255, 255);
+                    break;
             }
         }
     }
@@ -38,6 +50,10 @@ namespace Engine
         Dirt,
         Stone,
         Wood,
-        Leaves
+        Leaves,
+        CoalOre,
+        IronOre,
+        GoldOre,
+        DiamondOre
     }
 }

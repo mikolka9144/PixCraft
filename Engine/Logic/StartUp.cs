@@ -49,7 +49,10 @@ namespace Engine.Logic
             generator.GenerateTerrian();
             generator.CreateUnderGround();
             generator.GenerateTrees();
-            generator.GenerateOres(BlockType.Leaves);
+            generator.GenerateOres(BlockType.CoalOre);
+            generator.GenerateOres(BlockType.IronOre);
+            generator.GenerateOres(BlockType.GoldOre);
+            generator.GenerateOres(BlockType.DiamondOre);
             generator.Render();
         }
     }
