@@ -23,6 +23,7 @@ namespace Engine
         //Gameplay
         public int BlocksCollisionDelay = 2;
         public int MoveDelay = 3;
+        public int ChunkSize = 20;
     }
 
 }

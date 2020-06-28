@@ -115,19 +115,20 @@ namespace Engine.Engine
         }
         public void GenerateOres(BlockType type)
         {
+            var offset = parameters.ChunkSize;
             var count = oreTable.GetCount(type);
             var pointer = -size;
-            var chunks = size*2/20;
+            var chunks = size*2/offset;
             if (size % 10 != 0) chunks++;
             for (int c = 0; c < chunks; c++)
             {
                 for (int i = 0; i < count; i++)
                 {
-                    var X = randomizer.Next(pointer, pointer + 20);
+                    var X = randomizer.Next(pointer, pointer + offset);
                     var Y = randomizer.Next(-parameters.sizeOfStoneCollumn, -oreTable.GetMinimumDepth(type));
                     GenerateOre(X, Y, type, oreTable.GetChance(type));
                 }
-                pointer += 20;
+                pointer += offset;
             }
         }
         private void GenerateOre(int X, int Y,BlockType type,int bitSpawnChance)
