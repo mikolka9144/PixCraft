@@ -27,6 +27,7 @@ namespace Engine
         public int breakingRange = 50;
         internal int BaseHealth = 20;
         internal int MaxSlotCapatility = 64;
+        internal int minimumBlocksForFall = 3;
     }
 
 }

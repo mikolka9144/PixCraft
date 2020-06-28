@@ -98,7 +98,7 @@
     </Compile>
     <Compile Include="Engine\Models\IOreTable.cs" />
     <Compile Include="Logic\IActiveElements.cs" />
-    <Compile Include="Logic\IMoveDefiner.cs" />
+    <Compile Include="Resources\IMoveDefiner.cs" />
     <Compile Include="Logic\Movable object.cs" />
     <Compile Include="Logic\Player.cs" />
     <Compile Include="Logic\PointerController.cs" />

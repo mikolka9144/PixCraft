@@ -17,12 +17,13 @@ namespace Engine.Logic
         private readonly IMover tileManager;
         private readonly IMoveDefiner moveDefiner;
         private readonly Parameters paramters;
-        private readonly PlayerStatus status;
+        protected readonly PlayerStatus status;
         private bool Grounded;
         private PauseMenu settingsForm;
         private int TicksElapsed;
         private int speed;
         private int TicksElapsedForMove;
+        private int DistanceFalled;
 
         public Movable_object(IActiveElements ActiveElements,IMover tileManager,IMoveDefiner moveDefiner,PointerController pointer,Parameters paramters,PlayerStatus status)
         {
@@ -85,6 +86,7 @@ namespace Engine.Logic
 
         private void ApplyGravity()
         {
+            
             if (moveDefiner.key(command.Jump) && Grounded)
             {
 
@@ -99,12 +101,14 @@ namespace Engine.Logic
                     Grounded = true;
                     Pointer.LastFoliage = block;
                     if (speed < 0) speed = 0;
+                    status.DealDamage(DistanceFalled);
+                    DistanceFalled = 0;
                     break;
                 }
 
             }
             tileManager.Move(roation.Down, speed);
-
+            if (speed < 0) DistanceFalled -= speed;
             if (speed > -paramters.MaxFallSpeed) speed -= 1;
         }
 

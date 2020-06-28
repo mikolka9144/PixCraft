@@ -48,7 +48,6 @@
             this.Inventory.Size = new System.Drawing.Size(339, 175);
             this.Inventory.TabIndex = 1;
             this.Inventory.UseCompatibleStateImageBehavior = false;
-            this.Inventory.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // StatusDisplay
             // 
@@ -62,7 +61,6 @@
             this.Name = "StatusDisplay";
             this.Text = "StatusDisplay";
             this.TopMost = true;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StatusDisplay_FormClosing);
             this.ResumeLayout(false);
 
         }

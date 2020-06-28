@@ -9,8 +9,9 @@ namespace Engine.Logic
     internal class PlayerStatus
     {
         private int MaxSlotLimit;
+        private readonly Parameters parameters;
 
-        public int health { get; private set; }
+        public int health { get; set; }
         public List<Item> Inventory { get; }
         public IStatusDisplayer Displayer { get; }
 
@@ -18,6 +19,7 @@ namespace Engine.Logic
         {
             health = parameters.BaseHealth;
             Inventory = new List<Item>();
+            this.parameters = parameters;
             Displayer = displayer;
             MaxSlotLimit = parameters.MaxSlotCapatility;
         }
@@ -55,5 +57,16 @@ namespace Engine.Logic
             selection.Count -= 1;
             if (selection.Count <= 0) Inventory.Remove(selection);
         }
+        public void DealDamage(int DistanceFallen)
+        {
+            if (DistanceFallen >= parameters.minimumBlocksForFall*parameters.BlockSize)
+            {
+                DistanceFallen -= parameters.minimumBlocksForFall* parameters.BlockSize;
+                health -= DistanceFallen / parameters.BlockSize;
+                if (health <= 0) OnKill.Invoke();
+            }
+        }
+
+        internal event Action OnKill;
     }
 }

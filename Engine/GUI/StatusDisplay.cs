@@ -26,7 +26,8 @@ namespace Engine.GUI
         {
             SelectedIndex = -1;
             Inventory.Items.Clear();
-            LifeBar.Value = life / Parameters.BaseHealth;
+            double precentage = ((double)life / Parameters.BaseHealth) * 100.0;
+            LifeBar.Value = (int)precentage;
             for (int i = 0; i < currentItems.Count; i++)
             {
                 var elementToTransform = currentItems[i];
@@ -36,16 +37,6 @@ namespace Engine.GUI
             }
             ShowDialog();
             if(Inventory.SelectedItems.Count != 0)SelectedIndex = (int)Inventory.SelectedItems[0].Tag;
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void StatusDisplay_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            
         }
     }
 }
