@@ -24,6 +24,7 @@ namespace Engine
         public int BlocksCollisionDelay = 2;
         public int MoveDelay = 3;
         public int ChunkSize = 20;
+        public int breakingRange = 50;
     }
 
 }

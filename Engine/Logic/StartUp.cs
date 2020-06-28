@@ -24,7 +24,7 @@ namespace Engine.Logic
             tileManager = new TileManager(parameters, engine, IdProcessor);
 
             var pointer = new Pointer(engine);
-            var pointerController = new PointerController(pointer, engine,moveDefiner);
+            var pointerController = new PointerController(pointer, engine,moveDefiner,parameters);
             var player = new Player(parameters,engine,engine,pointerController,moveDefiner);
 
             var MainMenu = new Main_Menu(this,parameters);
