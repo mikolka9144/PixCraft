@@ -3,7 +3,9 @@ using Engine.Engine.models;
 using Engine.GUI;
 using Logic;
 using PixBlocks.PythonIron.Tools.Game;
+using System;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Engine.Logic
 {
@@ -37,18 +39,19 @@ namespace Engine.Logic
             game.start();
         }
 
-        public void GenerateWorld(int seed, int size)
+        public void GenerateWorld(int seed, int size, ProgressBar progress)
         {
             IsWorldGenerated = true;
             var oreTable = new OreTable();
 
             var generator = new Generator(seed, tileManager, parameters, oreTable,size,engine);
-            ExecuteGeneration(generator);
+            ExecuteGeneration(generator,progress);
 
         }
-        private void ExecuteGeneration(Generator generator)
+        private void ExecuteGeneration(Generator generator,ProgressBar progress)
         {
             generator.GenerateTerrian();
+            progress.Value = 20;
             generator.CreateUnderGround();
             generator.GenerateTrees();
             generator.GenerateOres(BlockType.CoalOre);

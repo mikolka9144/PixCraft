@@ -33,6 +33,7 @@
             this.numericSize = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
+            this.progress = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.numericSeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSize)).BeginInit();
             this.SuspendLayout();
@@ -81,7 +82,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(61, 178);
+            this.btnStart.Location = new System.Drawing.Point(61, 129);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 5;
@@ -89,11 +90,19 @@
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
+            // progress
+            // 
+            this.progress.Location = new System.Drawing.Point(0, 207);
+            this.progress.Name = "progress";
+            this.progress.Size = new System.Drawing.Size(243, 23);
+            this.progress.TabIndex = 6;
+            // 
             // NewWorld
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(245, 235);
+            this.Controls.Add(this.progress);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.numericSize);
@@ -114,5 +123,6 @@
         private System.Windows.Forms.NumericUpDown numericSize;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.ProgressBar progress;
     }
 }

@@ -1,7 +1,9 @@
-﻿namespace Engine.GUI
+﻿using System.Windows.Forms;
+
+namespace Engine.GUI
 {
     public interface IInit
     {
-        void GenerateWorld(int seed, int size);
+        void GenerateWorld(int seed, int size, ProgressBar progress);
     }
 }
