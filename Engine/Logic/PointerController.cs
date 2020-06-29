@@ -67,11 +67,11 @@ namespace Engine.Engine.models
         private void MovePointer()
         {
             var MousePos = GameScene.gameSceneStatic.mouse.position;
-            var PointPos = point.Sprite.position;
-            var Xlen = MousePos.x - PointPos.x;
-            var Ylen = MousePos.y - PointPos.y;
-            point.Move(roation.Up, (int)(Ylen / 20) * 20);
-            point.Move(roation.Right, (int)(Xlen / 20) * 20);
+            var PointPos = point;
+            var Xlen = MousePos.x - PointPos.X;
+            var Ylen = MousePos.y - PointPos.Y;
+            point.Move(roation.Up, (int)(Ylen / 10) * 20);
+            point.Move(roation.Right, (int)(Xlen / 10) * 20);
         }
     }
 }
