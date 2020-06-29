@@ -7,14 +7,15 @@ namespace Engine.Engine.models
     public class SpriteOverlay
     {
         // Token: 0x06000007 RID: 7 RVA: 0x00002158 File Offset: 0x00000358
-        public SpriteOverlay(Sprite sprite, int x, int y, BlockType Id, IDrawer engine,IIdProcessor processor)
+        public SpriteOverlay(Sprite sprite, int x, int y, BlockType Id, IDrawer engine,IIdProcessor processor,Parameters parameters)
         {
             this.Sprite = sprite;
             this.X = x;
             this.Y = y;
             this.Id = Id;
             Engine = engine;
-            if(processor != null) processor.ProcessSprite(this);
+            this.parameters = parameters;
+            if (processor != null) processor.ProcessSprite(this);
         }
 
         public Sprite Sprite { get; }
@@ -29,6 +30,13 @@ namespace Engine.Engine.models
             Engine.Draw(this);
         }
 
+        internal bool IsActiveBlock()
+        {
+            var isActive = IsRendered;
+            var IsNotInRange = X > parameters.hitboxArea.Right || X < -parameters.hitboxArea.Left
+                || Y > parameters.hitboxArea.Up || Y < parameters.hitboxArea.Down;
+            return isActive && IsNotInRange;
+        }
         // Token: 0x0600000D RID: 13 RVA: 0x000021E0 File Offset: 0x000003E0
         protected void SetPosition(roation roation, int lenght)
         {
@@ -55,5 +63,6 @@ namespace Engine.Engine.models
 
         // Token: 0x04000005 RID: 5
         public int Y;
+        private readonly Parameters parameters;
     }
 }

@@ -10,10 +10,10 @@ namespace Engine.Engine
     public class Engine : IDrawer,IActiveElements,IMover
     {
         public List<Block> Blocks = new List<Block>();
-        public List<Block> ActiveBlocks => Blocks.FindAll(s => IsActiveBlock(s)).ToList();
+        public List<Block> ActiveBlocks => Blocks.FindAll(s => s.IsActiveBlock()).ToList();
 
         public List<Foliage> Toppings = new List<Foliage>();
-        public List<Foliage> ActiveToppings => Toppings.FindAll(s => IsActiveBlock(s)).ToList();
+        public List<Foliage> ActiveToppings => Toppings.FindAll(s => s.IsActiveBlock()).ToList();
 
         public BlockIdProcessor IdProcessor = new BlockIdProcessor();
         public List<SpriteOverlay> Sprites = new List<SpriteOverlay>();
@@ -52,7 +52,7 @@ namespace Engine.Engine
         // Token: 0x06000018 RID: 24 RVA: 0x000025D0 File Offset: 0x000007D0
         public void AddBlockTile(int X, int Y, BlockType Id, int size, bool SholdDraw)
         {
-            Block block = new Block(X, Y, Id, size, this, IdProcessor);
+            Block block = new Block(X, Y, Id, size, this, IdProcessor,paramters);
             AddBlockTile(block, SholdDraw);
         }
         public void AddBlockTile(Block block,bool ShouldDraw)
@@ -115,13 +115,7 @@ namespace Engine.Engine
             this.Center.Move(roation, lenght);
         }
 
-        private bool IsActiveBlock(SpriteOverlay sprite)
-        {
-            var isActive = sprite.IsRendered;
-            var IsNotInRange = sprite.X > paramters.hitboxArea.Right || sprite.X < -paramters.hitboxArea.Left 
-                || sprite.Y > paramters.hitboxArea.Up || sprite.Y < paramters.hitboxArea.Down;
-            return isActive && IsNotInRange;
-        }
+        
     }
 
     public interface ITileManager
