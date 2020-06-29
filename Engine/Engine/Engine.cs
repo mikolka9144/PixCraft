@@ -126,7 +126,14 @@ namespace Engine.Engine
 
     public interface ITileManager
     {
+        ///<summary>
+        ///Creates a block with collision check
+        ///</summary>
         void AddBlockTile(int BlockX, int BlockY, BlockType Id,bool replace, bool forceReplace = false);
+        ///<summary>
+        ///Creates a block without collision check
+        ///</summary>
+        void AddBlockTile(int BlockX, int BlockY, BlockType Id);
         List<Block> Blocks { get; }
     }
 

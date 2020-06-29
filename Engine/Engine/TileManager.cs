@@ -25,23 +25,30 @@ namespace Engine.Engine
 
         public void AddBlockTile(int BlockX, int BlockY, BlockType Id, bool replace, bool forceReplace = false)
         {
-            var x = parameters.BlockSize;
-            var currentBlock = Blocks.Find(s => (s.X / x) == BlockX && s.Y / x == BlockY);
-            if (currentBlock != null)
-            {
-                if (replace)
+                var x = parameters.BlockSize;
+                var currentBlock = Blocks.Find(s => (s.X / x) == BlockX && s.Y / x == BlockY);
+                if (currentBlock != null)
                 {
-                    Blocks.Remove(currentBlock);
+                    if (replace)
+                    {
+                        Blocks.Remove(currentBlock);
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
-                else
+                else if (forceReplace)
                 {
                     return;
                 }
-            }
-            else if(forceReplace)
-            {
-                return;            
-            }
+
+            AddBlockTile(BlockX, BlockY, Id);
+        }
+
+        public void AddBlockTile(int BlockX, int BlockY, BlockType Id)
+        {
+            var x = parameters.BlockSize;
             Blocks.Add(new Block(BlockX * x, BlockY * x, Id, x, drawer, processor));
         }
     }

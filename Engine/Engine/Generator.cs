@@ -51,12 +51,12 @@ namespace Engine.Engine
         {
             if (random - 1 == BlockY)
             {
-                manager.AddBlockTile(BlockX,BlockY, BlockType.Grass, true);
+                manager.AddBlockTile(BlockX,BlockY, BlockType.Grass);
             }
             else
             {
 
-                manager.AddBlockTile(BlockX,BlockY, BlockType.Dirt, true);
+                manager.AddBlockTile(BlockX,BlockY, BlockType.Dirt);
             }
         }
 
@@ -110,7 +110,7 @@ namespace Engine.Engine
         {
             for (int Y = -1; Y > -parameters.sizeOfStoneCollumn; Y--)
             {
-                manager.AddBlockTile(X, Y, BlockType.Stone, true);
+                manager.AddBlockTile(X, Y, BlockType.Stone);
             }
         }
         public void GenerateOres(BlockType type)
