@@ -57,14 +57,16 @@ namespace Engine.Logic
             selection.Count -= 1;
             if (selection.Count <= 0) Inventory.Remove(selection);
         }
-        public void DealDamage(int DistanceFallen)
+        public bool DealDamage(int DistanceFallen)
         {
             if (DistanceFallen >= parameters.minimumBlocksForFall*parameters.BlockSize)
             {
                 DistanceFallen -= parameters.minimumBlocksForFall* parameters.BlockSize;
                 health -= DistanceFallen / parameters.BlockSize;
                 if (health <= 0) OnKill.Invoke();
+                return true;
             }
+            return false;
         }
 
         internal event Action OnKill;

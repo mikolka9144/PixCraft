@@ -14,12 +14,14 @@ namespace Engine.Logic
 {
     abstract class Movable_object:Sprite
     {
-        private readonly IMover tileManager;
-        private readonly IMoveDefiner moveDefiner;
-        private readonly Parameters paramters;
+        protected readonly IMover tileManager;
+        protected readonly IMoveDefiner moveDefiner;
+        protected readonly Parameters paramters;
         protected readonly PlayerStatus status;
+        protected event Action PostUpdate;
+        protected event Action OnDamageDeal;
+
         private bool Grounded;
-        private PauseMenu settingsForm;
         private int TicksElapsed;
         private int speed;
         private int TicksElapsedForMove;
@@ -37,7 +39,7 @@ namespace Engine.Logic
 			Grounded = false;
 			TicksElapsed = paramters.BlocksCollisionDelay;
 			TicksElapsedForMove = paramters.MoveDelay;
-			settingsForm = new PauseMenu(paramters);
+			
 		}
 
         public IActiveElements ActiveElements { get; }
@@ -55,9 +57,7 @@ namespace Engine.Logic
             }
             ApplyGravity();
             ApplyBlocksCollisions();
-            if (moveDefiner.key(command.Pause)) Pause();
-            if (moveDefiner.key(command.OpenInventory)) status.OpenInventory();
-            
+            PostUpdate.Invoke();          
         }
 
         private void ApplyBlocksCollisions()
@@ -79,10 +79,7 @@ namespace Engine.Logic
             if (TicksElapsedForMove != paramters.MoveDelay) TicksElapsedForMove++;
         }
 
-        private void Pause()
-        {
-            settingsForm.ShowDialog();
-        }
+        
 
         private void ApplyGravity()
         {
@@ -101,7 +98,7 @@ namespace Engine.Logic
                     Grounded = true;
                     Pointer.LastFoliage = block;
                     if (speed < 0) speed = 0;
-                    status.DealDamage(DistanceFalled);
+                    if(status.DealDamage(DistanceFalled)) OnDamageDeal.Invoke();
                     DistanceFalled = 0;
                     break;
                 }
@@ -115,7 +112,7 @@ namespace Engine.Logic
         private void MoveRight()
         {
             flip = false;
-            tileManager.Move(roation.Left, 5);
+            tileManager.Move(roation.Left, paramters.moveSpeed);
             foreach (var b in ActiveElements.ActiveBlocks)
             {
                 if (collide(b.Sprite))

@@ -15,3 +15,10 @@ C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.dll
 C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.pdb
 C:\Users\mikol\source\repos\Block engine\Engine\bin\Debug\PixBlocks10.exe
 C:\Users\mikol\source\repos\Block engine\Engine\bin\Debug\PixBlocks10.exe.config
+C:\Users\mikol\source\repos\Block engine\Engine\bin\Debug\Engine.dll.config
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.GUI.Main_Menu.resources
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.GUI.NewWorld.resources
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.GUI.PauseMenu.resources
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.GUI.Settings_Form.resources
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.GUI.StatusDisplay.resources
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.csproj.GenerateResource.cache
