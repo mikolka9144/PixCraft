@@ -1,5 +1,4 @@
 ﻿using PixBlocks.PythonIron.Tools.Integration;
-using System;
 
 namespace Engine.Engine.models
 {
@@ -7,7 +6,7 @@ namespace Engine.Engine.models
     public class SpriteOverlay
     {
         // Token: 0x06000007 RID: 7 RVA: 0x00002158 File Offset: 0x00000358
-        public SpriteOverlay(Sprite sprite, int x, int y, BlockType Id, IDrawer engine,IIdProcessor processor,Parameters parameters)
+        public SpriteOverlay(Sprite sprite, int x, int y, BlockType Id, IDrawer engine, IIdProcessor processor, Parameters parameters)
         {
             this.Sprite = sprite;
             this.X = x;
@@ -15,6 +14,7 @@ namespace Engine.Engine.models
             this.Id = Id;
             Engine = engine;
             this.parameters = parameters;
+
             if (processor != null) processor.ProcessSprite(this);
         }
 
@@ -37,6 +37,7 @@ namespace Engine.Engine.models
                 || Y > parameters.hitboxArea.Up || Y < parameters.hitboxArea.Down;
             return isActive && IsNotInRange;
         }
+
         // Token: 0x0600000D RID: 13 RVA: 0x000021E0 File Offset: 0x000003E0
         protected void SetPosition(roation roation, int lenght)
         {
@@ -45,16 +46,18 @@ namespace Engine.Engine.models
                 case roation.Up:
                     Y += lenght;
                     break;
+
                 case roation.Left:
                     X -= lenght;
                     break;
+
                 case roation.Right:
                     X += lenght;
                     break;
+
                 case roation.Down:
                     Y -= lenght;
                     break;
-                
             }
         }
 
@@ -63,6 +66,7 @@ namespace Engine.Engine.models
 
         // Token: 0x04000005 RID: 5
         public int Y;
+
         private readonly Parameters parameters;
     }
 }

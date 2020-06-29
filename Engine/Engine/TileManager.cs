@@ -49,7 +49,7 @@ namespace Engine.Engine
         public void AddBlockTile(int BlockX, int BlockY, BlockType Id)
         {
             var x = parameters.BlockSize;
-            Blocks.Add(new Block(BlockX * x, BlockY * x, Id, x, drawer, processor));
+            Blocks.Add(new Block(BlockX * x, BlockY * x, Id, x, drawer, processor,parameters));
         }
     }
 }

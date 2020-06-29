@@ -20,12 +20,12 @@ namespace Engine.Engine
         
 
         public SpriteOverlay Center;
-        public readonly Parameters paramters;
+        public readonly Parameters parameters;
 
         public Engine(Parameters paramters)
         {
-            Center = new Center(this);
-            this.paramters = paramters;
+            Center = new Center(this,paramters);
+            this.parameters = paramters;
         }
 
         public void RemoveTile(Block tile)
@@ -52,7 +52,7 @@ namespace Engine.Engine
         // Token: 0x06000018 RID: 24 RVA: 0x000025D0 File Offset: 0x000007D0
         public void AddBlockTile(int X, int Y, BlockType Id, int size, bool SholdDraw)
         {
-            Block block = new Block(X, Y, Id, size, this, IdProcessor,paramters);
+            Block block = new Block(X, Y, Id, size, this, IdProcessor,parameters);
             AddBlockTile(block, SholdDraw);
         }
         public void AddBlockTile(Block block,bool ShouldDraw)
@@ -69,8 +69,10 @@ namespace Engine.Engine
         // Token: 0x06000019 RID: 25 RVA: 0x00002628 File Offset: 0x00000828
         public void Draw(SpriteOverlay sprite)
         {
-            bool flag = sprite.X > paramters.border.Left || sprite.X < -paramters.border.Right || 
-                sprite.Y > paramters.border.Up || sprite.Y < -paramters.border.Down;
+            
+             var flag = sprite.X > parameters.border.Left || sprite.X < -parameters.border.Right || 
+                sprite.Y > parameters.border.Up || sprite.Y < -parameters.border.Down;
+            
             if (flag)
             {
                 sprite.Sprite.IsVisible = false;
@@ -92,7 +94,7 @@ namespace Engine.Engine
         {
             if (!sprite.IsRendered)
             {
-                Thread.Sleep(paramters.Delay);
+                Thread.Sleep(parameters.Delay);
                 GameScene.gameSceneStatic.add(sprite.Sprite);
                 sprite.IsRendered = true;
             }

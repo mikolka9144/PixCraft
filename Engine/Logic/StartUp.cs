@@ -27,7 +27,7 @@ namespace Engine.Logic
             tileManager = new TileManager(parameters, engine, IdProcessor);
 
             var playerstatus = new PlayerStatus(parameters, StatusWindow);
-            var pointer = new Pointer(engine);
+            var pointer = new Pointer(engine,parameters);
             var pointerController = new PointerController(playerstatus,pointer, engine,moveDefiner,parameters);
             var player = new Player(parameters,engine,engine,pointerController,moveDefiner,playerstatus);
 

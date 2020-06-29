@@ -11,7 +11,7 @@ namespace Engine.Engine.models
             
             Sprite.image = 63;
             Sprite.size = size;
-            foliage = new Foliage(x, y + size / 3, Id, this,processor);
+            foliage = new Foliage(x, y + size / 3, Id, this,processor,parameters);
         }
 
         public Foliage foliage { get; private set; }
