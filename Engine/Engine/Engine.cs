@@ -76,7 +76,6 @@ namespace Engine.Engine
             if (flag)
             {
                 sprite.Sprite.IsVisible = false;
-                sprite.IsRendered = false;
             }
             else
             {
@@ -92,11 +91,10 @@ namespace Engine.Engine
         // Token: 0x0600001A RID: 26 RVA: 0x000026D8 File Offset: 0x000008D8
         private void AddSpriteToGame(SpriteOverlay sprite)
         {
-            if (!sprite.IsRendered)
+            if (!sprite.Sprite.IsVisible)
             {
                 Thread.Sleep(parameters.Delay);
                 GameScene.gameSceneStatic.add(sprite.Sprite);
-                sprite.IsRendered = true;
             }
         }
 

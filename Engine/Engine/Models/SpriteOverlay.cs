@@ -20,7 +20,6 @@ namespace Engine.Engine.models
 
         public Sprite Sprite { get; }
         public BlockType Id { get; }
-        public bool IsRendered = false;
         public IDrawer Engine { get; }
 
         // Token: 0x0600000C RID: 12 RVA: 0x000021C7 File Offset: 0x000003C7
@@ -32,10 +31,9 @@ namespace Engine.Engine.models
 
         internal bool IsActiveBlock()
         {
-            var isActive = IsRendered;
             var IsNotInRange = X > parameters.hitboxArea.Right || X < -parameters.hitboxArea.Left
                 || Y > parameters.hitboxArea.Up || Y < -parameters.hitboxArea.Down;
-            return isActive && !IsNotInRange;
+            return Sprite.IsVisible && !IsNotInRange;
         }
 
         // Token: 0x0600000D RID: 13 RVA: 0x000021E0 File Offset: 0x000003E0
