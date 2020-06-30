@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PixBlocks.PythonIron.Tools.Integration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,8 @@ namespace Engine
         internal int minimumBlocksForFall = 3;
         internal int PointerRange = 80;
         internal int PointerStatusChangeDelay = 300;
+        internal Color DefaultColor = new Color(15, 142, 255);
+        internal Color RedColor = new Color(255, 51, 0);
     }
 
 }

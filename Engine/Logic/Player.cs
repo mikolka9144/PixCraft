@@ -34,9 +34,9 @@ namespace Logic
 
         private void Player_OnDamageDeal()
         {
-            color = new Color(204, 0, 51);
+            color = paramters.RedColor;
             Thread.Sleep(600);
-            color = new Color(15, 142, 255);
+            color = paramters.DefaultColor;
         }
 
         private void Pause()

@@ -83,8 +83,8 @@ namespace Engine.Engine.models
         private void ChangeStateOfPointer()
         {
             DestroyModeActive = !DestroyModeActive;
-            if (DestroyModeActive) Point.Sprite.color = new Color(255, 51, 0);
-            else Point.Sprite.color = new Color(15, 142, 255);
+            if (DestroyModeActive) Point.Sprite.color = paramters.RedColor;
+            else Point.Sprite.color = paramters.DefaultColor;
             Thread.Sleep(paramters.PointerStatusChangeDelay);
         }
 
