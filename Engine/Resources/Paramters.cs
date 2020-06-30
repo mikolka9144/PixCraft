@@ -29,6 +29,7 @@ namespace Engine
         internal int MaxSlotCapatility = 64;
         internal int minimumBlocksForFall = 3;
         internal int PointerRange = 80;
+        internal int PointerStatusChangeDelay = 300;
     }
 
 }

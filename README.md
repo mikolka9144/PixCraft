@@ -5,6 +5,6 @@ Jest to port gry Minecraft w programie PixBlocks.
 A,D: Poruszanie postacią na bok.
 Spacja: Skok Postaci.
 P: Pauza.
-LPM: Postawienie bloku.
-PPM: Zniszczenie bloku.
+LPM: Postawienie\Zniszczenie bloku.
+M: Zmiana akcji.
 

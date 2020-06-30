@@ -46,7 +46,7 @@ namespace Engine.Logic
         public BlockType GetBlockToPlace()
         {
             var index = Displayer.SelectedIndex;
-            if (index < 0 || Inventory.Count == 0) return BlockType.None;
+            if (index < 0 || Inventory.Count -1<index) return BlockType.None;
             var selection = Inventory[index];
             Decrement(selection);
             return selection.Type;

@@ -1,6 +1,8 @@
 ﻿using Engine.Logic;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Engine.Engine.models
 {
@@ -9,6 +11,7 @@ namespace Engine.Engine.models
         private readonly PlayerStatus status;
         private readonly IMoveDefiner moveDefiner;
         private readonly Parameters paramters;
+        private Task ChangeStateOfPointerTask;
         private bool DestroyModeActive;
 
         public PointerController(PlayerStatus status, Pointer pointer, Engine engine, IMoveDefiner moveDefiner, Parameters paramters)
@@ -19,6 +22,7 @@ namespace Engine.Engine.models
             Engine = engine;
             this.moveDefiner = moveDefiner;
             this.paramters = paramters;
+            ChangeStateOfPointerTask = new Task(ChangeStateOfPointer);
             engine.Sprites.Add(pointer);
         }
         public Pointer point { get; }
@@ -35,7 +39,7 @@ namespace Engine.Engine.models
 
                 if (DestroyModeActive)
                 {
-                    foreach (var b in Engine.Blocks.FindAll(s => s.IsRendered&&IsInBreakingRange(s)))
+                    foreach (var b in Engine.Blocks.FindAll(s => s.IsRendered))
                     {
 
                         if (point.Sprite.collide(b.Sprite))
@@ -48,7 +52,7 @@ namespace Engine.Engine.models
                 }
                 else
                 {
-                    foreach (var b in Engine.Blocks.FindAll(s => s.IsRendered && IsInBreakingRange(s)))
+                    foreach (var b in Engine.Blocks.FindAll(s => s.IsRendered))
                     {
                         if (point.Sprite.collide(b.Sprite)) return;
                     }
@@ -56,11 +60,20 @@ namespace Engine.Engine.models
                     if (blockType != BlockType.None) Engine.AddBlockTile(point.X, point.Y, blockType, paramters.BlockSize, true);
                 }
             }
-            if (moveDefiner.key(command.ChangeMouseState))
+            if (moveDefiner.key(command.ChangeMouseState)&& ChangeStateOfPointerTask.Status != TaskStatus.Running)
             {
-                DestroyModeActive = !DestroyModeActive;
+                if (ChangeStateOfPointerTask.Status == TaskStatus.RanToCompletion) ChangeStateOfPointerTask = new Task(ChangeStateOfPointer);
+                ChangeStateOfPointerTask.Start();
             }
             point.Sprite.image = IsInBreakingRange(point) ? 56 : 55;
+        }
+
+        private void ChangeStateOfPointer()
+        {
+            DestroyModeActive = !DestroyModeActive;
+            if (DestroyModeActive) point.Sprite.color = new Color(255, 51, 0);
+            else point.Sprite.color = new Color(15, 142, 255);
+            Thread.Sleep(paramters.PointerStatusChangeDelay);
         }
 
         private void MovePointer()
