@@ -3,6 +3,7 @@ using Engine.Engine.models;
 using Engine.GUI;
 using Logic;
 using PixBlocks.PythonIron.Tools.Game;
+using PixBlocks.PythonIron.Tools.Integration;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,6 +35,7 @@ namespace Engine.Logic
             var MainMenu = new Main_Menu(this,parameters);
             MainMenu.ShowDialog();
             if (!IsWorldGenerated) return;
+            game.background = new Color(102, 51, 204);
             game.add(pointerController);
             game.add(player);
             game.start();

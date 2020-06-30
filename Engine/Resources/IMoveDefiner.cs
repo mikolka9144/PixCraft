@@ -15,15 +15,10 @@ namespace Engine.Logic
         Right,
         down,
         Jump,
-        BreakBlock,
-        PlaceBlock,
-        cameraUp,
-        cameraCast,
-        cameraLeft,
-        cameraRight,
-        cameraDown,
+        Action,
         Pause,
-        OpenInventory
+        OpenInventory,
+        ChangeMouseState
     }
     public class PlayerMoveDefiner : IMoveDefiner
     {
@@ -51,20 +46,8 @@ namespace Engine.Logic
                     return game.key("s");
                 case command.Jump:
                     return game.key("space");
-                case command.BreakBlock:
-                    return game.key("n");
-                case command.PlaceBlock:
+                case command.ChangeMouseState:
                     return game.key("m");
-                case command.cameraUp:
-                    return game.key("up");
-                case command.cameraCast:
-                    return game.key("c");
-                case command.cameraLeft:
-                    return game.key("left");
-                case command.cameraRight:
-                    return game.key("right");
-                case command.cameraDown:
-                    return game.key("down");
                 case command.Pause:
                     var state = game.key("p");
                     if (state)
@@ -92,6 +75,10 @@ namespace Engine.Logic
                         InventoryWasPressed = false;
                         return State;
                     }
+
+                case command.Action:
+                    return game.mouse.pressed;
+                    break;
             }
             return false;
         }

@@ -28,6 +28,7 @@ namespace Engine
         internal int BaseHealth = 20;
         internal int MaxSlotCapatility = 64;
         internal int minimumBlocksForFall = 3;
+        internal int PointerRange = 80;
     }
 
 }

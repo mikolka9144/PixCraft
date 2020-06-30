@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatusDisplay));
             this.LifeBar = new System.Windows.Forms.ProgressBar();
             this.Inventory = new System.Windows.Forms.ListView();
             this.SuspendLayout();
@@ -56,6 +57,7 @@
             this.ClientSize = new System.Drawing.Size(363, 260);
             this.Controls.Add(this.Inventory);
             this.Controls.Add(this.LifeBar);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "StatusDisplay";

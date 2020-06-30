@@ -1,17 +1,17 @@
 ﻿using Engine.Logic;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
-using System;
 
 namespace Engine.Engine.models
 {
-    internal class PointerController:Sprite
+    internal class PointerController : Sprite
     {
         private readonly PlayerStatus status;
         private readonly IMoveDefiner moveDefiner;
         private readonly Parameters paramters;
+        private bool DestroyModeActive;
 
-        public PointerController(PlayerStatus status,Pointer pointer,Engine engine,IMoveDefiner moveDefiner,Parameters paramters)
+        public PointerController(PlayerStatus status, Pointer pointer, Engine engine, IMoveDefiner moveDefiner, Parameters paramters)
         {
             size = 0;
             this.status = status;
@@ -31,47 +31,57 @@ namespace Engine.Engine.models
                 point.Y > paramters.breakingRange || point.Y < -paramters.breakingRange;
 
             MovePointer();
-
-            if (moveDefiner.key(command.BreakBlock) && !IsNotInRange)
+            if (moveDefiner.key(command.Action) && !IsNotInRange)
             {
-                foreach (var b in Engine.ActiveBlocks)
-                {
 
-                    if (this.point.Sprite.collide(b.Sprite))
+                if (DestroyModeActive)
+                {
+                    foreach (var b in Engine.ActiveBlocks)
                     {
-                        status.AddElement(new Item(true, 1, b.Id));
-                        Engine.RemoveTile(b);
-                        break;
+
+                        if (point.Sprite.collide(b.Sprite))
+                        {
+                            status.AddElement(new Item(true, 1, b.Id));
+                            Engine.RemoveTile(b);
+                            break;
+                        }
                     }
                 }
-            }
-            else if (moveDefiner.key(command.PlaceBlock) && !IsNotInRange)
-            {
-                foreach (var b in Engine.ActiveBlocks)
+                else
                 {
-                    if (point.Sprite.collide(b.Sprite)) return;
+                    foreach (var b in Engine.ActiveBlocks)
+                    {
+                        if (point.Sprite.collide(b.Sprite)) return;
+                    }
+                    var blockType = status.GetBlockToPlace();
+                    if (blockType != BlockType.None) Engine.AddBlockTile(point.X, point.Y, blockType, paramters.BlockSize, true);
                 }
-                var blockType = status.GetBlockToPlace();
-                if (blockType != BlockType.None) Engine.AddBlockTile(point.X, point.Y, blockType, 20, true);
             }
-            if (IsNotInRange)
+            if (moveDefiner.key(command.ChangeMouseState))
             {
-                point.Sprite.image = 55;
+                DestroyModeActive = !DestroyModeActive;
             }
-            else
-            {
-                point.Sprite.image = 56;
-            }
+            point.Sprite.image = IsNotInRange ? 55 : 56;
         }
 
         private void MovePointer()
         {
+
             var MousePos = GameScene.gameSceneStatic.mouse.position;
             var PointPos = point;
             var Xlen = MousePos.x - PointPos.X;
             var Ylen = MousePos.y - PointPos.Y;
-            point.Move(roation.Up, (int)(Ylen / 10) * 20);
-            point.Move(roation.Right, (int)(Xlen / 10) * 20);
+            var YtoMove = (int)(Ylen / 10) * 20;
+            var XtoMove = (int)(Xlen / 10) * 20;
+
+            bool IsNotInPointerZone = point.X + XtoMove > paramters.PointerRange || point.X + XtoMove < -paramters.PointerRange ||
+                point.Y + YtoMove > paramters.PointerRange || point.Y + YtoMove < -paramters.PointerRange;
+            if (!IsNotInPointerZone)
+            {
+
+                point.Move(roation.Up, YtoMove);
+                point.Move(roation.Right, XtoMove);
+            }
         }
     }
 }

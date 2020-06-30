@@ -102,7 +102,7 @@
     <Compile Include="Logic\Movable object.cs" />
     <Compile Include="Logic\Player.cs" />
     <Compile Include="Logic\PointerController.cs" />
-    <Compile Include="Logic\StartUp.cs" />
+    <Compile Include="StartUp.cs" />
     <Compile Include="Engine\Models\directions.cs" />
     <Compile Include="Engine\Models\OreEntry.cs" />
     <Compile Include="Resources\Ores.cs" />

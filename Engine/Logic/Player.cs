@@ -46,7 +46,7 @@ namespace Logic
         private void Update()
         {
             if (moveDefiner.key(command.Pause)) Pause();
-            if (moveDefiner.key(command.OpenInventory)) status.OpenInventory();
+            if (moveDefiner.key(command.OpenInventory)) status.OpenInventory();            
         }
 
         private void KillPlayer()
