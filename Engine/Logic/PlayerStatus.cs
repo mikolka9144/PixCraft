@@ -25,22 +25,23 @@ namespace Engine.Logic
         }
         public void AddElement(Item item)
         {
-            var clone = Inventory.Find(s => s.Type == item.Type);
-            if (clone is null || !item.CanStack)
+            var clones = Inventory.FindAll(s => s.Type == item.Type);
+            if (clones is null || !item.CanStack)
             {
                 Inventory.Add(item);
 
             }
             else
             {
-                if (clone.Count + item.Count <= MaxSlotLimit)
+                foreach (var element in clones)
                 {
-                    clone.Count += item.Count;
+                    if (element.Count + item.Count <= MaxSlotLimit)
+                    {
+                        element.Count += item.Count;
+                        return;
+                    }
                 }
-                else
-                {
-                    Inventory.Add(item);
-                }
+                    Inventory.Add(item);                
             }
         }
         public BlockType GetBlockToPlace()
