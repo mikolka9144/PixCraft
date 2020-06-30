@@ -78,7 +78,6 @@ namespace Engine.Logic
 
                 case command.Action:
                     return game.mouse.pressed;
-                    break;
             }
             return false;
         }

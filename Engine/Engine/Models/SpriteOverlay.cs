@@ -34,8 +34,8 @@ namespace Engine.Engine.models
         {
             var isActive = IsRendered;
             var IsNotInRange = X > parameters.hitboxArea.Right || X < -parameters.hitboxArea.Left
-                || Y > parameters.hitboxArea.Up || Y < parameters.hitboxArea.Down;
-            return isActive && IsNotInRange;
+                || Y > parameters.hitboxArea.Up || Y < -parameters.hitboxArea.Down;
+            return isActive && !IsNotInRange;
         }
 
         // Token: 0x0600000D RID: 13 RVA: 0x000021E0 File Offset: 0x000003E0

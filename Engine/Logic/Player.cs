@@ -19,7 +19,7 @@ namespace Logic
 {
     class Player:Movable_object
     {
-        private PauseMenu settingsForm;
+        private readonly PauseMenu settingsForm;
 
         public Player(Parameters paramters,IActiveElements activeElements,IMover manager,PointerController pointer,IMoveDefiner definer,PlayerStatus status):base(activeElements,manager,definer,pointer,paramters,status)
         {

@@ -27,16 +27,15 @@ namespace Engine.Engine.models
 
         public override void update()
         {
-            bool IsNotInRange = point.X > paramters.breakingRange || point.X < -paramters.breakingRange ||
-                point.Y > paramters.breakingRange || point.Y < -paramters.breakingRange;
+            
 
             MovePointer();
-            if (moveDefiner.key(command.Action) && !IsNotInRange)
+            if (moveDefiner.key(command.Action) && IsInBreakingRange(point))
             {
 
                 if (DestroyModeActive)
                 {
-                    foreach (var b in Engine.ActiveBlocks)
+                    foreach (var b in Engine.Blocks.FindAll(s => s.IsRendered&&IsInBreakingRange(s)))
                     {
 
                         if (point.Sprite.collide(b.Sprite))
@@ -49,7 +48,7 @@ namespace Engine.Engine.models
                 }
                 else
                 {
-                    foreach (var b in Engine.ActiveBlocks)
+                    foreach (var b in Engine.Blocks.FindAll(s => s.IsRendered && IsInBreakingRange(s)))
                     {
                         if (point.Sprite.collide(b.Sprite)) return;
                     }
@@ -61,7 +60,7 @@ namespace Engine.Engine.models
             {
                 DestroyModeActive = !DestroyModeActive;
             }
-            point.Sprite.image = IsNotInRange ? 55 : 56;
+            point.Sprite.image = IsInBreakingRange(point) ? 56 : 55;
         }
 
         private void MovePointer()
@@ -82,6 +81,12 @@ namespace Engine.Engine.models
                 point.Move(roation.Up, YtoMove);
                 point.Move(roation.Right, XtoMove);
             }
+        }
+        private bool IsInBreakingRange(SpriteOverlay point)
+        {
+            bool IsNotInRange = point.X > paramters.breakingRange || point.X < -paramters.breakingRange ||
+                point.Y > paramters.breakingRange || point.Y < -paramters.breakingRange;
+            return !IsNotInRange;
         }
     }
 }

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewWorld));
             this.numericSeed = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.numericSize = new System.Windows.Forms.NumericUpDown();
@@ -109,7 +108,6 @@
             this.Controls.Add(this.numericSize);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericSeed);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NewWorld";
             this.Text = "NewWorld";
             ((System.ComponentModel.ISupportInitialize)(this.numericSeed)).EndInit();

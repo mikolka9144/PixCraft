@@ -111,23 +111,6 @@
     <Compile Include="Engine\Models\SpriteOverlay.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="GUI\Main Menu.resx">
-      <DependentUpon>Main Menu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\NewWorld.resx">
-      <DependentUpon>NewWorld.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\PauseMenu.resx">
-      <DependentUpon>PauseMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Settings Form.resx">
-      <DependentUpon>Settings Form.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\StatusDisplay.resx">
-      <DependentUpon>StatusDisplay.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

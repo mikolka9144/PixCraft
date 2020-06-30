@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings_Form));
             this.label1 = new System.Windows.Forms.Label();
             this.numericGrid = new System.Windows.Forms.NumericUpDown();
             this.btnSave = new System.Windows.Forms.Button();
@@ -74,7 +73,6 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.numericGrid);
             this.Controls.Add(this.label1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Settings_Form";
             this.Text = "Settings_Form";
             ((System.ComponentModel.ISupportInitialize)(this.numericGrid)).EndInit();
