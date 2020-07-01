@@ -1,6 +1,7 @@
 ﻿using Engine.Engine;
 using Engine.Engine.models;
 using Engine.GUI;
+using Engine.Saves;
 using Logic;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
@@ -20,19 +21,21 @@ namespace Engine.Logic
         public void Init()
         {
             parameters = new Parameters();
+            engine = new Engine.Engine(parameters);
+            var StatusWindow = new StatusDisplay(parameters);
+
+            var playerstatus = new PlayerStatus(parameters, StatusWindow);
             var game = GameScene.gameSceneStatic;
             var IdProcessor = new BlockIdProcessor();
             var moveDefiner = new PlayerMoveDefiner();
-            var StatusWindow = new StatusDisplay(parameters);
-            engine = new Engine.Engine(parameters);
             tileManager = new TileManager(parameters, engine, IdProcessor);
-
-            var playerstatus = new PlayerStatus(parameters, StatusWindow);
+            var SaveManager = new SaveManager(tileManager, playerstatus);
+            var pauseMenu = new PauseMenu(parameters,SaveManager);
             var pointer = new Pointer(engine,parameters);
             var pointerController = new PointerController(playerstatus,pointer, engine,moveDefiner,parameters);
-            var player = new Player(parameters,engine,engine,pointerController,moveDefiner,playerstatus);
+            var player = new Player(pauseMenu,parameters,engine,engine,pointerController,moveDefiner,playerstatus);
 
-            var MainMenu = new Main_Menu(this,parameters);
+            var MainMenu = new Main_Menu(this,parameters,SaveManager);
             MainMenu.ShowDialog();
             if (!IsWorldGenerated) return;
             game.background = new Color(102, 51, 204);

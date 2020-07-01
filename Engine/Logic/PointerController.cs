@@ -40,11 +40,14 @@ namespace Engine.Engine.models
                 ChangeStateOfPointerTask.Start();
             }
             Point.Sprite.image = IsInBreakingRange(Point) ? 56 : 55;
-            if (!Point.Sprite.IsVisible) 
-            {
-                Point.X = 0;
-                Point.Y = 0;
-            }
+            if (!Point.Sprite.IsVisible) ResetPositon();
+            
+        }
+
+        private void ResetPositon()
+        {
+            Point.X = 0;
+            Point.Y = 0;
         }
 
         private void CheckBlocksOperations()

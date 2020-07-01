@@ -30,6 +30,7 @@
         {
             this.btnStart = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
+            this.btnLoadWorld = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnStart
@@ -52,11 +53,22 @@
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
+            // btnLoadWorld
+            // 
+            this.btnLoadWorld.Location = new System.Drawing.Point(12, 71);
+            this.btnLoadWorld.Name = "btnLoadWorld";
+            this.btnLoadWorld.Size = new System.Drawing.Size(224, 23);
+            this.btnLoadWorld.TabIndex = 2;
+            this.btnLoadWorld.Text = "Load";
+            this.btnLoadWorld.UseVisualStyleBackColor = true;
+            this.btnLoadWorld.Click += new System.EventHandler(this.btnLoadWorld_Click);
+            // 
             // Main_Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(248, 314);
+            this.ClientSize = new System.Drawing.Size(248, 107);
+            this.Controls.Add(this.btnLoadWorld);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.btnStart);
             this.Name = "Main_Menu";
@@ -69,5 +81,6 @@
 
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.Button btnLoadWorld;
     }
 }

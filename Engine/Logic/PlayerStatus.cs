@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Engine.Logic
 {
-    internal class PlayerStatus
+    public class PlayerStatus
     {
         private int MaxSlotLimit;
         private readonly Parameters parameters;
 
         public int health { get; set; }
-        public List<Item> Inventory { get; }
+        public List<Item> Inventory { get; private set; }
         public IStatusDisplayer Displayer { get; }
-
+        internal void LoadState(int health, List<Item> Inventory)
+        {
+            this.health = health;
+            this.Inventory = Inventory;
+        }
         public PlayerStatus(Parameters parameters,IStatusDisplayer displayer)
         {
             health = parameters.BaseHealth;

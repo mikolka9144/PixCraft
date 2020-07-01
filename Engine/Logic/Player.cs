@@ -21,14 +21,14 @@ namespace Logic
     {
         private readonly PauseMenu settingsForm;
 
-        public Player(Parameters paramters,IActiveElements activeElements,IMover manager,PointerController pointer,IMoveDefiner definer,PlayerStatus status):base(activeElements,manager,definer,pointer,paramters,status)
+        public Player(PauseMenu pauseMenu,Parameters paramters,IActiveElements activeElements,IMover manager,PointerController pointer,IMoveDefiner definer,PlayerStatus status):base(activeElements,manager,definer,pointer,paramters,status)
         {
             position = new PixBlocks.PythonIron.Tools.Integration.Vector(0, 0);
             size = 10;
             image = 0;
             status.OnKill += KillPlayer;
             PostUpdate += Update;
-            settingsForm = new PauseMenu(paramters);
+            settingsForm = pauseMenu;
             OnDamageDeal += () =>Task.Run(Player_OnDamageDeal);
         }
 

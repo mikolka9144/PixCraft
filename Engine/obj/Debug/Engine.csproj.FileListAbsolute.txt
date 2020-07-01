@@ -16,3 +16,8 @@ C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.csproj.CoreComp
 C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.csproj.CopyComplete
 C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.dll
 C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.pdb
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.GUI.LoadWorldWindow.resources
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.GUI.Main_Menu.resources
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.GUI.PauseMenu.resources
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.GUI.SaveWorldWindow.resources
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.csproj.GenerateResource.cache

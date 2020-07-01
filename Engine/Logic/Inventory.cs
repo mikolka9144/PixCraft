@@ -1,6 +1,6 @@
 ﻿namespace Engine.Logic
 {
-    internal class Item
+    public class Item
     {
         public Item(bool CanStack,int count,BlockType type)
         {
