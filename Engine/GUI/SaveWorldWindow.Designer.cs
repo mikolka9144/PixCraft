@@ -32,7 +32,7 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCloud = new System.Windows.Forms.Button();
-            this.SaveState = new System.Windows.Forms.SaveFileDialog();
+            this.txtBase = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -70,11 +70,19 @@
             this.btnCloud.Text = "Cloud Save";
             this.btnCloud.UseVisualStyleBackColor = true;
             // 
+            // txtBase
+            // 
+            this.txtBase.Location = new System.Drawing.Point(97, 100);
+            this.txtBase.Name = "txtBase";
+            this.txtBase.Size = new System.Drawing.Size(100, 20);
+            this.txtBase.TabIndex = 4;
+            // 
             // SaveWorldWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(219, 143);
+            this.Controls.Add(this.txtBase);
             this.Controls.Add(this.btnCloud);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtName);
@@ -92,6 +100,6 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCloud;
-        private System.Windows.Forms.SaveFileDialog SaveState;
+        private System.Windows.Forms.TextBox txtBase;
     }
 }

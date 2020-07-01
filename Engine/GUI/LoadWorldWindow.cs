@@ -26,8 +26,8 @@ namespace Engine.GUI
         {
             if(listBox.SelectedItem is null)
             {
-                openFile.ShowDialog();
-                if(openFile.FileName != "")Manager.LoadFromStream(File.OpenRead(openFile.FileName));               
+                var MemStream = new MemoryStream(Convert.FromBase64String(txtBase.Text));
+                Manager.LoadFromStream(MemStream);
             }
         }
     }

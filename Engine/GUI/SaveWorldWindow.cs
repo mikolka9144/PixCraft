@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,9 +27,9 @@ namespace Engine.GUI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var file = SaveState.OpenFile();
-            Manager.SaveToStream(file);
-            Close();
+            var MemStream = new MemoryStream();
+            Manager.SaveToStream(MemStream);
+            txtBase.Text = Convert.ToBase64String(MemStream.ToArray());
         }
     }
 }

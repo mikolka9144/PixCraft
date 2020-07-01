@@ -31,7 +31,7 @@
             this.listBox = new System.Windows.Forms.ListBox();
             this.label = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.openFile = new System.Windows.Forms.OpenFileDialog();
+            this.txtBase = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // listBox
@@ -61,15 +61,19 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // openFile
+            // txtBase
             // 
-            this.openFile.DereferenceLinks = false;
+            this.txtBase.Location = new System.Drawing.Point(15, 143);
+            this.txtBase.Name = "txtBase";
+            this.txtBase.Size = new System.Drawing.Size(100, 20);
+            this.txtBase.TabIndex = 3;
             // 
             // LoadWorldWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(185, 222);
+            this.Controls.Add(this.txtBase);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label);
             this.Controls.Add(this.listBox);
@@ -85,6 +89,6 @@
         private System.Windows.Forms.ListBox listBox;
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.OpenFileDialog openFile;
+        private System.Windows.Forms.TextBox txtBase;
     }
 }
