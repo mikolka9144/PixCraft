@@ -14,7 +14,7 @@ namespace Engine.Engine.models
         private Task ChangeStateOfPointerTask;
         private bool DestroyModeActive;
 
-        public PointerController(PlayerStatus status, Pointer pointer, Engine engine, IMoveDefiner moveDefiner, Parameters paramters)
+        public PointerController(PlayerStatus status, Pointer pointer, ITileManager engine, IMoveDefiner moveDefiner, Parameters paramters)
         {
             size = 0;
             this.status = status;
@@ -23,11 +23,10 @@ namespace Engine.Engine.models
             this.moveDefiner = moveDefiner;
             this.paramters = paramters;
             ChangeStateOfPointerTask = new Task(ChangeStateOfPointer);
-            engine.Sprites.Add(pointer);
         }
 
         public Pointer Point { get; }
-        public Engine Engine { get; }
+        public ITileManager Engine { get; }
         public Foliage LastFoliage { get; set; }
 
         public override void update()
@@ -72,7 +71,7 @@ namespace Engine.Engine.models
                 if (Point.Sprite.collide(b.Sprite)) return;
             }
             var blockType = status.GetBlockToPlace();
-            if (blockType != BlockType.None) Engine.AddBlockTile(Point.X, Point.Y, blockType, paramters.BlockSize, true);
+            if (blockType != BlockType.None) Engine.AddBlockTile(Point.X/ paramters.BlockSize, Point.Y / paramters.BlockSize, blockType, true);
         }
 
         private void DestroyBlock()

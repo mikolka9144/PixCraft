@@ -11,7 +11,6 @@ namespace Engine.Engine
         private readonly Parameters parameters;
         private readonly IOreTable oreTable;
         private readonly int size;
-        private readonly Engine engine;
 
         public Generator(int seed, ITileManager manager,Parameters paramters,IOreTable oreTable,int size,Engine engine)
         {
@@ -20,7 +19,6 @@ namespace Engine.Engine
             parameters = paramters;
             this.oreTable = oreTable;
             this.size = size;
-            this.engine = engine;
             CanGenerateTree = parameters.TreeSpread;
         }
         // Token: 0x06000015 RID: 21 RVA: 0x000024C0 File Offset: 0x000006C0
@@ -64,7 +62,7 @@ namespace Engine.Engine
         {
             foreach (var item in manager.Blocks)
             {
-                engine.AddBlockTile(item, true);
+                manager.AddBlockTile(item, true);
             }
         }
 

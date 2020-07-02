@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Engine.Saves;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,12 +11,13 @@ namespace EngineTets.Saves
         [SetUp]
         public void Setup()
         {
+            saveManager = new SaveManager()
         }
 
         [Test]
-        public void Test1()
+        public void CheckConversion()
         {
-            Assert.Pass();
+            
         }
     }
 }

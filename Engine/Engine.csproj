@@ -57,6 +57,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine\Drawer.cs" />
     <Compile Include="Engine\Models\Block.cs" />
     <Compile Include="Engine\Models\Center.cs" />
     <Compile Include="Engine\Engine.cs" />
@@ -82,6 +83,7 @@
       <DependentUpon>StatusDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\WorldEntry.cs" />
+    <Compile Include="Engine\Models\ITileManager.cs" />
     <Compile Include="Logic\Inventory.cs" />
     <Compile Include="Logic\IStatusDisplayer.cs" />
     <Compile Include="Logic\PlayerStatus.cs" />
@@ -121,8 +123,8 @@
     <Compile Include="Logic\Player.cs" />
     <Compile Include="Logic\PointerController.cs" />
     <Compile Include="Saves\BlockConverter.cs" />
-    <Compile Include="Saves\BlockTemplate.cs" />
-    <Compile Include="Saves\Save.cs" />
+    <Compile Include="Saves\Models\BlockTemplate.cs" />
+    <Compile Include="Saves\Models\Save.cs" />
     <Compile Include="Saves\SaveManager.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Engine\Models\directions.cs" />

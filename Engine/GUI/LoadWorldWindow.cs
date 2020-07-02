@@ -28,7 +28,8 @@ namespace Engine.GUI
         private void button1_Click(object sender, EventArgs e)
         {
           
-                Manager.LoadFromFile(txtBase.Text);
+            var save = Manager.LoadFromFile(txtBase.Text);
+            Manager.LoadSave(save);
             Init.IsWorldGenerated = true;
             Close();
             

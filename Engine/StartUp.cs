@@ -21,25 +21,28 @@ namespace Engine.Logic
         public void Init()
         {
             parameters = new Parameters();
-            engine = new Engine.Engine(parameters);
+            var drawer = new Drawer(parameters);
             var StatusWindow = new StatusDisplay(parameters);
             var IdProcessor = new BlockIdProcessor();
-            var blockConverter = new BlockConverter(parameters, engine, IdProcessor,engine.Center);
+            tileManager = new TileManager(parameters, drawer, IdProcessor);
+            engine = new Engine.Engine(parameters,tileManager,drawer);
+            var blockConverter = new BlockConverter(parameters, drawer, IdProcessor);
             var playerstatus = new PlayerStatus(parameters, StatusWindow);
             var game = GameScene.gameSceneStatic;
             var moveDefiner = new PlayerMoveDefiner();
-            tileManager = new TileManager(parameters, engine, IdProcessor);
-            var SaveManager = new SaveManager(engine, playerstatus,blockConverter);
+            var SaveManager = new SaveManager(tileManager, playerstatus,blockConverter,engine.Center,engine);
             var pauseMenu = new PauseMenu(parameters,SaveManager);
-            var pointer = new Pointer(engine,parameters);
-            var pointerController = new PointerController(playerstatus,pointer, engine,moveDefiner,parameters);
-            var player = new Player(pauseMenu,parameters,engine,engine,pointerController,moveDefiner,playerstatus);
+            var pointer = new Pointer(drawer,parameters);
+            var pointerController = new PointerController(playerstatus,pointer, tileManager,moveDefiner,parameters);
+            var player = new Player(pauseMenu,parameters,tileManager,engine,pointerController,moveDefiner,playerstatus);
 
             var MainMenu = new Main_Menu(this,parameters,SaveManager);
             MainMenu.ShowDialog();
             if (!IsWorldGenerated) return;
+            engine.Add(pointer);
             game.background = new Color(102, 51, 204);
             game.add(pointerController);
+            game.add(pointer.Sprite);
             game.add(player);
             game.start();
         }
@@ -66,7 +69,6 @@ namespace Engine.Logic
             generator.GenerateOres(BlockType.GoldOre);
             generator.GenerateOres(BlockType.DiamondOre);
             progress.Value = 100;
-            generator.Render();
         }
     }
 }
