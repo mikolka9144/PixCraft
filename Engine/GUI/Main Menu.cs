@@ -1,12 +1,5 @@
 ﻿using Engine.Saves;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Engine.GUI
@@ -29,7 +22,7 @@ namespace Engine.GUI
         private void btnStart_Click(object sender, EventArgs e)
         {
             new NewWorld(init).ShowDialog();
-            Close();
+            if (init.IsWorldGenerated == true) Close();
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
@@ -41,6 +34,7 @@ namespace Engine.GUI
         private void btnLoadWorld_Click(object sender, EventArgs e)
         {
             new LoadWorldWindow(Manager,init).ShowDialog();
+            if (init.IsWorldGenerated == true) Close();
         }
     }
 }

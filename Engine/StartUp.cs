@@ -52,7 +52,7 @@ namespace Engine.Logic
             IsWorldGenerated = true;
             var oreTable = new OreTable();
 
-            var generator = new Generator(seed, tileManager, parameters, oreTable,size,engine);
+            var generator = new Generator(seed, tileManager, parameters, oreTable,size);
             ExecuteGeneration(generator,progress);
 
         }

@@ -18,5 +18,6 @@ namespace Engine.Engine
         ///</summary>
         void AddBlockTile(int BlockX, int BlockY, BlockType Id, bool Draw = false);
         void RemoveTile(Block tile);
+        void PlaceBlock(int x, int y, BlockType blockType);
     }
 }

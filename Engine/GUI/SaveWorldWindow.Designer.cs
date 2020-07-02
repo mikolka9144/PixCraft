@@ -38,24 +38,24 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(132, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Name";
+            this.label1.Text = "Type path to file for saving";
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(72, 25);
+            this.txtName.Location = new System.Drawing.Point(16, 58);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(100, 20);
+            this.txtName.Size = new System.Drawing.Size(179, 20);
             this.txtName.TabIndex = 1;
             // 
             // btnCloud
             // 
-            this.btnCloud.Location = new System.Drawing.Point(16, 68);
+            this.btnCloud.Location = new System.Drawing.Point(61, 84);
             this.btnCloud.Name = "btnCloud";
             this.btnCloud.Size = new System.Drawing.Size(75, 23);
             this.btnCloud.TabIndex = 3;
-            this.btnCloud.Text = "Cloud Save";
+            this.btnCloud.Text = "Save";
             this.btnCloud.UseVisualStyleBackColor = true;
             this.btnCloud.Click += new System.EventHandler(this.btnCloud_Click);
             // 

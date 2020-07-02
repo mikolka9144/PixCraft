@@ -1,16 +1,8 @@
 ﻿using Engine;
-using Engine.Engine;
 using Engine.Engine.models;
 using Engine.GUI;
 using Engine.Logic;
-using PixBlocks.PythonIron.Tools.Game;
-using PixBlocks.PythonIron.Tools.Integration;
 using PixBlocks.TopPanel.Components.Basic;
-using PixBlocks.Views.GameControllerView;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;

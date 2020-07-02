@@ -82,10 +82,10 @@
     <Compile Include="GUI\StatusDisplay.Designer.cs">
       <DependentUpon>StatusDisplay.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\WorldEntry.cs" />
+    <Compile Include="Saves\Models\WorldEntry.cs" />
     <Compile Include="Engine\Models\ITileManager.cs" />
-    <Compile Include="Logic\Inventory.cs" />
-    <Compile Include="Logic\IStatusDisplayer.cs" />
+    <Compile Include="Logic\models\Item.cs" />
+    <Compile Include="Logic\models\IStatusDisplayer.cs" />
     <Compile Include="Logic\PlayerStatus.cs" />
     <Compile Include="Resources\IdProcessor.cs" />
     <Compile Include="Engine\Models\Pointer.cs" />
@@ -117,7 +117,7 @@
       <DependentUpon>Settings Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Engine\Models\IOreTable.cs" />
-    <Compile Include="Logic\IActiveElements.cs" />
+    <Compile Include="Logic\models\IActiveElements.cs" />
     <Compile Include="Resources\IMoveDefiner.cs" />
     <Compile Include="Logic\Movable object.cs" />
     <Compile Include="Logic\Player.cs" />

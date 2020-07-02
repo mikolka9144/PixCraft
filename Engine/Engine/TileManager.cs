@@ -76,5 +76,11 @@ namespace Engine.Engine
             this.Blocks.Remove(tile);
             this.Toppings.Remove(tile.foliage);
         }
+
+        public void PlaceBlock(int x, int y, BlockType blockType)
+        {
+            var block = new Block(x,y, blockType, parameters.BlockSize, drawer, processor, parameters);
+            AddBlockTile(block,true);
+        }
     }
 }

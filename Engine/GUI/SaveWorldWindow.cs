@@ -17,14 +17,10 @@ namespace Engine.GUI
         public PlayerStatus PlayerStatus { get; }
         public SaveManager Manager { get; }
 
-        private void txtBase_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCloud_Click(object sender, EventArgs e)
         {
             Manager.SaveToFile(txtName.Text);
+            Close();
         }
     }
 }

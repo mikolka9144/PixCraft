@@ -71,7 +71,7 @@ namespace Engine.Engine.models
                 if (Point.Sprite.collide(b.Sprite)) return;
             }
             var blockType = status.GetBlockToPlace();
-            if (blockType != BlockType.None) Engine.AddBlockTile(Point.X/ paramters.BlockSize, Point.Y / paramters.BlockSize, blockType, true);
+            if (blockType != BlockType.None) Engine.PlaceBlock(Point.X, Point.Y, blockType);
         }
 
         private void DestroyBlock()

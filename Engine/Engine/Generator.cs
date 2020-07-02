@@ -12,7 +12,7 @@ namespace Engine.Engine
         private readonly IOreTable oreTable;
         private readonly int size;
 
-        public Generator(int seed, ITileManager manager,Parameters paramters,IOreTable oreTable,int size,Engine engine)
+        public Generator(int seed, ITileManager manager,Parameters paramters,IOreTable oreTable,int size)
         {
             randomizer = new Random(seed);
             this.manager = manager;
