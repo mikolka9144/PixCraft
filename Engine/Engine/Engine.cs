@@ -19,7 +19,7 @@ namespace Engine.Engine
         public List<SpriteOverlay> Sprites = new List<SpriteOverlay>();
         
 
-        public SpriteOverlay Center;
+        public Center Center;
         public readonly Parameters parameters;
 
         public Engine(Parameters paramters)
@@ -37,7 +37,7 @@ namespace Engine.Engine
         }
 
         // Token: 0x06000016 RID: 22 RVA: 0x0000258D File Offset: 0x0000078D
-        private void MoveScene(int X, int Y)
+        public void MoveScene(int X, int Y)
         {
             this.Move(roation.Right, X);
             this.Move(roation.Down, Y);

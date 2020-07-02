@@ -24,12 +24,12 @@ namespace Engine.Logic
             engine = new Engine.Engine(parameters);
             var StatusWindow = new StatusDisplay(parameters);
             var IdProcessor = new BlockIdProcessor();
-            var blockConverter = new BlockConverter(parameters, engine, IdProcessor);
+            var blockConverter = new BlockConverter(parameters, engine, IdProcessor,engine.Center);
             var playerstatus = new PlayerStatus(parameters, StatusWindow);
             var game = GameScene.gameSceneStatic;
             var moveDefiner = new PlayerMoveDefiner();
             tileManager = new TileManager(parameters, engine, IdProcessor);
-            var SaveManager = new SaveManager(tileManager, playerstatus,blockConverter);
+            var SaveManager = new SaveManager(engine, playerstatus,blockConverter);
             var pauseMenu = new PauseMenu(parameters,SaveManager);
             var pointer = new Pointer(engine,parameters);
             var pointerController = new PointerController(playerstatus,pointer, engine,moveDefiner,parameters);

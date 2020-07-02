@@ -8,7 +8,7 @@ namespace Engine.Saves
 {
     public class SaveManager
     {
-        public SaveManager(ITileManager manager, PlayerStatus status,BlockConverter converter)
+        public SaveManager(Engine.Engine manager, PlayerStatus status,BlockConverter converter)
         {
             Manager = manager;
             Status = status;
@@ -17,7 +17,7 @@ namespace Engine.Saves
 
         }
         public XmlSerializer Serializer { get; }
-        public ITileManager Manager { get; }
+        public Engine.Engine Manager { get; }
         public PlayerStatus Status { get; }
         public BlockConverter Converter { get; }
 
@@ -29,7 +29,7 @@ namespace Engine.Saves
         public void SaveToStream(Stream SaveDest)
         {
             var save = new Save(); 
-            save.SetUp(Converter.Convert(Manager.Blocks), Status.health, Status.Inventory);
+            save.SetUp(Converter.Convert(Manager.Blocks), Status.health, Status.Inventory,Manager.Center.X, Manager.Center.Y);
             Serializer.Serialize(SaveDest, save);
         }
         public void LoadFromFile(string path)
@@ -49,8 +49,11 @@ namespace Engine.Saves
         private void LoadSave(Save save)
         {
             Status.LoadState( save.Hp,save.Items);
-            Manager.Blocks.AddRange(Converter.Convert(save.Tiles));
-
+            foreach (var item in Converter.Convert(save.Tiles,save.CenterX,save.CenterY))
+            {
+                Manager.AddBlockTile(item, true);
+            }
+            Manager.MoveScene(save.CenterX , -save.CenterY );
         }
     }
 }
