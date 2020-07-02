@@ -14,20 +14,30 @@ namespace Engine.GUI
 {
     public partial class LoadWorldWindow : Form
     {
-        public LoadWorldWindow(SaveManager manager)
+        private readonly WorldManager worldManager;
+
+        public LoadWorldWindow(SaveManager manager,IInit init)
         {
+            worldManager = new WorldManager();
             InitializeComponent();
             Manager = manager;
+            Init = init;
+            listBox.Items.AddRange(worldManager.ListOfWorlds.ToArray());
         }
 
         public SaveManager Manager { get; }
+        public IInit Init { get; }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(listBox.SelectedItem is null)
+            if(listBox.SelectedItem != null)
             {
-                var MemStream = new MemoryStream(Convert.FromBase64String(txtBase.Text));
+                var selection = (WorldEntry)listBox.SelectedItem;
+                var data = worldManager.LoadWorld(selection.Name);
+                var MemStream = new MemoryStream(Convert.FromBase64String(data));
                 Manager.LoadFromStream(MemStream);
+            Init.IsWorldGenerated = true;
+            Close();
             }
         }
     }

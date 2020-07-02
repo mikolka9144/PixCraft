@@ -40,7 +40,7 @@ namespace Engine.GUI
 
         private void btnLoadWorld_Click(object sender, EventArgs e)
         {
-            new LoadWorldWindow(Manager).ShowDialog();
+            new LoadWorldWindow(Manager,init).ShowDialog();
         }
     }
 }

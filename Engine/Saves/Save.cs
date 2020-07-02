@@ -9,7 +9,7 @@ namespace Engine.Saves
     [Serializable]
     public class Save
     {
-        public Save(List<Block> blocks,int hp,List<Item> items)
+        public Save(List<BlockTemplate> blocks,int hp,List<Item> items)
         {
             Tiles = blocks;
             Hp = hp;
@@ -19,7 +19,7 @@ namespace Engine.Saves
         {
 
         }
-        public List<Block> Tiles { get; set; }
+        public List<BlockTemplate> Tiles { get; set; }
         public int Hp { get; set; }
         public List<Item> Items { get; set; }
     }

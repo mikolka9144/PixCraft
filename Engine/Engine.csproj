@@ -38,6 +38,11 @@
     <Reference Include="PixBlocks">
       <HintPath>..\..\..\..\Desktop\PixSource\PixBlocks10.exe</HintPath>
     </Reference>
+    <Reference Include="PixBlocks.Server.DataModels, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="PixBlocks.ServerFasade, Version=33.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Desktop\PixSource\PixBlocks.ServerFasade.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -76,6 +81,8 @@
     <Compile Include="GUI\StatusDisplay.Designer.cs">
       <DependentUpon>StatusDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\WorldEntry.cs" />
+    <Compile Include="Saves\WorldManager.cs" />
     <Compile Include="Logic\Inventory.cs" />
     <Compile Include="Logic\IStatusDisplayer.cs" />
     <Compile Include="Logic\PlayerStatus.cs" />
@@ -114,6 +121,8 @@
     <Compile Include="Logic\Movable object.cs" />
     <Compile Include="Logic\Player.cs" />
     <Compile Include="Logic\PointerController.cs" />
+    <Compile Include="Saves\BlockConverter.cs" />
+    <Compile Include="Saves\BlockTemplate.cs" />
     <Compile Include="Saves\IFileManager.cs" />
     <Compile Include="Saves\Save.cs" />
     <Compile Include="Saves\SaveManager.cs" />

@@ -13,7 +13,7 @@ namespace Engine.Logic
 {
     public class StartUp:IInit
     {
-        private bool IsWorldGenerated = false;
+        public bool IsWorldGenerated { get; set; } = false;
         private Engine.Engine engine;
         private Parameters parameters;
         private TileManager tileManager;
@@ -23,13 +23,13 @@ namespace Engine.Logic
             parameters = new Parameters();
             engine = new Engine.Engine(parameters);
             var StatusWindow = new StatusDisplay(parameters);
-
+            var IdProcessor = new BlockIdProcessor();
+            var blockConverter = new BlockConverter(parameters, engine, IdProcessor);
             var playerstatus = new PlayerStatus(parameters, StatusWindow);
             var game = GameScene.gameSceneStatic;
-            var IdProcessor = new BlockIdProcessor();
             var moveDefiner = new PlayerMoveDefiner();
             tileManager = new TileManager(parameters, engine, IdProcessor);
-            var SaveManager = new SaveManager(tileManager, playerstatus);
+            var SaveManager = new SaveManager(tileManager, playerstatus,blockConverter);
             var pauseMenu = new PauseMenu(parameters,SaveManager);
             var pointer = new Pointer(engine,parameters);
             var pointerController = new PointerController(playerstatus,pointer, engine,moveDefiner,parameters);

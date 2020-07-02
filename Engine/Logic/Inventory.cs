@@ -1,5 +1,8 @@
-﻿namespace Engine.Logic
+﻿using System;
+
+namespace Engine.Logic
 {
+    [Serializable]
     public class Item
     {
         public Item(bool CanStack,int count,BlockType type)

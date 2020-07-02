@@ -6,7 +6,6 @@ C:\Users\mikol\source\repos\Block engine\Engine\bin\Debug\IronPython.dll
 C:\Users\mikol\source\repos\Block engine\Engine\bin\Debug\PixBlocks10.exe
 C:\Users\mikol\source\repos\Block engine\Engine\bin\Debug\Microsoft.Dynamic.dll
 C:\Users\mikol\source\repos\Block engine\Engine\bin\Debug\Microsoft.Scripting.dll
-C:\Users\mikol\source\repos\Block engine\Engine\bin\Debug\PixBlocks.Server.DataModels.dll
 C:\Users\mikol\source\repos\Block engine\Engine\bin\Debug\PixBlocks.ServerFasade.dll
 C:\Users\mikol\source\repos\Block engine\Engine\bin\Debug\WriteableBitmapEx.Wpf.dll
 C:\Users\mikol\source\repos\Block engine\Engine\bin\Debug\PixBlocks.Tools.dll
