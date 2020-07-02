@@ -122,7 +122,6 @@
     <Compile Include="Logic\PointerController.cs" />
     <Compile Include="Saves\BlockConverter.cs" />
     <Compile Include="Saves\BlockTemplate.cs" />
-    <Compile Include="Saves\IFileManager.cs" />
     <Compile Include="Saves\Save.cs" />
     <Compile Include="Saves\SaveManager.cs" />
     <Compile Include="StartUp.cs" />

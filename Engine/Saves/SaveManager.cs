@@ -21,10 +21,10 @@ namespace Engine.Saves
         public PlayerStatus Status { get; }
         public BlockConverter Converter { get; }
 
-        public void LoadFromStream(Stream stream)
+        public Save LoadFromStream(Stream stream)
         {
             var obj = Serializer.Deserialize(stream);
-            LoadSave((Save)obj);
+            return (Save)obj;
         }
         public void SaveToStream(Stream SaveDest)
         {
@@ -32,11 +32,10 @@ namespace Engine.Saves
             save.SetUp(Converter.Convert(Manager.Blocks), Status.health, Status.Inventory,Manager.Center.X, Manager.Center.Y);
             Serializer.Serialize(SaveDest, save);
         }
-        public void LoadFromFile(string path)
+        public Save LoadFromFile(string path)
         {
             var stream = File.OpenRead(path);
-            LoadFromStream(stream);
-            stream.Close();
+            return LoadFromStream(stream);
 
         }
         public void SaveToFile(string path)
@@ -53,7 +52,7 @@ namespace Engine.Saves
             {
                 Manager.AddBlockTile(item, true);
             }
-            Manager.MoveScene(save.CenterX , -save.CenterY );
+            Manager.MoveScene(save.CenterX/20*20 , -(save.CenterY / 20 * 20));
         }
     }
 }
