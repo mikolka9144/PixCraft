@@ -82,7 +82,6 @@
       <DependentUpon>StatusDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\WorldEntry.cs" />
-    <Compile Include="Saves\WorldManager.cs" />
     <Compile Include="Logic\Inventory.cs" />
     <Compile Include="Logic\IStatusDisplayer.cs" />
     <Compile Include="Logic\PlayerStatus.cs" />

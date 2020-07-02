@@ -11,9 +11,13 @@ namespace Engine.Logic
             Count = count;
             Type = type;
         }
+        public Item()
+        {
 
-        public bool CanStack { get; }
+        }
+
+        public bool CanStack { get; set; }
         public int Count { get; set; }
-        public BlockType Type { get; }
+        public BlockType Type { get; set; }
     }
 }

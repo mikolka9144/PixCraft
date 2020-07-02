@@ -14,15 +14,12 @@ namespace Engine.GUI
 {
     public partial class LoadWorldWindow : Form
     {
-        private readonly WorldManager worldManager;
 
         public LoadWorldWindow(SaveManager manager,IInit init)
         {
-            worldManager = new WorldManager();
             InitializeComponent();
             Manager = manager;
             Init = init;
-            listBox.Items.AddRange(worldManager.ListOfWorlds.ToArray());
         }
 
         public SaveManager Manager { get; }
@@ -30,15 +27,11 @@ namespace Engine.GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(listBox.SelectedItem != null)
-            {
-                var selection = (WorldEntry)listBox.SelectedItem;
-                var data = worldManager.LoadWorld(selection.Name);
-                var MemStream = new MemoryStream(Convert.FromBase64String(data));
-                Manager.LoadFromStream(MemStream);
+          
+                Manager.LoadFromFile(txtBase.Text);
             Init.IsWorldGenerated = true;
             Close();
-            }
+            
         }
     }
 }

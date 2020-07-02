@@ -12,13 +12,10 @@ namespace Engine.GUI
         {
             InitializeComponent();
             Manager = manager;
-            worldManager = new WorldManager();
         }
 
         public PlayerStatus PlayerStatus { get; }
         public SaveManager Manager { get; }
-
-        private WorldManager worldManager;
 
         private void txtBase_TextChanged(object sender, EventArgs e)
         {
@@ -27,9 +24,7 @@ namespace Engine.GUI
 
         private void btnCloud_Click(object sender, EventArgs e)
         {
-            var MemStream = new MemoryStream();
-            Manager.SaveToStream(MemStream);
-            worldManager.(txtName.Text, Convert.ToBase64String(MemStream.ToArray()));
+            Manager.SaveToFile(txtName.Text);
         }
     }
 }

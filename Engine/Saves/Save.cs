@@ -6,18 +6,13 @@ using System.Collections.Generic;
 
 namespace Engine.Saves
 {
-    [Serializable]
     public class Save
     {
-        public Save(List<BlockTemplate> blocks,int hp,List<Item> items)
+        public void SetUp(List<BlockTemplate> blocks,int hp,List<Item> items)
         {
             Tiles = blocks;
             Hp = hp;
             Items = items;
-        }
-        public Save()
-        {
-
         }
         public List<BlockTemplate> Tiles { get; set; }
         public int Hp { get; set; }
