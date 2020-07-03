@@ -5,13 +5,13 @@ namespace Engine
 {
     public interface IIdProcessor
     {
-        void ProcessSprite(SpriteOverlay overlay);
+        void ProcessSprite(SpriteOverlay overlay,BlockType Id);
     }
     public class BlockIdProcessor : IIdProcessor
     {
-        public void ProcessSprite(SpriteOverlay overlay)
+        public void ProcessSprite(SpriteOverlay overlay,BlockType Id)
         {
-            switch (overlay.Id)
+            switch (Id)
             {
                 case BlockType.Grass:
                     overlay.Sprite.color = new Color(100, 200, 50);

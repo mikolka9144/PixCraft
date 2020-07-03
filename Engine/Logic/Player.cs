@@ -13,7 +13,7 @@ namespace Logic
     {
         private readonly PauseMenu settingsForm;
 
-        public Player(PauseMenu pauseMenu,Parameters paramters,IActiveElements activeElements,IMover manager,PointerController pointer,IMoveDefiner definer,PlayerStatus status):base(activeElements,manager,definer,pointer,paramters,status)
+        public Player(PauseMenu pauseMenu,IActiveElements activeElements,IMover manager,PointerController pointer,IMoveDefiner definer,PlayerStatus status):base(activeElements,manager,definer,pointer,status)
         {
             position = new PixBlocks.PythonIron.Tools.Integration.Vector(0, 0);
             size = 10;
@@ -26,9 +26,9 @@ namespace Logic
 
         private void Player_OnDamageDeal()
         {
-            color = paramters.RedColor;
+            color = Parameters.RedColor;
             Thread.Sleep(600);
-            color = paramters.DefaultColor;
+            color = Parameters.DefaultColor;
         }
 
         private void Pause()

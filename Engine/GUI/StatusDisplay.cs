@@ -13,14 +13,12 @@ namespace Engine.GUI
 {
     internal partial class StatusDisplay : Form,IStatusDisplayer
     {
-        public StatusDisplay(Parameters parameters)
+        public StatusDisplay()
         {
             InitializeComponent();
-            Parameters = parameters;
         }
 
         public int SelectedIndex { get; set; }
-        public Parameters Parameters { get; }
 
         public void Present(int life, List<Item> currentItems)
         {

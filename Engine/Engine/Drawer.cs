@@ -11,17 +11,12 @@ namespace Engine.Engine
 {
     class Drawer:IDrawer
     {
-        private readonly Parameters parameters;
-
-        public Drawer(Parameters parameters)
-        {
-            this.parameters = parameters;
-        }
+        
         public void Draw(SpriteOverlay sprite)
         {
 
-            var flag = sprite.X > parameters.border.Left || sprite.X < -parameters.border.Right ||
-               sprite.Y > parameters.border.Up || sprite.Y < -parameters.border.Down;
+            var flag = sprite.X > Parameters.border.Left || sprite.X < -Parameters.border.Right ||
+               sprite.Y > Parameters.border.Up || sprite.Y < -Parameters.border.Down;
 
             if (flag)
             {

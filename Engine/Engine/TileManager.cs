@@ -16,13 +16,11 @@ namespace Engine.Engine
         public List<Foliage> Toppings { get; } = new List<Foliage>();
         public List<Foliage> ActiveToppings => Toppings.FindAll(s => s.IsActiveBlock()).ToList();
 
-        private readonly Parameters parameters;
         private readonly IDrawer drawer;
         private readonly IIdProcessor processor;
 
-        public TileManager(Parameters parameters, IDrawer drawer, IIdProcessor processor)
+        public TileManager( IDrawer drawer, IIdProcessor processor)
         {
-            this.parameters = parameters;
             this.drawer = drawer;
             this.processor = processor;
         }
@@ -31,7 +29,7 @@ namespace Engine.Engine
 
         public void AddBlockTile(int BlockX, int BlockY, BlockType Id, bool replace, bool forceReplace = false, bool Draw = false)
         {
-            var x = parameters.BlockSize;
+            var x = Parameters.BlockSize;
             var currentBlock = Blocks.Find(s => (s.X / x) == BlockX && s.Y / x == BlockY);
             if (currentBlock != null)
             {
@@ -55,8 +53,8 @@ namespace Engine.Engine
 
         public void AddBlockTile(int BlockX, int BlockY, BlockType Id, bool Draw = false)
         {
-            var x = parameters.BlockSize;
-            var block = new Block(BlockX * x, BlockY * x, Id, x, drawer, processor, parameters);
+            var x = Parameters.BlockSize;
+            var block = new Block(BlockX * x, BlockY * x, Id, x, drawer, processor);
             AddBlockTile(block, Draw);
         }
         public void AddBlockTile(Block block, bool ShouldDraw)
@@ -79,7 +77,7 @@ namespace Engine.Engine
 
         public void PlaceBlock(int x, int y, BlockType blockType)
         {
-            var block = new Block(x,y, blockType, parameters.BlockSize, drawer, processor, parameters);
+            var block = new Block(x,y, blockType, Parameters.BlockSize, drawer, processor);
             AddBlockTile(block,true);
         }
     }

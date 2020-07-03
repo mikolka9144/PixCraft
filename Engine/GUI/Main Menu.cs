@@ -7,15 +7,13 @@ namespace Engine.GUI
     public partial class Main_Menu : Form
     {
         private readonly IInit init;
-        private readonly Parameters paramters;
 
         public SaveManager Manager { get; }
 
-        public Main_Menu(IInit init,Parameters paramters,SaveManager manager)
+        public Main_Menu(IInit init,SaveManager manager)
         {
             InitializeComponent();
             this.init = init;
-            this.paramters = paramters;
             Manager = manager;
         }
 
@@ -27,7 +25,7 @@ namespace Engine.GUI
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            var settingsWindow = new Settings_Form(paramters);
+            var settingsWindow = new Settings_Form();
             settingsWindow.ShowDialog();
         }
 

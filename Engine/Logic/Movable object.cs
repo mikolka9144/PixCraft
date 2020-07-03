@@ -16,7 +16,6 @@ namespace Engine.Logic
     {
         protected readonly IMover tileManager;
         protected readonly IMoveDefiner moveDefiner;
-        protected readonly Parameters paramters;
         protected readonly PlayerStatus status;
         protected event Action PostUpdate;
         protected event Action OnDamageDeal;
@@ -27,18 +26,17 @@ namespace Engine.Logic
         private int TicksElapsedForMove;
         private int DistanceFalled;
 
-        public Movable_object(IActiveElements ActiveElements,IMover tileManager,IMoveDefiner moveDefiner,PointerController pointer,Parameters paramters,PlayerStatus status)
+        public Movable_object(IActiveElements ActiveElements,IMover tileManager,IMoveDefiner moveDefiner,PointerController pointer,PlayerStatus status)
         {
             this.ActiveElements = ActiveElements;
             this.tileManager = tileManager;
             this.moveDefiner = moveDefiner;
             Pointer = pointer;
-            this.paramters = paramters;
             this.status = status;
             speed = 0;
 			Grounded = false;
-			TicksElapsed = paramters.BlocksCollisionDelay;
-			TicksElapsedForMove = paramters.MoveDelay;
+			TicksElapsed = Parameters.BlocksCollisionDelay;
+			TicksElapsedForMove = Parameters.MoveDelay;
 			
 		}
 
@@ -47,11 +45,11 @@ namespace Engine.Logic
 
         public override void update()
         {
-            if (moveDefiner.key(command.Left) && TicksElapsedForMove >= paramters.MoveDelay)
+            if (moveDefiner.key(command.Left) && TicksElapsedForMove >= Parameters.MoveDelay)
             {
                 MoveLeft();
             }
-            else if (moveDefiner.key(command.Right) && TicksElapsedForMove >= paramters.MoveDelay)
+            else if (moveDefiner.key(command.Right) && TicksElapsedForMove >= Parameters.MoveDelay)
             {
                 MoveRight();
             }
@@ -72,11 +70,11 @@ namespace Engine.Logic
                         TicksElapsedForMove = 0;
                         speed = -speed;
                     }
-                    else if (collide(b.foliage.Sprite) && TicksElapsed == paramters.BlocksCollisionDelay) tileManager.Move(roation.Down, 3);
+                    else if (collide(b.foliage.Sprite) && TicksElapsed == Parameters.BlocksCollisionDelay) tileManager.Move(roation.Down, 3);
                 }
             }
-            if (TicksElapsed != paramters.BlocksCollisionDelay) TicksElapsed++;
-            if (TicksElapsedForMove != paramters.MoveDelay) TicksElapsedForMove++;
+            if (TicksElapsed != Parameters.BlocksCollisionDelay) TicksElapsed++;
+            if (TicksElapsedForMove != Parameters.MoveDelay) TicksElapsedForMove++;
         }
 
         
@@ -88,12 +86,12 @@ namespace Engine.Logic
             {
 
                 Grounded = false;
-                speed = paramters.MaxFallSpeed;
+                speed = Parameters.MaxFallSpeed;
             }
             foreach (var block in ActiveElements.ActiveToppings)
             {
 
-                if (collide(block.Sprite) && TicksElapsed >= paramters.BlocksCollisionDelay)
+                if (collide(block.Sprite) && TicksElapsed >= Parameters.BlocksCollisionDelay)
                 {
                     Grounded = true;
                     Pointer.LastFoliage = block;
@@ -106,18 +104,18 @@ namespace Engine.Logic
             }
             tileManager.Move(roation.Down, speed);
             if (speed < 0) DistanceFalled -= speed;
-            if (speed > -paramters.MaxFallSpeed) speed -= 1;
+            if (speed > -Parameters.MaxFallSpeed) speed -= 1;
         }
 
         private void MoveRight()
         {
             flip = false;
-            tileManager.Move(roation.Left, paramters.moveSpeed);
+            tileManager.Move(roation.Left,Parameters.moveSpeed);
             foreach (var b in ActiveElements.ActiveBlocks)
             {
                 if (collide(b.Sprite))
                 {
-                    tileManager.Move(roation.Right, paramters.moveSpeed);
+                    tileManager.Move(roation.Right,Parameters.moveSpeed);
                     break;
                 }
             }
@@ -126,12 +124,12 @@ namespace Engine.Logic
         private void MoveLeft()
         {
             flip = true;
-            tileManager.Move(roation.Right, paramters.moveSpeed);
+            tileManager.Move(roation.Right, Parameters.moveSpeed);
             foreach (var b in ActiveElements.ActiveBlocks)
             {
                 if (collide(b.Sprite))
                 {
-                    tileManager.Move(roation.Left, paramters.moveSpeed);
+                    tileManager.Move(roation.Left,Parameters.moveSpeed);
                     break;
                 }
             }

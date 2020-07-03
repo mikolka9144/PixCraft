@@ -6,7 +6,6 @@ namespace Engine.Logic
     public class PlayerStatus
     {
         private int MaxSlotLimit;
-        private readonly Parameters parameters;
 
         public int health { get; set; }
         public List<Item> Inventory { get; private set; }
@@ -16,13 +15,12 @@ namespace Engine.Logic
             this.health = health;
             this.Inventory = Inventory;
         }
-        public PlayerStatus(Parameters parameters,IStatusDisplayer displayer)
+        public PlayerStatus(IStatusDisplayer displayer)
         {
-            health = parameters.BaseHealth;
+            health = Parameters.BaseHealth;
             Inventory = new List<Item>();
-            this.parameters = parameters;
             Displayer = displayer;
-            MaxSlotLimit = parameters.MaxSlotCapatility;
+            MaxSlotLimit = Parameters.MaxSlotCapatility;
         }
         public void AddElement(Item item)
         {
@@ -61,10 +59,10 @@ namespace Engine.Logic
         }
         public bool DealDamage(int DistanceFallen)
         {
-            if (DistanceFallen >= parameters.minimumBlocksForFall*parameters.BlockSize)
+            if (DistanceFallen >= Parameters.minimumBlocksForFall*Parameters.BlockSize)
             {
-                DistanceFallen -= parameters.minimumBlocksForFall* parameters.BlockSize;
-                health -= DistanceFallen / parameters.BlockSize;
+                DistanceFallen -= Parameters.minimumBlocksForFall* Parameters.BlockSize;
+                health -= DistanceFallen / Parameters.BlockSize;
                 if (health <= 0) OnKill.Invoke();
                 return true;
             }

@@ -21,10 +21,9 @@ namespace Engine.Engine
 
         public ITileManager TileManager { get; }
 
-        public Engine(Parameters paramters,ITileManager tileManager,IDrawer drawer)
+        public Engine(ITileManager tileManager,IDrawer drawer)
         {
-            Center = new Center(drawer,paramters);
-            this.parameters = paramters;
+            Center = new Center(drawer);
             TileManager = tileManager;
         }
 

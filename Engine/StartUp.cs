@@ -15,28 +15,26 @@ namespace Engine.Logic
     {
         public bool IsWorldGenerated { get; set; } = false;
         private Engine.Engine engine;
-        private Parameters parameters;
         private TileManager tileManager;
 
         public void Init()
         {
-            parameters = new Parameters();
-            var drawer = new Drawer(parameters);
-            var StatusWindow = new StatusDisplay(parameters);
+            var drawer = new Drawer();
+            var StatusWindow = new StatusDisplay();
             var IdProcessor = new BlockIdProcessor();
-            tileManager = new TileManager(parameters, drawer, IdProcessor);
-            engine = new Engine.Engine(parameters,tileManager,drawer);
-            var blockConverter = new BlockConverter(parameters, drawer, IdProcessor);
-            var playerstatus = new PlayerStatus(parameters, StatusWindow);
+            tileManager = new TileManager( drawer, IdProcessor);
+            engine = new Engine.Engine(tileManager,drawer);
+            var blockConverter = new BlockConverter(drawer, IdProcessor);
+            var playerstatus = new PlayerStatus( StatusWindow);
             var game = GameScene.gameSceneStatic;
             var moveDefiner = new PlayerMoveDefiner();
             var SaveManager = new SaveManager(tileManager, playerstatus,blockConverter,engine.Center,engine);
-            var pauseMenu = new PauseMenu(parameters,SaveManager);
-            var pointer = new Pointer(drawer,parameters);
-            var pointerController = new PointerController(playerstatus,pointer, tileManager,moveDefiner,parameters);
-            var player = new Player(pauseMenu,parameters,tileManager,engine,pointerController,moveDefiner,playerstatus);
+            var pauseMenu = new PauseMenu(SaveManager);
+            var pointer = new Pointer(drawer);
+            var pointerController = new PointerController(playerstatus,pointer, tileManager,moveDefiner);
+            var player = new Player(pauseMenu,tileManager,engine,pointerController,moveDefiner,playerstatus);
 
-            var MainMenu = new Main_Menu(this,parameters,SaveManager);
+            var MainMenu = new Main_Menu(this,SaveManager);
             MainMenu.ShowDialog();
             if (!IsWorldGenerated) return;
             engine.Add(pointer);
@@ -52,7 +50,7 @@ namespace Engine.Logic
             IsWorldGenerated = true;
             var oreTable = new OreTable();
 
-            var generator = new Generator(seed, tileManager, parameters, oreTable,size);
+            var generator = new Generator(seed, tileManager, oreTable,size);
             ExecuteGeneration(generator,progress);
 
         }

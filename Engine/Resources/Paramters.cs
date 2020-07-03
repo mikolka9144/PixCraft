@@ -9,30 +9,30 @@ namespace Engine
 {
     public class Parameters
     {
-        public (int Up,int Left,int Right,int Down) border = (100,100,100,100);
-        public (int Up,int Left,int Right,int Down) hitboxArea = (20,20,20,20);
-        public int Delay = 0;
+        public static (int Up,int Left,int Right,int Down) border = (100,100,100,100);
+        public static (int Up,int Left,int Right,int Down) hitboxArea = (20,20,20,20);
+        public static int Delay = 0;
         //Generator Parameters
-        public int BlockSize = 20;
-        public int sizeOfStoneCollumn = 20;
+        public static int BlockSize = 20;
+        public static int sizeOfStoneCollumn = 20;
 
-        public int TreeSpread = 3;
-        public int minimumFillarHeightForTree = 3;
-        public int treeChance = 5;
-        public int moveSpeed = 5;
-        public int MaxFallSpeed = 6;
+        public static int TreeSpread = 3;
+        public static int minimumFillarHeightForTree = 3;
+        public static int treeChance = 5;
+        public static int moveSpeed = 5;
+        public static int MaxFallSpeed = 6;
         //Gameplay
-        public int BlocksCollisionDelay = 2;
-        public int MoveDelay = 3;
-        public int ChunkSize = 20;
-        public int breakingRange = 50;
-        internal int BaseHealth = 20;
-        internal int MaxSlotCapatility = 64;
-        internal int minimumBlocksForFall = 3;
-        internal int PointerRange = 80;
-        internal int PointerStatusChangeDelay = 300;
-        internal Color DefaultColor = new Color(15, 142, 255);
-        internal Color RedColor = new Color(255, 51, 0);
+        public static int BlocksCollisionDelay = 2;
+        public static int MoveDelay = 3;
+        public static int ChunkSize = 20;
+        public static int breakingRange = 50;
+        internal static int BaseHealth = 20;
+        internal static int MaxSlotCapatility = 64;
+        internal static int minimumBlocksForFall = 3;
+        internal static int PointerRange = 80;
+        internal static int PointerStatusChangeDelay = 300;
+        internal static Color DefaultColor = new Color(15, 142, 255);
+        internal static Color RedColor = new Color(255, 51, 0);
     }
 
 }

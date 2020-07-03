@@ -10,14 +10,12 @@ namespace Engine.Saves
 {
     public  class BlockConverter
     {
-        public BlockConverter(Parameters parameters,IDrawer drawer,IIdProcessor processor)
+        public BlockConverter(IDrawer drawer,IIdProcessor processor)
         {
-            Parameters = parameters;
             Drawer = drawer;
             Processor = processor;
         }
 
-        public Parameters Parameters { get; }
         public IDrawer Drawer { get; }
         public IIdProcessor Processor { get; }
 
@@ -26,7 +24,7 @@ namespace Engine.Saves
             var list = new List<Block>();
             foreach (var item in blocks)
             {
-                list.Add(new Block(item.X-CenterX,item.Y-CenterY, item.Id, Parameters.BlockSize, Drawer, Processor, Parameters));
+                list.Add(new Block(item.X-CenterX,item.Y-CenterY, item.Id, Parameters.BlockSize, Drawer, Processor));
             }
             return list;
         }

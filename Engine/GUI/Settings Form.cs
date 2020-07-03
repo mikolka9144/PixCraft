@@ -12,19 +12,17 @@ namespace Engine.GUI
 {
     public partial class Settings_Form : Form
     {
-        private readonly Parameters paramters;
 
-        public Settings_Form(Parameters paramters)
+        public Settings_Form()
         {
-            this.paramters = paramters;
             InitializeComponent();
-            numericGrid.Value = paramters.border.Up;
+            numericGrid.Value = Parameters.border.Up;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             var v = (int)numericGrid.Value;
-            paramters.border = (v, v, v, v);
+            Parameters.border = (v, v, v, v);
             Close();
         }
     }

@@ -8,18 +8,16 @@ namespace Engine.Engine
         private int CanGenerateTree;
         
         private readonly ITileManager manager;
-        private readonly Parameters parameters;
         private readonly IOreTable oreTable;
         private readonly int size;
 
-        public Generator(int seed, ITileManager manager,Parameters paramters,IOreTable oreTable,int size)
+        public Generator(int seed, ITileManager manager,IOreTable oreTable,int size)
         {
             randomizer = new Random(seed);
             this.manager = manager;
-            parameters = paramters;
             this.oreTable = oreTable;
             this.size = size;
-            CanGenerateTree = parameters.TreeSpread;
+            CanGenerateTree = Parameters.TreeSpread;
         }
         // Token: 0x06000015 RID: 21 RVA: 0x000024C0 File Offset: 0x000006C0
         public void GenerateTerrian()
@@ -70,13 +68,13 @@ namespace Engine.Engine
         {
             foreach (var item in manager.Blocks.FindAll(s => s.Id == BlockType.Grass))
             {
-                var size = parameters.BlockSize;
-                var ranSel = randomizer.Next(0, parameters.treeChance) == 0;
-                var HasSize = item.Y >= parameters.minimumFillarHeightForTree*parameters.BlockSize;
+                var size = Parameters.BlockSize;
+                var ranSel = randomizer.Next(0, Parameters.treeChance) == 0;
+                var HasSize = item.Y >= Parameters.minimumFillarHeightForTree*Parameters.BlockSize;
                 var IsAwayFromTrees = CanGenerateTree == 3;
 
                 if(ranSel&&HasSize&&IsAwayFromTrees) generateTree(item.X/size, item.Y/size);
-                else if (CanGenerateTree != parameters.TreeSpread) CanGenerateTree++;
+                else if (CanGenerateTree != Parameters.TreeSpread) CanGenerateTree++;
             }
         }
         private void generateTree(int X, int Y)
@@ -106,14 +104,14 @@ namespace Engine.Engine
 
         private void GenerateCollumnOfStone(int X)
         {
-            for (int Y = -1; Y > -parameters.sizeOfStoneCollumn; Y--)
+            for (int Y = -1; Y > -Parameters.sizeOfStoneCollumn; Y--)
             {
                 manager.AddBlockTile(X, Y, BlockType.Stone);
             }
         }
         public void GenerateOres(BlockType type)
         {
-            var offset = parameters.ChunkSize;
+            var offset = Parameters.ChunkSize;
             var count = oreTable.GetCount(type);
             var pointer = -size;
             var chunks = size*2/offset;
@@ -123,7 +121,7 @@ namespace Engine.Engine
                 for (int i = 0; i < count; i++)
                 {
                     var X = randomizer.Next(pointer, pointer + offset);
-                    var Y = randomizer.Next(-parameters.sizeOfStoneCollumn, -oreTable.GetMinimumDepth(type));
+                    var Y = randomizer.Next(-Parameters.sizeOfStoneCollumn, -oreTable.GetMinimumDepth(type));
                     GenerateOre(X, Y, type, oreTable.GetChance(type));
                 }
                 pointer += offset;

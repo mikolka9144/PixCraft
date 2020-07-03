@@ -6,7 +6,7 @@ namespace Engine.Engine.models
     public class Foliage : SpriteOverlay
     {
         // Token: 0x06000005 RID: 5 RVA: 0x000020D8 File Offset: 0x000002D8
-        public Foliage(int x, int y, BlockType id, Block block,IIdProcessor processor,Parameters parameters) : base(new Sprite(), x, y, id, block.Engine,processor,parameters)
+        public Foliage(int x, int y, Block block) : base(new Sprite(), x, y,  block.Engine)
         {
             base.Sprite.size = block.Sprite.size;
             base.Sprite.image = 65;

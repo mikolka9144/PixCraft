@@ -16,15 +16,12 @@ namespace Engine.GUI
 {
     public partial class PauseMenu : Form
     {
-        private readonly Parameters paramters;
-
         public SaveManager Manager { get; }
         public PlayerStatus Status { get; }
 
-        public PauseMenu(Parameters paramters,SaveManager manager)
+        public PauseMenu(SaveManager manager)
         {
             InitializeComponent();
-            this.paramters = paramters;
             Manager = manager;
         }
 
@@ -35,7 +32,7 @@ namespace Engine.GUI
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            var settingsWindow = new Settings_Form(paramters);
+            var settingsWindow = new Settings_Form();
             settingsWindow.ShowDialog();
         }
 
