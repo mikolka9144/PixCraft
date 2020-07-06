@@ -90,6 +90,7 @@
     </Compile>
     <Compile Include="Logic\models\CraftingEntry.cs" />
     <Compile Include="Logic\CraftingModule.cs" />
+    <Compile Include="Resources\Craftings.cs" />
     <Compile Include="Resources\PlockProperties.cs" />
     <Compile Include="Saves\Models\WorldEntry.cs" />
     <Compile Include="Engine\Models\ITileManager.cs" />
@@ -161,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\SaveWorldWindow.resx">
       <DependentUpon>SaveWorldWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\StatusDisplay.resx">
+      <DependentUpon>StatusDisplay.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,6 +7,7 @@ using Logic;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,12 +22,13 @@ namespace Engine.Logic
         public void Init()
         {
             var drawer = new Drawer();
-            var StatusWindow = new StatusDisplay();
             var IdProcessor = new BlockIdProcessor();
+            var craftingSystem = new CraftingModule(Craftings.GetCraftings());
+            var StatusWindow = new StatusDisplay(craftingSystem);
+            var playerstatus = new PlayerStatus( StatusWindow);
             tileManager = new TileManager( drawer, IdProcessor);
             engine = new Engine.Engine(tileManager,drawer);
             var blockConverter = new BlockConverter(drawer, IdProcessor);
-            var playerstatus = new PlayerStatus( StatusWindow);
             var game = GameScene.gameSceneStatic;
             var moveDefiner = new PlayerMoveDefiner();
             var SaveManager = new SaveManager(tileManager, playerstatus,blockConverter,engine.Center,engine);

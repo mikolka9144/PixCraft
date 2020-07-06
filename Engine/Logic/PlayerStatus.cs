@@ -52,7 +52,7 @@ namespace Engine.Logic
             Decrement(selection.type,1);
             return selection.type;
         }
-        public void OpenInventory() => Displayer.Present(health, Inventory);
+        public void OpenInventory() => Displayer.Present(health, this);
         public void Decrement(BlockType selection,int count)
         {
             var allItemsOfKind = Inventory.FindAll(s => s.type == selection);

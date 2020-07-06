@@ -18,3 +18,5 @@ C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.GUI.PauseMenu.r
 C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.GUI.SaveWorldWindow.resources
 C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.csproj.GenerateResource.cache
 C:\Users\mikol\source\repos\Block engine\Engine\bin\Debug\PixBlocks.exe
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.GUI.CraftingForm.resources
+C:\Users\mikol\source\repos\Block engine\Engine\obj\Debug\Engine.GUI.StatusDisplay.resources

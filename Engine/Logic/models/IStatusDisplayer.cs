@@ -5,7 +5,7 @@ namespace Engine.Logic
 {
     public interface IStatusDisplayer
     {
-        void Present(int life, List<Item> currentItems);
+        void Present(int life, PlayerStatus currentItems);
         int SelectedIndex { get; set; }
     }
 }

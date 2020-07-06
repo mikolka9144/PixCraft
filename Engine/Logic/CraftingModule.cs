@@ -7,16 +7,14 @@ namespace Engine.Logic
 {
     public class CraftingModule
     {
-        private PlayerStatus inventory;
-        private readonly List<CraftingEntry> craftingEntries;
+        internal readonly List<CraftingEntry> craftingEntries;
 
-        public CraftingModule(PlayerStatus inventory,List<CraftingEntry> craftingEntries)
+        public CraftingModule(List<CraftingEntry> craftingEntries)
         {
-            this.inventory = inventory;
             this.craftingEntries = craftingEntries;
         }
 
-        public bool Craft(BlockType blockType)
+        public bool Craft(PlayerStatus inventory, BlockType blockType)
         {
             var craft = craftingEntries.Find(s => s.CraftedItem.type == blockType);
             foreach (var item in craft.NeededItems)
