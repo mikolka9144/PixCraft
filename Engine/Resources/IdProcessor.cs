@@ -32,13 +32,16 @@ namespace Engine
                     overlay.Sprite.color = new Color(0, 0, 0);
                     break;
                 case BlockType.IronOre:
-                    overlay.Sprite.color = new Color(203,205,205);
+                    overlay.Sprite.color = new Color(203, 205, 205);
                     break;
                 case BlockType.GoldOre:
                     overlay.Sprite.color = new Color(153, 153, 0);
                     break;
                 case BlockType.DiamondOre:
                     overlay.Sprite.color = new Color(134, 255, 255);
+                    break;
+                case BlockType.Planks:
+                    overlay.Sprite.color = new Color(100, 100, 100);
                     break;
             }
         }
@@ -55,6 +58,7 @@ namespace Engine
         IronOre,
         GoldOre,
         DiamondOre,
-        stick
+        stick,
+        Planks
     }
 }

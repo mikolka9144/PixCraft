@@ -27,16 +27,10 @@ namespace Engine.GUI
         {
             playerStatus = currentItems;
             SelectedIndex = -1;
-            Inventory.Items.Clear();
             double precentage = ((double)life / Parameters.BaseHealth) * 100.0;
             LifeBar.Value = (int)precentage;
-            for (int i = 0; i < currentItems.Inventory.Count; i++)
-            {
-                var elementToTransform = currentItems.Inventory[i];
-                var ViewItem = new ListViewItem($"{elementToTransform.Name} x{elementToTransform.Count}");
-                ViewItem.Tag = i;
-                Inventory.Items.Add(ViewItem);
-            }
+            Inventory.Items.Clear();
+            Inventory.Items.AddRange(ItemsConverter.LoadItemsToList(currentItems.Inventory));
             ShowDialog();
             if(Inventory.SelectedItems.Count != 0)SelectedIndex = (int)Inventory.SelectedItems[0].Tag;
         }
@@ -45,6 +39,8 @@ namespace Engine.GUI
         {
             var form = new CraftingForm(playerStatus,Module);
             form.ShowDialog();
+            Inventory.Items.Clear();
+            Inventory.Items.AddRange(ItemsConverter.LoadItemsToList(playerStatus.Inventory));
         }
     }
 }

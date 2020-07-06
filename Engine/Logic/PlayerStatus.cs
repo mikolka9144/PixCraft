@@ -25,10 +25,17 @@ namespace Engine.Logic
         public void AddElement(Item item)
         {
             var clones = Inventory.FindAll(s => s.Compare(item));
-            if (clones is null || !item.CanStack)
+            if (clones is null )
             {
                 Inventory.Add(item);
 
+            }
+            else if (!item.CanStack)
+            {
+                for (int i = 0; i < item.Count; i++)
+                {
+                    Inventory.Add(new Item(1, item.type));
+                }
             }
             else
             {

@@ -19,6 +19,7 @@ namespace Engine.GUI
             PlayerStatus = playerStatus;
             CraftingModule = craftingModule;
             listOfItemsToCraft.Items.AddRange(craftingModule.craftingEntries.Select(s => s.CraftedItem.type).Cast<object>().ToArray());
+            UpdateInventory();
         }
 
         public PlayerStatus PlayerStatus { get; }
@@ -27,14 +28,28 @@ namespace Engine.GUI
         private void btnCraft_Click(object sender, EventArgs e)
         {
 
-            if (CraftingModule.Craft(PlayerStatus,(BlockType)listOfItemsToCraft.SelectedItem))
+            if (!CraftingModule.Craft(PlayerStatus,(BlockType)listOfItemsToCraft.SelectedItem))
             {
                 Close();
             }
-            else
-            {
+            UpdateInventory();
+        }
+        private void UpdateNeededItems(List<Item> neededItems)
+        {
+            neededItemsList.Items.Clear();
+            neededItemsList.Items.AddRange(ItemsConverter.LoadItemsToList(neededItems));
+        }
+        private void UpdateInventory()
+        {
+            Inventory.Items.Clear();
+            Inventory.Items.AddRange(ItemsConverter.LoadItemsToList(PlayerStatus.Inventory));
+        }
 
-            }
+        private void listOfItemsToCraft_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedBlockType = (BlockType)listOfItemsToCraft.SelectedItem;
+            UpdateNeededItems(CraftingModule.craftingEntries.Find(
+                s => s.CraftedItem.type == selectedBlockType).NeededItems.ToList());
         }
     }
 }

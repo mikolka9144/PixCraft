@@ -13,7 +13,8 @@ namespace Engine.Resources
         {
             var list = new List<CraftingEntry>();
             #region CraftingsData
-            list.Add(new CraftingEntry(new Item[] { new Item(1, BlockType.CoalOre) }, new Item(1, BlockType.Grass)));
+            list.Add(new CraftingEntry(new Item[] { new Item(1, BlockType.Wood) }, new Item(4, BlockType.Planks)));
+            list.Add(new CraftingEntry(new Item[] { new Item(1, BlockType.Planks) }, new Item(4, BlockType.stick)));
             #endregion
 
             return list;

@@ -20,7 +20,7 @@ namespace EngineTets.Logic
         {
             Inventory = new PlayerStatus(null);
             CraftingEntries = new List<CraftingEntry>();
-            Instance = new CraftingModule(Inventory,CraftingEntries);
+            Instance = new CraftingModule(CraftingEntries);
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace EngineTets.Logic
             CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, new Item(1, BlockType.DiamondOre)));
             Inventory.Inventory.Add(new Item(3, BlockType.Dirt));
 
-            var flag = Instance.Craft(BlockType.DiamondOre);
+            var flag = Instance.Craft(Inventory,BlockType.DiamondOre);
 
             Assert.IsTrue(flag);
             Assert.IsTrue(Inventory.Inventory.Find(s=>s.type == BlockType.DiamondOre).Count == 1);
@@ -41,7 +41,7 @@ namespace EngineTets.Logic
             CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, new Item(1, BlockType.DiamondOre)));
             Inventory.Inventory.Add(new Item(4, BlockType.Dirt));
 
-            var flag = Instance.Craft(BlockType.DiamondOre);
+            var flag = Instance.Craft(Inventory, BlockType.DiamondOre);
 
             Assert.IsTrue(flag);
             Assert.IsTrue(Inventory.Inventory.Find(s => s.type == BlockType.DiamondOre).Count == 1);
@@ -54,7 +54,7 @@ namespace EngineTets.Logic
             Inventory.Inventory.Add(new Item(2, BlockType.Dirt));
             Inventory.Inventory.Add(new Item(2, BlockType.Dirt));
 
-            var flag = Instance.Craft(BlockType.DiamondOre);
+            var flag = Instance.Craft(Inventory, BlockType.DiamondOre);
 
             Assert.IsTrue(flag);
             Assert.IsTrue(Inventory.Inventory.Find(s => s.type == BlockType.DiamondOre).Count == 1);
@@ -66,7 +66,7 @@ namespace EngineTets.Logic
             CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, new Item(1, BlockType.DiamondOre)));
             Inventory.Inventory.Add(new Item(2, BlockType.Dirt));
 
-            var flag = Instance.Craft(BlockType.DiamondOre);
+            var flag = Instance.Craft(Inventory, BlockType.DiamondOre);
 
             Assert.IsFalse(flag);
             Assert.IsNull(Inventory.Inventory.Find(s => s.type == BlockType.DiamondOre));
@@ -74,17 +74,17 @@ namespace EngineTets.Logic
 
         }
         [Test]
-        public void tryCraftItem_With2NeededItems()
+        public void tryCraftItem_NonStackAbleItem()
         {
-            CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt),new Item(1,BlockType.CoalOre) }, new Item(1, BlockType.DiamondOre)));
+            var craftedItem = new Item(2, BlockType.CoalOre);
+            craftedItem.CanStack = false;
+            CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, craftedItem));
             Inventory.Inventory.Add(new Item(3, BlockType.Dirt));
-            Inventory.Inventory.Add(new Item(1, BlockType.CoalOre));
 
-            var flag = Instance.Craft(BlockType.DiamondOre);
+            var flag = Instance.Craft(Inventory, BlockType.CoalOre);
 
             Assert.IsTrue(flag);
-            Assert.IsTrue(Inventory.Inventory.Find(s => s.type == BlockType.DiamondOre).Count == 1);
-            Assert.IsTrue(Inventory.Inventory.Count == 1);
+            Assert.IsTrue(Inventory.Inventory.Count == 2);
         }
     }
 }

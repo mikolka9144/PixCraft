@@ -70,6 +70,7 @@
     <Compile Include="GUI\CraftingForm.Designer.cs">
       <DependentUpon>CraftingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\ItemsConverterToViewItems.cs" />
     <Compile Include="GUI\LoadWorldWindow.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -30,8 +30,10 @@ namespace Engine.Resources
                     return (true, true);
                 case BlockType.DiamondOre:
                     return (true, true);
+                case BlockType.Planks:
+                    return (true, true);
             }
-            return (false, false);
+            return (true, false);
         }
     }
 }
