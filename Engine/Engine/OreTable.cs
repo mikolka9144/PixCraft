@@ -9,10 +9,10 @@ namespace Engine.Engine
 {
     public partial class OreTable : IOreTable
     {
-        public OreTable()
+        public OreTable(IEnumerable<OreEntry> oreEntries)
         {
             Entries = new List<OreEntry>();
-            this.InitOreTable();
+            Entries.AddRange(oreEntries);
         }
 
         public List<OreEntry> Entries { get; }

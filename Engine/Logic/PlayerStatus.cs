@@ -24,7 +24,7 @@ namespace Engine.Logic
         }
         public void AddElement(Item item)
         {
-            var clones = Inventory.FindAll(s => s.Type == item.Type);
+            var clones = Inventory.FindAll(s => s.Compare(item));
             if (clones is null || !item.CanStack)
             {
                 Inventory.Add(item);
@@ -48,14 +48,26 @@ namespace Engine.Logic
             var index = Displayer.SelectedIndex;
             if (index < 0 || Inventory.Count -1<index) return BlockType.None;
             var selection = Inventory[index];
-            Decrement(selection);
-            return selection.Type;
+            if (!selection.IsPlaceable) return BlockType.None;
+            Decrement(selection.type,1);
+            return selection.type;
         }
         public void OpenInventory() => Displayer.Present(health, Inventory);
-        private void Decrement(Item selection)
+        public void Decrement(BlockType selection,int count)
         {
-            selection.Count -= 1;
-            if (selection.Count <= 0) Inventory.Remove(selection);
+            var allItemsOfKind = Inventory.FindAll(s => s.type == selection);
+            for (int i = 0; i < allItemsOfKind.Count; i++)
+            {
+
+                if (allItemsOfKind[i].Count - count <= 0)
+                {
+                    Inventory.Remove(allItemsOfKind[i]);
+                    count -= allItemsOfKind[i].Count;
+                }
+                else allItemsOfKind[i].Count -= count;
+            }
+
+            
         }
         public bool DealDamage(int DistanceFallen)
         {

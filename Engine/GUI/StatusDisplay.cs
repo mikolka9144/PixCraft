@@ -29,7 +29,7 @@ namespace Engine.GUI
             for (int i = 0; i < currentItems.Count; i++)
             {
                 var elementToTransform = currentItems[i];
-                var ViewItem = new ListViewItem($"{elementToTransform.Type} x{elementToTransform.Count}");
+                var ViewItem = new ListViewItem($"{elementToTransform.Name} x{elementToTransform.Count}");
                 ViewItem.Tag = i;
                 Inventory.Items.Add(ViewItem);
             }

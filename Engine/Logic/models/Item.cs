@@ -1,15 +1,17 @@
-﻿using System;
+﻿using Engine.Resources;
+using System;
 
 namespace Engine.Logic
 {
-    [Serializable]
     public class Item
     {
-        public Item(bool CanStack,int count,BlockType type)
+        public Item(int count,BlockType type)
         {
-            this.CanStack = CanStack;
+            var Properties = BlockProperties.GetProperties(type);
+            this.CanStack = Properties.CanStack;
+            IsPlaceable = Properties.IsPlaceAble;
             Count = count;
-            Type = type;
+            this.type = type;
         }
         public Item()
         {
@@ -17,7 +19,14 @@ namespace Engine.Logic
         }
 
         public bool CanStack { get; set; }
+        public bool IsPlaceable { get; set; }
         public int Count { get; set; }
-        public BlockType Type { get; set; }
+        public BlockType type { get; set; }
+        public string Name { get => type.ToString();}
+
+        public bool Compare(Item item)
+        {
+            return item.type == type;
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Engine.Logic;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -82,7 +81,7 @@ namespace Engine.Engine.models
             {
                 if (Point.Sprite.collide(b.Sprite))
                 {
-                    status.AddElement(new Item(true, 1, b.Id));
+                    status.AddElement(new Item(1, b.Id));
                     Engine.RemoveTile(b);
                     break;
                 }

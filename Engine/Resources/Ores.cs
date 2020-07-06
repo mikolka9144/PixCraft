@@ -11,7 +11,7 @@ namespace Engine.Resources
 {
     public static class OreResource
     {
-        public static void InitOreTable(this OreTable table)
+        public static OreEntry[] InitOreTable()
         {
             var list = new OreEntry[]
             {
@@ -20,7 +20,7 @@ namespace Engine.Resources
                 new OreEntry(10,5,2,BlockType.GoldOre),
                 new OreEntry(15,6,1,BlockType.DiamondOre)
             };
-            table.Entries.AddRange(list);
+            return list;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace EngineTets.Saves
         [SetUp]
         public void Setup()
         {
-            saveManager = new SaveManager()
+            //saveManager = new SaveManager();
         }
 
         [Test]

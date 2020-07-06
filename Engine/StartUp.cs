@@ -1,6 +1,7 @@
 ﻿using Engine.Engine;
 using Engine.Engine.models;
 using Engine.GUI;
+using Engine.Resources;
 using Engine.Saves;
 using Logic;
 using PixBlocks.PythonIron.Tools.Game;
@@ -48,7 +49,7 @@ namespace Engine.Logic
         public void GenerateWorld(int seed, int size, ProgressBar progress)
         {
             IsWorldGenerated = true;
-            var oreTable = new OreTable();
+            var oreTable = new OreTable(OreResource.InitOreTable());
 
             var generator = new Generator(seed, tileManager, oreTable,size);
             ExecuteGeneration(generator,progress);

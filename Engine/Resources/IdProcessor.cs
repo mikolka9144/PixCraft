@@ -54,6 +54,7 @@ namespace Engine
         CoalOre,
         IronOre,
         GoldOre,
-        DiamondOre
+        DiamondOre,
+        stick
     }
 }

@@ -36,7 +36,7 @@
       <HintPath>..\..\..\..\Desktop\PixSource\IronPython.dll</HintPath>
     </Reference>
     <Reference Include="PixBlocks">
-      <HintPath>..\..\..\..\Desktop\PixSource\PixBlocks10.exe</HintPath>
+      <HintPath>..\PixBlocks.exe</HintPath>
     </Reference>
     <Reference Include="PixBlocks.Server.DataModels, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="PixBlocks.ServerFasade, Version=33.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -64,6 +64,12 @@
     <Compile Include="Engine\Models\Foliage.cs" />
     <Compile Include="Engine\Generator.cs" />
     <Compile Include="Engine\Models\IMover.cs" />
+    <Compile Include="GUI\CraftingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\CraftingForm.Designer.cs">
+      <DependentUpon>CraftingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\LoadWorldWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +88,9 @@
     <Compile Include="GUI\StatusDisplay.Designer.cs">
       <DependentUpon>StatusDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logic\models\CraftingEntry.cs" />
+    <Compile Include="Logic\CraftingModule.cs" />
+    <Compile Include="Resources\PlockProperties.cs" />
     <Compile Include="Saves\Models\WorldEntry.cs" />
     <Compile Include="Engine\Models\ITileManager.cs" />
     <Compile Include="Logic\models\Item.cs" />
@@ -138,6 +147,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GUI\CraftingForm.resx">
+      <DependentUpon>CraftingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\LoadWorldWindow.resx">
       <DependentUpon>LoadWorldWindow.cs</DependentUpon>
     </EmbeddedResource>
