@@ -1,7 +1,8 @@
 ﻿using Engine.Engine.models;
+using Engine.Resources;
 using System.Collections.Generic;
 
-namespace Engine.Engine
+namespace Engine.Engine.models
 {
     public interface ITileManager
     {

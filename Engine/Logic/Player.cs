@@ -2,12 +2,13 @@
 using Engine.Engine.models;
 using Engine.GUI;
 using Engine.Logic;
+using Engine.Resources;
 using PixBlocks.TopPanel.Components.Basic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Logic
+namespace Engine.Logic
 {
     class Player:Movable_object
     {

@@ -1,4 +1,6 @@
-﻿namespace Engine.Engine
+﻿using Engine.Resources;
+
+namespace Engine.Engine.models
 {
     public class OreEntry
     {

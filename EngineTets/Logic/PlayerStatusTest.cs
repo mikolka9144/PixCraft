@@ -1,5 +1,6 @@
 ﻿using Engine;
 using Engine.Logic;
+using Engine.Resources;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace EngineTets.Logic
             var third = Instance.GetBlockToPlace();
 
             Assert.AreEqual(BlockType.DiamondOre, first);
-            Assert.AreEqual(BlockType.stick, secound);
+            Assert.AreEqual(BlockType.None, secound);
             Assert.AreEqual(BlockType.Grass, third);
         }
     }

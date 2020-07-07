@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Engine.Resources;
+using System;
 
-namespace Engine.Saves
+namespace Engine.Saves.Models
 {
     [Serializable]
     public class BlockTemplate

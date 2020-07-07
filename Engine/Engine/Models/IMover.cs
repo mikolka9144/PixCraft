@@ -1,4 +1,4 @@
-﻿namespace Engine.Logic
+﻿namespace Engine.Engine.models
 {
     public interface IMover
     {

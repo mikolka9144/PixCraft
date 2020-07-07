@@ -1,7 +1,7 @@
 ﻿using Engine.Engine.models;
 using PixBlocks.PythonIron.Tools.Integration;
 
-namespace Engine
+namespace Engine.Resources
 {
     public interface IIdProcessor
     {

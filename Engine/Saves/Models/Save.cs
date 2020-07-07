@@ -1,7 +1,7 @@
 ﻿using Engine.Logic;
 using System.Collections.Generic;
 
-namespace Engine.Saves
+namespace Engine.Saves.Models
 {
     public class Save
     {

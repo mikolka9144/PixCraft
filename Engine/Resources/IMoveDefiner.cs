@@ -2,7 +2,7 @@
 using PixBlocks.Views.GameControllerView;
 using System;
 
-namespace Engine.Logic
+namespace Engine.Resources
 {
     public interface IMoveDefiner
     {

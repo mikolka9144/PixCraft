@@ -1,10 +1,12 @@
-﻿using Engine.Logic;
+﻿using Engine.Engine;
+using Engine.Engine.models;
+using Engine.Resources;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Engine.Engine.models
+namespace Engine.Logic
 {
     internal class PointerController : Sprite
     {
