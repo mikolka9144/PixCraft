@@ -31,7 +31,7 @@ namespace Engine.GUI
 
             if (!CraftingModule.Craft(PlayerStatus,(BlockType)listOfItemsToCraft.SelectedItem))
             {
-                Close();
+                MessageBox.Show("Can't craft item.");
             }
             UpdateInventory();
         }
