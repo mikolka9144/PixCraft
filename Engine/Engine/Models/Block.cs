@@ -1,5 +1,4 @@
 ﻿using Engine.Resources;
-using PixBlocks.PythonIron.Tools.Integration;
 using System;
 
 namespace Engine.Engine.models
@@ -8,11 +7,11 @@ namespace Engine.Engine.models
     public class Block : SpriteOverlay
     {
         // Token: 0x06000002 RID: 2 RVA: 0x00002078 File Offset: 0x00000278
-        public Block(int x, int y, BlockType Id, int size, IDrawer engine,IIdProcessor processor) : base(new Sprite(), x, y,  engine)
+        public Block(int x, int y, BlockType Id, int size, IDrawer engine,IIdProcessor processor) : base(x, y,  engine)
         {
             
-            Sprite.image = 63;
-            Sprite.size = size;
+            image = 63;
+            this.size = size;
             foliage = new Foliage(x, y + size / 3, this);
 
             processor.ProcessSprite(this,Id);

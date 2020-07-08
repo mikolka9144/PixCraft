@@ -1,11 +1,8 @@
 ﻿using Engine.Engine.models;
 using Engine.Logic;
 using Engine.Resources;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Engine.Engine
 {
@@ -70,8 +67,8 @@ namespace Engine.Engine
         }
         public void RemoveTile(Block tile)
         {
-            drawer.remove(tile.Sprite);
-            drawer.remove(tile.foliage.Sprite);
+            drawer.remove(tile);
+            drawer.remove(tile.foliage);
             this.Blocks.Remove(tile);
             this.Toppings.Remove(tile.foliage);
         }

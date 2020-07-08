@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Engine.GUI
@@ -14,8 +11,10 @@ namespace Engine.GUI
             for (int i = 0; i < inventory.Count; i++)
             {
                 var elementToTransform = inventory[i];
-                var ViewItem = new ListViewItem($"{elementToTransform.Name} x{elementToTransform.Count}");
-                ViewItem.Tag = i;
+                var ViewItem = new ListViewItem($"{elementToTransform.Name} x{elementToTransform.Count}")
+                {
+                    Tag = i
+                };
                 list.Add(ViewItem);
             }
             return list.ToArray();

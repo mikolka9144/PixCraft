@@ -6,7 +6,7 @@ namespace Engine.Engine
 {
     internal class Generator
     {
-        private Random randomizer;
+        private readonly Random randomizer;
         private int CanGenerateTree;
         
         private readonly ITileManager manager;
@@ -21,7 +21,7 @@ namespace Engine.Engine
             this.size = size;
             CanGenerateTree = Parameters.TreeSpread;
         }
-        // Token: 0x06000015 RID: 21 RVA: 0x000024C0 File Offset: 0x000006C0
+
         public void GenerateTerrian()
         {
             for (int i = -size; i < 0; i++)

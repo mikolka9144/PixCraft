@@ -6,8 +6,6 @@ namespace Engine.Logic
 {
     public class PlayerStatus
     {
-        private int MaxSlotLimit;
-
         public int health { get; set; }
         public List<Item> Inventory { get; private set; }
         public IStatusDisplayer Displayer { get; }
@@ -21,7 +19,6 @@ namespace Engine.Logic
             health = Parameters.BaseHealth;
             Inventory = new List<Item>();
             Displayer = displayer;
-            MaxSlotLimit = Parameters.MaxSlotCapatility;
         }
         public void AddElement(Item item)
         {
@@ -42,7 +39,7 @@ namespace Engine.Logic
             {
                 foreach (var element in clones)
                 {
-                    if (element.Count + item.Count <= MaxSlotLimit)
+                    if (element.Count + item.Count <= Parameters.MaxSlotCapatility)
                     {
                         element.Count += item.Count;
                         return;

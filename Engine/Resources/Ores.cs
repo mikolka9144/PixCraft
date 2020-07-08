@@ -1,12 +1,4 @@
-﻿using Engine.Engine;
-using Engine.Engine.models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
+﻿using Engine.Engine.models;
 
 namespace Engine.Resources
 {

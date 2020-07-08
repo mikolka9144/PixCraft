@@ -1,5 +1,4 @@
-﻿using Engine.Engine;
-using Engine.Engine.models;
+﻿using Engine.Engine.models;
 using Engine.Resources;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
@@ -38,8 +37,8 @@ namespace Engine.Logic
                 if (ChangeStateOfPointerTask.Status == TaskStatus.RanToCompletion) ChangeStateOfPointerTask = new Task(ChangeStateOfPointer);
                 ChangeStateOfPointerTask.Start();
             }
-            Point.Sprite.image = IsInBreakingRange(Point) ? 56 : 55;
-            if (!Point.Sprite.IsVisible) ResetPointer();
+            Point.image = IsInBreakingRange(Point) ? 56 : 55;
+            if (!Point.IsVisible) ResetPointer();
             
         }
 
@@ -69,9 +68,9 @@ namespace Engine.Logic
 
         private void PlaceBlock()
         {
-            foreach (var b in Engine.Blocks.FindAll(s => s.Sprite.IsVisible))
+            foreach (var b in Engine.Blocks.FindAll(s => s.IsVisible))
             {
-                if (Point.Sprite.collide(b.Sprite)) return;
+                if (Point.collide(b)) return;
             }
             var blockType = status.GetBlockToPlace();
             if (blockType != BlockType.None) Engine.PlaceBlock(Point.X, Point.Y, blockType);
@@ -79,9 +78,9 @@ namespace Engine.Logic
 
         private void DestroyBlock()
         {
-            foreach (var b in Engine.Blocks.FindAll(s => s.Sprite.IsVisible))
+            foreach (var b in Engine.Blocks.FindAll(s => s.IsVisible))
             {
-                if (Point.Sprite.collide(b.Sprite))
+                if (Point.collide(b))
                 {
                     status.AddElement(new Item(1, b.Id));
                     Engine.RemoveTile(b);
@@ -93,8 +92,8 @@ namespace Engine.Logic
         private void ChangeStateOfPointer()
         {
             DestroyModeActive = !DestroyModeActive;
-            if (DestroyModeActive) Point.Sprite.color = Parameters.RedColor;
-            else Point.Sprite.color = Parameters.DefaultColor;
+            if (DestroyModeActive) Point.color = Parameters.RedColor;
+            else Point.color = Parameters.DefaultColor;
             Thread.Sleep(Parameters.PointerStatusChangeDelay);
         }
 

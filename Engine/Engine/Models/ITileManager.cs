@@ -1,5 +1,4 @@
-﻿using Engine.Engine.models;
-using Engine.Resources;
+﻿using Engine.Resources;
 using System.Collections.Generic;
 
 namespace Engine.Engine.models

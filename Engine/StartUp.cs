@@ -5,9 +5,6 @@ using Engine.Resources;
 using Engine.Saves;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Engine.Logic
@@ -42,7 +39,7 @@ namespace Engine.Logic
             engine.Add(pointer);
             game.background = new Color(102, 51, 204);
             game.add(pointerController);
-            game.add(pointer.Sprite);
+            game.add(pointer);
             game.add(player);
             game.start();
         }

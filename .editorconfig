@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# IDE0002: Uprość dostęp do składowej
+dotnet_diagnostic.IDE0002.severity = warning
+
+# IDE0005: Dyrektywa using jest niepotrzebna.
+dotnet_diagnostic.IDE0005.severity = warning

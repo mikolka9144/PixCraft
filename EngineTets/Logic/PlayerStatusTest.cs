@@ -1,10 +1,7 @@
-﻿using Engine;
-using Engine.Logic;
+﻿using Engine.Logic;
 using Engine.Resources;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EngineTets.Logic
 {

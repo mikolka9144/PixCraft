@@ -2,11 +2,6 @@
 using Engine.Resources;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Engine.Engine
 {
@@ -21,12 +16,12 @@ namespace Engine.Engine
 
             if (flag)
             {
-                sprite.Sprite.IsVisible = false;
+                sprite.IsVisible = false;
             }
             else
             {
-                sprite.Sprite.position = new Vector(sprite.X, sprite.Y);
-                bool flag2 = !sprite.Sprite.IsVisible;
+                sprite.position = new Vector(sprite.X, sprite.Y);
+                bool flag2 = !sprite.IsVisible;
                 if (flag2)
                 {
                     AddSpriteToGame(sprite);
@@ -37,9 +32,9 @@ namespace Engine.Engine
         // Token: 0x0600001A RID: 26 RVA: 0x000026D8 File Offset: 0x000008D8
         private void AddSpriteToGame(SpriteOverlay sprite)
         {
-            if (!sprite.Sprite.IsVisible)
+            if (!sprite.IsVisible)
             {
-                GameScene.gameSceneStatic.add(sprite.Sprite);
+                GameScene.gameSceneStatic.add(sprite);
             }
         }
         public void remove(Sprite sprite)

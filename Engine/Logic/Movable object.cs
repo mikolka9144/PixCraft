@@ -1,15 +1,7 @@
-﻿using Engine.Engine;
-using Engine.Engine.models;
-using Engine.GUI;
+﻿using Engine.Engine.models;
 using Engine.Resources;
-using PixBlocks.Properties;
-using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Engine.Logic
 {
@@ -63,7 +55,7 @@ namespace Engine.Logic
         {
             foreach (var b in ActiveElements.ActiveBlocks)
             {
-                if (collide(b.Sprite))
+                if (collide(b))
                 {
                     if (speed > 0)
                     {
@@ -71,7 +63,7 @@ namespace Engine.Logic
                         TicksElapsedForMove = 0;
                         speed = -speed;
                     }
-                    else if (collide(b.foliage.Sprite) && TicksElapsed == Parameters.BlocksCollisionDelay) tileManager.Move(roation.Down, 3);
+                    else if (collide(b.foliage) && TicksElapsed == Parameters.BlocksCollisionDelay) tileManager.Move(roation.Down, 3);
                 }
             }
             if (TicksElapsed != Parameters.BlocksCollisionDelay) TicksElapsed++;
@@ -92,7 +84,7 @@ namespace Engine.Logic
             foreach (var block in ActiveElements.ActiveToppings)
             {
 
-                if (collide(block.Sprite) && TicksElapsed >= Parameters.BlocksCollisionDelay)
+                if (collide(block) && TicksElapsed >= Parameters.BlocksCollisionDelay)
                 {
                     Grounded = true;
                     Pointer.LastFoliage = block;
@@ -114,7 +106,7 @@ namespace Engine.Logic
             tileManager.Move(roation.Left,Parameters.moveSpeed);
             foreach (var b in ActiveElements.ActiveBlocks)
             {
-                if (collide(b.Sprite))
+                if (collide(b))
                 {
                     tileManager.Move(roation.Right,Parameters.moveSpeed);
                     break;
@@ -128,7 +120,7 @@ namespace Engine.Logic
             tileManager.Move(roation.Right, Parameters.moveSpeed);
             foreach (var b in ActiveElements.ActiveBlocks)
             {
-                if (collide(b.Sprite))
+                if (collide(b))
                 {
                     tileManager.Move(roation.Left,Parameters.moveSpeed);
                     break;

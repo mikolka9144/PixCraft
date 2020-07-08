@@ -1,12 +1,8 @@
-﻿using Engine;
-using Engine.Logic;
+﻿using Engine.Logic;
 using Engine.Resources;
-using Engine.Saves;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace EngineTets.Logic
 {
@@ -77,8 +73,10 @@ namespace EngineTets.Logic
         [Test]
         public void tryCraftItem_NonStackAbleItem()
         {
-            var craftedItem = new Item(2, BlockType.CoalOre);
-            craftedItem.CanStack = false;
+            var craftedItem = new Item(2, BlockType.CoalOre)
+            {
+                CanStack = false
+            };
             CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, craftedItem));
             Inventory.Inventory.Add(new Item(3, BlockType.Dirt));
 

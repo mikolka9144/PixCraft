@@ -1,6 +1,4 @@
 ﻿using PixBlocks.PythonIron.Tools.Game;
-using PixBlocks.Views.GameControllerView;
-using System;
 
 namespace Engine.Resources
 {
