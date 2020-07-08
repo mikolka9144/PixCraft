@@ -1,20 +1,18 @@
-﻿using Engine;
-using Engine.Engine;
+﻿using Engine.Engine;
+using Engine.Engine.models;
+using Engine.Resources;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EngineTets.Engine
 {
-    class OreTableTests
+    internal class OreTableTests
     {
         private OreTable OreTable;
 
         [SetUp]
         public void Setup()
         {
-            OreTable = new OreTable(new[] { new OreEntry(5,10,34,BlockType.None)});
+            OreTable = new OreTable(new[] { new OreEntry(5, 10, 34, BlockType.None) });
         }
 
         [Test]
@@ -23,12 +21,14 @@ namespace EngineTets.Engine
             var dataToCheck = OreTable.GetCount(BlockType.None);
             Assert.AreEqual(34, dataToCheck);
         }
+
         [Test]
         public void GetOreData_Chance()
         {
             var dataToCheck = OreTable.GetChance(BlockType.None);
             Assert.AreEqual(10, dataToCheck);
         }
+
         [Test]
         public void GetOreData_MinimumDepth()
         {

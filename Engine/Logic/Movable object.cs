@@ -5,12 +5,14 @@ using System;
 
 namespace Engine.Logic
 {
-    abstract class Movable_object:Sprite
+    internal abstract class Movable_object : Sprite
     {
         protected readonly IMover tileManager;
         protected readonly IMoveDefiner moveDefiner;
         protected readonly PlayerStatus status;
+
         protected event Action PostUpdate;
+
         protected event Action OnDamageDeal;
 
         private bool Grounded;
@@ -19,7 +21,7 @@ namespace Engine.Logic
         private int TicksElapsedForMove;
         private int DistanceFalled;
 
-        public Movable_object(IActiveElements ActiveElements,IMover tileManager,IMoveDefiner moveDefiner,PointerController pointer,PlayerStatus status)
+        public Movable_object(IActiveElements ActiveElements, IMover tileManager, IMoveDefiner moveDefiner, PointerController pointer, PlayerStatus status)
         {
             this.ActiveElements = ActiveElements;
             this.tileManager = tileManager;
@@ -27,11 +29,10 @@ namespace Engine.Logic
             Pointer = pointer;
             this.status = status;
             speed = 0;
-			Grounded = false;
-			TicksElapsed = Parameters.BlocksCollisionDelay;
-			TicksElapsedForMove = Parameters.MoveDelay;
-			
-		}
+            Grounded = false;
+            TicksElapsed = Parameters.BlocksCollisionDelay;
+            TicksElapsedForMove = Parameters.MoveDelay;
+        }
 
         public IActiveElements ActiveElements { get; }
         public PointerController Pointer { get; }
@@ -48,7 +49,7 @@ namespace Engine.Logic
             }
             ApplyGravity();
             ApplyBlocksCollisions();
-            PostUpdate.Invoke();          
+            PostUpdate.Invoke();
         }
 
         private void ApplyBlocksCollisions()
@@ -70,30 +71,24 @@ namespace Engine.Logic
             if (TicksElapsedForMove != Parameters.MoveDelay) TicksElapsedForMove++;
         }
 
-        
-
         private void ApplyGravity()
         {
-            
             if (moveDefiner.key(command.Jump) && Grounded)
             {
-
                 Grounded = false;
                 speed = Parameters.MaxFallSpeed;
             }
             foreach (var block in ActiveElements.ActiveToppings)
             {
-
                 if (collide(block) && TicksElapsed >= Parameters.BlocksCollisionDelay)
                 {
                     Grounded = true;
                     Pointer.LastFoliage = block;
                     if (speed < 0) speed = 0;
-                    if(status.DealDamage(DistanceFalled)) OnDamageDeal.Invoke();
+                    if (status.DealDamage(DistanceFalled)) OnDamageDeal.Invoke();
                     DistanceFalled = 0;
                     break;
                 }
-
             }
             tileManager.Move(roation.Down, speed);
             if (speed < 0) DistanceFalled -= speed;
@@ -103,12 +98,12 @@ namespace Engine.Logic
         private void MoveRight()
         {
             flip = false;
-            tileManager.Move(roation.Left,Parameters.moveSpeed);
+            tileManager.Move(roation.Left, Parameters.moveSpeed);
             foreach (var b in ActiveElements.ActiveBlocks)
             {
                 if (collide(b))
                 {
-                    tileManager.Move(roation.Right,Parameters.moveSpeed);
+                    tileManager.Move(roation.Right, Parameters.moveSpeed);
                     break;
                 }
             }
@@ -122,7 +117,7 @@ namespace Engine.Logic
             {
                 if (collide(b))
                 {
-                    tileManager.Move(roation.Left,Parameters.moveSpeed);
+                    tileManager.Move(roation.Left, Parameters.moveSpeed);
                     break;
                 }
             }

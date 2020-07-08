@@ -7,10 +7,11 @@ namespace Engine.Saves.Models
     public class BlockTemplate
     {
         public BlockType Id { get; set; }
+
         public BlockTemplate()
         {
-
         }
+
         public BlockTemplate(BlockType id, int y, int x)
         {
             Id = id;

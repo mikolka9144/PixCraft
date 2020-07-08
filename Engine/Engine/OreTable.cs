@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Engine.Engine.models;
 using Engine.Resources;
-using Engine.Engine.models;
+using System.Collections.Generic;
 
 namespace Engine.Engine
 {
@@ -23,6 +23,5 @@ namespace Engine.Engine
         }
 
         public int GetMinimumDepth(BlockType type) => Entries.Find(s => s.Type == type).MinimumDepth;
-
     }
 }

@@ -5,12 +5,10 @@ using PixBlocks.PythonIron.Tools.Integration;
 
 namespace Engine.Engine
 {
-    class Drawer:IDrawer
+    internal class Drawer : IDrawer
     {
-        
         public void Draw(SpriteOverlay sprite)
         {
-
             var flag = sprite.X > Parameters.border.Left || sprite.X < -Parameters.border.Right ||
                sprite.Y > Parameters.border.Up || sprite.Y < -Parameters.border.Down;
 
@@ -37,6 +35,7 @@ namespace Engine.Engine
                 GameScene.gameSceneStatic.add(sprite);
             }
         }
+
         public void remove(Sprite sprite)
         {
             GameScene.gameSceneStatic.remove(sprite);

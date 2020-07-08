@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace Engine.Saves
 {
-    public  class BlockConverter
+    public class BlockConverter
     {
-        public BlockConverter(IDrawer drawer,IIdProcessor processor)
+        public BlockConverter(IDrawer drawer, IIdProcessor processor)
         {
             Drawer = drawer;
             Processor = processor;
@@ -17,15 +17,16 @@ namespace Engine.Saves
         public IDrawer Drawer { get; }
         public IIdProcessor Processor { get; }
 
-        public  List<Block> Convert(List<BlockTemplate> blocks,int CenterX,int CenterY)
+        public List<Block> Convert(List<BlockTemplate> blocks, int CenterX, int CenterY)
         {
             var list = new List<Block>();
             foreach (var item in blocks)
             {
-                list.Add(new Block(item.X-CenterX,item.Y-CenterY, item.Id, Parameters.BlockSize, Drawer, Processor));
+                list.Add(new Block(item.X - CenterX, item.Y - CenterY, item.Id, Parameters.BlockSize, Drawer, Processor));
             }
             return list;
         }
+
         public List<BlockTemplate> Convert(List<Block> blocks)
         {
             var list = new List<BlockTemplate>();

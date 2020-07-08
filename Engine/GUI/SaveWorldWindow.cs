@@ -1,8 +1,6 @@
 ﻿using Engine.Logic;
 using Engine.Saves;
 using System;
-using System.IO;
-using System.Windows;
 
 namespace Engine.GUI
 {

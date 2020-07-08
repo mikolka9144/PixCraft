@@ -8,11 +8,11 @@ using System.Windows;
 
 namespace Engine.Logic
 {
-    class Player:Movable_object
+    internal class Player : Movable_object
     {
         private readonly PauseMenu settingsForm;
 
-        public Player(PauseMenu pauseMenu,IActiveElements activeElements,IMover manager,PointerController pointer,IMoveDefiner definer,PlayerStatus status):base(activeElements,manager,definer,pointer,status)
+        public Player(PauseMenu pauseMenu, IActiveElements activeElements, IMover manager, PointerController pointer, IMoveDefiner definer, PlayerStatus status) : base(activeElements, manager, definer, pointer, status)
         {
             position = new PixBlocks.PythonIron.Tools.Integration.Vector(0, 0);
             size = 10;
@@ -20,7 +20,7 @@ namespace Engine.Logic
             status.OnKill += KillPlayer;
             PostUpdate += Update;
             settingsForm = pauseMenu;
-            OnDamageDeal += () =>Task.Run(Player_OnDamageDeal);
+            OnDamageDeal += () => Task.Run(Player_OnDamageDeal);
         }
 
         private void Player_OnDamageDeal()
@@ -34,10 +34,11 @@ namespace Engine.Logic
         {
             settingsForm.ShowDialog();
         }
+
         private void Update()
         {
             if (moveDefiner.key(command.Pause)) Pause();
-            if (moveDefiner.key(command.OpenInventory)) status.OpenInventory();            
+            if (moveDefiner.key(command.OpenInventory)) status.OpenInventory();
         }
 
         private void KillPlayer()

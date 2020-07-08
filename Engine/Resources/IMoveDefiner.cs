@@ -6,6 +6,7 @@ namespace Engine.Resources
     {
         bool key(command command);
     }
+
     public enum command
     {
         Up,
@@ -18,6 +19,7 @@ namespace Engine.Resources
         OpenInventory,
         ChangeMouseState
     }
+
     public class PlayerMoveDefiner : IMoveDefiner
     {
         private bool PauseWasPressed;
@@ -36,16 +38,22 @@ namespace Engine.Resources
             {
                 case command.Up:
                     return game.key("w");
+
                 case command.Left:
                     return game.key("a");
+
                 case command.Right:
                     return game.key("d");
+
                 case command.down:
                     return game.key("s");
+
                 case command.Jump:
                     return game.key("space");
+
                 case command.ChangeMouseState:
                     return game.key("m");
+
                 case command.Pause:
                     var state = game.key("p");
                     if (state)

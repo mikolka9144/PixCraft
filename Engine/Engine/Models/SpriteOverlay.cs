@@ -4,10 +4,10 @@ using PixBlocks.PythonIron.Tools.Integration;
 namespace Engine.Engine.models
 {
     // Token: 0x02000005 RID: 5
-    public class SpriteOverlay:Sprite
+    public class SpriteOverlay : Sprite
     {
         // Token: 0x06000007 RID: 7 RVA: 0x00002158 File Offset: 0x00000358
-        public SpriteOverlay( int x, int y, IDrawer engine)
+        public SpriteOverlay(int x, int y, IDrawer engine)
         {
             X = x;
             Y = y;
@@ -57,6 +57,6 @@ namespace Engine.Engine.models
         public int X;
 
         // Token: 0x04000005 RID: 5
-        public int Y;    
+        public int Y;
     }
 }

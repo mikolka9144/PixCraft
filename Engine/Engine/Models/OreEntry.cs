@@ -4,7 +4,7 @@ namespace Engine.Engine.models
 {
     public class OreEntry
     {
-        public OreEntry(int minimumDepth, int howOftenGenerateBits,int oresPerXBlocks, BlockType type)
+        public OreEntry(int minimumDepth, int howOftenGenerateBits, int oresPerXBlocks, BlockType type)
         {
             MinimumDepth = minimumDepth;
             ChanceOfSpawn = howOftenGenerateBits;
@@ -17,5 +17,4 @@ namespace Engine.Engine.models
         public int OresPerXBlocks { get; }
         public BlockType Type { get; }
     }
-    
 }

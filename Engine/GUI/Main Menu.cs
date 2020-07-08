@@ -10,7 +10,7 @@ namespace Engine.GUI
 
         public SaveManager Manager { get; }
 
-        public Main_Menu(IInit init,SaveManager manager)
+        public Main_Menu(IInit init, SaveManager manager)
         {
             InitializeComponent();
             this.init = init;
@@ -31,7 +31,7 @@ namespace Engine.GUI
 
         private void btnLoadWorld_Click(object sender, EventArgs e)
         {
-            new LoadWorldWindow(Manager,init).ShowDialog();
+            new LoadWorldWindow(Manager, init).ShowDialog();
             if (init.IsWorldGenerated == true) Close();
         }
     }

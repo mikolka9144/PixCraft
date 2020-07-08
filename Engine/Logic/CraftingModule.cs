@@ -25,13 +25,12 @@ namespace Engine.Logic
             {
                 var requiredCount = craft.NeededItems.First(s => s.type == item.type).Count;
                 var materil = inventory.Inventory.FindAll(s => s.type == item.type);
-                if(materil.First().Count < requiredCount)
+                if (materil.First().Count < requiredCount)
                 {
                     requiredCount -= materil.First().Count;
                     inventory.Inventory.Remove(materil.First());
-                    
                 }
-                inventory.Decrement(item.type,requiredCount);                
+                inventory.Decrement(item.type, requiredCount);
             }
             inventory.AddElement(craft.CraftedItem);
             return true;

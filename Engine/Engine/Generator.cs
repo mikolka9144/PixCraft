@@ -8,12 +8,12 @@ namespace Engine.Engine
     {
         private readonly Random randomizer;
         private int CanGenerateTree;
-        
+
         private readonly ITileManager manager;
         private readonly IOreTable oreTable;
         private readonly int size;
 
-        public Generator(int seed, ITileManager manager,IOreTable oreTable,int size)
+        public Generator(int seed, ITileManager manager, IOreTable oreTable, int size)
         {
             randomizer = new Random(seed);
             this.manager = manager;
@@ -30,7 +30,6 @@ namespace Engine.Engine
                 for (int j = 0; j < random; j++)
                 {
                     GenerateFillarOfDirt(j, i, random);
-                    
                 }
             }
             //reverse
@@ -39,22 +38,20 @@ namespace Engine.Engine
                 var random = randomizer.Next(1, 5);
                 for (int l = 0; l < random; l++)
                 {
-                    GenerateFillarOfDirt(l, k,random);
+                    GenerateFillarOfDirt(l, k, random);
                 }
             }
-
         }
 
         private void GenerateFillarOfDirt(int BlockY, int BlockX, int random)
         {
             if (random - 1 == BlockY)
             {
-                manager.AddBlockTile(BlockX,BlockY, BlockType.Grass);
+                manager.AddBlockTile(BlockX, BlockY, BlockType.Grass);
             }
             else
             {
-
-                manager.AddBlockTile(BlockX,BlockY, BlockType.Dirt);
+                manager.AddBlockTile(BlockX, BlockY, BlockType.Dirt);
             }
         }
 
@@ -72,22 +69,23 @@ namespace Engine.Engine
             {
                 var size = Parameters.BlockSize;
                 var ranSel = randomizer.Next(0, Parameters.treeChance) == 0;
-                var HasSize = item.Y >= Parameters.minimumFillarHeightForTree*Parameters.BlockSize;
+                var HasSize = item.Y >= Parameters.minimumFillarHeightForTree * Parameters.BlockSize;
                 var IsAwayFromTrees = CanGenerateTree == 3;
 
-                if(ranSel&&HasSize&&IsAwayFromTrees) generateTree(item.X/size, item.Y/size);
+                if (ranSel && HasSize && IsAwayFromTrees) generateTree(item.X / size, item.Y / size);
                 else if (CanGenerateTree != Parameters.TreeSpread) CanGenerateTree++;
             }
         }
+
         private void generateTree(int X, int Y)
         {
-            for (int i = Y+1; i < Y+4; i++)
+            for (int i = Y + 1; i < Y + 4; i++)
             {
-                manager.AddBlockTile(X,i, BlockType.Wood,false);
+                manager.AddBlockTile(X, i, BlockType.Wood, false);
             }
-            manager.AddBlockTile(X, (Y+4), BlockType.Leaves, false);
-            manager.AddBlockTile((X-1),(Y+3), BlockType.Leaves, false);
-            manager.AddBlockTile((X+1),(Y +3), BlockType.Leaves, false);
+            manager.AddBlockTile(X, Y + 4, BlockType.Leaves, false);
+            manager.AddBlockTile(X - 1, Y + 3, BlockType.Leaves, false);
+            manager.AddBlockTile(X + 1, Y + 3, BlockType.Leaves, false);
             CanGenerateTree = 0;
         }
 
@@ -111,12 +109,13 @@ namespace Engine.Engine
                 manager.AddBlockTile(X, Y, BlockType.Stone);
             }
         }
+
         public void GenerateOres(BlockType type)
         {
             var offset = Parameters.ChunkSize;
             var count = oreTable.GetCount(type);
             var pointer = -size;
-            var chunks = size*2/offset;
+            var chunks = size * 2 / offset;
             if (size % 10 != 0) chunks++;
             for (int c = 0; c < chunks; c++)
             {
@@ -129,18 +128,20 @@ namespace Engine.Engine
                 pointer += offset;
             }
         }
-        private void GenerateOre(int X, int Y,BlockType type,int bitSpawnChance)
+
+        private void GenerateOre(int X, int Y, BlockType type, int bitSpawnChance)
         {
             manager.AddBlockTile(X, Y, type, true, true);
             for (int x = -1; x < 2; x++)
             {
                 for (int y = -1; y < 2; y++)
                 {
-                    GenerateBit(X-x, Y-y, type, bitSpawnChance);
+                    GenerateBit(X - x, Y - y, type, bitSpawnChance);
                 }
             }
         }
-        private void GenerateBit(int X, int Y, BlockType type,int spawnChance)
+
+        private void GenerateBit(int X, int Y, BlockType type, int spawnChance)
         {
             if (randomizer.Next(0, spawnChance) == 0) manager.AddBlockTile(X, Y, type, true, true);
         }

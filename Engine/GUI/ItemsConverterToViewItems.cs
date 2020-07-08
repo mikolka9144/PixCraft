@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Engine.GUI
 {
-    static class ItemsConverter
+    internal static class ItemsConverter
     {
         public static ListViewItem[] LoadItemsToList(List<Logic.Item> inventory)
         {

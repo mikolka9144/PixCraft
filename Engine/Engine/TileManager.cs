@@ -17,13 +17,11 @@ namespace Engine.Engine
         private readonly IDrawer drawer;
         private readonly IIdProcessor processor;
 
-        public TileManager( IDrawer drawer, IIdProcessor processor)
+        public TileManager(IDrawer drawer, IIdProcessor processor)
         {
             this.drawer = drawer;
             this.processor = processor;
         }
-
-
 
         public void AddBlockTile(int BlockX, int BlockY, BlockType Id, bool replace, bool forceReplace = false, bool Draw = false)
         {
@@ -55,6 +53,7 @@ namespace Engine.Engine
             var block = new Block(BlockX * x, BlockY * x, Id, x, drawer, processor);
             AddBlockTile(block, Draw);
         }
+
         public void AddBlockTile(Block block, bool ShouldDraw)
         {
             Blocks.Add(block);
@@ -65,6 +64,7 @@ namespace Engine.Engine
                 drawer.Draw(block.foliage);
             }
         }
+
         public void RemoveTile(Block tile)
         {
             drawer.remove(tile);
@@ -75,8 +75,8 @@ namespace Engine.Engine
 
         public void PlaceBlock(int x, int y, BlockType blockType)
         {
-            var block = new Block(x,y, blockType, Parameters.BlockSize, drawer, processor);
-            AddBlockTile(block,true);
+            var block = new Block(x, y, blockType, Parameters.BlockSize, drawer, processor);
+            AddBlockTile(block, true);
         }
     }
 }

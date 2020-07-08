@@ -4,7 +4,7 @@
     public class Foliage : SpriteOverlay
     {
         // Token: 0x06000005 RID: 5 RVA: 0x000020D8 File Offset: 0x000002D8
-        public Foliage(int x, int y, Block block) : base(x, y,  block.Engine)
+        public Foliage(int x, int y, Block block) : base(x, y, block.Engine)
         {
             size = block.size;
             image = 65;

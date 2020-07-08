@@ -5,7 +5,7 @@ using System;
 
 namespace EngineTets.Logic
 {
-    class PlayerStatusTest
+    internal class PlayerStatusTest
     {
         private TestStatusDisplayer Displayer;
         private PlayerStatus Instance;
@@ -39,7 +39,7 @@ namespace EngineTets.Logic
 
     internal class TestStatusDisplayer : IStatusDisplayer
     {
-        public int SelectedIndex { get; set ; }
+        public int SelectedIndex { get; set; }
 
         public void Present(int life, PlayerStatus currentItems)
         {

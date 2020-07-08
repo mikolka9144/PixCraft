@@ -1,21 +1,12 @@
 ﻿using Engine.Saves;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Engine.GUI
 {
     public partial class LoadWorldWindow : Form
     {
-
-        public LoadWorldWindow(SaveManager manager,IInit init)
+        public LoadWorldWindow(SaveManager manager, IInit init)
         {
             InitializeComponent();
             Manager = manager;
@@ -27,12 +18,10 @@ namespace Engine.GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-          
             var save = Manager.LoadFromFile(txtBase.Text);
             Manager.LoadSave(save);
             Init.IsWorldGenerated = true;
             Close();
-            
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace EngineTets.Logic
 {
-    class CraftingTests
+    internal class CraftingTests
     {
         private PlayerStatus Inventory;
         private List<CraftingEntry> CraftingEntries;
@@ -26,12 +26,13 @@ namespace EngineTets.Logic
             CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, new Item(1, BlockType.DiamondOre)));
             Inventory.Inventory.Add(new Item(3, BlockType.Dirt));
 
-            var flag = Instance.Craft(Inventory,BlockType.DiamondOre);
+            var flag = Instance.Craft(Inventory, BlockType.DiamondOre);
 
             Assert.IsTrue(flag);
-            Assert.IsTrue(Inventory.Inventory.Find(s=>s.type == BlockType.DiamondOre).Count == 1);
+            Assert.IsTrue(Inventory.Inventory.Find(s => s.type == BlockType.DiamondOre).Count == 1);
             Assert.IsNull(Inventory.Inventory.FirstOrDefault(s => s.type == BlockType.Dirt));
         }
+
         [Test]
         public void tryCraftItem_neededItemIn1Slot2()
         {
@@ -44,6 +45,7 @@ namespace EngineTets.Logic
             Assert.IsTrue(Inventory.Inventory.Find(s => s.type == BlockType.DiamondOre).Count == 1);
             Assert.IsNotNull(Inventory.Inventory.First(s => s.type == BlockType.Dirt));
         }
+
         [Test]
         public void tryCraftItem_neededItemInManySlots()
         {
@@ -57,6 +59,7 @@ namespace EngineTets.Logic
             Assert.IsTrue(Inventory.Inventory.Find(s => s.type == BlockType.DiamondOre).Count == 1);
             Assert.IsTrue(Inventory.Inventory.Find(s => s.type == BlockType.Dirt).Count == 1);
         }
+
         [Test]
         public void tryCraftItem_WithNotNeededItems()
         {
@@ -68,8 +71,8 @@ namespace EngineTets.Logic
             Assert.IsFalse(flag);
             Assert.IsNull(Inventory.Inventory.Find(s => s.type == BlockType.DiamondOre));
             Assert.IsTrue(Inventory.Inventory.Find(s => s.type == BlockType.Dirt).Count == 2);
-
         }
+
         [Test]
         public void tryCraftItem_NonStackAbleItem()
         {

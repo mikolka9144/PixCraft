@@ -1,12 +1,8 @@
-﻿using Engine.Saves;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using NUnit.Framework;
 
 namespace EngineTets.Saves
 {
-    class SaveManagerTest
+    internal class SaveManagerTest
     {
         [SetUp]
         public void Setup()
@@ -17,7 +13,6 @@ namespace EngineTets.Saves
         [Test]
         public void CheckConversion()
         {
-            
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Engine.Saves.Models
 {
     public class Save
     {
-        public void SetUp(List<BlockTemplate> blocks,int hp,List<Item> items,int CenterX,int CenterY)
+        public void SetUp(List<BlockTemplate> blocks, int hp, List<Item> items, int CenterX, int CenterY)
         {
             this.CenterX = CenterX;
             this.CenterY = CenterY;
@@ -13,6 +13,7 @@ namespace Engine.Saves.Models
             Hp = hp;
             Items = items;
         }
+
         public List<BlockTemplate> Tiles { get; set; }
         public int Hp { get; set; }
         public int CenterX { get; set; }

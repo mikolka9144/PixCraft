@@ -8,7 +8,7 @@ namespace Engine.Saves
 {
     public class SaveManager
     {
-        public SaveManager(ITileManager manager, PlayerStatus status,BlockConverter converter, Center center,IMover mover)
+        public SaveManager(ITileManager manager, PlayerStatus status, BlockConverter converter, Center center, IMover mover)
         {
             Manager = manager;
             Status = status;
@@ -16,8 +16,8 @@ namespace Engine.Saves
             Center = center;
             Mover = mover;
             Serializer = new XmlSerializer(typeof(Save));
-
         }
+
         public XmlSerializer Serializer { get; }
         public ITileManager Manager { get; }
         public PlayerStatus Status { get; }
@@ -30,18 +30,20 @@ namespace Engine.Saves
             var obj = Serializer.Deserialize(stream);
             return (Save)obj;
         }
+
         public void SaveToStream(Stream SaveDest)
         {
-            var save = new Save(); 
-            save.SetUp(Converter.Convert(Manager.Blocks), Status.health, Status.Inventory,Center.X, Center.Y);
+            var save = new Save();
+            save.SetUp(Converter.Convert(Manager.Blocks), Status.health, Status.Inventory, Center.X, Center.Y);
             Serializer.Serialize(SaveDest, save);
         }
+
         public Save LoadFromFile(string path)
         {
             var stream = File.OpenRead(path);
             return LoadFromStream(stream);
-
         }
+
         public void SaveToFile(string path)
         {
             var stream = File.OpenWrite(path);
@@ -51,13 +53,14 @@ namespace Engine.Saves
 
         public void LoadSave(Save save)
         {
-            Status.LoadState( save.Hp,save.Items);
-            foreach (var item in Converter.Convert(save.Tiles,save.CenterX,save.CenterY))
+            Status.LoadState(save.Hp, save.Items);
+            foreach (var item in Converter.Convert(save.Tiles, save.CenterX, save.CenterY))
             {
                 Manager.AddBlockTile(item, false);
             }
-            MoveScene(save.CenterX/20*20 , -(save.CenterY / 20 * 20));
+            MoveScene(save.CenterX / 20 * 20, -(save.CenterY / 20 * 20));
         }
+
         private void MoveScene(int X, int Y)
         {
             Mover.Move(roation.Right, X);

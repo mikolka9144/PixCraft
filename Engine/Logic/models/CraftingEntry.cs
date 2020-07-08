@@ -4,7 +4,7 @@ namespace Engine.Logic
 {
     public class CraftingEntry
     {
-        public CraftingEntry(IEnumerable<Item> neededItems,Item craftedItem)
+        public CraftingEntry(IEnumerable<Item> neededItems, Item craftedItem)
         {
             NeededItems = neededItems;
             CraftedItem = craftedItem;

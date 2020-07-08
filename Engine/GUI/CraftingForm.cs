@@ -9,7 +9,7 @@ namespace Engine.GUI
 {
     public partial class CraftingForm : Form
     {
-        public CraftingForm(PlayerStatus playerStatus,CraftingModule craftingModule)
+        public CraftingForm(PlayerStatus playerStatus, CraftingModule craftingModule)
         {
             InitializeComponent();
             PlayerStatus = playerStatus;
@@ -23,18 +23,19 @@ namespace Engine.GUI
 
         private void btnCraft_Click(object sender, EventArgs e)
         {
-
-            if (!CraftingModule.Craft(PlayerStatus,(BlockType)listOfItemsToCraft.SelectedItem))
+            if (!CraftingModule.Craft(PlayerStatus, (BlockType)listOfItemsToCraft.SelectedItem))
             {
                 MessageBox.Show("Can't craft item.");
             }
             UpdateInventory();
         }
+
         private void UpdateNeededItems(List<Item> neededItems)
         {
             neededItemsList.Items.Clear();
             neededItemsList.Items.AddRange(ItemsConverter.LoadItemsToList(neededItems));
         }
+
         private void UpdateInventory()
         {
             Inventory.Items.Clear();

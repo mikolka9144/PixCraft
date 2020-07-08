@@ -6,7 +6,6 @@ namespace Engine.GUI
 {
     public partial class Settings_Form : Form
     {
-
         public Settings_Form()
         {
             InitializeComponent();

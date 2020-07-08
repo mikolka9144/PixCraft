@@ -1,4 +1,5 @@
-﻿using Engine.Engine.models;
+﻿using Engine.Engine;
+using Engine.Engine.models;
 using Engine.Resources;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
@@ -7,24 +8,21 @@ using System.Threading.Tasks;
 
 namespace Engine.Logic
 {
-    internal class PointerController : Sprite
+    internal class PointerController : Pointer
     {
         private readonly PlayerStatus status;
         private readonly IMoveDefiner moveDefiner;
         private Task ChangeStateOfPointerTask;
         private bool DestroyModeActive;
 
-        public PointerController(PlayerStatus status, Pointer pointer, ITileManager engine, IMoveDefiner moveDefiner)
+        public PointerController(PlayerStatus status, ITileManager engine, IMoveDefiner moveDefiner,IDrawer drawer):base(drawer)
         {
-            size = 0;
             this.status = status;
-            Point = pointer;
             Engine = engine;
             this.moveDefiner = moveDefiner;
             ChangeStateOfPointerTask = new Task(ChangeStateOfPointer);
         }
 
-        public Pointer Point { get; }
         public ITileManager Engine { get; }
         public Foliage LastFoliage { get; set; }
 
@@ -37,23 +35,18 @@ namespace Engine.Logic
                 if (ChangeStateOfPointerTask.Status == TaskStatus.RanToCompletion) ChangeStateOfPointerTask = new Task(ChangeStateOfPointer);
                 ChangeStateOfPointerTask.Start();
             }
-            Point.image = IsInBreakingRange(Point) ? 56 : 55;
-            if (!Point.IsVisible) ResetPointer();
-            
+            if(!IsInBreakingRange(this)) ResetPointer();
         }
 
         private void ResetPointer()
         {
-            for (int i = 0; i < 3; i++)
-            {
-
-                MovePointer(new Vector(0, 0));
-            }
+            X = LastFoliage.Block.X;
+            Y = LastFoliage.Block.Y + Parameters.BlockSize;
         }
 
         private void CheckBlocksOperations()
         {
-            if (moveDefiner.key(command.Action) && IsInBreakingRange(Point))
+            if (moveDefiner.key(command.Action) && IsInBreakingRange(this))
             {
                 if (DestroyModeActive)
                 {
@@ -70,17 +63,17 @@ namespace Engine.Logic
         {
             foreach (var b in Engine.Blocks.FindAll(s => s.IsVisible))
             {
-                if (Point.collide(b)) return;
+                if (collide(b)) return;
             }
             var blockType = status.GetBlockToPlace();
-            if (blockType != BlockType.None) Engine.PlaceBlock(Point.X, Point.Y, blockType);
+            if (blockType != BlockType.None) Engine.PlaceBlock(X,Y, blockType);
         }
 
         private void DestroyBlock()
         {
             foreach (var b in Engine.Blocks.FindAll(s => s.IsVisible))
             {
-                if (Point.collide(b))
+                if (collide(b))
                 {
                     status.AddElement(new Item(1, b.Id));
                     Engine.RemoveTile(b);
@@ -92,29 +85,28 @@ namespace Engine.Logic
         private void ChangeStateOfPointer()
         {
             DestroyModeActive = !DestroyModeActive;
-            if (DestroyModeActive) Point.color = Parameters.RedColor;
-            else Point.color = Parameters.DefaultColor;
+            if (DestroyModeActive) color = Parameters.RedColor;
+            else color = Parameters.DefaultColor;
             Thread.Sleep(Parameters.PointerStatusChangeDelay);
         }
 
         private void MovePointer(Vector MousePos)
         {
-            var PointPos = Point;
-            var Xlen = MousePos.x - PointPos.X;
-            var Ylen = MousePos.y - PointPos.Y;
+            var Xlen = MousePos.x - X;
+            var Ylen = MousePos.y - Y;
             var YtoMove = (int)(Ylen / 10) * 20;
             var XtoMove = (int)(Xlen / 10) * 20;
 
-            bool IsNotInXZone = Point.X + XtoMove > Parameters.PointerRange || Point.X + XtoMove < -Parameters.PointerRange;
-            bool IsNotInYZone = Point.Y + YtoMove > Parameters.PointerRange || Point.Y + YtoMove < -Parameters.PointerRange;
-            if (!IsNotInXZone) Point.Move(roation.Right, XtoMove);
-            if (!IsNotInYZone) Point.Move(roation.Up, YtoMove);
+            bool IsNotInXZone = X + XtoMove > Parameters.PointerRange || X + XtoMove < -Parameters.PointerRange;
+            bool IsNotInYZone = Y + YtoMove > Parameters.PointerRange || Y + YtoMove < -Parameters.PointerRange;
+            if (!IsNotInXZone) Move(roation.Right, XtoMove);
+            if (!IsNotInYZone) Move(roation.Up, YtoMove);
         }
 
         private bool IsInBreakingRange(SpriteOverlay point)
         {
-            bool IsNotInRange = point.X > Parameters.breakingRange || point.X < -Parameters.breakingRange ||
-                point.Y > Parameters.breakingRange || point.Y < -Parameters.breakingRange;
+            bool IsNotInRange = point.X > Parameters.PointerRange || point.X < -Parameters.PointerRange ||
+                point.Y > Parameters.PointerRange || point.Y < -Parameters.PointerRange;
             return !IsNotInRange;
         }
     }
