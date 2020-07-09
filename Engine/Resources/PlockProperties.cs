@@ -35,6 +35,14 @@
 
                 case BlockType.Planks:
                     return (true, true);
+                case BlockType.None:
+                    break;
+                case BlockType.stick:
+                    break;
+                case BlockType.CraftingTable:
+                    return (true, true);
+                case BlockType.Furnance:
+                    return (true, true);
             }
             return (true, false);
         }

@@ -36,5 +36,8 @@ namespace Engine.GUI
             Inventory.Items.Clear();
             Inventory.Items.AddRange(ItemsConverter.LoadItemsToList(playerStatus.Inventory));
         }
+
+        private void Inventory_DoubleClick(object sender, EventArgs e) => Close();
+        
     }
 }

@@ -9,10 +9,8 @@ namespace Engine.Resources
 
     public enum command
     {
-        Up,
         Left,
         Right,
-        down,
         Jump,
         Action,
         Pause,
@@ -36,17 +34,12 @@ namespace Engine.Resources
         {
             switch (command)
             {
-                case command.Up:
-                    return game.key("w");
 
                 case command.Left:
                     return game.key("a");
 
                 case command.Right:
                     return game.key("d");
-
-                case command.down:
-                    return game.key("s");
 
                 case command.Jump:
                     return game.key("space");

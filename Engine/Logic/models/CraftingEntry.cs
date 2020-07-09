@@ -1,16 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using Engine.Resources;
+using System.Collections.Generic;
 
 namespace Engine.Logic
 {
     public class CraftingEntry
     {
-        public CraftingEntry(IEnumerable<Item> neededItems, Item craftedItem)
+        public CraftingEntry(IEnumerable<Item> neededItems, Item craftedItem,BlockType station)
         {
             NeededItems = neededItems;
             CraftedItem = craftedItem;
+            Station = station;
         }
 
         public IEnumerable<Item> NeededItems { get; }
         public Item CraftedItem { get; }
+        public BlockType Station { get; }
     }
 }

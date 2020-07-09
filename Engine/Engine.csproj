@@ -38,11 +38,6 @@
     <Reference Include="PixBlocks">
       <HintPath>..\PixBlocks.exe</HintPath>
     </Reference>
-    <Reference Include="PixBlocks.Server.DataModels, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null" />
-    <Reference Include="PixBlocks.ServerFasade, Version=33.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Desktop\PixSource\PixBlocks.ServerFasade.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -89,6 +84,7 @@
     <Compile Include="GUI\StatusDisplay.Designer.cs">
       <DependentUpon>StatusDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logic\models\INearbyBlockCheck.cs" />
     <Compile Include="Logic\models\CraftingEntry.cs" />
     <Compile Include="Logic\CraftingModule.cs" />
     <Compile Include="Resources\Craftings.cs" />

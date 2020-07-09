@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Engine.Engine
 {
-    public class TileManager : IActiveElements, ITileManager
+    public class TileManager : IActiveElements, ITileManager,INearbyBlockCheck
     {
         public List<Block> ActiveBlocks => Blocks.FindAll(s => s.IsActiveBlock()).ToList();
         public List<Block> Blocks { get; } = new List<Block>();
@@ -77,6 +77,12 @@ namespace Engine.Engine
         {
             var block = new Block(x, y, blockType, Parameters.BlockSize, drawer, processor);
             AddBlockTile(block, true);
+        }
+
+        public bool IsStationNearby(BlockType station)
+        {
+            if (station == BlockType.None) return true;
+            return ActiveBlocks.Any(s => s.Id == station);
         }
     }
 }

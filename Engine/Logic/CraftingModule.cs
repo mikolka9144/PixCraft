@@ -6,16 +6,32 @@ namespace Engine.Logic
 {
     public class CraftingModule
     {
-        internal readonly List<CraftingEntry> craftingEntries;
-
-        public CraftingModule(List<CraftingEntry> craftingEntries)
+        private readonly List<CraftingEntry> _craftingEntries;
+        public List<CraftingEntry> craftingEntries 
         {
-            this.craftingEntries = craftingEntries;
+            get
+            {
+                var listToReturn = new List<CraftingEntry>();
+                foreach (var craft in _craftingEntries)
+                {
+                    if (NearbyBlockCheck.IsStationNearby(craft.Station)) listToReturn.Add(craft);
+                }
+                return listToReturn;
+            }
         }
+
+        public CraftingModule(List<CraftingEntry> craftingEntries,INearbyBlockCheck nearbyBlockCheck)
+        {
+            _craftingEntries = craftingEntries;
+            NearbyBlockCheck = nearbyBlockCheck;
+        }
+
+        public INearbyBlockCheck NearbyBlockCheck { get; }
 
         public bool Craft(PlayerStatus inventory, BlockType blockType)
         {
-            var craft = craftingEntries.Find(s => s.CraftedItem.type == blockType);
+            var craft = _craftingEntries.Find(s => s.CraftedItem.type == blockType);
+
             foreach (var item in craft.NeededItems)
             {
                 if (item.Count > inventory.Inventory.FindAll(s => s.type == item.type).Select(s => s.Count).Sum()) return false;

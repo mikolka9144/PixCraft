@@ -11,8 +11,14 @@ namespace Engine.Resources
 
             #region CraftingsData
 
-            list.Add(new CraftingEntry(new Item[] { new Item(1, BlockType.Wood) }, new Item(4, BlockType.Planks)));
-            list.Add(new CraftingEntry(new Item[] { new Item(1, BlockType.Planks) }, new Item(4, BlockType.stick)));
+            list.Add(new CraftingEntry(new Item[] { new Item(1, BlockType.Wood) }, new Item(4, BlockType.Planks),BlockType.None));
+            list.Add(new CraftingEntry(new Item[] { new Item(1, BlockType.Planks) }, new Item(4, BlockType.stick),BlockType.None));
+            list.Add(new CraftingEntry(new Item[] { new Item(4, BlockType.Planks) }, new Item(1, BlockType.CraftingTable),BlockType.None));
+
+            list.Add(new CraftingEntry(new Item[] { new Item(8, BlockType.Stone) }, new Item(1, BlockType.Furnance),BlockType.CraftingTable));
+
+            list.Add(new CraftingEntry(new Item[] { new Item(1, BlockType.IronOre),new Item(1,BlockType.Planks) }, new Item(1, BlockType.IronBar),BlockType.Furnance));
+            list.Add(new CraftingEntry(new Item[] { new Item(1, BlockType.GoldBar), new Item(1, BlockType.Planks) }, new Item(1, BlockType.GoldBar),BlockType.Furnance));
 
             #endregion CraftingsData
 

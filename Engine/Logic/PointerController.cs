@@ -18,12 +18,12 @@ namespace Engine.Logic
         public PointerController(PlayerStatus status, ITileManager engine, IMoveDefiner moveDefiner,IDrawer drawer):base(drawer)
         {
             this.status = status;
-            Engine = engine;
+            Tiles = engine;
             this.moveDefiner = moveDefiner;
             ChangeStateOfPointerTask = new Task(ChangeStateOfPointer);
         }
 
-        public ITileManager Engine { get; }
+        public ITileManager Tiles { get; }
         public Foliage LastFoliage { get; set; }
 
         public override void update()
@@ -61,22 +61,22 @@ namespace Engine.Logic
 
         private void PlaceBlock()
         {
-            foreach (var b in Engine.Blocks.FindAll(s => s.IsVisible))
+            foreach (var b in Tiles.Blocks.FindAll(s => s.IsVisible))
             {
                 if (collide(b)) return;
             }
             var blockType = status.GetBlockToPlace();
-            if (blockType != BlockType.None) Engine.PlaceBlock(X,Y, blockType);
+            if (blockType != BlockType.None) Tiles.PlaceBlock(X,Y, blockType);
         }
 
         private void DestroyBlock()
         {
-            foreach (var b in Engine.Blocks.FindAll(s => s.IsVisible))
+            foreach (var b in Tiles.Blocks.FindAll(s => s.IsVisible))
             {
                 if (collide(b))
                 {
                     status.AddElement(new Item(1, b.Id));
-                    Engine.RemoveTile(b);
+                    Tiles.RemoveTile(b);
                     break;
                 }
             }

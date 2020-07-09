@@ -18,11 +18,11 @@ namespace Engine.Logic
         {
             var drawer = new Drawer();
             var IdProcessor = new BlockIdProcessor();
-            var craftingSystem = new CraftingModule(Craftings.GetCraftings());
-            var StatusWindow = new StatusDisplay(craftingSystem);
-            var playerstatus = new PlayerStatus(StatusWindow);
             tileManager = new TileManager(drawer, IdProcessor);
             engine = new Engine.Engine(tileManager, drawer);
+            var craftingSystem = new CraftingModule(Craftings.GetCraftings(),tileManager);
+            var StatusWindow = new StatusDisplay(craftingSystem);
+            var playerstatus = new PlayerStatus(StatusWindow);
             var blockConverter = new BlockConverter(drawer, IdProcessor);
             var game = GameScene.gameSceneStatic;
             var moveDefiner = new PlayerMoveDefiner();

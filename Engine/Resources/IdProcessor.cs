@@ -51,7 +51,13 @@ namespace Engine.Resources
                     break;
 
                 case BlockType.Planks:
-                    overlay.color = new Color(100, 100, 100);
+                    overlay.color = new Color(170, 103, 0);
+                    break;
+                case BlockType.CraftingTable:
+                    overlay.color = new Color(96, 101, 1);
+                    break;
+                case BlockType.Furnance:
+                    overlay.color = new Color(255, 161, 114);
                     break;
             }
         }
@@ -70,6 +76,10 @@ namespace Engine.Resources
         GoldOre,
         DiamondOre,
         stick,
-        Planks
+        Planks,
+        CraftingTable,
+        Furnance,
+        GoldBar,
+        IronBar
     }
 }

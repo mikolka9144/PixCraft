@@ -49,6 +49,7 @@
             this.Inventory.Size = new System.Drawing.Size(339, 175);
             this.Inventory.TabIndex = 1;
             this.Inventory.UseCompatibleStateImageBehavior = false;
+            this.Inventory.DoubleClick += new System.EventHandler(this.Inventory_DoubleClick);
             // 
             // button1
             // 
