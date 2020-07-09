@@ -1,4 +1,5 @@
 ﻿using PixBlocks.PythonIron.Tools.Integration;
+using System.Net;
 
 namespace Engine.Resources
 {
@@ -31,5 +32,8 @@ namespace Engine.Resources
         internal static int PointerStatusChangeDelay = 300;
         internal static Color DefaultColor = new Color(15, 142, 255);
         internal static Color RedColor = new Color(255, 51, 0);
+        internal static int port = 666;
+
+        public static IPAddress IpAddress { get; set; }
     }
 }

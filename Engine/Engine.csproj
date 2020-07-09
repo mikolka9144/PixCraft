@@ -91,6 +91,10 @@
     </Compile>
     <Compile Include="Logic\models\CraftingEntry.cs" />
     <Compile Include="Logic\CraftingModule.cs" />
+    <Compile Include="Network\Client.cs" />
+    <Compile Include="Network\IDataSender.cs" />
+    <Compile Include="Network\NetworkApi.cs" />
+    <Compile Include="Network\Server.cs" />
     <Compile Include="Resources\Craftings.cs" />
     <Compile Include="Resources\PlockProperties.cs" />
     <Compile Include="Saves\Models\WorldEntry.cs" />
