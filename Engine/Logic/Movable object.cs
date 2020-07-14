@@ -11,8 +11,6 @@ namespace Engine.Logic
         protected readonly IMoveDefiner moveDefiner;
         protected readonly PlayerStatus status;
 
-        protected event Action PostUpdate;
-
         protected event Action OnDamageDeal;
 
         private bool Grounded;
@@ -49,7 +47,6 @@ namespace Engine.Logic
             }
             ApplyGravity();
             ApplyBlocksCollisions();
-            PostUpdate.Invoke();
         }
 
         private void ApplyBlocksCollisions()
@@ -91,6 +88,7 @@ namespace Engine.Logic
                 }
             }
             tileManager.Move(roation.Down, speed);
+
             if (speed < 0) DistanceFalled -= speed;
             if (speed > -Parameters.MaxFallSpeed) speed -= 1;
         }

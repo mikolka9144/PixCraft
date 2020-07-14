@@ -18,7 +18,6 @@ namespace Engine.Logic
             size = 10;
             image = 0;
             status.OnKill += KillPlayer;
-            PostUpdate += Update;
             settingsForm = pauseMenu;
             OnDamageDeal += () => Task.Run(Player_OnDamageDeal);
         }
@@ -30,15 +29,15 @@ namespace Engine.Logic
             color = Parameters.DefaultColor;
         }
 
+        public override void update()
+        {
+            base.update();
+            if (moveDefiner.key(command.Pause)) Pause();
+            if (moveDefiner.key(command.OpenInventory)) status.OpenInventory();
+        }
         private void Pause()
         {
             settingsForm.ShowDialog();
-        }
-
-        private void Update()
-        {
-            if (moveDefiner.key(command.Pause)) Pause();
-            if (moveDefiner.key(command.OpenInventory)) status.OpenInventory();
         }
 
         private void KillPlayer()
