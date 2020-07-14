@@ -1,13 +1,13 @@
-﻿using Engine.Engine.models;
+﻿using Engine.Engine;
+using Engine.Engine.models;
 using Engine.Resources;
-using PixBlocks.PythonIron.Tools.Integration;
 using System;
+using System.Linq;
 
 namespace Engine.Logic
 {
-    internal abstract class Movable_object : Sprite
+    internal abstract class Movable_object : SpriteOverlay
     {
-        protected readonly IMover tileManager;
         protected readonly IMoveDefiner moveDefiner;
         protected readonly PlayerStatus status;
 
@@ -19,10 +19,9 @@ namespace Engine.Logic
         private int TicksElapsedForMove;
         private int DistanceFalled;
 
-        public Movable_object(IActiveElements ActiveElements, IMover tileManager, IMoveDefiner moveDefiner, PointerController pointer, PlayerStatus status)
+        public Movable_object(IActiveElements ActiveElements,IDrawer drawer, IMoveDefiner moveDefiner, PointerController pointer, PlayerStatus status):base(0,0,drawer)
         {
             this.ActiveElements = ActiveElements;
-            this.tileManager = tileManager;
             this.moveDefiner = moveDefiner;
             Pointer = pointer;
             this.status = status;
@@ -61,7 +60,8 @@ namespace Engine.Logic
                         TicksElapsedForMove = 0;
                         speed = -speed;
                     }
-                    else if (collide(b.foliage) && TicksElapsed == Parameters.BlocksCollisionDelay) tileManager.Move(roation.Down, 3);
+                    else if (collide(b.foliage) && TicksElapsed == Parameters.BlocksCollisionDelay) 
+                    Move(roation.Up, Parameters.StandUpSpeed);
                 }
             }
             if (TicksElapsed != Parameters.BlocksCollisionDelay) TicksElapsed++;
@@ -87,8 +87,13 @@ namespace Engine.Logic
                     break;
                 }
             }
-            tileManager.Move(roation.Down, speed);
+            Move(roation.Up, speed);
+            ChangeMoveSpeed();
+            
+        }
 
+        private void ChangeMoveSpeed()
+        {
             if (speed < 0) DistanceFalled -= speed;
             if (speed > -Parameters.MaxFallSpeed) speed -= 1;
         }
@@ -96,26 +101,19 @@ namespace Engine.Logic
         private void MoveRight()
         {
             flip = false;
-            tileManager.Move(roation.Left, Parameters.moveSpeed);
-            foreach (var b in ActiveElements.ActiveBlocks)
-            {
-                if (collide(b))
-                {
-                    tileManager.Move(roation.Right, Parameters.moveSpeed);
-                    break;
-                }
-            }
+            if(!ActiveElements.ActiveBlocks.Any(s => s.collide(this)))
+                Move(roation.Left, Parameters.moveSpeed);
         }
 
         private void MoveLeft()
         {
             flip = true;
-            tileManager.Move(roation.Right, Parameters.moveSpeed);
+            Move(roation.Right, Parameters.moveSpeed);
             foreach (var b in ActiveElements.ActiveBlocks)
             {
                 if (collide(b))
                 {
-                    tileManager.Move(roation.Left, Parameters.moveSpeed);
+                    Move(roation.Left, Parameters.moveSpeed);
                     break;
                 }
             }

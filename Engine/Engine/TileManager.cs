@@ -14,6 +14,9 @@ namespace Engine.Engine
         public List<Foliage> Toppings { get; } = new List<Foliage>();
         public List<Foliage> ActiveToppings => Toppings.FindAll(s => s.IsActiveBlock()).ToList();
 
+        public List<Fluid> Fluids { get; } = new List<Fluid>();
+        public List<Fluid> ActiveFluids => Fluids.FindAll(s => s.IsActiveBlock()).ToList();
+
         private readonly IDrawer drawer;
         private readonly IIdProcessor processor;
 
@@ -31,6 +34,7 @@ namespace Engine.Engine
             {
                 if (replace)
                 {
+                    
                     Blocks.Remove(currentBlock);
                     Toppings.Remove(currentBlock.foliage);
                 }
@@ -50,7 +54,7 @@ namespace Engine.Engine
         public void AddBlockTile(int BlockX, int BlockY, BlockType Id, bool Draw = false)
         {
             var x = Parameters.BlockSize;
-            var block = new Block(BlockX * x, BlockY * x, Id, x, drawer, processor);
+            var block = new Block(BlockX * x, BlockY * x, Id, drawer, processor);
             AddBlockTile(block, Draw);
         }
 
@@ -75,7 +79,7 @@ namespace Engine.Engine
 
         public void PlaceBlock(int x, int y, BlockType blockType)
         {
-            var block = new Block(x, y, blockType, Parameters.BlockSize, drawer, processor);
+            var block = new Block(x, y, blockType, drawer, processor);
             AddBlockTile(block, true);
         }
 
@@ -83,6 +87,30 @@ namespace Engine.Engine
         {
             if (station == BlockType.None) return true;
             return ActiveBlocks.Any(s => s.Id == station);
+        }
+
+        public void AddFluid(int BlockX, int BlockY, BlockType Id, bool replace, bool forceReplace = false, bool Draw = false)
+        {
+            var x = Parameters.BlockSize;
+            var currentBlock = Blocks.Find(s => (s.X / x) == BlockX && s.Y / x == BlockY);
+            if (currentBlock != null)
+            {
+                if (replace)
+                {
+
+                    Blocks.Remove(currentBlock);
+                    Toppings.Remove(currentBlock.foliage);
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else if (forceReplace)
+            {
+                return;
+            }
+            Fluids.Add(new Fluid(BlockX * x, BlockY * x, Id, drawer, processor));
         }
     }
 }

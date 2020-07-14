@@ -7,5 +7,6 @@ namespace Engine.Logic
     {
         List<Block> ActiveBlocks { get; }
         List<Foliage> ActiveToppings { get; }
+        List<Fluid> ActiveFluids { get; }
     }
 }

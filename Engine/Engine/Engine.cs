@@ -47,6 +47,10 @@ namespace Engine.Engine
             {
                 foliage.Move(roation, lenght);
             }
+            foreach (var item in TileManager.Fluids)
+            {
+                item.Move(roation, lenght);
+            }
             Center.Move(roation, lenght);
         }
     }

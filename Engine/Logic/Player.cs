@@ -1,7 +1,9 @@
-﻿using Engine.Engine.models;
+﻿using Engine.Engine;
+using Engine.Engine.models;
 using Engine.GUI;
 using Engine.Resources;
 using PixBlocks.TopPanel.Components.Basic;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,13 +14,16 @@ namespace Engine.Logic
     {
         private readonly PauseMenu settingsForm;
 
-        public Player(PauseMenu pauseMenu, IActiveElements activeElements, IMover manager, PointerController pointer, IMoveDefiner definer, PlayerStatus status) : base(activeElements, manager, definer, pointer, status)
+        public IMover Mover { get; }
+
+        public Player(PauseMenu pauseMenu, IActiveElements activeElements, PointerController pointer, IMoveDefiner definer, PlayerStatus status,IDrawer drawer,IMover mover) : base(activeElements, drawer, definer, pointer, status)
         {
             position = new PixBlocks.PythonIron.Tools.Integration.Vector(0, 0);
             size = 10;
             image = 0;
             status.OnKill += KillPlayer;
             settingsForm = pauseMenu;
+            Mover = mover;
             OnDamageDeal += () => Task.Run(Player_OnDamageDeal);
         }
 
@@ -34,7 +39,23 @@ namespace Engine.Logic
             base.update();
             if (moveDefiner.key(command.Pause)) Pause();
             if (moveDefiner.key(command.OpenInventory)) status.OpenInventory();
+            MoveCamera();
         }
+
+        private void MoveCamera()
+        {
+            if (X != 0)
+            {
+                Mover.Move(roation.Right, X);
+                X = 0;
+            }
+            if (Y != 0)
+            {
+                Mover.Move(roation.Down, Y);
+                Y = 0;
+            }
+        }
+
         private void Pause()
         {
             settingsForm.ShowDialog();

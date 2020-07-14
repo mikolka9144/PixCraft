@@ -77,6 +77,17 @@ namespace Engine.Engine
             }
         }
 
+        internal void GenerateWater()
+        {
+            for (int X = -size; X < size; X++)
+            {
+                for (int i = Parameters.WaterLevel; i > 0; i--)
+                {
+                    manager.AddFluid(X, i, BlockType.Stone, false);
+                }
+            }
+        }
+
         private void generateTree(int X, int Y)
         {
             for (int i = Y + 1; i < Y + 4; i++)

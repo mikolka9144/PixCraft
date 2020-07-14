@@ -59,6 +59,7 @@
     <Compile Include="Engine\Models\Foliage.cs" />
     <Compile Include="Engine\Generator.cs" />
     <Compile Include="Engine\Models\IMover.cs" />
+    <Compile Include="Engine\Models\Fluid.cs" />
     <Compile Include="GUI\CraftingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +85,7 @@
     <Compile Include="GUI\StatusDisplay.Designer.cs">
       <DependentUpon>StatusDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layer.cs" />
     <Compile Include="Logic\models\INearbyBlockCheck.cs" />
     <Compile Include="Logic\models\CraftingEntry.cs" />
     <Compile Include="Logic\CraftingModule.cs" />

@@ -31,5 +31,7 @@ namespace Engine.Resources
         internal static int PointerStatusChangeDelay = 300;
         internal static Color DefaultColor = new Color(15, 142, 255);
         internal static Color RedColor = new Color(255, 51, 0);
+        internal static int WaterLevel = 2;
+        internal static int StandUpSpeed = 3;
     }
 }

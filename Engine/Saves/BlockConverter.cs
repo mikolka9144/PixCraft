@@ -22,7 +22,7 @@ namespace Engine.Saves
             var list = new List<Block>();
             foreach (var item in blocks)
             {
-                list.Add(new Block(item.X - CenterX, item.Y - CenterY, item.Id, Parameters.BlockSize, Drawer, Processor));
+                list.Add(new Block(item.X - CenterX, item.Y - CenterY, item.Id, Drawer, Processor));
             }
             return list;
         }

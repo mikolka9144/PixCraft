@@ -1,12 +1,13 @@
 ﻿using Engine.Engine;
 using Engine.GUI;
+using Engine.Logic;
 using Engine.Resources;
 using Engine.Saves;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
 using System.Windows.Forms;
 
-namespace Engine.Logic
+namespace Engine
 {
     public class StartUp : IInit
     {
@@ -29,7 +30,7 @@ namespace Engine.Logic
             var SaveManager = new SaveManager(tileManager, playerstatus, blockConverter, engine.Center, engine);
             var pauseMenu = new PauseMenu(SaveManager);
             var pointerController = new PointerController(playerstatus, tileManager, moveDefiner,drawer);
-            var player = new Player(pauseMenu, tileManager, engine, pointerController, moveDefiner, playerstatus);
+            var player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus,drawer,engine);
 
             var MainMenu = new Main_Menu(this, SaveManager);
             MainMenu.ShowDialog();
@@ -53,6 +54,7 @@ namespace Engine.Logic
         private void ExecuteGeneration(Generator generator, ProgressBar progress)
         {
             generator.GenerateTerrian();
+            generator.GenerateWater();
             progress.Value = 25;
             generator.CreateUnderGround();
             progress.Value = 50;
