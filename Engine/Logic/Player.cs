@@ -46,7 +46,7 @@ namespace Engine.Logic
         {
             if (X != 0)
             {
-                Mover.Move(roation.Right, X);
+                Mover.Move(roation.Left, X);
                 X = 0;
             }
             if (Y != 0)

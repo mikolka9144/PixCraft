@@ -101,19 +101,26 @@ namespace Engine.Logic
         private void MoveRight()
         {
             flip = false;
-            if(!ActiveElements.ActiveBlocks.Any(s => s.collide(this)))
-                Move(roation.Left, Parameters.moveSpeed);
-        }
-
-        private void MoveLeft()
-        {
-            flip = true;
             Move(roation.Right, Parameters.moveSpeed);
             foreach (var b in ActiveElements.ActiveBlocks)
             {
                 if (collide(b))
                 {
                     Move(roation.Left, Parameters.moveSpeed);
+                    break;
+                }
+            }
+        }
+
+        private void MoveLeft()
+        {
+            flip = true;
+            Move(roation.Left, Parameters.moveSpeed);
+            foreach (var b in ActiveElements.ActiveBlocks)
+            {
+                if (collide(b))
+                {
+                    Move(roation.Right, Parameters.moveSpeed);
                     break;
                 }
             }
