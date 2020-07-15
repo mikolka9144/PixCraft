@@ -99,8 +99,8 @@ namespace Engine.Logic
 
             bool IsNotInXZone = X + XtoMove > Parameters.PointerRange || X + XtoMove < -Parameters.PointerRange;
             bool IsNotInYZone = Y + YtoMove > Parameters.PointerRange || Y + YtoMove < -Parameters.PointerRange;
-            if (!IsNotInXZone) Move(roation.Right, XtoMove);
-            if (!IsNotInYZone) Move(roation.Up, YtoMove);
+            if (!IsNotInXZone) move(roation.Right, XtoMove);
+            if (!IsNotInYZone) move(roation.Up, YtoMove);
         }
 
         private bool IsInBreakingRange(SpriteOverlay point)

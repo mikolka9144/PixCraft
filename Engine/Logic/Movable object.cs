@@ -1,7 +1,6 @@
 ﻿using Engine.Engine;
 using Engine.Engine.models;
 using Engine.Resources;
-using System;
 using System.Linq;
 
 namespace Engine.Logic
@@ -11,7 +10,10 @@ namespace Engine.Logic
         protected readonly IMoveDefiner moveDefiner;
         protected readonly PlayerStatus status;
 
-        protected event Action OnDamageDeal;
+        public virtual void OnDamageDeal()
+        {
+
+        }
 
         private bool Grounded;
         private int TicksElapsed;
@@ -26,7 +28,6 @@ namespace Engine.Logic
             Pointer = pointer;
             this.status = status;
             speed = 0;
-            Grounded = false;
             TicksElapsed = Parameters.BlocksCollisionDelay;
             TicksElapsedForMove = Parameters.MoveDelay;
         }
@@ -61,7 +62,7 @@ namespace Engine.Logic
                         speed = -speed;
                     }
                     else if (collide(b.foliage) && TicksElapsed == Parameters.BlocksCollisionDelay) 
-                    Move(roation.Up, Parameters.StandUpSpeed);
+                    move(roation.Up, Parameters.StandUpSpeed);
                 }
             }
             if (TicksElapsed != Parameters.BlocksCollisionDelay) TicksElapsed++;
@@ -82,12 +83,12 @@ namespace Engine.Logic
                     Grounded = true;
                     Pointer.LastFoliage = block;
                     if (speed < 0) speed = 0;
-                    if (status.DealDamage(DistanceFalled)) OnDamageDeal.Invoke();
+                    if (status.DealDamage(DistanceFalled)) OnDamageDeal();
                     DistanceFalled = 0;
                     break;
                 }
             }
-            Move(roation.Up, speed);
+            move(roation.Up, speed);
             ChangeMoveSpeed();
             
         }
@@ -95,18 +96,30 @@ namespace Engine.Logic
         private void ChangeMoveSpeed()
         {
             if (speed < 0) DistanceFalled -= speed;
-            if (speed > -Parameters.MaxFallSpeed) speed -= 1;
+            if(ActiveElements.ActiveFluids.FindAll(s => s.Id == BlockType.Water).Any(s => collide(s)))
+            {
+                DistanceFalled = 0;
+                if (speed > -Parameters.MaxWaterFallSpeed) speed -= 1;
+                if (speed < -Parameters.MaxWaterFallSpeed) speed += 1;
+                Grounded = true;
+            }
+            else
+            {
+
+                if (speed > -Parameters.MaxFallSpeed) speed -= 1;
+            }
+            
         }
 
         private void MoveRight()
         {
             flip = false;
-            Move(roation.Right, Parameters.moveSpeed);
+            move(roation.Right, Parameters.moveSpeed);
             foreach (var b in ActiveElements.ActiveBlocks)
             {
                 if (collide(b))
                 {
-                    Move(roation.Left, Parameters.moveSpeed);
+                    move(roation.Left, Parameters.moveSpeed);
                     break;
                 }
             }
@@ -115,12 +128,12 @@ namespace Engine.Logic
         private void MoveLeft()
         {
             flip = true;
-            Move(roation.Left, Parameters.moveSpeed);
+            move(roation.Left, Parameters.moveSpeed);
             foreach (var b in ActiveElements.ActiveBlocks)
             {
                 if (collide(b))
                 {
-                    Move(roation.Right, Parameters.moveSpeed);
+                    move(roation.Right, Parameters.moveSpeed);
                     break;
                 }
             }

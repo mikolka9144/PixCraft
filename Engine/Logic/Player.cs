@@ -2,11 +2,8 @@
 using Engine.Engine.models;
 using Engine.GUI;
 using Engine.Resources;
-using PixBlocks.TopPanel.Components.Basic;
 using System;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Engine.Logic
 {
@@ -24,10 +21,9 @@ namespace Engine.Logic
             status.OnKill += KillPlayer;
             settingsForm = pauseMenu;
             Mover = mover;
-            OnDamageDeal += () => Task.Run(Player_OnDamageDeal);
         }
 
-        private void Player_OnDamageDeal()
+        public override void OnDamageDeal()
         {
             color = Parameters.RedColor;
             Thread.Sleep(600);
@@ -63,13 +59,7 @@ namespace Engine.Logic
 
         private void KillPlayer()
         {
-            Application.Current.Dispatcher.Invoke(ShowMessage);
-            Thread.CurrentThread.Abort();
-        }
-
-        private void ShowMessage()
-        {
-            CustomMessageBox.Show("You Died");
+            throw new Exception("You Died");
         }
     }
 }

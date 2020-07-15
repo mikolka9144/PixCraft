@@ -37,21 +37,21 @@ namespace Engine.Engine
         {
             foreach (Block block in TileManager.Blocks)
             {
-                block.Move(roation, lenght);
+                block.move(roation, lenght);
             }
             foreach (SpriteOverlay spriteOverlay in Sprites)
             {
-                spriteOverlay.Move(roation, lenght);
+                spriteOverlay.move(roation, lenght);
             }
             foreach (Foliage foliage in TileManager.Toppings)
             {
-                foliage.Move(roation, lenght);
+                foliage.move(roation, lenght);
             }
             foreach (var item in TileManager.Fluids)
             {
-                item.Move(roation, lenght);
+                item.move(roation, lenght);
             }
-            Center.Move(roation, lenght);
+            Center.move(roation, lenght);
         }
     }
 

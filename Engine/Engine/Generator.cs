@@ -83,7 +83,7 @@ namespace Engine.Engine
             {
                 for (int i = Parameters.WaterLevel; i > 0; i--)
                 {
-                    manager.AddFluid(X, i, BlockType.Stone, false);
+                    manager.AddFluid(X, i, BlockType.Water, false);
                 }
             }
         }
@@ -102,12 +102,7 @@ namespace Engine.Engine
 
         public void CreateUnderGround()
         {
-            for (int X = -size; X < 0; X++)
-            {
-                GenerateCollumnOfStone(X);
-            }
-
-            for (int X = 0; X < size; X++)
+            for (int X = -size; X < size; X++)
             {
                 GenerateCollumnOfStone(X);
             }

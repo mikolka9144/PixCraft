@@ -8,6 +8,9 @@ namespace Engine.Engine.models
             image = 88;
             size = Parameters.BlockSize;
             processor.ProcessSprite(this, Id);
+            this.Id = Id;
         }
+
+        public BlockType Id { get; }
     }
 }

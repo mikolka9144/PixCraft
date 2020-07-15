@@ -80,6 +80,7 @@ namespace Engine.Resources
         CraftingTable,
         Furnance,
         GoldBar,
-        IronBar
+        IronBar,
+        Water
     }
 }
