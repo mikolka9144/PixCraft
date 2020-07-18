@@ -21,17 +21,19 @@ namespace Engine.Resources
         public static int MaxFallSpeed = 6;
         internal static int MaxWaterFallSpeed = 2;
         internal static int StandUpSpeed = 3;
+        internal static int WaterJumpSpeed = 4;
 
-        internal static int WaterLevel = 5;
+        internal static int WaterLevel = 2;
         public static int BlocksCollisionDelay = 2;
 
         public static int MoveDelay = 3;
-        internal static int BaseHealth = 20;
+        public static int BaseHealth = 20;
         internal static int MaxSlotCapatility = 64;
         internal static int minimumBlocksForFall = 3;
         internal static int PointerStatusChangeDelay = 300;
         //colors
         internal static Color DefaultColor = new Color(15, 142, 255);
         internal static Color RedColor = new Color(255, 51, 0);
+        public static int MaxBreath = 2;
     }
 }

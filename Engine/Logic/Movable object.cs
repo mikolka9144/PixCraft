@@ -1,18 +1,26 @@
 ﻿using Engine.Engine;
 using Engine.Engine.models;
 using Engine.Resources;
+using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Engine.Logic
 {
-    internal abstract class Movable_object : SpriteOverlay
+    public class MovableObject : SpriteOverlay
     {
         protected readonly IMoveDefiner moveDefiner;
         protected readonly PlayerStatus status;
 
         public virtual void OnDamageDeal()
         {
-
+            Task.Run(() =>
+            {
+                color = Parameters.RedColor;
+                Thread.Sleep(600);
+                color = Parameters.DefaultColor;
+            });
         }
 
         private bool Grounded;
@@ -20,9 +28,11 @@ namespace Engine.Logic
         private int speed;
         private int TicksElapsedForMove;
         private int DistanceFalled;
+        private int WaterTicks = 0;
 
-        public Movable_object(IActiveElements ActiveElements,IDrawer drawer, IMoveDefiner moveDefiner, PointerController pointer, PlayerStatus status):base(0,0,drawer)
+        public MovableObject(IActiveElements ActiveElements,IDrawer drawer, IMoveDefiner moveDefiner, PointerController pointer, PlayerStatus status):base(0,0,drawer)
         {
+            status.OnDamageDeal = OnDamageDeal;
             this.ActiveElements = ActiveElements;
             this.moveDefiner = moveDefiner;
             Pointer = pointer;
@@ -47,6 +57,25 @@ namespace Engine.Logic
             }
             ApplyGravity();
             ApplyBlocksCollisions();
+            CheckIfUnderwater();
+        }
+
+        public void CheckIfUnderwater()
+        {
+            foreach (var item in ActiveElements.ActiveFluids)
+            {
+                if(collide(item))
+                {
+                    WaterTicks++;
+                    if (WaterTicks > 19)
+                    {
+                        status.DealBreathBuuble();
+                        WaterTicks = 0;
+                    }
+                    return;
+                }
+            }
+            status.RestoreBreath();      
         }
 
         private void ApplyBlocksCollisions()
@@ -71,32 +100,33 @@ namespace Engine.Logic
 
         private void ApplyGravity()
         {
+            var touchesWater = ActiveElements.ActiveFluids.FindAll(s => s.Id == BlockType.Water).Any(s => collide(s));
             if (moveDefiner.key(command.Jump) && Grounded)
             {
                 Grounded = false;
-                speed = Parameters.MaxFallSpeed;
+                
+                speed = touchesWater?Parameters.WaterJumpSpeed:Parameters.MaxFallSpeed;
             }
             foreach (var block in ActiveElements.ActiveToppings)
             {
                 if (collide(block) && TicksElapsed >= Parameters.BlocksCollisionDelay)
                 {
                     Grounded = true;
-                    Pointer.LastFoliage = block;
                     if (speed < 0) speed = 0;
-                    if (status.DealDamage(DistanceFalled)) OnDamageDeal();
+                    status.DealDamage(DistanceFalled);
                     DistanceFalled = 0;
                     break;
                 }
             }
             move(roation.Up, speed);
-            ChangeMoveSpeed();
+            ChangeMoveSpeed(touchesWater);
             
         }
 
-        private void ChangeMoveSpeed()
+        private void ChangeMoveSpeed(bool touchesWater)
         {
             if (speed < 0) DistanceFalled -= speed;
-            if(ActiveElements.ActiveFluids.FindAll(s => s.Id == BlockType.Water).Any(s => collide(s)))
+            if(touchesWater)
             {
                 DistanceFalled = 0;
                 if (speed > -Parameters.MaxWaterFallSpeed) speed -= 1;

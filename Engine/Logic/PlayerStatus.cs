@@ -7,8 +7,10 @@ namespace Engine.Logic
     public class PlayerStatus
     {
         public int health { get; set; }
+        public int breath { get; set; }
         public List<Item> Inventory { get; private set; }
         public IStatusDisplayer Displayer { get; }
+        public Action OnDamageDeal;
 
         internal void LoadState(int health, List<Item> Inventory)
         {
@@ -18,6 +20,7 @@ namespace Engine.Logic
 
         public PlayerStatus(IStatusDisplayer displayer)
         {
+            breath = Parameters.MaxBreath;
             health = Parameters.BaseHealth;
             Inventory = new List<Item>();
             Displayer = displayer;
@@ -61,6 +64,24 @@ namespace Engine.Logic
             return selection.type;
         }
 
+        public void DealBreathBuuble()
+        {
+            breath--;
+            if (breath < 0) Deal(1);
+        }
+
+        private void Deal(int v)
+        {
+            health -= v;
+            OnDamageDeal();
+            if (health <= 0) OnKill.Invoke();
+        }
+
+        internal void RestoreBreath()
+        {
+            breath = Parameters.MaxBreath;
+        }
+
         public void OpenInventory() => Displayer.Present(health, this);
 
         public void Decrement(BlockType selection, int count)
@@ -77,18 +98,15 @@ namespace Engine.Logic
             }
         }
 
-        public bool DealDamage(int DistanceFallen)
+        public void DealDamage(int DistanceFallen)
         {
             if (DistanceFallen >= Parameters.minimumBlocksForFall * Parameters.BlockSize)
             {
                 DistanceFallen -= Parameters.minimumBlocksForFall * Parameters.BlockSize;
-                health -= DistanceFallen / Parameters.BlockSize;
-                if (health <= 0) OnKill.Invoke();
-                return true;
+                Deal(DistanceFallen / Parameters.BlockSize);
+                
             }
-            return false;
         }
-
         internal event Action OnKill;
     }
 }

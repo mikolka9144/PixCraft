@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Engine.Logic
 {
-    internal class Player : Movable_object
+    internal class Player : MovableObject
     {
         private readonly PauseMenu settingsForm;
 
@@ -22,13 +22,7 @@ namespace Engine.Logic
             settingsForm = pauseMenu;
             Mover = mover;
         }
-
-        public override void OnDamageDeal()
-        {
-            color = Parameters.RedColor;
-            Thread.Sleep(600);
-            color = Parameters.DefaultColor;
-        }
+       
 
         public override void update()
         {

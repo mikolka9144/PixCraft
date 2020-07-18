@@ -85,7 +85,6 @@
     <Compile Include="GUI\StatusDisplay.Designer.cs">
       <DependentUpon>StatusDisplay.cs</DependentUpon>
     </Compile>
-    <Compile Include="Layer.cs" />
     <Compile Include="Logic\models\INearbyBlockCheck.cs" />
     <Compile Include="Logic\models\CraftingEntry.cs" />
     <Compile Include="Logic\CraftingModule.cs" />

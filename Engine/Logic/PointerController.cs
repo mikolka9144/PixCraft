@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Engine.Logic
 {
-    internal class PointerController : Pointer
+    public class PointerController : Pointer
     {
         private readonly PlayerStatus status;
         private readonly IMoveDefiner moveDefiner;
@@ -24,7 +24,6 @@ namespace Engine.Logic
         }
 
         public ITileManager Tiles { get; }
-        public Foliage LastFoliage { get; set; }
 
         public override void update()
         {
@@ -35,14 +34,8 @@ namespace Engine.Logic
                 if (ChangeStateOfPointerTask.Status == TaskStatus.RanToCompletion) ChangeStateOfPointerTask = new Task(ChangeStateOfPointer);
                 ChangeStateOfPointerTask.Start();
             }
-            if(!IsInBreakingRange(this)) ResetPointer();
         }
 
-        private void ResetPointer()
-        {
-            X = LastFoliage.Block.X;
-            Y = LastFoliage.Block.Y + Parameters.BlockSize;
-        }
 
         private void CheckBlocksOperations()
         {

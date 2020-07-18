@@ -15,6 +15,11 @@ namespace EngineTets.Logic
         {
             Displayer = new TestStatusDisplayer();
             Instance = new PlayerStatus(Displayer);
+            Instance.OnDamageDeal += Instance_OnDamageDeal;
+        }
+
+        private void Instance_OnDamageDeal()
+        {
         }
 
         [Test]
@@ -34,6 +39,15 @@ namespace EngineTets.Logic
             Assert.AreEqual(BlockType.DiamondOre, first);
             Assert.AreEqual(BlockType.None, secound);
             Assert.AreEqual(BlockType.Grass, third);
+        }
+        [Test]
+        public void CheckDrowning()
+        {
+            Instance.breath = 1;
+            Instance.DealBreathBuuble();
+            Assert.AreEqual(Parameters.BaseHealth, Instance.health);
+            Instance.DealBreathBuuble();
+            Assert.AreEqual(Parameters.BaseHealth-1, Instance.health);
         }
     }
 
