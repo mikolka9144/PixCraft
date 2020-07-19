@@ -110,7 +110,17 @@ namespace Engine.Engine
             {
                 return;
             }
-            Fluids.Add(new Fluid(BlockX * x, BlockY * x, Id, drawer, processor));
+            AddFluid(new Fluid(BlockX * x, BlockY * x, Id, drawer, processor));
+        }
+        public void RemoveFluid(Fluid fluid)
+        {
+            Fluids.Remove(fluid);
+            drawer.remove(fluid);
+        }
+
+        public void AddFluid(Fluid block)
+        {
+            Fluids.Add(block);
         }
     }
 }

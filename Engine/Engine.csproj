@@ -90,6 +90,7 @@
     <Compile Include="Logic\CraftingModule.cs" />
     <Compile Include="Resources\Craftings.cs" />
     <Compile Include="Resources\PlockProperties.cs" />
+    <Compile Include="Saves\Models\FluidTemplate.cs" />
     <Compile Include="Saves\Models\WorldEntry.cs" />
     <Compile Include="Engine\Models\ITileManager.cs" />
     <Compile Include="Logic\models\Item.cs" />

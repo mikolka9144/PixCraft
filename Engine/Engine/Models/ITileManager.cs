@@ -8,7 +8,9 @@ namespace Engine.Engine.models
         List<Block> Blocks { get; }
         List<Foliage> Toppings { get; }
         List<Fluid> Fluids { get; }
+        void RemoveFluid(Fluid fluid);
         void AddBlockTile(Block block, bool ShouldDraw);
+        void AddFluid(Fluid block);
 
         ///<summary>
         ///Creates a block with collision check

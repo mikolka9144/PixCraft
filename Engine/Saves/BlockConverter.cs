@@ -17,6 +17,15 @@ namespace Engine.Saves
         public IDrawer Drawer { get; }
         public IIdProcessor Processor { get; }
 
+        public List<Fluid> Convert(List<FluidTemplate> blocks, int CenterX, int CenterY)
+        {
+            var list = new List<Fluid>();
+            foreach (var item in blocks)
+            {
+                list.Add(new Fluid(item.X - CenterX, item.Y - CenterY, item.Id, Drawer, Processor));
+            }
+            return list;
+        }
         public List<Block> Convert(List<BlockTemplate> blocks, int CenterX, int CenterY)
         {
             var list = new List<Block>();
@@ -33,6 +42,15 @@ namespace Engine.Saves
             foreach (var item in blocks)
             {
                 list.Add(new BlockTemplate(item.Id, item.Y, item.X));
+            }
+            return list;
+        }
+        public List<FluidTemplate> Convert(List<Fluid> blocks)
+        {
+            var list = new List<FluidTemplate>();
+            foreach (var item in blocks)
+            {
+                list.Add(new FluidTemplate(item.Id, item.Y, item.X));
             }
             return list;
         }
