@@ -6,16 +6,17 @@ using System.Linq;
 
 namespace Engine.Engine
 {
-    public class TileManager : IActiveElements, ITileManager,INearbyBlockCheck
+    public class TileManager :ITileManager,INearbyBlockCheck
     {
-        public List<Block> ActiveBlocks => Blocks.FindAll(s => s.IsActiveBlock()).ToList();
+        public List<Block> ActiveBlocks => Blocks.FindAll(s => s.IsActiveBlock(Parameters.hitboxArea)).ToList();
+        public List<Block> VisiableBlocks => Blocks.FindAll(s => s.IsActiveBlock(Parameters.BreakingRange)).ToList();
         public List<Block> Blocks { get; } = new List<Block>();
 
         public List<Foliage> Toppings { get; } = new List<Foliage>();
-        public List<Foliage> ActiveToppings => Toppings.FindAll(s => s.IsActiveBlock()).ToList();
+        public List<Foliage> ActiveToppings => Toppings.FindAll(s => s.IsActiveBlock(Parameters.hitboxArea)).ToList();
 
         public List<Fluid> Fluids { get; } = new List<Fluid>();
-        public List<Fluid> ActiveFluids => Fluids.FindAll(s => s.IsActiveBlock()).ToList();
+        public List<Fluid> ActiveFluids => Fluids.FindAll(s => s.IsActiveBlock(Parameters.hitboxArea)).ToList();
 
         private readonly IDrawer drawer;
         private readonly IIdProcessor processor;

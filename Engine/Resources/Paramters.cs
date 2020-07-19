@@ -5,8 +5,9 @@ namespace Engine.Resources
     public class Parameters
     {
         public static (int Up, int Left, int Right, int Down) border = (100, 100, 100, 100);
-        public static (int Up, int Left, int Right, int Down) hitboxArea = (20, 20, 20, 20);
-        internal static int PointerRange = 50;
+        public static int hitboxArea = 20;
+        public static int BreakingRange = 50;
+        internal static int PointerRange = 80;
         public static int Delay = 0;
 
         //Generator Parameters

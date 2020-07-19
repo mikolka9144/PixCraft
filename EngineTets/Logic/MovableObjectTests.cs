@@ -50,5 +50,7 @@ namespace EngineTets.Logic
         public List<Foliage> ActiveToppings { get; set; }
 
         public List<Fluid> ActiveFluids { get; set; }
+
+        public List<Block> VisiableBlocks { get; set; }
     }
 }

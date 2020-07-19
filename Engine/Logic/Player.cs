@@ -3,7 +3,6 @@ using Engine.Engine.models;
 using Engine.GUI;
 using Engine.Resources;
 using System;
-using System.Threading;
 
 namespace Engine.Logic
 {

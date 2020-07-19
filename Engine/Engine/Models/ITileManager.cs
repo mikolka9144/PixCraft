@@ -1,9 +1,10 @@
-﻿using Engine.Resources;
+﻿using Engine.Logic;
+using Engine.Resources;
 using System.Collections.Generic;
 
 namespace Engine.Engine.models
 {
-    public interface ITileManager
+    public interface ITileManager:IActiveElements
     {
         List<Block> Blocks { get; }
         List<Foliage> Toppings { get; }

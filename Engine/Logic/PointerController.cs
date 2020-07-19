@@ -3,6 +3,7 @@ using Engine.Engine.models;
 using Engine.Resources;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -34,12 +35,17 @@ namespace Engine.Logic
                 if (ChangeStateOfPointerTask.Status == TaskStatus.RanToCompletion) ChangeStateOfPointerTask = new Task(ChangeStateOfPointer);
                 ChangeStateOfPointerTask.Start();
             }
+            image = IsInRange(Parameters.BreakingRange) ? 56 : 55;
+            if (!IsInRange(Parameters.PointerRange))
+            {
+                position = Tiles.VisiableBlocks.First().position;
+            }
         }
 
 
         private void CheckBlocksOperations()
         {
-            if (moveDefiner.key(command.Action) && IsInBreakingRange(this))
+            if (moveDefiner.key(command.Action) && IsInRange(Parameters.BreakingRange))
             {
                 if (DestroyModeActive)
                 {
@@ -105,13 +111,6 @@ namespace Engine.Logic
             bool IsNotInYZone = Y + YtoMove > Parameters.PointerRange || Y + YtoMove < -Parameters.PointerRange;
             if (!IsNotInXZone) move(roation.Right, XtoMove);
             if (!IsNotInYZone) move(roation.Up, YtoMove);
-        }
-
-        private bool IsInBreakingRange(SpriteOverlay point)
-        {
-            bool IsNotInRange = point.X > Parameters.PointerRange || point.X < -Parameters.PointerRange ||
-                point.Y > Parameters.PointerRange || point.Y < -Parameters.PointerRange;
-            return !IsNotInRange;
         }
     }
 }
