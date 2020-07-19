@@ -89,7 +89,7 @@ namespace Engine.Engine
             return ActiveBlocks.Any(s => s.Id == station);
         }
 
-        public void AddFluid(int BlockX, int BlockY, BlockType Id, bool replace, bool forceReplace = false, bool Draw = false)
+        public bool AddFluid(int BlockX, int BlockY, BlockType Id, bool replace, bool forceReplace = false, bool Draw = false)
         {
             var x = Parameters.BlockSize;
             var currentBlock = Blocks.Find(s => (s.X / x) == BlockX && s.Y / x == BlockY);
@@ -103,14 +103,15 @@ namespace Engine.Engine
                 }
                 else
                 {
-                    return;
+                    return false;
                 }
             }
             else if (forceReplace)
             {
-                return;
+                return false;
             }
             AddFluid(new Fluid(BlockX * x, BlockY * x, Id, drawer, processor));
+            return true;
         }
         public void RemoveFluid(Fluid fluid)
         {

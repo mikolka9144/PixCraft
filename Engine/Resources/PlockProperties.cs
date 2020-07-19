@@ -43,6 +43,14 @@
                     return (true, true);
                 case BlockType.Furnance:
                     return (true, true);
+                case BlockType.GoldBar:
+                    break;
+                case BlockType.IronBar:
+                    break;
+                case BlockType.Water:
+                    break;
+                case BlockType.Sand:
+                    return (true, true);
             }
             return (true, false);
         }

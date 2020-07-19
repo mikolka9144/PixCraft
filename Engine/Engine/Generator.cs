@@ -78,12 +78,20 @@ namespace Engine.Engine
         }
 
         internal void GenerateWater()
-        {
+        {           
             for (int X = -size; X < size; X++)
             {
-                for (int i = Parameters.WaterLevel; i > 0; i--)
+                bool FirstBlock = true;
+                for (int i = Parameters.WaterLevel; i > -1; i--)
                 {
-                    manager.AddFluid(X, i, BlockType.Water, false);
+                    var placedFluid = manager.AddFluid(X, i, BlockType.Water, false);                 
+                    if (!placedFluid) 
+                    {
+                        if (FirstBlock) break;
+                        manager.AddBlockTile(X, i, BlockType.Sand, false);
+                        break;
+                    }
+                    FirstBlock = false;
                 }
             }
         }
