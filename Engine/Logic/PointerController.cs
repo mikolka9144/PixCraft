@@ -59,9 +59,12 @@ namespace Engine.Logic
                 if (collide(b)) return;
             }
 
-            RemoveOverlappingWater();
             var blockType = status.GetBlockToPlace();
-            if (blockType != BlockType.None) Tiles.PlaceBlock(X, Y, blockType);
+            if (blockType != BlockType.None)
+            {
+                Tiles.PlaceBlock(X, Y, blockType);
+                RemoveOverlappingWater(); 
+            }
         }
 
         private void RemoveOverlappingWater()
