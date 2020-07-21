@@ -1,6 +1,9 @@
-﻿using Engine.Resources;
+﻿using Engine.Logic.models;
+using Engine.Resources;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Engine.Logic
 {
@@ -11,6 +14,13 @@ namespace Engine.Logic
         public List<Item> Inventory { get; private set; }
         public IStatusDisplayer Displayer { get; }
         public Action OnDamageDeal;
+        private Task lavaDamageDeal;
+
+        private void LavaDamage()
+        {
+            Deal(Parameters.LavaDamage);
+            Thread.Sleep(1000);
+        }
 
         internal void LoadState(int health, List<Item> Inventory)
         {
@@ -24,6 +34,7 @@ namespace Engine.Logic
             health = Parameters.BaseHealth;
             Inventory = new List<Item>();
             Displayer = displayer;
+            lavaDamageDeal = new Task(LavaDamage);
         }
 
         public void AddElement(Item item)
@@ -68,6 +79,15 @@ namespace Engine.Logic
         {
             breath--;
             if (breath < 0) Deal(1);
+        }
+
+        internal void DealDamageFromLava()
+        {
+            if (lavaDamageDeal.Status == TaskStatus.RanToCompletion || lavaDamageDeal.Status == TaskStatus.Created)
+            {
+                lavaDamageDeal = new Task(LavaDamage);
+                lavaDamageDeal.Start();
+            }
         }
 
         private void Deal(int v)

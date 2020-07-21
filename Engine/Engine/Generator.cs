@@ -12,13 +12,15 @@ namespace Engine.Engine
         private readonly ITileManager manager;
         private readonly IOreTable oreTable;
         private readonly int size;
+        private readonly IDrawer drawer;
 
-        public Generator(int seed, ITileManager manager, IOreTable oreTable, int size)
+        public Generator(int seed, ITileManager manager, IOreTable oreTable, int size,IDrawer drawer)
         {
             randomizer = new Random(seed);
             this.manager = manager;
             this.oreTable = oreTable;
             this.size = size;
+            this.drawer = drawer;
             CanGenerateTree = Parameters.TreeSpread;
         }
 
@@ -59,7 +61,15 @@ namespace Engine.Engine
         {
             foreach (var item in manager.Blocks)
             {
-                manager.AddBlockTile(item, true);
+                drawer.Draw(item);
+            }
+            foreach(var item in manager.Toppings)
+            {
+                drawer.Draw(item);
+            }
+            foreach(var item in manager.Fluids)
+            {
+                drawer.Draw(item);
             }
         }
 
@@ -84,11 +94,11 @@ namespace Engine.Engine
                 bool FirstBlock = true;
                 for (int i = Parameters.WaterLevel; i > -1; i--)
                 {
-                    var placedFluid = manager.AddFluid(X, i, BlockType.Water, false);                 
+                    var placedFluid = manager.AddFluid(X, i, BlockType.Water,false);                 
                     if (!placedFluid) 
                     {
                         if (FirstBlock) break;
-                        manager.AddBlockTile(X, i, BlockType.Sand, false);
+                        manager.AddBlockTile(X, i, BlockType.Sand,true,true);
                         break;
                     }
                     FirstBlock = false;
@@ -100,11 +110,11 @@ namespace Engine.Engine
         {
             for (int i = Y + 1; i < Y + 4; i++)
             {
-                manager.AddBlockTile(X, i, BlockType.Wood, false);
+                manager.AddBlockTile(X, i, BlockType.Wood);
             }
-            manager.AddBlockTile(X, Y + 4, BlockType.Leaves, false);
-            manager.AddBlockTile(X - 1, Y + 3, BlockType.Leaves, false);
-            manager.AddBlockTile(X + 1, Y + 3, BlockType.Leaves, false);
+            manager.AddBlockTile(X, Y + 4, BlockType.Leaves);
+            manager.AddBlockTile(X - 1, Y + 3, BlockType.Leaves);
+            manager.AddBlockTile(X + 1, Y + 3, BlockType.Leaves);
             CanGenerateTree = 0;
         }
 
@@ -128,8 +138,10 @@ namespace Engine.Engine
         {
             var offset = Parameters.ChunkSize;
             var count = oreTable.GetCount(type);
+            var GenerateAsFluid = oreTable.IsFluid(type);
             var pointer = -size;
             var chunks = size * 2 / offset;
+
             if (size % 10 != 0) chunks++;
             for (int c = 0; c < chunks; c++)
             {
@@ -137,27 +149,33 @@ namespace Engine.Engine
                 {
                     var X = randomizer.Next(pointer, pointer + offset);
                     var Y = randomizer.Next(-Parameters.sizeOfStoneCollumn, -oreTable.GetMinimumDepth(type));
-                    GenerateOre(X, Y, type, oreTable.GetChance(type));
+                    GenerateOre(X, Y, type, oreTable.GetChance(type),GenerateAsFluid);
                 }
                 pointer += offset;
             }
         }
 
-        private void GenerateOre(int X, int Y, BlockType type, int bitSpawnChance)
+        private void GenerateOre(int X, int Y, BlockType type, int bitSpawnChance, bool generateAsFluid)
         {
-            manager.AddBlockTile(X, Y, type, true, true);
+            AddOreNode(X, Y, type,generateAsFluid);
             for (int x = -1; x < 2; x++)
             {
                 for (int y = -1; y < 2; y++)
                 {
-                    GenerateBit(X - x, Y - y, type, bitSpawnChance);
+                    GenerateBit(X - x, Y - y, type, bitSpawnChance,generateAsFluid);
                 }
             }
         }
 
-        private void GenerateBit(int X, int Y, BlockType type, int spawnChance)
+        private void AddOreNode(int X, int Y, BlockType type,bool GenerateAsFluid)
         {
-            if (randomizer.Next(0, spawnChance) == 0) manager.AddBlockTile(X, Y, type, true, true);
+            if (GenerateAsFluid) manager.AddFluid(X, Y, type,true,true);          
+                else manager.AddBlockTile(X, Y, type, true,true);          
+        }
+
+        private void GenerateBit(int X, int Y, BlockType type, int spawnChance,bool IsFluid)
+        {
+            if (randomizer.Next(0, spawnChance) == 0) AddOreNode(X, Y, type, IsFluid);
         }
     }
 }

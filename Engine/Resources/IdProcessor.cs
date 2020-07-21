@@ -62,6 +62,9 @@ namespace Engine.Resources
                 case BlockType.Water:
                     overlay.color = new Color(0, 255, 204);
                     break;
+                case BlockType.Lava:
+                    overlay.color = new Color(255, 0, 51);
+                    break;
                 case BlockType.Sand:
                     overlay.color = new Color(204, 255, 51);
                     break;
@@ -88,6 +91,7 @@ namespace Engine.Resources
         GoldBar,
         IronBar,
         Water,
-        Sand
+        Sand,
+        Lava
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Engine.Engine.models;
-using Engine.Logic;
+using Engine.Logic.models;
 using Engine.Resources;
 using System.Collections.Generic;
 using System.Linq;
@@ -120,9 +120,7 @@ namespace Engine.Engine
             drawer.remove(fluid);
         }
 
-        public void AddFluid(Fluid block)
-        {
-            Fluids.Add(block);
-        }
+        public void AddFluid(Fluid block) => Fluids.Add(block);
+        
     }
 }

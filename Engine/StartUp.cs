@@ -14,23 +14,24 @@ namespace Engine
         public bool IsWorldGenerated { get; set; } = false;
         private Engine.Engine engine;
         private TileManager tileManager;
+        private Drawer Drawer;
 
         public void Init()
         {
-            var drawer = new Drawer();
+            Drawer = new Drawer();
             var IdProcessor = new BlockIdProcessor();
-            tileManager = new TileManager(drawer, IdProcessor);
-            engine = new Engine.Engine(tileManager, drawer);
+            tileManager = new TileManager(Drawer, IdProcessor);
+            engine = new Engine.Engine(tileManager, Drawer);
             var craftingSystem = new CraftingModule(Craftings.GetCraftings(),tileManager);
             var StatusWindow = new StatusDisplay(craftingSystem);
             var playerstatus = new PlayerStatus(StatusWindow);
-            var blockConverter = new BlockConverter(drawer, IdProcessor);
+            var blockConverter = new BlockConverter(Drawer, IdProcessor);
             var game = GameScene.gameSceneStatic;
             var moveDefiner = new PlayerMoveDefiner();
             var SaveManager = new SaveManager(tileManager, playerstatus, blockConverter, engine.Center, engine);
             var pauseMenu = new PauseMenu(SaveManager);
-            var pointerController = new PointerController(playerstatus, tileManager, moveDefiner,drawer);
-            var player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus,drawer,engine);
+            var pointerController = new PointerController(playerstatus, tileManager, moveDefiner,Drawer);
+            var player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus,Drawer,engine);
 
             var MainMenu = new Main_Menu(this, SaveManager);
             MainMenu.ShowDialog();
@@ -47,7 +48,7 @@ namespace Engine
             IsWorldGenerated = true;
             var oreTable = new OreTable(OreResource.InitOreTable());
 
-            var generator = new Generator(seed, tileManager, oreTable, size);
+            var generator = new Generator(seed, tileManager, oreTable, size,Drawer);
             ExecuteGeneration(generator, progress);
         }
 
@@ -56,15 +57,17 @@ namespace Engine
             generator.GenerateTerrian();
             generator.GenerateWater();
             progress.Value = 25;
-            generator.CreateUnderGround();
-            progress.Value = 50;
             generator.GenerateTrees();
+            progress.Value = 50;
+            generator.CreateUnderGround();
             progress.Value = 75;
             generator.GenerateOres(BlockType.CoalOre);
             generator.GenerateOres(BlockType.IronOre);
             generator.GenerateOres(BlockType.GoldOre);
             generator.GenerateOres(BlockType.DiamondOre);
+            generator.GenerateOres(BlockType.Lava);
             progress.Value = 100;
+            generator.Render();
         }
     }
 }

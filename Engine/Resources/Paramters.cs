@@ -35,6 +35,7 @@ namespace Engine.Resources
         //colors
         internal static Color DefaultColor = new Color(15, 142, 255);
         internal static Color RedColor = new Color(255, 51, 0);
-        public static int MaxBreath = 2;
+        public static int MaxBreath = 10;
+        internal static int LavaDamage = 5;
     }
 }

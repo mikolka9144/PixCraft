@@ -1,5 +1,6 @@
 ﻿using Engine.Engine;
 using Engine.Engine.models;
+using Engine.Logic.models;
 using Engine.Resources;
 using System.Linq;
 using System.Threading;
@@ -57,6 +58,12 @@ namespace Engine.Logic
             ApplyGravity();
             ApplyBlocksCollisions();
             CheckIfUnderwater();
+            CheckIfTouchesFluid(BlockType.Lava);
+        }
+
+        private void CheckIfTouchesFluid(BlockType lava)
+        {
+            if (ActiveElements.ActiveFluids.FindAll(s => s.Id == lava).Any(s => collide(s))) status.DealDamageFromLava();
         }
 
         public void CheckIfUnderwater()
@@ -99,12 +106,12 @@ namespace Engine.Logic
 
         private void ApplyGravity()
         {
-            var touchesWater = ActiveElements.ActiveFluids.FindAll(s => s.Id == BlockType.Water).Any(s => collide(s));
+            var touchesFluid = ActiveElements.ActiveFluids.Any(s => collide(s));
             if (moveDefiner.key(command.Jump) && Grounded)
             {
                 Grounded = false;
                 
-                speed = touchesWater?Parameters.WaterJumpSpeed:Parameters.MaxFallSpeed;
+                speed = touchesFluid?Parameters.WaterJumpSpeed:Parameters.MaxFallSpeed;
             }
             foreach (var block in ActiveElements.ActiveToppings)
             {
@@ -118,7 +125,7 @@ namespace Engine.Logic
                 }
             }
             move(roation.Up, speed);
-            ChangeMoveSpeed(touchesWater);
+            ChangeMoveSpeed(touchesFluid);
             
         }
 

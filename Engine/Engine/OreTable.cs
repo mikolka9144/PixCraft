@@ -23,5 +23,7 @@ namespace Engine.Engine
         }
 
         public int GetMinimumDepth(BlockType type) => Entries.Find(s => s.Type == type).MinimumDepth;
+
+        public bool IsFluid(BlockType type) => Entries.Find(s => s.Type == type).IsFluid;
     }
 }

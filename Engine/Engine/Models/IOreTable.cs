@@ -7,6 +7,7 @@ namespace Engine.Engine.models
         int GetChance(BlockType type);
 
         int GetCount(BlockType type);
+        bool IsFluid(BlockType type);
 
         int GetMinimumDepth(BlockType type);
     }
