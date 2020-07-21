@@ -85,7 +85,6 @@
     <Compile Include="GUI\StatusDisplay.Designer.cs">
       <DependentUpon>StatusDisplay.cs</DependentUpon>
     </Compile>
-    <Compile Include="Logic\models\INearbyBlockCheck.cs" />
     <Compile Include="Logic\models\CraftingEntry.cs" />
     <Compile Include="Logic\CraftingModule.cs" />
     <Compile Include="Resources\Craftings.cs" />
@@ -94,7 +93,6 @@
     <Compile Include="Saves\Models\WorldEntry.cs" />
     <Compile Include="Engine\Models\ITileManager.cs" />
     <Compile Include="Logic\models\Item.cs" />
-    <Compile Include="Logic\models\IStatusDisplayer.cs" />
     <Compile Include="Logic\PlayerStatus.cs" />
     <Compile Include="Resources\IdProcessor.cs" />
     <Compile Include="Engine\Models\Pointer.cs" />
@@ -126,7 +124,7 @@
       <DependentUpon>Settings Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Engine\Models\IOreTable.cs" />
-    <Compile Include="Logic\models\IActiveElements.cs" />
+    <Compile Include="Logic\models\Interfances.cs" />
     <Compile Include="Resources\IMoveDefiner.cs" />
     <Compile Include="Logic\Movable object.cs" />
     <Compile Include="Logic\Player.cs" />
@@ -136,7 +134,7 @@
     <Compile Include="Saves\Models\Save.cs" />
     <Compile Include="Saves\SaveManager.cs" />
     <Compile Include="StartUp.cs" />
-    <Compile Include="Engine\Models\directions.cs" />
+    <Compile Include="Resources\directions.cs" />
     <Compile Include="Engine\Models\OreEntry.cs" />
     <Compile Include="Resources\Ores.cs" />
     <Compile Include="Resources\Paramters.cs" />
