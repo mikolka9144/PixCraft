@@ -9,3 +9,15 @@ dotnet_diagnostic.IDE0005.severity = warning
 # IDE0047: Usuń niepotrzebne nawiasy
 dotnet_diagnostic.IDE0047.severity = warning
 
+
+# IDE0003: Usuń kwalifikacje
+dotnet_style_qualification_for_event = false:warning
+
+# IDE0003: Usuń kwalifikacje
+dotnet_style_qualification_for_field = false:warning
+
+# IDE0003: Usuń kwalifikacje
+dotnet_style_qualification_for_method = false:warning
+
+# IDE0003: Usuń kwalifikacje
+dotnet_style_qualification_for_property = false:warning

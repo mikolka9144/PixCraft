@@ -1,5 +1,6 @@
 ﻿using Engine.Engine;
 using Engine.Engine.models;
+using Engine.PixBlocks_Implementations;
 using Engine.Resources;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
@@ -16,32 +17,43 @@ namespace Engine.Logic
         private Task ChangeStateOfPointerTask;
         private bool DestroyModeActive;
 
-        public PointerController(PlayerStatus status, ITileManager engine, IMoveDefiner moveDefiner,IDrawer drawer):base(drawer)
+        public PointerController(PlayerStatus status, ITileManager engine, IMoveDefiner moveDefiner,IDrawer drawer,IPixSound sound):base(drawer)
         {
             this.status = status;
             Tiles = engine;
             this.moveDefiner = moveDefiner;
+            Sound = sound;
             ChangeStateOfPointerTask = new Task(ChangeStateOfPointer);
         }
 
         public ITileManager Tiles { get; }
+        public IPixSound Sound { get; }
 
         public override void update()
         {
             MovePointer(GameScene.gameSceneStatic.mouse.position);
             CheckBlocksOperations();
+            ChangeState();
+            image = IsInRange(Parameters.BreakingRange) ? 56 : 55;
+            ResetPointer();
+        }
+
+        private void ChangeState()
+        {
             if (moveDefiner.key(command.ChangeMouseState) && ChangeStateOfPointerTask.Status != TaskStatus.Running)
             {
                 if (ChangeStateOfPointerTask.Status == TaskStatus.RanToCompletion) ChangeStateOfPointerTask = new Task(ChangeStateOfPointer);
                 ChangeStateOfPointerTask.Start();
             }
-            image = IsInRange(Parameters.BreakingRange) ? 56 : 55;
+        }
+
+        private void ResetPointer()
+        {
             if (!IsInRange(Parameters.PointerRange))
             {
                 position = Tiles.VisiableBlocks.First().position;
             }
         }
-
 
         private void CheckBlocksOperations()
         {
@@ -60,7 +72,7 @@ namespace Engine.Logic
 
         private void PlaceBlock()
         {
-            foreach (var b in Tiles.Blocks.FindAll(s => s.IsVisible))
+            foreach (var b in Tiles.VisiableBlocks)
             {
                 if (collide(b)) return;
             }
@@ -70,6 +82,7 @@ namespace Engine.Logic
             {
                 Tiles.PlaceBlock(X, Y, blockType);
                 RemoveOverlappingWater(); 
+                Sound.PlaySound(SoundType.Place);
             }
         }
 
@@ -81,12 +94,13 @@ namespace Engine.Logic
 
         private void DestroyBlock()
         {
-            foreach (var b in Tiles.Blocks.FindAll(s => s.IsVisible))
+            foreach (var b in Tiles.VisiableBlocks.FindAll(s => s.IsVisible))
             {
                 if (collide(b))
                 {
                     status.AddElement(new Item(1, b.Id));
                     Tiles.RemoveTile(b);
+                    Sound.PlaySound(SoundType.Break);
                     break;
                 }
             }

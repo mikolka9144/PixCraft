@@ -87,8 +87,12 @@
     </Compile>
     <Compile Include="Logic\models\CraftingEntry.cs" />
     <Compile Include="Logic\CraftingModule.cs" />
+    <Compile Include="PixBlocks Implementations\ISound.cs" />
+    <Compile Include="PixBlocks Implementations\PixSound.cs" />
+    <Compile Include="PixBlocks Implementations\SoundType.cs" />
     <Compile Include="Resources\Craftings.cs" />
     <Compile Include="Resources\PlockProperties.cs" />
+    <Compile Include="Resources\Sounds.cs" />
     <Compile Include="Saves\Models\FluidTemplate.cs" />
     <Compile Include="Saves\Models\WorldEntry.cs" />
     <Compile Include="Engine\Models\ITileManager.cs" />

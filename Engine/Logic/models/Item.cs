@@ -7,7 +7,7 @@ namespace Engine.Logic
         public Item(int count, BlockType type)
         {
             var Properties = BlockProperties.GetProperties(type);
-            this.CanStack = Properties.CanStack;
+            CanStack = Properties.CanStack;
             IsPlaceable = Properties.IsPlaceAble;
             Count = count;
             this.type = type;

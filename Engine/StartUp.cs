@@ -1,11 +1,14 @@
 ﻿using Engine.Engine;
 using Engine.GUI;
 using Engine.Logic;
+using Engine.PixBlocks_Implementations;
 using Engine.Resources;
 using Engine.Saves;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
 using System.Windows.Forms;
+
+using Sound = Engine.PixBlocks_Implementations.Sound;
 
 namespace Engine
 {
@@ -18,6 +21,7 @@ namespace Engine
 
         public void Init()
         {
+            var Sound = new PixSound(new Sounds(new Sound()));
             Drawer = new Drawer();
             var IdProcessor = new BlockIdProcessor();
             tileManager = new TileManager(Drawer, IdProcessor);
@@ -30,8 +34,8 @@ namespace Engine
             var moveDefiner = new PlayerMoveDefiner();
             var SaveManager = new SaveManager(tileManager, playerstatus, blockConverter, engine.Center, engine);
             var pauseMenu = new PauseMenu(SaveManager);
-            var pointerController = new PointerController(playerstatus, tileManager, moveDefiner,Drawer);
-            var player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus,Drawer,engine);
+            var pointerController = new PointerController(playerstatus, tileManager, moveDefiner,Drawer,Sound);
+            var player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus,Drawer,engine,engine.Center);
 
             var MainMenu = new Main_Menu(this, SaveManager);
             MainMenu.ShowDialog();

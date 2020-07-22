@@ -26,7 +26,7 @@ namespace Engine.Engine
         // Token: 0x06000017 RID: 23 RVA: 0x000025BE File Offset: 0x000007BE
         public void Add(SpriteOverlay sprite)
         {
-            this.Sprites.Add(sprite);
+            Sprites.Add(sprite);
         }
 
         // Token: 0x06000018 RID: 24 RVA: 0x000025D0 File Offset: 0x000007D0

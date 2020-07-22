@@ -3,24 +3,30 @@ using Engine.Engine.models;
 using Engine.GUI;
 using Engine.Logic.models;
 using Engine.Resources;
-using System;
+
+using PixBlocks.PythonIron.Tools.Game;
+
+using System.Windows.Forms;
 
 namespace Engine.Logic
 {
-    internal class Player : MovableObject
+    internal class Player : MovableObject 
     {
-        private readonly PauseMenu settingsForm;
+        private PauseMenu settingsForm;
 
         public IMover Mover { get; }
 
-        public Player(PauseMenu pauseMenu, IActiveElements activeElements, PointerController pointer, IMoveDefiner definer, PlayerStatus status,IDrawer drawer,IMover mover) : base(activeElements, drawer, definer, pointer, status)
+        private Center center;
+
+        public Player(PauseMenu pauseMenu, IActiveElements activeElements, PointerController pointer, IMoveDefiner definer, PlayerStatus status,IDrawer drawer,IMover mover,Center center) : base(activeElements, drawer, definer, pointer, status)
         {
             position = new PixBlocks.PythonIron.Tools.Integration.Vector(0, 0);
             size = 10;
             image = 0;
-            status.OnKill += KillPlayer;
+            status.OnKill = KillPlayer;
             settingsForm = pauseMenu;
             Mover = mover;
+            this.center = center;
         }
        
 
@@ -53,7 +59,8 @@ namespace Engine.Logic
 
         private void KillPlayer()
         {
-            throw new Exception("You Died");
+            GameScene.gameSceneStatic.stop();
+            MessageBox.Show("You Died.");
         }
     }
 }

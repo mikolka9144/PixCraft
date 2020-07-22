@@ -2,6 +2,8 @@
 using Engine.Engine.models;
 using Engine.Logic.models;
 using Engine.Resources;
+
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -131,12 +133,42 @@ namespace Engine.Logic
 
         private void ChangeMoveSpeed(bool touchesWater)
         {
-            if (speed < 0) DistanceFalled -= speed;
-            if(touchesWater)
-            {
-                DistanceFalled = 0;
-                if (speed > -Parameters.MaxWaterFallSpeed) speed -= 1;
-                if (speed < -Parameters.MaxWaterFallSpeed) speed += 1;
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            JapaneseCalendar
+                VV       V                    VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            1;
                 Grounded = true;
             }
             else

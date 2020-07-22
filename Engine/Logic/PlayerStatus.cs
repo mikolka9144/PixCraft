@@ -92,9 +92,9 @@ namespace Engine.Logic
 
         private void Deal(int v)
         {
+            if (health <= v) OnKill();
             health -= v;
             OnDamageDeal();
-            if (health <= 0) OnKill.Invoke();
         }
 
         internal void RestoreBreath()
@@ -127,6 +127,6 @@ namespace Engine.Logic
                 
             }
         }
-        internal event Action OnKill;
+        internal Action OnKill;
     }
 }

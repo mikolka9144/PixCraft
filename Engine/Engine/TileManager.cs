@@ -74,8 +74,8 @@ namespace Engine.Engine
         {
             drawer.remove(tile);
             drawer.remove(tile.foliage);
-            this.Blocks.Remove(tile);
-            this.Toppings.Remove(tile.foliage);
+            Blocks.Remove(tile);
+            Toppings.Remove(tile.foliage);
         }
 
         public void PlaceBlock(int x, int y, BlockType blockType)

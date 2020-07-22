@@ -1,4 +1,5 @@
 ﻿using Engine.Logic;
+using Engine.Logic.models;
 using Engine.Resources;
 using NUnit.Framework;
 using System;
