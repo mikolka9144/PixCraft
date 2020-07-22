@@ -2,6 +2,7 @@
 using Engine.Engine.models;
 using Engine.GUI;
 using Engine.Logic.models;
+using Engine.PixBlocks_Implementations;
 using Engine.Resources;
 
 using PixBlocks.PythonIron.Tools.Game;
@@ -18,7 +19,7 @@ namespace Engine.Logic
 
         private Center center;
 
-        public Player(PauseMenu pauseMenu, IActiveElements activeElements, PointerController pointer, IMoveDefiner definer, PlayerStatus status,IDrawer drawer,IMover mover,Center center) : base(activeElements, drawer, definer, pointer, status)
+        public Player(PauseMenu pauseMenu, IActiveElements activeElements, PointerController pointer, IMoveDefiner definer, PlayerStatus status,IDrawer drawer,IMover mover,Center center,IPixSound sound) : base(activeElements, drawer, definer, pointer, status,sound)
         {
             position = new PixBlocks.PythonIron.Tools.Integration.Vector(0, 0);
             size = 10;

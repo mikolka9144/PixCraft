@@ -1,6 +1,7 @@
 ﻿using Engine.Engine;
 using Engine.Engine.models;
 using Engine.Logic.models;
+using Engine.PixBlocks_Implementations;
 using Engine.Resources;
 
 using System.Globalization;
@@ -31,14 +32,16 @@ namespace Engine.Logic
         private int TicksElapsedForMove;
         private int DistanceFalled;
         private int WaterTicks = 0;
+        private bool IsInWater;
 
-        public MovableObject(IActiveElements ActiveElements,IDrawer drawer, IMoveDefiner moveDefiner, PointerController pointer, PlayerStatus status):base(0,0,drawer)
+        public MovableObject(IActiveElements ActiveElements,IDrawer drawer, IMoveDefiner moveDefiner, PointerController pointer, PlayerStatus status,IPixSound sound):base(0,0,drawer)
         {
             status.OnDamageDeal = OnDamageDeal;
             this.ActiveElements = ActiveElements;
             this.moveDefiner = moveDefiner;
             Pointer = pointer;
             this.status = status;
+            Sound = sound;
             speed = 0;
             TicksElapsed = Parameters.BlocksCollisionDelay;
             TicksElapsedForMove = Parameters.MoveDelay;
@@ -46,21 +49,32 @@ namespace Engine.Logic
 
         public IActiveElements ActiveElements { get; }
         public PointerController Pointer { get; }
+        public IPixSound Sound { get; }
 
         public override void update()
         {
             if (moveDefiner.key(command.Left) && TicksElapsedForMove >= Parameters.MoveDelay)
             {
                 MoveLeft();
+                PlayMoveSound();
             }
             else if (moveDefiner.key(command.Right) && TicksElapsedForMove >= Parameters.MoveDelay)
             {
                 MoveRight();
+                PlayMoveSound();
             }
             ApplyGravity();
             ApplyBlocksCollisions();
             CheckIfUnderwater();
             CheckIfTouchesFluid(BlockType.Lava);
+        }
+
+        private void PlayMoveSound()
+        {
+            if(ActiveElements.ActiveToppings.Any(s => collide(s)))
+            {
+                Sound.PlaySound(SoundType.Walking);
+            }
         }
 
         private void CheckIfTouchesFluid(BlockType lava)
@@ -74,6 +88,11 @@ namespace Engine.Logic
             {
                 if(collide(item))
                 {
+                    if (!IsInWater)
+                    {
+                        Sound.PlaySound(SoundType.WaterEnter);
+                        IsInWater = true;
+                    }
                     WaterTicks++;
                     if (WaterTicks > 19)
                     {
@@ -82,6 +101,11 @@ namespace Engine.Logic
                     }
                     return;
                 }
+            }
+            if (IsInWater)
+            {
+                Sound.PlaySound(SoundType.WaterExit);
+                IsInWater = false;
             }
             status.RestoreBreath();      
         }
@@ -133,42 +157,12 @@ namespace Engine.Logic
 
         private void ChangeMoveSpeed(bool touchesWater)
         {
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            JapaneseCalendar
-                VV       V                    VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            1;
+            if (speed < 0) DistanceFalled -= speed;
+            if (touchesWater)
+            {
+                DistanceFalled = 0;
+                if (speed > -Parameters.MaxWaterFallSpeed) speed -= 1;
+                if (speed < -Parameters.MaxWaterFallSpeed) speed += 1;
                 Grounded = true;
             }
             else
@@ -176,7 +170,6 @@ namespace Engine.Logic
 
                 if (speed > -Parameters.MaxFallSpeed) speed -= 1;
             }
-            
         }
 
         private void MoveRight()

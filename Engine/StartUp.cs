@@ -35,7 +35,7 @@ namespace Engine
             var SaveManager = new SaveManager(tileManager, playerstatus, blockConverter, engine.Center, engine);
             var pauseMenu = new PauseMenu(SaveManager);
             var pointerController = new PointerController(playerstatus, tileManager, moveDefiner,Drawer,Sound);
-            var player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus,Drawer,engine,engine.Center);
+            var player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus,Drawer,engine,engine.Center,Sound);
 
             var MainMenu = new Main_Menu(this, SaveManager);
             MainMenu.ShowDialog();
@@ -44,6 +44,7 @@ namespace Engine
             game.background = new Color(102, 51, 204);
             game.add(pointerController);
             game.add(player);
+            Sound.PlaySound(SoundType.Music);
             game.start();
         }
 
