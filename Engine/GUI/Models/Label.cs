@@ -2,7 +2,7 @@
 
 namespace Engine.GUI.Models
 {
-    class Label:PixControl
+    public class Label:PixControl
     {
         public Label(Vector vector,string message,int size)
         {

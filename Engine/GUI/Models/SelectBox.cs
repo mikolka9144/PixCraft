@@ -37,13 +37,18 @@ namespace Engine.GUI.Models
 
     public struct Box
     {
-        public Box(string name,Action task)
+        public Box(string name,Action<BoxItem> task)
         {
             Name = name;
             Task = task;
         }
+        public Box(string name, Action task)
+        {
+            Name = name;
+            Task = (s) =>task.Invoke();
+        }
 
         public string Name { get; }
-        public Action Task { get; }
+        public Action<BoxItem> Task { get; }
     }
 }

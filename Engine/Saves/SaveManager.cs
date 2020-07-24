@@ -25,10 +25,10 @@ namespace Engine.Saves
         public Center Center { get; }
         public IMover Mover { get; }
 
-        public Save LoadFromStream(Stream stream)
+        public void LoadFromStream(Stream stream)
         {
             var obj = Serializer.Deserialize(stream);
-            return (Save)obj;
+            LoadSave((Save)obj);
         }
 
         public void SaveToStream(Stream SaveDest)
@@ -38,10 +38,10 @@ namespace Engine.Saves
             Serializer.Serialize(SaveDest, save);
         }
 
-        public Save LoadFromFile(string path)
+        public void LoadSaveFromFile(string path)
         {
             var stream = File.OpenRead(path);
-            return LoadFromStream(stream);
+             LoadFromStream(stream);
         }
 
         public void SaveToFile(string path)
@@ -51,7 +51,7 @@ namespace Engine.Saves
             stream.Close();
         }
 
-        public void LoadSave(Save save)
+        private void LoadSave(Save save)
         {
             Status.LoadState(save.Hp, save.Items);
             foreach (var item in Converter.Convert(save.Tiles, save.CenterX, save.CenterY))

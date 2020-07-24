@@ -4,9 +4,9 @@ using System;
 
 namespace Engine.GUI.Models
 {
-    class BoxItem:PixControl
+    public class BoxItem:PixControl
     {
-        public BoxItem(Vector vector,string text,int size,Action taskToRepresent)
+        public BoxItem(Vector vector,string text,int size,Action<BoxItem> taskToRepresent)
         {
             label = new Label(vector, text, size);
             label.color = new Color(100, 100, 100);
@@ -29,12 +29,11 @@ namespace Engine.GUI.Models
         }
         public override void update()
         {
-            if (collide(GameScene.gameSceneStatic.mouse.position) && GameScene.gameSceneStatic.mouse.pressed) TaskToRepresent.Invoke();
+            if (collide(GameScene.gameSceneStatic.mouse.position) && GameScene.gameSceneStatic.mouse.pressed) TaskToRepresent.Invoke(this);
         }
 
         private bool collide(Vector position)
         {
-            if (!IsVisible) return false;
             double mouseSize = 10;
             double num = size * 0.5 + mouseSize * 0.5;
             if (Math.Abs(position.x - this.position.x) > num || Math.Abs(position.y - this.position.y) > num)
@@ -49,6 +48,6 @@ namespace Engine.GUI.Models
         }
 
         public Label label { get; }
-        public Action TaskToRepresent { get; }
+        public Action<BoxItem> TaskToRepresent { get; set; }
     }
 }

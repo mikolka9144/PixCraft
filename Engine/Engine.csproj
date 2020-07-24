@@ -66,14 +66,9 @@
     <Compile Include="GUI\Forms [OLD]\CraftingForm.Designer.cs">
       <DependentUpon>CraftingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\LoadWorldForm.cs" />
     <Compile Include="GUI\Models\IForm.cs" />
     <Compile Include="GUI\ItemsConverterToViewItems.cs" />
-    <Compile Include="GUI\Forms [OLD]\LoadWorldWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Forms [OLD]\LoadWorldWindow.Designer.cs">
-      <DependentUpon>LoadWorldWindow.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\MainMenu.cs" />
     <Compile Include="GUI\Forms [OLD]\SaveWorldWindow.cs">
       <SubType>Form</SubType>
@@ -91,6 +86,7 @@
     <Compile Include="GUI\Models\Label.cs" />
     <Compile Include="GUI\Models\PixControl.cs" />
     <Compile Include="GUI\Models\SelectBox.cs" />
+    <Compile Include="GUI\Models\StaticExtensions.cs" />
     <Compile Include="GUI\NewWorldForm.cs" />
     <Compile Include="Logic\models\CraftingEntry.cs" />
     <Compile Include="Logic\CraftingModule.cs" />
@@ -142,9 +138,6 @@
   <ItemGroup>
     <EmbeddedResource Include="GUI\Forms [OLD]\CraftingForm.resx">
       <DependentUpon>CraftingForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms [OLD]\LoadWorldWindow.resx">
-      <DependentUpon>LoadWorldWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms [OLD]\PauseMenu.resx">
       <DependentUpon>PauseMenu.cs</DependentUpon>

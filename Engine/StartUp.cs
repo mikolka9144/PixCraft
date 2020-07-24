@@ -6,9 +6,6 @@ using Engine.Resources;
 using Engine.Saves;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
-using System;
-using System.Windows.Forms;
-
 using MainMenu = Engine.GUI.MainMenu;
 using Sound = Engine.PixBlocks_Implementations.Sound;
 
@@ -16,6 +13,7 @@ namespace Engine
 {
     public class StartUp
     {
+        private static SaveManager SaveManager;
 
         public void Init()
         {
@@ -40,12 +38,24 @@ namespace Engine
             var playerstatus = new PlayerStatus(StatusWindow);
             var blockConverter = new BlockConverter(Drawer, IdProcessor);
             var moveDefiner = new PlayerMoveDefiner();
-            var SaveManager = new SaveManager(tileManager, playerstatus, blockConverter, engine.Center, engine);
+            SaveManager = new SaveManager(tileManager, playerstatus, blockConverter, engine.Center, engine);
             var pauseMenu = new PauseMenu(SaveManager);
             var oreTable = new OreTable(OreResource.InitOreTable());
             pointerController = new PointerController(playerstatus, tileManager, moveDefiner, Drawer, Sound);
             player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus, Drawer, engine, engine.Center, Sound);
             generator = new Generator(tileManager, oreTable, Drawer);
+        }
+
+        internal static void InitGame(string text)
+        {
+            PixSound Sound;
+            PointerController pointerController;
+            Player player;
+            Engine.Engine engine;
+            ConfigureDependencies(out Sound, out pointerController, out player, out _, out engine);           
+            SaveManager.LoadSaveFromFile(text);
+
+            Start(Sound, pointerController, player, engine);
         }
 
         internal static void InitGame(int size, int seed)

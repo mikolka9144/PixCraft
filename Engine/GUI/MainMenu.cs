@@ -10,9 +10,14 @@ namespace Engine.GUI
 
         private  void SwichToNewWorldForm()
         {
-            Hide();
             var form = new NewWorldForm();
-            Thread.Sleep(50);
+            SwichTo(form);
+        }
+
+        private void SwichTo(Form form)
+        {
+            Hide();
+            Thread.Sleep(100);
             form.Show();
         }
 
@@ -20,11 +25,17 @@ namespace Engine.GUI
 
         public MainMenu():base(new Color(0,200,100),300)
         {
-            var options = new Box[] { new Box("Start", SwichToNewWorldForm), new Box("Load World", null) };
+            var options = new Box[] { new Box("Start", SwichToNewWorldForm), new Box("Load World", SwichToLoadWorldForm) };
 
             controls.Add(new Label(new Vector(0, 80), "PixCraft", 50));
             optionsWindow = new SelectBox(new Vector(0, 0), options);
             controls.Add(optionsWindow);
+        }
+
+        private void SwichToLoadWorldForm()
+        {
+            var form = new LoadWorldForm();
+            SwichTo(form);
         }
     }
 }
