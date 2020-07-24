@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Engine.GUI
 {
-    public partial class CraftingForm : Form
+    public partial class CraftingForm : System.Windows.Forms.Form
     {
         public CraftingForm(PlayerStatus playerStatus, CraftingModule craftingModule)
         {

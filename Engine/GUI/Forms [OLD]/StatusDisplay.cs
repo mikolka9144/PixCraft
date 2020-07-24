@@ -2,11 +2,10 @@
 using Engine.Logic.models;
 using Engine.Resources;
 using System;
-using System.Windows.Forms;
 
 namespace Engine.GUI
 {
-    internal partial class StatusDisplay : Form, IStatusDisplayer
+    internal partial class StatusDisplay : System.Windows.Forms.Form, IStatusDisplayer
     {
         public StatusDisplay(CraftingModule module)
         {

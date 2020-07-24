@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.btnResume = new System.Windows.Forms.Button();
-            this.btnSettings = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -43,19 +42,9 @@
             this.btnResume.UseVisualStyleBackColor = true;
             this.btnResume.Click += new System.EventHandler(this.btnResume_Click);
             // 
-            // btnSettings
-            // 
-            this.btnSettings.Location = new System.Drawing.Point(12, 42);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(233, 23);
-            this.btnSettings.TabIndex = 1;
-            this.btnSettings.Text = "Settings";
-            this.btnSettings.UseVisualStyleBackColor = true;
-            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
-            // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(12, 72);
+            this.btnSave.Location = new System.Drawing.Point(12, 41);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(233, 23);
             this.btnSave.TabIndex = 2;
@@ -67,9 +56,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(257, 107);
+            this.ClientSize = new System.Drawing.Size(257, 78);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.btnResume);
             this.Name = "PauseMenu";
             this.Text = "PauseMenu";
@@ -80,7 +68,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnResume;
-        private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button btnSave;
     }
 }

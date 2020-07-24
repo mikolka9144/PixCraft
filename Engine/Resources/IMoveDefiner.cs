@@ -15,7 +15,9 @@ namespace Engine.Resources
         Action,
         Pause,
         OpenInventory,
-        ChangeMouseState
+        ChangeMouseState,
+        Up,
+        Down
     }
 
     public class PlayerMoveDefiner : IMoveDefiner

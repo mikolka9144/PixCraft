@@ -60,31 +60,38 @@
     <Compile Include="Engine\Generator.cs" />
     <Compile Include="Engine\Models\IMover.cs" />
     <Compile Include="Engine\Models\Fluid.cs" />
-    <Compile Include="GUI\CraftingForm.cs">
+    <Compile Include="GUI\Forms [OLD]\CraftingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\CraftingForm.Designer.cs">
+    <Compile Include="GUI\Forms [OLD]\CraftingForm.Designer.cs">
       <DependentUpon>CraftingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Models\IForm.cs" />
     <Compile Include="GUI\ItemsConverterToViewItems.cs" />
-    <Compile Include="GUI\LoadWorldWindow.cs">
+    <Compile Include="GUI\Forms [OLD]\LoadWorldWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\LoadWorldWindow.Designer.cs">
+    <Compile Include="GUI\Forms [OLD]\LoadWorldWindow.Designer.cs">
       <DependentUpon>LoadWorldWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\SaveWorldWindow.cs">
+    <Compile Include="GUI\MainMenu.cs" />
+    <Compile Include="GUI\Forms [OLD]\SaveWorldWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\SaveWorldWindow.Designer.cs">
+    <Compile Include="GUI\Forms [OLD]\SaveWorldWindow.Designer.cs">
       <DependentUpon>SaveWorldWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\StatusDisplay.cs">
+    <Compile Include="GUI\Forms [OLD]\StatusDisplay.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\StatusDisplay.Designer.cs">
+    <Compile Include="GUI\Forms [OLD]\StatusDisplay.Designer.cs">
       <DependentUpon>StatusDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Models\BoxItem.cs" />
+    <Compile Include="GUI\Models\Label.cs" />
+    <Compile Include="GUI\Models\PixControl.cs" />
+    <Compile Include="GUI\Models\SelectBox.cs" />
+    <Compile Include="GUI\NewWorldForm.cs" />
     <Compile Include="Logic\models\CraftingEntry.cs" />
     <Compile Include="Logic\CraftingModule.cs" />
     <Compile Include="PixBlocks Implementations\ISound.cs" />
@@ -102,30 +109,11 @@
     <Compile Include="Engine\Models\Pointer.cs" />
     <Compile Include="Engine\OreTable.cs" />
     <Compile Include="Engine\TileManager.cs" />
-    <Compile Include="GUI\IInit.cs" />
-    <Compile Include="GUI\Main Menu.cs">
+    <Compile Include="GUI\Forms [OLD]\PauseMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Main Menu.Designer.cs">
-      <DependentUpon>Main Menu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\NewWorld.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\NewWorld.Designer.cs">
-      <DependentUpon>NewWorld.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\PauseMenu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\PauseMenu.Designer.cs">
+    <Compile Include="GUI\Forms [OLD]\PauseMenu.Designer.cs">
       <DependentUpon>PauseMenu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Settings Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Settings Form.Designer.cs">
-      <DependentUpon>Settings Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Engine\Models\IOreTable.cs" />
     <Compile Include="Logic\models\Interfances.cs" />
@@ -152,22 +140,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="GUI\CraftingForm.resx">
+    <EmbeddedResource Include="GUI\Forms [OLD]\CraftingForm.resx">
       <DependentUpon>CraftingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\LoadWorldWindow.resx">
+    <EmbeddedResource Include="GUI\Forms [OLD]\LoadWorldWindow.resx">
       <DependentUpon>LoadWorldWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Main Menu.resx">
-      <DependentUpon>Main Menu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\PauseMenu.resx">
+    <EmbeddedResource Include="GUI\Forms [OLD]\PauseMenu.resx">
       <DependentUpon>PauseMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\SaveWorldWindow.resx">
+    <EmbeddedResource Include="GUI\Forms [OLD]\SaveWorldWindow.resx">
       <DependentUpon>SaveWorldWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\StatusDisplay.resx">
+    <EmbeddedResource Include="GUI\Forms [OLD]\StatusDisplay.resx">
       <DependentUpon>StatusDisplay.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

@@ -12,30 +12,40 @@ namespace Engine.Engine
 
         public Center Center;
         public readonly Parameters parameters;
+        private readonly IDrawer drawer;
 
-        public ITileManager TileManager { get; }
+        public ITileManager manager { get; }
 
         public Engine(ITileManager tileManager, IDrawer drawer)
         {
             Center = new Center(drawer);
-            TileManager = tileManager;
+            manager = tileManager;
+            this.drawer = drawer;
         }
 
-        // Token: 0x06000016 RID: 22 RVA: 0x0000258D File Offset: 0x0000078D
-
-        // Token: 0x06000017 RID: 23 RVA: 0x000025BE File Offset: 0x000007BE
         public void Add(SpriteOverlay sprite)
         {
             Sprites.Add(sprite);
         }
-
-        // Token: 0x06000018 RID: 24 RVA: 0x000025D0 File Offset: 0x000007D0
-
-        // Token: 0x06000019 RID: 25 RVA: 0x00002628 File Offset: 0x00000828
+        public void Render()
+        {
+            foreach (var item in manager.Blocks)
+            {
+                drawer.Draw(item);
+            }
+            foreach (var item in manager.Toppings)
+            {
+                drawer.Draw(item);
+            }
+            foreach (var item in manager.Fluids)
+            {
+                drawer.Draw(item);
+            }
+        }
 
         public void Move(roation roation, int lenght)
         {
-            foreach (Block block in TileManager.Blocks)
+            foreach (Block block in manager.Blocks)
             {
                 block.move(roation, lenght);
             }
@@ -43,11 +53,11 @@ namespace Engine.Engine
             {
                 spriteOverlay.move(roation, lenght);
             }
-            foreach (Foliage foliage in TileManager.Toppings)
+            foreach (Foliage foliage in manager.Toppings)
             {
                 foliage.move(roation, lenght);
             }
-            foreach (var item in TileManager.Fluids)
+            foreach (var item in manager.Fluids)
             {
                 item.move(roation, lenght);
             }

@@ -6,73 +6,72 @@ using Engine.Resources;
 using Engine.Saves;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
+using System;
 using System.Windows.Forms;
 
+using MainMenu = Engine.GUI.MainMenu;
 using Sound = Engine.PixBlocks_Implementations.Sound;
 
 namespace Engine
 {
-    public class StartUp : IInit
+    public class StartUp
     {
-        public bool IsWorldGenerated { get; set; } = false;
-        private Engine.Engine engine;
-        private TileManager tileManager;
-        private Drawer Drawer;
 
         public void Init()
         {
-            var Sound = new PixSound(new Sounds(new Sound()));
-            Drawer = new Drawer();
+            var game = GameScene.gameSceneStatic;
+            var MainMenu = new MainMenu();
+            MainMenu.Show();
+            game.start();
+
+           
+            
+        }
+
+        private static void ConfigureDependencies(out PixSound Sound, out PointerController pointerController, out Player player,out Generator generator,out Engine.Engine engine)
+        {
+            Sound = new PixSound(new Sounds(new Sound()));
+            var Drawer = new Drawer();
             var IdProcessor = new BlockIdProcessor();
-            tileManager = new TileManager(Drawer, IdProcessor);
+            var tileManager = new TileManager(Drawer, IdProcessor);
             engine = new Engine.Engine(tileManager, Drawer);
-            var craftingSystem = new CraftingModule(Craftings.GetCraftings(),tileManager);
+            var craftingSystem = new CraftingModule(Craftings.GetCraftings(), tileManager);
             var StatusWindow = new StatusDisplay(craftingSystem);
             var playerstatus = new PlayerStatus(StatusWindow);
             var blockConverter = new BlockConverter(Drawer, IdProcessor);
-            var game = GameScene.gameSceneStatic;
             var moveDefiner = new PlayerMoveDefiner();
             var SaveManager = new SaveManager(tileManager, playerstatus, blockConverter, engine.Center, engine);
             var pauseMenu = new PauseMenu(SaveManager);
-            var pointerController = new PointerController(playerstatus, tileManager, moveDefiner,Drawer,Sound);
-            var player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus,Drawer,engine,engine.Center,Sound);
+            var oreTable = new OreTable(OreResource.InitOreTable());
+            pointerController = new PointerController(playerstatus, tileManager, moveDefiner, Drawer, Sound);
+            player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus, Drawer, engine, engine.Center, Sound);
+            generator = new Generator(tileManager, oreTable, Drawer);
+        }
 
-            var MainMenu = new Main_Menu(this, SaveManager);
-            MainMenu.ShowDialog();
-            if (!IsWorldGenerated) return;
+        internal static void InitGame(int size, int seed)
+        {
+            PixSound Sound;
+            PointerController pointerController;
+            Player player;
+            Generator generator;
+            Engine.Engine engine;
+            ConfigureDependencies(out Sound, out pointerController, out player,out generator,out engine);
+            generator.GenerateWorld(seed, size);
+
+            Start(Sound,pointerController,player,engine);
+        }
+
+        private static void Start(PixSound Sound, PointerController pointerController, Player player,Engine.Engine engine)
+        {
+            var game = GameScene.gameSceneStatic;
             engine.Add(pointerController);
             game.background = new Color(102, 51, 204);
-            game.add(pointerController);
+
+            engine.Render();
+
             game.add(player);
             Sound.PlaySound(SoundType.Music);
-            game.start();
         }
-
-        public void GenerateWorld(int seed, int size, ProgressBar progress)
-        {
-            IsWorldGenerated = true;
-            var oreTable = new OreTable(OreResource.InitOreTable());
-
-            var generator = new Generator(seed, tileManager, oreTable, size,Drawer);
-            ExecuteGeneration(generator, progress);
-        }
-
-        private void ExecuteGeneration(Generator generator, ProgressBar progress)
-        {
-            generator.GenerateTerrian();
-            generator.GenerateWater();
-            progress.Value = 25;
-            generator.GenerateTrees();
-            progress.Value = 50;
-            generator.CreateUnderGround();
-            progress.Value = 75;
-            generator.GenerateOres(BlockType.CoalOre);
-            generator.GenerateOres(BlockType.IronOre);
-            generator.GenerateOres(BlockType.GoldOre);
-            generator.GenerateOres(BlockType.DiamondOre);
-            generator.GenerateOres(BlockType.Lava);
-            progress.Value = 100;
-            generator.Render();
-        }
+        
     }
 }

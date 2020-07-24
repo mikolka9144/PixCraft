@@ -18,7 +18,7 @@ namespace EngineTets.Logic
         {
             ActiveElements = new Elements();
             playerStatus = new PlayerStatus(null);
-            Instance = new MovableObject(ActiveElements, null, null, null,playerStatus);
+            Instance = new MovableObject(ActiveElements, null, null, null,playerStatus,new TestSound());
 
             Instance.IsDestroyed = false;
             Instance.IsVisible = true;

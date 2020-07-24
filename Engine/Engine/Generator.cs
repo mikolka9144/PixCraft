@@ -6,25 +6,39 @@ namespace Engine.Engine
 {
     internal class Generator
     {
-        private readonly Random randomizer;
+        private Random randomizer;
         private int CanGenerateTree;
 
         private readonly ITileManager manager;
         private readonly IOreTable oreTable;
-        private readonly int size;
+        private int size;
         private readonly IDrawer drawer;
 
-        public Generator(int seed, ITileManager manager, IOreTable oreTable, int size,IDrawer drawer)
+        public Generator(ITileManager manager, IOreTable oreTable,IDrawer drawer)
         {
-            randomizer = new Random(seed);
+            
             this.manager = manager;
             this.oreTable = oreTable;
-            this.size = size;
             this.drawer = drawer;
             CanGenerateTree = Parameters.TreeSpread;
         }
 
-        public void GenerateTerrian()
+        public void GenerateWorld(int seed,int size)
+        {
+            randomizer = new Random(seed);
+            this.size = size;
+
+            GenerateTerrian();
+            GenerateWater();
+            GenerateTrees();
+            CreateUnderGround();
+            GenerateOres(BlockType.CoalOre);
+            GenerateOres(BlockType.IronOre);
+            GenerateOres(BlockType.GoldOre);
+            GenerateOres(BlockType.DiamondOre);
+            GenerateOres(BlockType.Lava);
+        }
+        private void GenerateTerrian()
         {
             for (int i = -size; i < 0; i++)
             {
@@ -57,23 +71,9 @@ namespace Engine.Engine
             }
         }
 
-        internal void Render()
-        {
-            foreach (var item in manager.Blocks)
-            {
-                drawer.Draw(item);
-            }
-            foreach(var item in manager.Toppings)
-            {
-                drawer.Draw(item);
-            }
-            foreach(var item in manager.Fluids)
-            {
-                drawer.Draw(item);
-            }
-        }
+        
 
-        public void GenerateTrees()
+        private void GenerateTrees()
         {
             foreach (var item in manager.Blocks.FindAll(s => s.Id == BlockType.Grass))
             {
@@ -87,7 +87,7 @@ namespace Engine.Engine
             }
         }
 
-        internal void GenerateWater()
+        private void GenerateWater()
         {           
             for (int X = -size; X < size; X++)
             {
@@ -118,7 +118,7 @@ namespace Engine.Engine
             CanGenerateTree = 0;
         }
 
-        public void CreateUnderGround()
+        private void CreateUnderGround()
         {
             for (int X = -size; X < size; X++)
             {
@@ -134,7 +134,7 @@ namespace Engine.Engine
             }
         }
 
-        public void GenerateOres(BlockType type)
+        private void GenerateOres(BlockType type)
         {
             var offset = Parameters.ChunkSize;
             var count = oreTable.GetCount(type);
