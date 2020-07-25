@@ -8,7 +8,7 @@ namespace Engine.Engine
     public class Engine : IMover
     {
         public BlockIdProcessor IdProcessor = new BlockIdProcessor();
-        public List<SpriteOverlay> Sprites = new List<SpriteOverlay>();
+        public List<IStoppableSpriteOverlay> Sprites = new List<IStoppableSpriteOverlay>();
 
         public Center Center;
         public readonly Parameters parameters;
@@ -23,7 +23,7 @@ namespace Engine.Engine
             this.drawer = drawer;
         }
 
-        public void Add(SpriteOverlay sprite)
+        public void Add(IStoppableSpriteOverlay sprite)
         {
             Sprites.Add(sprite);
         }

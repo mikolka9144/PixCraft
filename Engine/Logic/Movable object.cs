@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Engine.Logic
 {
-    public class MovableObject : SpriteOverlay
+    public class MovableObject : SpriteOverlay,IStoppableSpriteOverlay
     {
         protected readonly IMoveDefiner moveDefiner;
         protected readonly PlayerStatus status;
@@ -48,9 +48,11 @@ namespace Engine.Logic
         public IActiveElements ActiveElements { get; }
         public PointerController Pointer { get; }
         public IPixSound Sound { get; }
+        public bool Active { get; set; } = true;
 
         public override void update()
         {
+            if (!Active) return;
             if (moveDefiner.key(command.Left) && TicksElapsedForMove >= Parameters.MoveDelay)
             {
                 MoveLeft();

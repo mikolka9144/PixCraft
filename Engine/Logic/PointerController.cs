@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Engine.Logic
 {
-    public class PointerController : Pointer
+    public class PointerController : Pointer,IStoppableSpriteOverlay
     {
         private readonly PlayerStatus status;
         private readonly IMoveDefiner moveDefiner;
@@ -28,9 +28,11 @@ namespace Engine.Logic
 
         public ITileManager Tiles { get; }
         public IPixSound Sound { get; }
+        public bool Active { get; set; } = true;
 
         public override void update()
         {
+            if (!Active) return;
             MovePointer(GameScene.gameSceneStatic.mouse.position);
             CheckBlocksOperations();
             ChangeState();

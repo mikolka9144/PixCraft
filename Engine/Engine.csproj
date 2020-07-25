@@ -88,6 +88,9 @@
     <Compile Include="GUI\Models\SelectBox.cs" />
     <Compile Include="GUI\Models\StaticExtensions.cs" />
     <Compile Include="GUI\NewWorldForm.cs" />
+    <Compile Include="GUI\PauseForm.cs" />
+    <Compile Include="GUI\SaveWorldForm.cs" />
+    <Compile Include="IStoppableSpriteOverlay.cs" />
     <Compile Include="Logic\models\CraftingEntry.cs" />
     <Compile Include="Logic\CraftingModule.cs" />
     <Compile Include="PixBlocks Implementations\ISound.cs" />
@@ -105,12 +108,6 @@
     <Compile Include="Engine\Models\Pointer.cs" />
     <Compile Include="Engine\OreTable.cs" />
     <Compile Include="Engine\TileManager.cs" />
-    <Compile Include="GUI\Forms [OLD]\PauseMenu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Forms [OLD]\PauseMenu.Designer.cs">
-      <DependentUpon>PauseMenu.cs</DependentUpon>
-    </Compile>
     <Compile Include="Engine\Models\IOreTable.cs" />
     <Compile Include="Logic\models\Interfances.cs" />
     <Compile Include="Resources\IMoveDefiner.cs" />
@@ -138,9 +135,6 @@
   <ItemGroup>
     <EmbeddedResource Include="GUI\Forms [OLD]\CraftingForm.resx">
       <DependentUpon>CraftingForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms [OLD]\PauseMenu.resx">
-      <DependentUpon>PauseMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms [OLD]\SaveWorldWindow.resx">
       <DependentUpon>SaveWorldWindow.cs</DependentUpon>

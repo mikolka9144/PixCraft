@@ -13,13 +13,13 @@ namespace Engine.Logic
 {
     internal class Player : MovableObject 
     {
-        private PauseMenu settingsForm;
+        private PauseForm settingsForm;
 
         public IMover Mover { get; }
 
         private Center center;
 
-        public Player(PauseMenu pauseMenu, IActiveElements activeElements, PointerController pointer, IMoveDefiner definer, PlayerStatus status,IDrawer drawer,IMover mover,Center center,IPixSound sound) : base(activeElements, drawer, definer, pointer, status,sound)
+        public Player(PauseForm pauseMenu, IActiveElements activeElements, PointerController pointer, IMoveDefiner definer, PlayerStatus status,IDrawer drawer,IMover mover,Center center,IPixSound sound) : base(activeElements, drawer, definer, pointer, status,sound)
         {
             position = new PixBlocks.PythonIron.Tools.Integration.Vector(0, 0);
             size = 10;
@@ -55,7 +55,7 @@ namespace Engine.Logic
 
         private void Pause()
         {
-            settingsForm.ShowDialog();
+            settingsForm.Show();
         }
 
         private void KillPlayer()

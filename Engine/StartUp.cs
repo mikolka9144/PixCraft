@@ -1,4 +1,5 @@
 ﻿using Engine.Engine;
+using Engine.Engine.models;
 using Engine.GUI;
 using Engine.Logic;
 using Engine.PixBlocks_Implementations;
@@ -39,7 +40,7 @@ namespace Engine
             var blockConverter = new BlockConverter(Drawer, IdProcessor);
             var moveDefiner = new PlayerMoveDefiner();
             SaveManager = new SaveManager(tileManager, playerstatus, blockConverter, engine.Center, engine);
-            var pauseMenu = new PauseMenu(SaveManager);
+            var pauseMenu = new PauseForm(engine,SaveManager);
             var oreTable = new OreTable(OreResource.InitOreTable());
             pointerController = new PointerController(playerstatus, tileManager, moveDefiner, Drawer, Sound);
             player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus, Drawer, engine, engine.Center, Sound);
@@ -79,7 +80,8 @@ namespace Engine
 
             engine.Render();
 
-            game.add(player);
+            engine.Add(player);
+            player.move(roation.Up, 0);
             Sound.PlaySound(SoundType.Music);
         }
         
