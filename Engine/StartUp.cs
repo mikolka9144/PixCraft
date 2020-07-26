@@ -43,7 +43,7 @@ namespace Engine
             var pauseMenu = new PauseForm(engine,SaveManager);
             var oreTable = new OreTable(OreResource.InitOreTable());
             pointerController = new PointerController(playerstatus, tileManager, moveDefiner, Drawer, Sound);
-            player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus, Drawer, engine, engine.Center, Sound);
+            player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus, Drawer, engine, Sound);
             generator = new Generator(tileManager, oreTable, Drawer);
         }
 

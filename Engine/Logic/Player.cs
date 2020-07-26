@@ -17,9 +17,7 @@ namespace Engine.Logic
 
         public IMover Mover { get; }
 
-        private Center center;
-
-        public Player(PauseForm pauseMenu, IActiveElements activeElements, PointerController pointer, IMoveDefiner definer, PlayerStatus status,IDrawer drawer,IMover mover,Center center,IPixSound sound) : base(activeElements, drawer, definer, pointer, status,sound)
+        public Player(PauseForm pauseMenu, IActiveElements activeElements, PointerController pointer, IMoveDefiner definer, PlayerStatus status,IDrawer drawer,IMover mover,IPixSound sound) : base(activeElements, drawer, definer, pointer, status,sound)
         {
             position = new PixBlocks.PythonIron.Tools.Integration.Vector(0, 0);
             size = 10;
@@ -27,7 +25,6 @@ namespace Engine.Logic
             status.OnKill = KillPlayer;
             settingsForm = pauseMenu;
             Mover = mover;
-            this.center = center;
         }
        
 

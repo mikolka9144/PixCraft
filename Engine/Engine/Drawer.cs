@@ -9,21 +9,17 @@ namespace Engine.Engine
     {
         public void Draw(SpriteOverlay sprite)
         {
-            var flag = sprite.X > Parameters.border.Left || sprite.X < -Parameters.border.Right ||
+            var IsNotInBorder = sprite.X > Parameters.border.Left || sprite.X < -Parameters.border.Right ||
                sprite.Y > Parameters.border.Up || sprite.Y < -Parameters.border.Down;
 
-            if (flag)
+            if (IsNotInBorder)
             {
                 sprite.IsVisible = false;
             }
             else
             {
                 sprite.position = new Vector(sprite.X, sprite.Y);
-                bool flag2 = !sprite.IsVisible;
-                if (flag2)
-                {
-                    AddSpriteToGame(sprite);
-                }
+                AddSpriteToGame(sprite);
             }
         }
 
