@@ -11,16 +11,16 @@ namespace Engine.GUI.Models
         public SelectBox(Vector vector,IList<Box> boxes)
         {
             size = 0;
-            ItemsList = new List<BoxItem>();
+            ItemsList = new List<Button>();
             for (int i = 0; i < boxes.Count(); i++)
             {
                 var localVector = new Vector(vector.x,vector.y-(30*i));
                 ItemsList.Add(
-                    new BoxItem(localVector, boxes[i].Name,30,boxes[i].Task));
+                    new Button(localVector, boxes[i].Name,30,boxes[i].Task));
             }
             
         }
-        internal List<BoxItem> ItemsList { get; }
+        internal List<Button> ItemsList { get; }
 
         public override void Hide()
         {
@@ -37,7 +37,7 @@ namespace Engine.GUI.Models
 
     public struct Box
     {
-        public Box(string name,Action<BoxItem> task)
+        public Box(string name,Action<PixControl> task)
         {
             Name = name;
             Task = task;
@@ -49,6 +49,6 @@ namespace Engine.GUI.Models
         }
 
         public string Name { get; }
-        public Action<BoxItem> Task { get; }
+        public Action<PixControl> Task { get; }
     }
 }

@@ -66,19 +66,14 @@
     <Compile Include="GUI\Forms [OLD]\CraftingForm.Designer.cs">
       <DependentUpon>CraftingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\InventoryForm.cs" />
     <Compile Include="GUI\LoadWorldForm.cs" />
     <Compile Include="GUI\Models\IForm.cs" />
-    <Compile Include="GUI\ItemsConverterToViewItems.cs" />
     <Compile Include="GUI\MainMenu.cs" />
-    <Compile Include="GUI\Forms [OLD]\StatusDisplay.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Forms [OLD]\StatusDisplay.Designer.cs">
-      <DependentUpon>StatusDisplay.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Models\BoxItem.cs" />
+    <Compile Include="GUI\Models\Button.cs" />
     <Compile Include="GUI\Models\Label.cs" />
     <Compile Include="GUI\Models\PixControl.cs" />
+    <Compile Include="GUI\Models\RadioEntry.cs" />
     <Compile Include="GUI\Models\SelectBox.cs" />
     <Compile Include="GUI\Models\StaticExtensions.cs" />
     <Compile Include="GUI\NewWorldForm.cs" />
@@ -130,9 +125,9 @@
     <EmbeddedResource Include="GUI\Forms [OLD]\CraftingForm.resx">
       <DependentUpon>CraftingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms [OLD]\StatusDisplay.resx">
-      <DependentUpon>StatusDisplay.cs</DependentUpon>
-    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Sound\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

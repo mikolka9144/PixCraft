@@ -5,14 +5,15 @@ namespace Engine.GUI.Models
 {
     public static class StaticExtensions
     {
-        public static Action<BoxItem> configureAsTextBox(bool IsNumber)
+        public static Action<PixControl> configureAsTextBox(bool IsNumber)
         {
             return (s) => Task(s, IsNumber);
         }
 
-        private static void Task(BoxItem item, bool IsNumber)
+        private static void Task(PixControl item, bool IsNumber)
         {
-            item.label.text = TryParseInput(item.label.text, IsNumber);
+            var button = item as Button;
+            button.label.text = TryParseInput(button.label.text, IsNumber);
         }
 
         private static string TryParseInput(string PrevValue, bool IsNumber)

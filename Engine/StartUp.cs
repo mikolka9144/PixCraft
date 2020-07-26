@@ -35,7 +35,7 @@ namespace Engine
             var tileManager = new TileManager(Drawer, IdProcessor);
             engine = new Engine.Engine(tileManager, Drawer);
             var craftingSystem = new CraftingModule(Craftings.GetCraftings(), tileManager);
-            var StatusWindow = new StatusDisplay(craftingSystem);
+            var StatusWindow = new InventoryForm(craftingSystem);
             var playerstatus = new PlayerStatus(StatusWindow);
             var blockConverter = new BlockConverter(Drawer, IdProcessor);
             var moveDefiner = new PlayerMoveDefiner();

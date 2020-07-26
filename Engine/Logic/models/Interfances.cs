@@ -17,7 +17,7 @@ namespace Engine.Logic.models
     }
     public interface IStatusDisplayer
     {
-        void Present(int life, PlayerStatus currentItems);
+        void Present( PlayerStatus currentItems);
 
         int SelectedIndex { get; set; }
     }

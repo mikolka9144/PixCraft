@@ -102,7 +102,7 @@ namespace Engine.Logic
             breath = Parameters.MaxBreath;
         }
 
-        public void OpenInventory() => Displayer.Present(health, this);
+        public void OpenInventory() => Displayer.Present( this);
 
         public void Decrement(BlockType selection, int count)
         {

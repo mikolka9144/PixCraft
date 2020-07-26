@@ -33,13 +33,13 @@ namespace Engine.GUI
         private void UpdateNeededItems(List<Item> neededItems)
         {
             neededItemsList.Items.Clear();
-            neededItemsList.Items.AddRange(ItemsConverter.LoadItemsToList(neededItems));
+            //neededItemsList.Items.AddRange(ItemsConverter.LoadItemsToList(neededItems));
         }
 
         private void UpdateInventory()
         {
             Inventory.Items.Clear();
-            Inventory.Items.AddRange(ItemsConverter.LoadItemsToList(PlayerStatus.Inventory));
+           // Inventory.Items.AddRange(ItemsConverter.LoadItemsToList(PlayerStatus.Inventory));
         }
 
         private void listOfItemsToCraft_SelectedIndexChanged(object sender, EventArgs e)
