@@ -68,13 +68,15 @@
     </Compile>
     <Compile Include="GUI\InventoryForm.cs" />
     <Compile Include="GUI\LoadWorldForm.cs" />
+    <Compile Include="GUI\Models\Controls\CloseButton.cs" />
     <Compile Include="GUI\Models\IForm.cs" />
     <Compile Include="GUI\MainMenu.cs" />
-    <Compile Include="GUI\Models\Button.cs" />
-    <Compile Include="GUI\Models\Label.cs" />
+    <Compile Include="GUI\Models\Controls\Button.cs" />
+    <Compile Include="GUI\Models\Controls\IndexedButton.cs" />
+    <Compile Include="GUI\Models\Controls\Label.cs" />
     <Compile Include="GUI\Models\PixControl.cs" />
-    <Compile Include="GUI\Models\RadioEntry.cs" />
-    <Compile Include="GUI\Models\SelectBox.cs" />
+    <Compile Include="GUI\Models\Controls\RadioList.cs" />
+    <Compile Include="GUI\Models\Controls\SelectBox.cs" />
     <Compile Include="GUI\Models\StaticExtensions.cs" />
     <Compile Include="GUI\NewWorldForm.cs" />
     <Compile Include="GUI\PauseForm.cs" />

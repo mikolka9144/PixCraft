@@ -1,5 +1,4 @@
 ﻿using PixBlocks.PythonIron.Tools.Integration;
-using PixBlocks.PythonIron.Tools.Game;
 using System;
 
 namespace Engine.GUI.Models
@@ -13,7 +12,7 @@ namespace Engine.GUI.Models
 
             position = vector;
             this.size = size;
-            OnClick += taskToRepresent;
+            OnClick = taskToRepresent;
             image = 77;
             angle = 90;
         }

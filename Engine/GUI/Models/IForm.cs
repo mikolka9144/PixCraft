@@ -12,7 +12,6 @@ namespace Engine.GUI
             image = 63;
             this.color = color;
         }
-
         public List<PixControl> controls = new List<PixControl>();
 
         public override void Show()

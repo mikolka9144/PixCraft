@@ -1,6 +1,4 @@
-﻿using Engine.Engine.models;
-
-namespace Engine.Engine
+﻿namespace Engine.Engine
 {
     public interface IStoppableSpriteOverlay
     {

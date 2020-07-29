@@ -19,6 +19,6 @@ namespace Engine.Logic.models
     {
         void Present( PlayerStatus currentItems);
 
-        int SelectedIndex { get; set; }
+        int SelectedIndex { get; }
     }
 }

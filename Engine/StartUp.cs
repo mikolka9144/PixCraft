@@ -7,6 +7,8 @@ using Engine.Resources;
 using Engine.Saves;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
+using System;
+using System.Windows.Forms;
 using MainMenu = Engine.GUI.MainMenu;
 using Sound = Engine.PixBlocks_Implementations.Sound;
 
@@ -16,15 +18,31 @@ namespace Engine
     {
         private static SaveManager SaveManager;
 
-        public void Init()
+        public void ShowMainMenu()
         {
             var game = GameScene.gameSceneStatic;
             var MainMenu = new MainMenu();
             MainMenu.Show();
-            game.start();
-
-           
-            
+            game.start();     
+        }
+        public void Init()
+        {
+            try
+            {
+                ShowMainMenu();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.StackTrace);
+                MessageBox.Show(ex.Source);
+                MessageBox.Show(ex.InnerException.Message);
+                MessageBox.Show(ex.InnerException.Source);
+                MessageBox.Show(ex.InnerException.StackTrace);
+                MessageBox.Show(ex.InnerException.InnerException.Message);
+                MessageBox.Show(ex.InnerException.InnerException.Source);
+                MessageBox.Show(ex.InnerException.InnerException.StackTrace);
+            }
         }
 
         private static void ConfigureDependencies(out PixSound Sound, out PointerController pointerController, out Player player,out Generator generator,out Engine.Engine engine)
@@ -35,7 +53,7 @@ namespace Engine
             var tileManager = new TileManager(Drawer, IdProcessor);
             engine = new Engine.Engine(tileManager, Drawer);
             var craftingSystem = new CraftingModule(Craftings.GetCraftings(), tileManager);
-            var StatusWindow = new InventoryForm(craftingSystem);
+            var StatusWindow = new InventoryForm(craftingSystem,engine);
             var playerstatus = new PlayerStatus(StatusWindow);
             var blockConverter = new BlockConverter(Drawer, IdProcessor);
             var moveDefiner = new PlayerMoveDefiner();

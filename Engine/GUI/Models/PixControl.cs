@@ -6,7 +6,7 @@ namespace Engine.GUI.Models
 {
     public class PixControl : Sprite
     {
-        public event Action<PixControl> OnClick;
+        public Action<PixControl> OnClick;
 
         public virtual void Hide()
         {
@@ -19,7 +19,8 @@ namespace Engine.GUI.Models
         }
         public override void update()
         {
-            if (collide(GameScene.gameSceneStatic.mouse.position) && GameScene.gameSceneStatic.mouse.pressed) OnClick.Invoke(this);
+            if (OnClick is null) return;
+            if (collide(GameScene.gameSceneStatic.mouse.position) && GameScene.gameSceneStatic.mouse.pressed) OnClick(this);
         }
 
         private bool collide(Vector position)

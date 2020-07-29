@@ -56,7 +56,8 @@ namespace EngineTets.Logic
     {
         public int SelectedIndex { get; set; }
 
-        public void Present(int life, PlayerStatus currentItems)
+
+        public void Present(PlayerStatus currentItems)
         {
             throw new NotImplementedException();
         }

@@ -1,7 +1,6 @@
 ﻿using Engine.GUI.Models;
 using Engine.Saves;
 using PixBlocks.PythonIron.Tools.Integration;
-using System;
 using System.Threading;
 
 namespace Engine.GUI
