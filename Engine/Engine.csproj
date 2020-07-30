@@ -60,12 +60,7 @@
     <Compile Include="Engine\Generator.cs" />
     <Compile Include="Engine\Models\IMover.cs" />
     <Compile Include="Engine\Models\Fluid.cs" />
-    <Compile Include="GUI\Forms [OLD]\CraftingForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Forms [OLD]\CraftingForm.Designer.cs">
-      <DependentUpon>CraftingForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="GUI\CraftingForm.cs" />
     <Compile Include="GUI\InventoryForm.cs" />
     <Compile Include="GUI\LoadWorldForm.cs" />
     <Compile Include="GUI\Models\Controls\CloseButton.cs" />
@@ -77,6 +72,7 @@
     <Compile Include="GUI\Models\PixControl.cs" />
     <Compile Include="GUI\Models\Controls\RadioList.cs" />
     <Compile Include="GUI\Models\Controls\SelectBox.cs" />
+    <Compile Include="GUI\Models\RadioListConverter.cs" />
     <Compile Include="GUI\Models\StaticExtensions.cs" />
     <Compile Include="GUI\NewWorldForm.cs" />
     <Compile Include="GUI\PauseForm.cs" />
@@ -122,11 +118,6 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="GUI\Forms [OLD]\CraftingForm.resx">
-      <DependentUpon>CraftingForm.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sound\" />

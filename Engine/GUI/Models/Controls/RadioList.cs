@@ -8,12 +8,14 @@ namespace Engine.GUI.Models
     {
         public List<IndexedButton> radios { get; }
         public int Selection { get; set; }
-        public RadioList(Vector vector)
+        public int ItemsInCollumn { get; }
+
+        public RadioList(Vector vector,int itemsInCollumn)
         {
             position = vector;
             size = 0;
             radios = new List<IndexedButton>();
-            
+            ItemsInCollumn = itemsInCollumn;
         }
         public void Initalize(IList<RadioTemplate> controls)
         {
@@ -22,12 +24,12 @@ namespace Engine.GUI.Models
             var Xpos = position.x;
             for (int i = 0; i < controls.Count(); i++)
             {
-                if (Ypos < -70) 
+                if (i%ItemsInCollumn == 0&& i != 0) 
                 { 
-                    Xpos -= 40;
+                    Xpos += 40;
                     Ypos = position.y;
                 }
-                var radio = new IndexedButton(new Vector(position.x, Ypos), controls[i].Text,30, changeSelection, i);
+                var radio = new IndexedButton(new Vector(Xpos, Ypos), controls[i].Text,30, changeSelection, i);
                 radios.Add(radio);
                 Ypos -= 30;
             }
