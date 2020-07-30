@@ -19,7 +19,7 @@ namespace Engine.GUI.Models
             set 
             { 
                 active = value;
-                color = value ? new Color(140, 200, 230) : new Color(0, 0, 0);
+                color = value ? new Color(140, 200, 230) : new Color(15, 142, 255);
             } 
         }
     }

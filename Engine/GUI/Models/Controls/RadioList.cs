@@ -19,14 +19,20 @@ namespace Engine.GUI.Models
         {
             radios.Clear();
             var Ypos = position.y;
+            var Xpos = position.x;
             for (int i = 0; i < controls.Count(); i++)
             {
-                var radio = new IndexedButton(new Vector(position.x, Ypos), controls[i].Text,20, changeSelection, i);
+                if (Ypos < -70) 
+                { 
+                    Xpos -= 40;
+                    Ypos = position.y;
+                }
+                var radio = new IndexedButton(new Vector(position.x, Ypos), controls[i].Text,30, changeSelection, i);
                 radios.Add(radio);
-                Ypos -= 20;
+                Ypos -= 30;
             }
             if (radios.Count == 0) return;
-            radios.First().Active = true;
+            
         }
         private void changeSelection(PixControl obj)
         {

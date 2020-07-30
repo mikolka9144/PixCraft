@@ -24,15 +24,22 @@ namespace Engine.GUI
                 elements.Add(new RadioTemplate($"{item.Name} X:{item.Count}"));
             }
             list.Initalize(elements);
+            list.radios[SelectedIndex].Active = true;
             Show();
         }
         public InventoryForm(CraftingModule craftingSystem,Engine.Engine engine) :base(new Color(10,100,200),300)
         {
-            list = new RadioList(new Vector(0, 0));
+            list = new RadioList(new Vector(-70, 70));
+            controls.Add(new Button(new Vector(-70, 90), "Craft", 30, ShowWorkBench));
             controls.Add(list);
             controls.Add(new CloseButton(new Vector(90, 90), 20, CloseForm));
             this.craftingSystem = craftingSystem;
             this.engine = engine;
+        }
+
+        private void ShowWorkBench(PixControl obj)
+        {
+            
         }
 
         private void CloseForm(PixControl obj)
