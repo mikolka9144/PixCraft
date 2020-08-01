@@ -38,7 +38,6 @@ namespace Engine.GUI.Models
                 Ypos -= 30;
                 i++;
             }
-            if (radios.Count == 0) return;
             
         }
         private void changeSelection(PixControl obj)

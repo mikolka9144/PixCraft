@@ -1,4 +1,5 @@
-﻿using PixBlocks.PythonIron.Tools.Game;
+﻿
+using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
 using System;
 
@@ -7,7 +8,6 @@ namespace Engine.GUI.Models
     public class PixControl : Sprite
     {
         public Action<PixControl> OnClick;
-
         public virtual void Hide()
         {
             GameScene.gameSceneStatic.remove(this);

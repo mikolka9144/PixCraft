@@ -22,13 +22,20 @@ namespace Engine.GUI
             this.craftingSystem = craftingSystem;
             this.inventory = inventory;
             showPreviousForm = ShowPreviousForm;
-            allCraftings = new RadioList(new Vector(-80,90), 6);
+
+            controls.Add(new Label(new Vector(-80, 90), "Rcepies", 30));
+            allCraftings = new RadioList(new Vector(-80,70), 7);
             allCraftings.OnSelectionChange += AllCraftings_OnSelectionChange;
             controls.Add(allCraftings);
-            neededItems = new RadioList(new Vector(0, 90), 4,true);
+
+            controls.Add(new Label(new Vector(0, 95), "Requirements", 30));
+            neededItems = new RadioList(new Vector(0, 75), 2,true);
             controls.Add(neededItems);
+
+            controls.Add(new Label(new Vector(0, 20), "Inventory", 30));
             havedItems = new RadioList(new Vector(0, 0), 4,true);
             controls.Add(havedItems);
+
             controls.Add(new CloseButton(new Vector(90, 90),20,(s) =>Hide()));
             controls.Add(new Button(new Vector(-50, -90), "Craft", 20, CraftItem) { color = new Color(204, 51, 153) });
             InitData();
@@ -39,7 +46,7 @@ namespace Engine.GUI
             var item = allCraftings.radios[allCraftings.Selection].ObjectToRepresent as Item;
             craftingSystem.Craft(inventory, item.type);
             RefreshInventory();
-            Thread.Sleep(80);
+            Thread.Sleep(100);
         }
 
         private void AllCraftings_OnSelectionChange(object sender,IndexedButton args)
@@ -52,7 +59,7 @@ namespace Engine.GUI
         private void InitData()
         {
             allCraftings.Initalize(craftingSystem.craftingEntries.Select(s => s.CraftedItem));
-            RefreshInventory();
+            havedItems.Initalize(inventory.Inventory);
         }
 
         private void RefreshInventory()
