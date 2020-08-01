@@ -27,5 +27,11 @@ namespace Engine.Logic
         {
             return item.type == type;
         }
+        public override string ToString() => $"{Name} X:{Count}";
+
+        internal Item Duplicate()
+        {
+            return MemberwiseClone() as Item;
+        }
     }
 }

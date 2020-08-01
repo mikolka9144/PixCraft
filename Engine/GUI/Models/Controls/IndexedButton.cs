@@ -5,14 +5,17 @@ namespace Engine.GUI.Models
 {
     public class IndexedButton : Button
     {
-        private bool active;
 
-        public IndexedButton(Vector vector, string text, int size, Action<PixControl> taskToRepresent, int index) : base(vector, text, size, taskToRepresent)
+        public IndexedButton(Vector vector, object objectToRepresent, int size, Action<PixControl> taskToRepresent, int index) : base(vector, objectToRepresent.ToString(), size, taskToRepresent)
         {
+            ObjectToRepresent = objectToRepresent;
             Index = index;
         }
 
+        public object ObjectToRepresent { get; }
         public int Index { get; }
+
+        private bool active;
         public bool Active 
         { 
             get => active; 

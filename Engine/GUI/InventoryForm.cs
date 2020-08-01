@@ -3,6 +3,7 @@ using Engine.GUI.Models.Controls;
 using Engine.Logic;
 using Engine.Logic.models;
 using PixBlocks.PythonIron.Tools.Integration;
+using System.Threading;
 
 namespace Engine.GUI
 {
@@ -20,12 +21,12 @@ namespace Engine.GUI
             Inventory = currentItems;
             
             list.Initalize(currentItems.Inventory);
-            list.radios[SelectedIndex].Active = true;
+            if(list.radios.Count !=0)list.radios[SelectedIndex].Active = true;
             Show();
         }
         public InventoryForm(CraftingModule craftingSystem,Engine.Engine engine) :base(new Color(10,100,200),300)
         {
-            list = new RadioList(new Vector(-70, 70),6);
+            list = new RadioList(new Vector(-70, 60),5);
             controls.Add(new Button(new Vector(-70, 90), "Craft", 30, ShowWorkBench));
             controls.Add(list);
             controls.Add(new CloseButton(new Vector(90, 90), 20, CloseForm));
@@ -35,7 +36,15 @@ namespace Engine.GUI
 
         private void ShowWorkBench(PixControl obj)
         {
-            var craftingForm = new CraftingForm(craftingSystem, Inventory);
+            var craftingForm = new CraftingForm(craftingSystem, Inventory,ShowAfterCrafting);
+            craftingForm.Show();
+            Hide();
+        }
+
+        private void ShowAfterCrafting()
+        {
+            Present(Inventory);
+            Thread.Sleep(80);
         }
 
         private void CloseForm(PixControl obj)

@@ -49,7 +49,7 @@ namespace Engine.Logic
                 }
                 inventory.Decrement(item.type, requiredCount);
             }
-            inventory.AddElement(craft.CraftedItem);
+            inventory.AddElement(craft.CraftedItem.Duplicate());
             return true;
         }
     }

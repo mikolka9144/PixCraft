@@ -1,6 +1,6 @@
 ﻿using PixBlocks.PythonIron.Tools.Integration;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Engine.GUI.Models
 {
@@ -9,39 +9,47 @@ namespace Engine.GUI.Models
         public List<IndexedButton> radios { get; }
         public int Selection { get; set; }
         public int ItemsInCollumn { get; }
+        public bool DisableSelection { get; }
+        public event EventHandler<IndexedButton> OnSelectionChange;
 
-        public RadioList(Vector vector,int itemsInCollumn)
+        public RadioList(Vector vector,int itemsInCollumn,bool DisableSelection = false)
         {
             position = vector;
             size = 0;
             radios = new List<IndexedButton>();
             ItemsInCollumn = itemsInCollumn;
+            this.DisableSelection = DisableSelection;
         }
-        public void Initalize(IList<RadioTemplate> controls)
+        public void Initalize(IEnumerable<object> controls)
         {
             radios.Clear();
             var Ypos = position.y;
             var Xpos = position.x;
-            for (int i = 0; i < controls.Count(); i++)
+            var i = 0;
+            foreach (var item in controls)
             {
-                if (i%ItemsInCollumn == 0&& i != 0) 
-                { 
-                    Xpos += 40;
+                if (i % ItemsInCollumn == 0 && i != 0)
+                {
+                    Xpos += 30;
                     Ypos = position.y;
                 }
-                var radio = new IndexedButton(new Vector(Xpos, Ypos), controls[i].Text,30, changeSelection, i);
+                var radio = new IndexedButton(new Vector(Xpos, Ypos),item, 30, changeSelection, i);
                 radios.Add(radio);
                 Ypos -= 30;
+                i++;
             }
             if (radios.Count == 0) return;
             
         }
         private void changeSelection(PixControl obj)
         {
+            if (DisableSelection) return;
+
             radios.ForEach(s => s.Active = false);
             var radio = obj as IndexedButton;
             radio.Active = true;
             Selection = radio.Index;
+            OnSelectionChange?.Invoke(this,radio);
         }
         public override void Show()
         {
@@ -51,15 +59,5 @@ namespace Engine.GUI.Models
         {
             radios.ForEach(s => s.Hide());
         }
-    }
-
-    public struct RadioTemplate
-    {
-        public RadioTemplate(string text)
-        {
-            Text = text;
-        }
-
-        public string Text { get; }
     }
 }

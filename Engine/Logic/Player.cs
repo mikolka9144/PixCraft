@@ -31,6 +31,7 @@ namespace Engine.Logic
         public override void update()
         {
             base.update();
+            if (!Active) return;
             if (moveDefiner.key(command.Pause)) Pause();
             if (moveDefiner.key(command.OpenInventory)) status.OpenInventory();
             MoveCamera();

@@ -9,7 +9,7 @@ namespace Engine.Engine
     public class TileManager :ITileManager,INearbyBlockCheck
     {
         public List<Block> ActiveBlocks => Blocks.FindAll(s => s.IsActiveBlock(Parameters.hitboxArea)).ToList();
-        public List<Block> VisiableBlocks => Blocks.FindAll(s => s.IsActiveBlock(Parameters.BreakingRange)).ToList();
+        public List<Block> VisiableBlocks => Blocks.FindAll(s => s.IsVisible).ToList();
         public List<Block> Blocks { get; } = new List<Block>();
 
         public List<Foliage> Toppings { get; } = new List<Foliage>();

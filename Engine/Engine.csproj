@@ -64,7 +64,7 @@
     <Compile Include="GUI\InventoryForm.cs" />
     <Compile Include="GUI\LoadWorldForm.cs" />
     <Compile Include="GUI\Models\Controls\CloseButton.cs" />
-    <Compile Include="GUI\Models\IForm.cs" />
+    <Compile Include="GUI\Models\Form.cs" />
     <Compile Include="GUI\MainMenu.cs" />
     <Compile Include="GUI\Models\Controls\Button.cs" />
     <Compile Include="GUI\Models\Controls\IndexedButton.cs" />
@@ -72,7 +72,6 @@
     <Compile Include="GUI\Models\PixControl.cs" />
     <Compile Include="GUI\Models\Controls\RadioList.cs" />
     <Compile Include="GUI\Models\Controls\SelectBox.cs" />
-    <Compile Include="GUI\Models\RadioListConverter.cs" />
     <Compile Include="GUI\Models\StaticExtensions.cs" />
     <Compile Include="GUI\NewWorldForm.cs" />
     <Compile Include="GUI\PauseForm.cs" />
@@ -80,9 +79,9 @@
     <Compile Include="IStoppableSpriteOverlay.cs" />
     <Compile Include="Logic\models\CraftingEntry.cs" />
     <Compile Include="Logic\CraftingModule.cs" />
-    <Compile Include="PixBlocks Implementations\ISound.cs" />
-    <Compile Include="PixBlocks Implementations\PixSound.cs" />
-    <Compile Include="PixBlocks Implementations\SoundType.cs" />
+    <Compile Include="PixBlocks Implementations\Sound\ISound.cs" />
+    <Compile Include="PixBlocks Implementations\Sound\PixSound.cs" />
+    <Compile Include="PixBlocks Implementations\Sound\SoundType.cs" />
     <Compile Include="Resources\Craftings.cs" />
     <Compile Include="Resources\PlockProperties.cs" />
     <Compile Include="Resources\Sounds.cs" />
@@ -119,8 +118,6 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sound\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
