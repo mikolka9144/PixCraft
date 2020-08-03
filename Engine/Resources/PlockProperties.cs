@@ -1,11 +1,20 @@
-﻿namespace Engine.Resources
+﻿using System.Collections.Generic;
+
+namespace Engine.Resources
 {
     public static class BlockPropertiesData
     {
+        private static List<BlockType> Items = new List<BlockType>() 
+        {
+            BlockType.GoldBar,
+            BlockType.IronBar,
+            BlockType.stick,
+            BlockType.None
+        };
         public static BlockProperties GetProperties(BlockType type)
         {
-            if(type >0 ) return new BlockProperties(true, true);
-            return new BlockProperties(true, false);
+            if(Items.Contains(type) ) return new BlockProperties(true, false);
+            return new BlockProperties(true, true);
         }
     }
 }
