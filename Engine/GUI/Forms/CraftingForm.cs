@@ -44,23 +44,23 @@ namespace Engine.GUI
             Thread.Sleep(100);
         }
 
-        private void AllCraftings_OnSelectionChange(object sender,IndexedButton args)
+        private void AllCraftings_OnSelectionChange(object sender,SelectionEventArgs args)
         {
             neededItems.Hide();
-            neededItems.Initalize(craftingSystem.craftingEntries[args.Index].NeededItems);
+            neededItems.Initalize(craftingSystem.craftingEntries[args.radio.Index].NeededItems,6);
             neededItems.Show();
         }
 
         private void InitData()
         {
-            allCraftings.Initalize(craftingSystem.craftingEntries.Select(s => s.CraftedItem));
-            havedItems.Initalize(inventory.Inventory);
+            allCraftings.Initalize(craftingSystem.craftingEntries.Select(s => s.CraftedItem),11);
+            havedItems.Initalize(inventory.Inventory,12);
         }
 
         private void RefreshInventory()
         {
             havedItems.Hide();
-            havedItems.Initalize(inventory.Inventory);
+            havedItems.Initalize(inventory.Inventory,12);
             havedItems.Show();
         }
     }

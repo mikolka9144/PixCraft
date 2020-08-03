@@ -8,8 +8,9 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Engine</RootNamespace>
     <AssemblyName>Engine</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -60,6 +61,7 @@
     <Compile Include="Engine\Generator.cs" />
     <Compile Include="Engine\Models\IMover.cs" />
     <Compile Include="Engine\Models\Fluid.cs" />
+    <Compile Include="GUI\SelectionEventArgs.cs" />
     <Compile Include="GUI\Forms\CraftingForm.cs" />
     <Compile Include="GUI\Forms\InventoryForm.cs" />
     <Compile Include="GUI\Forms\LoadWorldForm.cs" />

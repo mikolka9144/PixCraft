@@ -1,6 +1,7 @@
 ﻿using Engine.GUI.Models;
 using Engine.Logic;
 using Engine.Logic.models;
+using Engine.Resources;
 using PixBlocks.PythonIron.Tools.Integration;
 
 namespace Engine.GUI
@@ -9,6 +10,7 @@ namespace Engine.GUI
     {
         private CraftingModule craftingSystem;
         private PlayerStatus Inventory;
+        private Label HpLabel;
         private readonly Engine.Engine engine;
 
         public int SelectedIndex { get => list.Selection; }
@@ -23,8 +25,8 @@ namespace Engine.GUI
         private void InitFromPresent(PlayerStatus currentItems)
         {
             Inventory = currentItems;
-
-            list.Initalize(currentItems.Inventory);
+            HpLabel.text = $"HP:{currentItems.health}/{Parameters.BaseHealth}";
+            list.Initalize(currentItems.Inventory,25);
             if (list.radios.Count-1 >= SelectedIndex) list.radios[SelectedIndex].Active = true;
         }
 
@@ -32,6 +34,8 @@ namespace Engine.GUI
         {
             list = new RadioList(new Vector(-70, 60),5);
             controls.Add(new Button(new Vector(-70, 90), "Craft", 30, ShowWorkBench));
+            HpLabel = new Label(new Vector(-30, 90), "", 30) { color = new Color(200,0,0)};
+            controls.Add(HpLabel);
             controls.Add(list);
             this.craftingSystem = craftingSystem;
             this.engine = engine;

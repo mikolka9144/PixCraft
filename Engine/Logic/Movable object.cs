@@ -16,12 +16,12 @@ namespace Engine.Logic
 
         public virtual void OnDamageDeal()
         {
-            Task.Run(() =>
+            new Task(() =>
             {
                 color = Parameters.RedColor;
                 Thread.Sleep(600);
                 color = Parameters.DefaultColor;
-            });
+            }).Start();
         }
 
         private bool Grounded;

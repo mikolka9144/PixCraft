@@ -4,7 +4,7 @@ namespace Engine.Resources
 {
     public class Parameters
     {
-        public static (int Up, int Left, int Right, int Down) border = (100, 100, 100, 100);
+        public static RangeBox border = new RangeBox(100, 100, 100, 100);
         public static int hitboxArea = 20;
         public static int BreakingRange = 50;
         internal static int PointerRange = 80;
@@ -37,5 +37,23 @@ namespace Engine.Resources
         internal static Color RedColor = new Color(255, 51, 0);
         public static int MaxBreath = 10;
         internal static int LavaDamage = 5;
+    }
+
+    public struct RangeBox
+    {
+
+
+        public RangeBox(int Up, int Left, int Right, int Down)
+        {
+            this.Up = Up;
+            this.Left = Left;
+            this.Right = Right;
+            this.Down = Down;
+        }
+
+        public int Up { get; }
+        public int Left { get; }
+        public int Right { get; }
+        public int Down { get; }
     }
 }

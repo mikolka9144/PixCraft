@@ -10,7 +10,7 @@ namespace Engine.GUI.Models
         public int Selection { get; set; }
         public int ItemsInCollumn { get; }
         public bool DisableSelection { get; }
-        public event EventHandler<IndexedButton> OnSelectionChange;
+        public event EventHandler<SelectionEventArgs> OnSelectionChange;
 
         public RadioList(Vector vector,int itemsInCollumn,bool DisableSelection = false)
         {
@@ -20,7 +20,7 @@ namespace Engine.GUI.Models
             ItemsInCollumn = itemsInCollumn;
             this.DisableSelection = DisableSelection;
         }
-        public void Initalize(IEnumerable<object> controls)
+        public void Initalize(IEnumerable<object> controls,int maxElements)
         {
             radios.Clear();
             var Ypos = position.y;
@@ -30,13 +30,14 @@ namespace Engine.GUI.Models
             {
                 if (i % ItemsInCollumn == 0 && i != 0)
                 {
-                    Xpos += 30;
+                    Xpos += 40;
                     Ypos = position.y;
                 }
                 var radio = new IndexedButton(new Vector(Xpos, Ypos),item, 30, changeSelection, i);
                 radios.Add(radio);
                 Ypos -= 30;
                 i++;
+                if (i == maxElements) break;
             }
             
         }
@@ -48,7 +49,7 @@ namespace Engine.GUI.Models
             var radio = obj as IndexedButton;
             radio.Active = true;
             Selection = radio.Index;
-            OnSelectionChange?.Invoke(this,radio);
+            OnSelectionChange?.Invoke(this,new SelectionEventArgs(radio));
         }
         public override void Show()
         {
