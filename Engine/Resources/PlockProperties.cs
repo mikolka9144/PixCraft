@@ -9,7 +9,6 @@ namespace Engine.Resources
             BlockType.GoldBar,
             BlockType.IronBar,
             BlockType.stick,
-            BlockType.None
         };
         public static BlockProperties GetProperties(BlockType type)
         {

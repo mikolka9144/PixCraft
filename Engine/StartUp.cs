@@ -34,8 +34,9 @@ namespace Engine
             }
             catch (Exception ex)
             {
-                if (ex is ThreadAbortException) return;
+                if (ex is ThreadInterruptedException) return;
                 MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.GetType().FullName);
                 MessageBox.Show(ex.StackTrace);
             }
         }

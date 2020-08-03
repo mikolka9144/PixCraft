@@ -25,7 +25,7 @@ namespace Engine.GUI
             Inventory = currentItems;
 
             list.Initalize(currentItems.Inventory);
-            if (list.radios.Count != 0) list.radios[SelectedIndex].Active = true;
+            if (list.radios.Count-1 >= SelectedIndex) list.radios[SelectedIndex].Active = true;
         }
 
         public InventoryForm(CraftingModule craftingSystem,Engine.Engine engine) :base(new Color(10,100,200),300,null,true)
