@@ -8,7 +8,7 @@ namespace Engine.GUI
     {
         private SelectBox parameters;
 
-        public NewWorldForm() : base(new Color(200, 100, 0), 300)
+        public NewWorldForm(Form previousForm) : base(new Color(200, 100, 0), 300,previousForm)
         {
             IList<Box> PreBoxs = new Box[] 
             { 

@@ -69,6 +69,7 @@ ScaffoldingReadMe.txt
 StyleCopReport.xml
 
 # Files built by Visual Studio
+*.dll
 *_i.c
 *_p.c
 *_h.h
@@ -86,6 +87,7 @@ StyleCopReport.xml
 *.tlb
 *.tli
 *.tlh
+*.pdb
 *.tmp
 *.tmp_proj
 *_wpftmp.csproj
@@ -142,7 +144,9 @@ _TeamCity*
 !.axoCover/settings.json
 
 # Coverlet is a free, cross platform Code Coverage Tool
-coverage*[.json, .xml, .info]
+coverage*.json
+coverage*.xml
+coverage*.info
 
 # Visual Studio code coverage results
 *.coverage

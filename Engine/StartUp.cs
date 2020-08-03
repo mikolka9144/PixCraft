@@ -8,6 +8,7 @@ using Engine.Saves;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
 using System;
+using System.Threading;
 using System.Windows.Forms;
 using MainMenu = Engine.GUI.MainMenu;
 using Sound = Engine.PixBlocks_Implementations.Sound;
@@ -33,15 +34,9 @@ namespace Engine
             }
             catch (Exception ex)
             {
+                if (ex is ThreadAbortException) return;
                 MessageBox.Show(ex.Message);
                 MessageBox.Show(ex.StackTrace);
-                MessageBox.Show(ex.Source);
-                MessageBox.Show(ex.InnerException.Message);
-                MessageBox.Show(ex.InnerException.Source);
-                MessageBox.Show(ex.InnerException.StackTrace);
-                MessageBox.Show(ex.InnerException.InnerException.Message);
-                MessageBox.Show(ex.InnerException.InnerException.Source);
-                MessageBox.Show(ex.InnerException.InnerException.StackTrace);
             }
         }
 

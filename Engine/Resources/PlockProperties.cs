@@ -1,58 +1,26 @@
 ﻿namespace Engine.Resources
 {
-    public static class BlockProperties
+    public static class BlockPropertiesData
     {
-        public static (bool CanStack, bool IsPlaceAble) GetProperties(BlockType type)
+        public static BlockProperties GetProperties(BlockType type)
         {
-            switch (type)
-            {
-                case BlockType.Grass:
-                    return (true, true);
+            if(type >0 ) return new BlockProperties(true, true);
+            return new BlockProperties(true, false);
+        }
+    }
+}
 
-                case BlockType.Dirt:
-                    return (true, true);
+namespace Engine
+{
+    public struct BlockProperties
+    {
+        public bool CanStack;
+        public bool IsPlaceAble;
 
-                case BlockType.Stone:
-                    return (true, true);
-
-                case BlockType.Wood:
-                    return (true, true);
-
-                case BlockType.Leaves:
-                    return (true, true);
-
-                case BlockType.CoalOre:
-                    return (true, true);
-
-                case BlockType.IronOre:
-                    return (true, true);
-
-                case BlockType.GoldOre:
-                    return (true, true);
-
-                case BlockType.DiamondOre:
-                    return (true, true);
-
-                case BlockType.Planks:
-                    return (true, true);
-                case BlockType.None:
-                    break;
-                case BlockType.stick:
-                    break;
-                case BlockType.CraftingTable:
-                    return (true, true);
-                case BlockType.Furnance:
-                    return (true, true);
-                case BlockType.GoldBar:
-                    break;
-                case BlockType.IronBar:
-                    break;
-                case BlockType.Water:
-                    break;
-                case BlockType.Sand:
-                    return (true, true);
-            }
-            return (true, false);
+        public BlockProperties(bool IsStackable, bool IsPlaceable)
+        {
+            CanStack = IsStackable;
+            IsPlaceAble = IsPlaceable;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Engine.GUI
         private readonly Engine.Engine engine;
         private readonly SaveManager manager;
 
-        public PauseForm(Engine.Engine engine,SaveManager manager) : base(new Color(204, 153, 51), 150)
+        public PauseForm(Engine.Engine engine,SaveManager manager) : base(new Color(204, 153, 51), 150,null)
         {
             var list = new Box[] { new Box("Resume", Resume), new Box("Save", Save) };
             selectBox = new SelectBox(new Vector(0, 20), list);

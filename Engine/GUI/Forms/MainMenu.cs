@@ -1,6 +1,5 @@
 ﻿using Engine.GUI.Models;
 using PixBlocks.PythonIron.Tools.Integration;
-using System.Threading;
 using Label = Engine.GUI.Models.Label;
 
 namespace Engine.GUI
@@ -10,31 +9,31 @@ namespace Engine.GUI
 
         private  void SwichToNewWorldForm()
         {
-            var form = new NewWorldForm();
+            var form = new NewWorldForm(this);
             SwichTo(form);
         }
 
         private void SwichTo(Form form)
         {
             Hide();
-            Thread.Sleep(100);
             form.Show();
         }
 
         private SelectBox optionsWindow;
 
-        public MainMenu():base(new Color(0,200,100),300)
+        public MainMenu():base(new Color(0,100,100),300,null)
         {
             var options = new Box[] { new Box("Start", SwichToNewWorldForm), new Box("Load World", SwichToLoadWorldForm) };
 
-            controls.Add(new Label(new Vector(0, 80), "PixCraft", 50));
+            controls.Add(new Label(new Vector(0, 80), "PixCraft", 200));
+            controls.Add(new Label(new Vector(90, -90), "V.1.0", 10));
             optionsWindow = new SelectBox(new Vector(0, 0), options);
             controls.Add(optionsWindow);
         }
 
         private void SwichToLoadWorldForm()
         {
-            var form = new LoadWorldForm();
+            var form = new LoadWorldForm(this);
             SwichTo(form);
         }
     }

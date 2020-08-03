@@ -74,7 +74,12 @@ namespace Engine.Resources
 
     public enum BlockType
     {
-        None,
+        //Above 0 = Blocks
+        //Under 0 = Items
+        stick=-3,
+        GoldBar=-2,
+        IronBar=-1,
+        None = 0,
         Grass,
         Dirt,
         Stone,
@@ -84,12 +89,9 @@ namespace Engine.Resources
         IronOre,
         GoldOre,
         DiamondOre,
-        stick,
         Planks,
         CraftingTable,
         Furnance,
-        GoldBar,
-        IronBar,
         Water,
         Sand,
         Lava

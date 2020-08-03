@@ -7,7 +7,7 @@ namespace Engine.GUI
     {
         private Button txtFile;
 
-        public LoadWorldForm() :base(new Color(100,200,255),300)
+        public LoadWorldForm(Form previousForm) :base(new Color(100,200,255),300,previousForm)
         {
             controls.Add(new Label(new Vector(0, 40), "Enter path to file", 50));
             txtFile = new Button(new Vector(0, 0), " ", 50, StaticExtensions.configureAsTextBox(false));

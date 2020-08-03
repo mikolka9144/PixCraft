@@ -1,8 +1,6 @@
 ﻿using Engine.GUI.Models;
-using Engine.GUI.Models.Controls;
 using Engine.Logic;
 using PixBlocks.PythonIron.Tools.Integration;
-using System;
 using System.Linq;
 using System.Threading;
 
@@ -12,16 +10,14 @@ namespace Engine.GUI
     {
         private CraftingModule craftingSystem;
         private PlayerStatus inventory;
-        private readonly Action showPreviousForm;
         private RadioList allCraftings;
         private RadioList neededItems;
         private RadioList havedItems;
 
-        public CraftingForm(CraftingModule craftingSystem, PlayerStatus inventory,Action ShowPreviousForm):base(new Color(100,200,255),300)
+        public CraftingForm(CraftingModule craftingSystem, PlayerStatus inventory,Form previousForm):base(new Color(100,200,255),300,previousForm)
         {
             this.craftingSystem = craftingSystem;
             this.inventory = inventory;
-            showPreviousForm = ShowPreviousForm;
 
             controls.Add(new Label(new Vector(-80, 90), "Rcepies", 30));
             allCraftings = new RadioList(new Vector(-80,70), 7);
@@ -36,7 +32,6 @@ namespace Engine.GUI
             havedItems = new RadioList(new Vector(0, 0), 4,true);
             controls.Add(havedItems);
 
-            controls.Add(new CloseButton(new Vector(90, 90),20,(s) =>Hide()));
             controls.Add(new Button(new Vector(-50, -90), "Craft", 20, CraftItem) { color = new Color(204, 51, 153) });
             InitData();
         }
@@ -67,12 +62,6 @@ namespace Engine.GUI
             havedItems.Hide();
             havedItems.Initalize(inventory.Inventory);
             havedItems.Show();
-        }
-
-        public override void Hide()
-        {
-            base.Hide();
-            showPreviousForm();
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Engine.Resources
                 case SoundType.Music:
                     return new Task(() => Play("m2", 0));
                 case SoundType.Walking:
-                    return new Task(() => Play("n28", 400));
+                    return new Task(() => Play("e5", 400));
                 case SoundType.WaterEnter:
                     return new Task(() => Play("e20", 200));
                 case SoundType.WaterExit:
