@@ -6,8 +6,7 @@ namespace Engine.Engine.models
     {
         public SpriteOverlay(int x, int y, IDrawer engine)
         {
-            X = x;
-            Y = y;
+            Position = new Positon(x, y);
             Engine = engine;
         }
 
@@ -19,9 +18,9 @@ namespace Engine.Engine.models
             Engine.Draw(this);
         }
 
-        internal bool IsActiveBlock(int range)
+        internal bool IsActiveBlock(int range, Positon offset)
         {
-            return IsVisible && IsInRange(range);
+            return IsVisible && IsInRange(range,offset);
         }
 
         protected void SetPosition(roation roation, int lenght)
@@ -29,30 +28,29 @@ namespace Engine.Engine.models
             switch (roation)
             {
                 case roation.Up:
-                    Y += lenght;
+                    Position.Y += lenght;
                     break;
 
                 case roation.Left:
-                    X -= lenght;
+                    Position.X -= lenght;
                     break;
 
                 case roation.Right:
-                    X += lenght;
+                    Position.X += lenght;
                     break;
 
                 case roation.Down:
-                    Y -= lenght;
+                    Position.Y -= lenght;
                     break;
             }
         }
 
-        public int X;
-        public int Y;
-
-        public bool IsInRange( int Range)
+        public Positon Position { get; private set; }
+        public bool IsInRange( int Range,Positon offset)
         {
-            bool IsNotInRange = X > Range || X < -Range ||Y > Range || Y < -Range;
+            bool IsNotInRange = Position.X > Range+offset.X || Position.X < -Range+ offset.X || Position.Y > Range+ offset.Y || Position.Y < -Range+ offset.Y;
             return !IsNotInRange;
         }
+        public bool IsInRange(int Range) => IsInRange(Range, new Positon(0, 0));
     }
 }

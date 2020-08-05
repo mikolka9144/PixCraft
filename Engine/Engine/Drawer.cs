@@ -9,8 +9,8 @@ namespace Engine.Engine
     {
         public void Draw(SpriteOverlay sprite)
         {
-            var IsNotInBorder = sprite.X > Parameters.border.Left || sprite.X < -Parameters.border.Right ||
-               sprite.Y > Parameters.border.Up || sprite.Y < -Parameters.border.Down;
+            var IsNotInBorder = sprite.Position.X > Parameters.border.Left || sprite.Position.X < -Parameters.border.Right ||
+               sprite.Position.Y > Parameters.border.Up || sprite.Position.Y < -Parameters.border.Down;
 
             if (IsNotInBorder)
             {
@@ -18,7 +18,7 @@ namespace Engine.Engine
             }
             else
             {
-                sprite.position = new Vector(sprite.X, sprite.Y);
+                sprite.position = new Vector(sprite.Position.X, sprite.Position.Y);
                 AddSpriteToGame(sprite);
             }
         }

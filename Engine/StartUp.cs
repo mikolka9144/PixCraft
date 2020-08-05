@@ -1,5 +1,6 @@
 ﻿using Engine.Engine;
 using Engine.Engine.models;
+using Engine.Entities;
 using Engine.GUI;
 using Engine.Logic;
 using Engine.PixBlocks_Implementations;
@@ -90,6 +91,7 @@ namespace Engine
         {
             var game = GameScene.gameSceneStatic;
             engine.Add(pointerController);
+            engine.Add(new Zombie(engine.manager, new Drawer(), Sound));
             game.background = new Color(102, 51, 204);
 
             engine.Render();

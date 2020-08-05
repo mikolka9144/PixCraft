@@ -82,7 +82,7 @@ namespace Engine.Logic
             var blockType = status.GetBlockToPlace();
             if (blockType != BlockType.None)
             {
-                Tiles.PlaceBlock(X, Y, blockType);
+                Tiles.PlaceBlock(Position.X, Position.Y, blockType);
                 RemoveOverlappingWater(); 
                 Sound.PlaySound(SoundType.Place);
             }
@@ -118,13 +118,13 @@ namespace Engine.Logic
 
         private void MovePointer(Vector MousePos)
         {
-            var Xlen = MousePos.x - X;
-            var Ylen = MousePos.y - Y;
+            var Xlen = MousePos.x - Position.X;
+            var Ylen = MousePos.y - Position.Y;
             var YtoMove = (int)(Ylen / 10) * 20;
             var XtoMove = (int)(Xlen / 10) * 20;
 
-            bool IsNotInXZone = X + XtoMove > Parameters.PointerRange || X + XtoMove < -Parameters.PointerRange;
-            bool IsNotInYZone = Y + YtoMove > Parameters.PointerRange || Y + YtoMove < -Parameters.PointerRange;
+            bool IsNotInXZone = Position.X + XtoMove > Parameters.PointerRange || Position.X + XtoMove < -Parameters.PointerRange;
+            bool IsNotInYZone = Position.Y + YtoMove > Parameters.PointerRange || Position.Y + YtoMove < -Parameters.PointerRange;
             if (!IsNotInXZone) move(roation.Right, XtoMove);
             if (!IsNotInYZone) move(roation.Up, YtoMove);
         }

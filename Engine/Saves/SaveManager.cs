@@ -34,7 +34,7 @@ namespace Engine.Saves
         public void SaveToStream(Stream SaveDest)
         {
             var save = new Save();
-            save.SetUp(Converter.Convert(Manager.Blocks),Converter.Convert(Manager.Fluids), Status.health, Status.Inventory, Center.X, Center.Y);
+            save.SetUp(Converter.Convert(Manager.Blocks),Converter.Convert(Manager.Fluids), Status.health, Status.Inventory, Center.Position.X, Center.Position.Y);
             Serializer.Serialize(SaveDest, save);
         }
 

@@ -18,7 +18,7 @@ namespace EngineTets.Logic
         {
             ActiveElements = new Elements();
             playerStatus = new PlayerStatus(null);
-            Instance = new MovableObject(ActiveElements, null, null, null,playerStatus,new TestSound());
+            Instance = new MovableObject(ActiveElements, null, null,playerStatus,new TestSound());
 
             Instance.IsDestroyed = false;
             Instance.IsVisible = true;
@@ -27,8 +27,8 @@ namespace EngineTets.Logic
             fluid.IsDestroyed = false;
             fluid.IsVisible = true;
 
-            ActiveElements.ActiveFluids = new List<Fluid>(1);
-            ActiveElements.ActiveFluids.Add(fluid);
+            ActiveElements.SetActiveFluids(new List<Fluid>(1));
+            ActiveElements.GetActiveFluids().Add(fluid);
             
         }
 
@@ -46,12 +46,21 @@ namespace EngineTets.Logic
     }
     class Elements : IActiveElements
     {
-        public List<Block> ActiveBlocks { get; set; }
+        public List<Block> VisiableBlocks => throw new System.NotImplementedException();
 
-        public List<Foliage> ActiveToppings { get; set; }
+        public List<Block> GetActiveBlocks(Positon sprite)
+        {
+            throw new System.NotImplementedException();
+        }
 
-        public List<Fluid> ActiveFluids { get; set; }
+        public List<Fluid> GetActiveFluids(Positon sprite)
+        {
+            throw new System.NotImplementedException();
+        }
 
-        public List<Block> VisiableBlocks { get; set; }
+        public List<Foliage> GetActiveToppings(Positon sprite)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

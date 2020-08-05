@@ -41,7 +41,7 @@ namespace Engine.Saves
             var list = new List<BlockTemplate>();
             foreach (var item in blocks)
             {
-                list.Add(new BlockTemplate(item.Id, item.Y, item.X));
+                list.Add(new BlockTemplate(item.Id, item.Position.Y, item.Position.X));
             }
             return list;
         }
@@ -50,7 +50,7 @@ namespace Engine.Saves
             var list = new List<FluidTemplate>();
             foreach (var item in blocks)
             {
-                list.Add(new FluidTemplate(item.Id, item.Y, item.X));
+                list.Add(new FluidTemplate(item.Id, item.Position.Y, item.Position.X));
             }
             return list;
         }

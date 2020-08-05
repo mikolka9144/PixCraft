@@ -11,8 +11,8 @@ namespace Engine.Logic
 {
     public class MovableObject : SpriteOverlay,IStoppableSpriteOverlay
     {
-        protected readonly IMoveDefiner moveDefiner;
-        protected readonly PlayerStatus status;
+        protected  IMoveDefiner moveDefiner;
+        protected  PlayerStatus status;
 
         public virtual void OnDamageDeal()
         {
@@ -32,12 +32,11 @@ namespace Engine.Logic
         private int WaterTicks = 0;
         private bool IsInWater;
 
-        public MovableObject(IActiveElements ActiveElements,IDrawer drawer, IMoveDefiner moveDefiner, PointerController pointer, PlayerStatus status,IPixSound sound):base(0,0,drawer)
+        public MovableObject(IActiveElements ActiveElements,IDrawer drawer, IMoveDefiner moveDefiner, PlayerStatus status,IPixSound sound):base(0,0,drawer)
         {
             status.OnDamageDeal = OnDamageDeal;
             this.ActiveElements = ActiveElements;
             this.moveDefiner = moveDefiner;
-            Pointer = pointer;
             this.status = status;
             Sound = sound;
             speed = 0;
@@ -46,9 +45,9 @@ namespace Engine.Logic
         }
 
         public IActiveElements ActiveElements { get; }
-        public PointerController Pointer { get; }
         public IPixSound Sound { get; }
         public bool Active { get; set; } = true;
+        
 
         public override void update()
         {
@@ -71,7 +70,7 @@ namespace Engine.Logic
 
         private void PlayMoveSound()
         {
-            if(ActiveElements.ActiveToppings.Any(s => collide(s)))
+            if(ActiveElements.GetActiveToppings(Position).Any(s => collide(s)))
             {
                 Sound.PlaySound(SoundType.Walking);
             }
@@ -79,12 +78,12 @@ namespace Engine.Logic
 
         private void CheckIfTouchesFluid(BlockType lava)
         {
-            if (ActiveElements.ActiveFluids.FindAll(s => s.Id == lava).Any(s => collide(s))) status.DealDamageFromLava();
+            if (ActiveElements.GetActiveFluids(Position).FindAll(s => s.Id == lava).Any(s => collide(s))) status.DealDamageFromLava();
         }
 
         public void CheckIfUnderwater()
         {
-            foreach (var item in ActiveElements.ActiveFluids)
+            foreach (var item in ActiveElements.GetActiveFluids(Position))
             {
                 if(collide(item))
                 {
@@ -112,7 +111,7 @@ namespace Engine.Logic
 
         private void ApplyBlocksCollisions()
         {
-            foreach (var b in ActiveElements.ActiveBlocks)
+            foreach (var b in ActiveElements.GetActiveBlocks(Position))
             {
                 if (collide(b))
                 {
@@ -132,14 +131,14 @@ namespace Engine.Logic
 
         private void ApplyGravity()
         {
-            var touchesFluid = ActiveElements.ActiveFluids.Any(s => collide(s));
+            var touchesFluid = ActiveElements.GetActiveFluids(Position).Any(s => collide(s));
             if (moveDefiner.key(command.Jump) && Grounded)
             {
                 Grounded = false;
                 
                 speed = touchesFluid?Parameters.WaterJumpSpeed:Parameters.MaxFallSpeed;
             }
-            foreach (var block in ActiveElements.ActiveToppings)
+            foreach (var block in ActiveElements.GetActiveToppings(Position))
             {
                 if (collide(block) && TicksElapsed >= Parameters.BlocksCollisionDelay)
                 {
@@ -176,7 +175,7 @@ namespace Engine.Logic
         {
             flip = false;
             move(roation.Right, Parameters.moveSpeed);
-            foreach (var b in ActiveElements.ActiveBlocks)
+            foreach (var b in ActiveElements.GetActiveBlocks(Position))
             {
                 if (collide(b))
                 {
@@ -190,7 +189,7 @@ namespace Engine.Logic
         {
             flip = true;
             move(roation.Left, Parameters.moveSpeed);
-            foreach (var b in ActiveElements.ActiveBlocks)
+            foreach (var b in ActiveElements.GetActiveBlocks(Position))
             {
                 if (collide(b))
                 {

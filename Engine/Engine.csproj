@@ -61,7 +61,9 @@
     <Compile Include="Engine\Generator.cs" />
     <Compile Include="Engine\Models\IMover.cs" />
     <Compile Include="Engine\Models\Fluid.cs" />
-    <Compile Include="GUI\SelectionEventArgs.cs" />
+    <Compile Include="Entities\Monster AI.cs" />
+    <Compile Include="Entities\zombie.cs" />
+    <Compile Include="GUI\Models\SelectionEventArgs.cs" />
     <Compile Include="GUI\Forms\CraftingForm.cs" />
     <Compile Include="GUI\Forms\InventoryForm.cs" />
     <Compile Include="GUI\Forms\LoadWorldForm.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="IStoppableSpriteOverlay.cs" />
     <Compile Include="Logic\models\CraftingEntry.cs" />
     <Compile Include="Logic\CraftingModule.cs" />
+    <Compile Include="Models\Positon.cs" />
     <Compile Include="PixBlocks Implementations\Sound\ISound.cs" />
     <Compile Include="PixBlocks Implementations\Sound\PixSound.cs" />
     <Compile Include="PixBlocks Implementations\Sound\SoundType.cs" />
