@@ -42,6 +42,8 @@ namespace Engine.Engine.models
         }
 
         public Positon Position { get; private set; }
+        public bool IsActive { get; internal set; }
+
         public bool IsInRange( int Range,Positon offset)
         {
             bool IsNotInRange = Position.X > Range+offset.X || Position.X < -Range+ offset.X || Position.Y > Range+ offset.Y || Position.Y < -Range+ offset.Y;

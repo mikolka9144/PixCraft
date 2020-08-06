@@ -68,6 +68,6 @@ namespace Engine.Engine
     {
         void Draw(SpriteOverlay sprite);
 
-        void remove(Sprite sprite);
+        void remove(SpriteOverlay sprite);
     }
 }

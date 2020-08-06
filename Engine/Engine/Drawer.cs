@@ -3,11 +3,28 @@ using Engine.Logic;
 using Engine.Resources;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Threading;
+using System.Windows;
+using System.Windows.Threading;
+using Vector = PixBlocks.PythonIron.Tools.Integration.Vector;
 
 namespace Engine.Engine
 {
     internal class Drawer : IDrawer
     {
+        public List<Sprite> GameScenesSprites { get; }
+        private SpriteCollector garbageCollector;
+
+        public Drawer()
+        {
+            #region SetStolenSpriteList
+            GameScenesSprites = GameScene.gameSceneStatic.GetType().GetField("gameObjects", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(GameScene.gameSceneStatic) as List<Sprite>;
+            #endregion
+            garbageCollector = new SpriteCollector();
+            GameScenesSprites.Insert(0,garbageCollector);
+        }
         public void Draw(SpriteOverlay sprite)
         {
             var IsNotInBorder = sprite.Position.X > Parameters.border.Left || sprite.Position.X < -Parameters.border.Right ||
@@ -25,7 +42,7 @@ namespace Engine.Engine
         }
 
         // Token: 0x0600001A RID: 26 RVA: 0x000026D8 File Offset: 0x000008D8
-        private void AddSpriteToGame(SpriteOverlay sprite)
+        private void AddSpriteToGame(Sprite sprite)
         {
             if (!sprite.IsVisible)
             {
@@ -33,10 +50,33 @@ namespace Engine.Engine
             }
         }
 
-        public void remove(Sprite sprite)
+        public void remove(SpriteOverlay sprite)
         {
             GameScene.gameSceneStatic.remove(sprite);
-            
+            garbageCollector.SpritesToRemove.Add(sprite);
+        }
+    }
+
+    internal class SpriteCollector : Sprite
+    {
+        public SpriteCollector()
+        {
+            #region SetStolenSpriteList
+            GameScenesSprites = GameScene.gameSceneStatic.GetType().GetField("gameObjects", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(GameScene.gameSceneStatic) as List<Sprite>;
+            #endregion
+            size = 0;
+        }
+
+        public List<Sprite> SpritesToRemove { get; } = new List<Sprite>();
+        public List<Sprite> GameScenesSprites { get; }
+
+        public override void update()
+        {
+            foreach (var item in SpritesToRemove)
+            {
+                if(!item.IsVisible)GameScenesSprites.Remove(item);
+            }
+            SpritesToRemove.Clear();
         }
     }
 }
