@@ -1,4 +1,5 @@
 ﻿using Engine.Engine.models;
+using Engine.Logic;
 using Engine.Resources;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
@@ -14,7 +15,7 @@ namespace Engine.Engine
 
             if (IsNotInBorder)
             {
-                sprite.IsVisible = false;
+                remove(sprite);
             }
             else
             {
@@ -35,6 +36,7 @@ namespace Engine.Engine
         public void remove(Sprite sprite)
         {
             GameScene.gameSceneStatic.remove(sprite);
+            
         }
     }
 }

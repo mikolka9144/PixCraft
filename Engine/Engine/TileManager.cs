@@ -124,17 +124,17 @@ namespace Engine.Engine
         
         public List<Block> GetActiveBlocks(Positon sprite)
         {
-            return Blocks.FindAll(s => s.IsActiveBlock(Parameters.hitboxArea, sprite)).ToList();
+            return Blocks.FindAll(s => s.IsInRange(Parameters.hitboxArea, sprite)).ToList();
         }
         public List<Foliage> GetActiveToppings(Positon sprite)
         {
-            return Toppings.FindAll(s => s.IsActiveBlock(Parameters.hitboxArea, sprite)).ToList();
+            return Toppings.FindAll(s => s.IsInRange(Parameters.hitboxArea, sprite)).ToList();
         }
 
 
         public List<Fluid> GetActiveFluids(Positon sprite)
         {
-            return Fluids.FindAll(s => s.IsActiveBlock(Parameters.hitboxArea,sprite)).ToList();
+            return Fluids.FindAll(s => s.IsInRange(Parameters.hitboxArea,sprite)).ToList();
         }
     }
 }

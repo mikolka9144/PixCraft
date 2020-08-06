@@ -10,7 +10,9 @@ namespace Engine.Entities
         public Zombie(IActiveElements ActiveElements, IDrawer drawer, IPixSound sound) : base(ActiveElements, drawer, null, new PlayerStatus(null), sound)
         {
             size = 10;
-            moveDefiner = new Monster_AI(this);
-        }
+            var logic = new Monster_AI(this);
+            OnWallHit += logic.Zombie_OnWallHit;
+            moveDefiner = logic;
+        } 
     }
 }

@@ -3,6 +3,7 @@ using Engine.Logic;
 using Engine.Logic.models;
 using Engine.Resources;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace EngineTets.Logic
@@ -28,7 +29,7 @@ namespace EngineTets.Logic
             fluid.IsVisible = true;
 
             ActiveElements.SetActiveFluids(new List<Fluid>(1));
-            ActiveElements.GetActiveFluids().Add(fluid);
+            ActiveElements.GetActiveFluids(new Positon(0,0)).Add(fluid);
             
         }
 
@@ -61,6 +62,11 @@ namespace EngineTets.Logic
         public List<Foliage> GetActiveToppings(Positon sprite)
         {
             throw new System.NotImplementedException();
+        }
+
+        internal void SetActiveFluids(List<Fluid> lists)
+        {
+            throw new NotImplementedException();
         }
     }
 }

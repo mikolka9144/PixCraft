@@ -5,6 +5,8 @@ namespace Engine.Entities
 {
     class Monster_AI : IMoveDefiner
     {
+        private bool Jump;
+
         public Monster_AI(SpriteOverlay sprite)
         {
             Sprite = sprite;
@@ -17,13 +19,36 @@ namespace Engine.Entities
             switch (command)
             {
                 case command.Left:
-                    return Sprite.Position.X > 0;
-                case command.Right:
-                    return Sprite.Position.X <= 0;
-                case command.Jump:
+                    if(Sprite.Position.X > 0)
+                    {
+                        return true;
+                    }
                     break;
+                case command.Right:
+                    if(Sprite.Position.X < 0)
+                    {
+                        return true;
+                    }
+                    break;
+                case command.Jump:
+                    return jump();
             }
             return false;
+        }
+
+        private bool jump()
+        {
+            if(Jump)
+            {
+                Jump = false;
+                return true;
+            }
+            return Jump;
+        }
+
+        internal void Zombie_OnWallHit(object sender, System.EventArgs e)
+        {
+            Jump = true;
         }
     }
 }

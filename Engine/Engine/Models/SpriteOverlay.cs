@@ -1,4 +1,5 @@
 ﻿using PixBlocks.PythonIron.Tools.Integration;
+using System;
 
 namespace Engine.Engine.models
 {
@@ -16,11 +17,6 @@ namespace Engine.Engine.models
         {
             SetPosition(roation, lenght);
             Engine.Draw(this);
-        }
-
-        internal bool IsActiveBlock(int range, Positon offset)
-        {
-            return IsVisible && IsInRange(range,offset);
         }
 
         protected void SetPosition(roation roation, int lenght)
@@ -52,5 +48,18 @@ namespace Engine.Engine.models
             return !IsNotInRange;
         }
         public bool IsInRange(int Range) => IsInRange(Range, new Positon(0, 0));
+        public bool collide(SpriteOverlay sprite)
+        {
+            double num = size * 0.5 + sprite.size * 0.5;
+            if (Math.Abs(sprite.Position.X - Position.X) > num || Math.Abs(sprite.Position.Y - Position.Y) > num)
+            {
+                return false;
+            }
+            if (Math.Sqrt((sprite.Position.X - Position.X) * (sprite.Position.X - Position.X) + (sprite.Position.Y - Position.Y) * (sprite.Position.Y - Position.Y)) < num)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

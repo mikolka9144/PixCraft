@@ -11,7 +11,6 @@ namespace Engine.Engine
         public List<IStoppableSpriteOverlay> Sprites = new List<IStoppableSpriteOverlay>();
 
         public Center Center;
-        public readonly Parameters parameters;
         private readonly IDrawer drawer;
 
         public ITileManager manager { get; }

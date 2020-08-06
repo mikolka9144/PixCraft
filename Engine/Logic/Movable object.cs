@@ -3,6 +3,7 @@ using Engine.Engine.models;
 using Engine.Logic.models;
 using Engine.PixBlocks_Implementations;
 using Engine.Resources;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace Engine.Logic
     {
         protected  IMoveDefiner moveDefiner;
         protected  PlayerStatus status;
+        protected event EventHandler OnWallHit;
 
         public virtual void OnDamageDeal()
         {
@@ -180,6 +182,7 @@ namespace Engine.Logic
                 if (collide(b))
                 {
                     move(roation.Left, Parameters.moveSpeed);
+                    OnWallHit?.Invoke(this, null);
                     break;
                 }
             }
@@ -194,6 +197,7 @@ namespace Engine.Logic
                 if (collide(b))
                 {
                     move(roation.Right, Parameters.moveSpeed);
+                    OnWallHit?.Invoke(this, null);
                     break;
                 }
             }

@@ -96,7 +96,7 @@ namespace Engine.Logic
 
         private void DestroyBlock()
         {
-            foreach (var b in Tiles.VisiableBlocks.FindAll(s => s.IsVisible))
+            foreach (var b in Tiles.VisiableBlocks)
             {
                 if (collide(b))
                 {
