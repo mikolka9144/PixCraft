@@ -6,6 +6,8 @@ namespace Engine.Engine.models
     [Serializable]
     public class Block : SpriteOverlay
     {
+        internal ToolType tool;
+
         public Block(int x, int y, BlockType Id, IDrawer engine, IIdProcessor processor) : base(x, y, engine)
         {
             image = 63;
@@ -19,5 +21,6 @@ namespace Engine.Engine.models
 
         public Foliage foliage { get; private set; }
         public BlockType Id { get; }
+        public int Durablity { get; set; }
     }
 }

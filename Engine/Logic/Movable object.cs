@@ -13,7 +13,7 @@ namespace Engine.Logic
     public class MovableObject : SpriteOverlay,IStoppableSpriteOverlay
     {
         protected  IMoveDefiner moveDefiner;
-        protected  PlayerStatus status;
+        internal  PlayerStatus status;
         protected event EventHandler OnWallHit;
 
         public virtual void OnDamageDeal()
@@ -34,13 +34,14 @@ namespace Engine.Logic
         private int WaterTicks = 0;
         private bool IsInWater;
 
-        public MovableObject(IActiveElements ActiveElements,IDrawer drawer, IMoveDefiner moveDefiner, PlayerStatus status,IPixSound sound):base(0,0,drawer)
+        public MovableObject(IActiveElements ActiveElements,IDrawer drawer, IMoveDefiner moveDefiner, PlayerStatus status,IPixSound sound,IMovableObjectParameters parameters):base(0,0,drawer)
         {
             status.OnDamageDeal = OnDamageDeal;
             this.ActiveElements = ActiveElements;
             this.moveDefiner = moveDefiner;
             this.status = status;
             Sound = sound;
+            Parameters = parameters;
             speed = 0;
             TicksElapsed = Parameters.BlocksCollisionDelay;
             TicksElapsedForMove = Parameters.MoveDelay;
@@ -48,6 +49,7 @@ namespace Engine.Logic
 
         public IActiveElements ActiveElements { get; }
         public IPixSound Sound { get; }
+        public IMovableObjectParameters Parameters { get; }
         public bool Active { get; set; } = true;
         
 

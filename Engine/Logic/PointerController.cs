@@ -16,18 +16,22 @@ namespace Engine.Logic
         private readonly IMoveDefiner moveDefiner;
         private Task ChangeStateOfPointerTask;
         private bool DestroyModeActive;
+        private int BreakingTicks;
+        private Block blockToBreak;
 
-        public PointerController(PlayerStatus status, ITileManager engine, IMoveDefiner moveDefiner,IDrawer drawer,IPixSound sound):base(drawer)
+        public PointerController(PlayerStatus status, ITileManager engine, IMoveDefiner moveDefiner,IDrawer drawer,IPixSound sound,IPointerControllerParameters parameters):base(drawer)
         {
             this.status = status;
             Tiles = engine;
             this.moveDefiner = moveDefiner;
             Sound = sound;
+            Parameters = parameters;
             ChangeStateOfPointerTask = new Task(ChangeStateOfPointer);
         }
 
         public ITileManager Tiles { get; }
         public IPixSound Sound { get; }
+        public IPointerControllerParameters Parameters { get; }
         public bool Active { get; set; } = true;
 
         public override void update()
@@ -64,28 +68,30 @@ namespace Engine.Logic
                 if (DestroyModeActive)
                 {
                     DestroyBlock();
+                    return;
                 }
                 else
                 {
                     PlaceBlock();
                 }
             }
+            BreakingTicks = 0;
         }
 
         private void PlaceBlock()
         {
+            var blockType = status.GetItem();
+            if (blockType is null) return;
+            if (!blockType.IsPlaceable) return;
+
             foreach (var b in Tiles.VisiableBlocks)
             {
                 if (collide(b)) return;
             }
-
-            var blockType = status.GetBlockToPlace();
-            if (blockType != BlockType.None)
-            {
-                Tiles.PlaceBlock(Position.X, Position.Y, blockType);
-                RemoveOverlappingWater(); 
-                Sound.PlaySound(SoundType.Place);
-            }
+            Tiles.PlaceBlock(Position.X, Position.Y, blockType.type);
+            status.Decrement(blockType.type, 1);
+            RemoveOverlappingWater();
+            Sound.PlaySound(SoundType.Place);
         }
 
         private void RemoveOverlappingWater()
@@ -96,13 +102,27 @@ namespace Engine.Logic
 
         private void DestroyBlock()
         {
+            var blockType = status.GetItem();
+            if(BreakingTicks > 0)
+            {
+                if (blockType is null) BreakingTicks+=1;
+                else if (blockToBreak.tool == blockType.TooltType)
+                    BreakingTicks += blockType.Power;
+                if(BreakingTicks>= blockToBreak.Durablity)
+                {
+                    status.AddElement(new Item(1, blockToBreak.Id));
+                    Tiles.RemoveTile(blockToBreak);
+                    Sound.PlaySound(SoundType.Break);
+                    BreakingTicks = 0;
+                    return;
+                }
+            }
             foreach (var b in Tiles.VisiableBlocks)
             {
                 if (collide(b))
                 {
-                    status.AddElement(new Item(1, b.Id));
-                    Tiles.RemoveTile(b);
-                    Sound.PlaySound(SoundType.Break);
+                    blockToBreak = b;
+                    BreakingTicks++;
                     break;
                 }
             }

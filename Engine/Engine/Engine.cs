@@ -1,6 +1,5 @@
 ﻿using Engine.Engine.models;
 using Engine.Resources;
-using PixBlocks.PythonIron.Tools.Integration;
 using System.Collections.Generic;
 
 namespace Engine.Engine
@@ -14,6 +13,7 @@ namespace Engine.Engine
         private readonly IDrawer drawer;
 
         public ITileManager manager { get; }
+        public List<SpriteOverlay> entities { get; } = new List<SpriteOverlay>();
 
         public Engine(ITileManager tileManager, IDrawer drawer)
         {
@@ -49,6 +49,10 @@ namespace Engine.Engine
                 block.move(roation, lenght);
             }
             foreach (SpriteOverlay spriteOverlay in Sprites)
+            {
+                spriteOverlay.move(roation, lenght);
+            }
+            foreach (SpriteOverlay spriteOverlay in entities)
             {
                 spriteOverlay.move(roation, lenght);
             }

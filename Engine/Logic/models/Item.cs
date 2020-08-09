@@ -9,6 +9,9 @@ namespace Engine.Logic
             var Properties = BlockPropertiesData.GetProperties(type);
             CanStack = Properties.CanStack;
             IsPlaceable = Properties.IsPlaceAble;
+            TooltType = Properties.type;
+            Power = Properties.power;
+            Durablity = Properties.durablity;
             Count = count;
             this.type = type;
         }
@@ -21,6 +24,9 @@ namespace Engine.Logic
         public bool IsPlaceable { get; set; }
         public int Count { get; set; }
         public BlockType type { get; set; }
+        public ToolType TooltType { get; set; }
+        public int Power { get; set; }
+        public int Durablity { get; set; }
         public string Name { get => type.ToString(); }
 
         public bool Compare(Item item)

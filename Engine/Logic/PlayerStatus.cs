@@ -13,12 +13,14 @@ namespace Engine.Logic
         public int breath { get; set; }
         public List<Item> Inventory { get; private set; }
         public IStatusDisplayer Displayer { get; }
+        public IPlayerStatusParameters parameters { get; }
+
         public Action OnDamageDeal;
         private Task lavaDamageDeal;
 
         private void LavaDamage()
         {
-            Deal(Parameters.LavaDamage);
+            Deal(parameters.LavaDamage);
             Thread.Sleep(1000);
         }
 
@@ -28,12 +30,13 @@ namespace Engine.Logic
             this.Inventory = Inventory;
         }
 
-        public PlayerStatus(IStatusDisplayer displayer)
+        public PlayerStatus(IStatusDisplayer displayer,IPlayerStatusParameters parameters)
         {
-            breath = Parameters.MaxBreath;
-            health = Parameters.BaseHealth;
+            breath = parameters.MaxBreath;
+            health = parameters.BaseHealth;
             Inventory = new List<Item>();
             Displayer = displayer;
+            this.parameters = parameters;
             lavaDamageDeal = new Task(LavaDamage);
         }
 
@@ -55,7 +58,7 @@ namespace Engine.Logic
             {
                 foreach (var element in clones)
                 {
-                    if (element.Count + item.Count <= Parameters.MaxSlotCapatility)
+                    if (element.Count + item.Count <= parameters.MaxSlotCapatility)
                     {
                         element.Count += item.Count;
                         return;
@@ -65,15 +68,6 @@ namespace Engine.Logic
             }
         }
 
-        public BlockType GetBlockToPlace()
-        {
-            var index = Displayer.SelectedIndex;
-            if (index < 0 || Inventory.Count - 1 < index) return BlockType.None;
-            var selection = Inventory[index];
-            if (!selection.IsPlaceable) return BlockType.None;
-            Decrement(selection.type, 1);
-            return selection.type;
-        }
 
         public void DealBreathBuuble()
         {
@@ -90,6 +84,15 @@ namespace Engine.Logic
             }
         }
 
+        internal Item GetItem()
+        {
+            var index = Displayer.SelectedIndex;
+            if (index < 0 || Inventory.Count - 1 < index) return null;
+            var selection = Inventory[index];
+            //Decrement(selection.type, 1);
+            return selection;
+        }
+
         private void Deal(int v)
         {
             if (health <= v) OnKill();
@@ -99,7 +102,7 @@ namespace Engine.Logic
 
         internal void RestoreBreath()
         {
-            breath = Parameters.MaxBreath;
+            breath = parameters.MaxBreath;
         }
 
         public void OpenInventory() => Displayer.Present( this);
@@ -120,9 +123,9 @@ namespace Engine.Logic
 
         public void DealDamage(int DistanceFallen)
         {
-            if (DistanceFallen >= Parameters.minimumBlocksForFall * Parameters.BlockSize)
+            if (DistanceFallen >= parameters.minimumBlocksForFall * Parameters.BlockSize)
             {
-                DistanceFallen -= Parameters.minimumBlocksForFall * Parameters.BlockSize;
+                DistanceFallen -= parameters.minimumBlocksForFall * Parameters.BlockSize;
                 Deal(DistanceFallen / Parameters.BlockSize);
                 
             }

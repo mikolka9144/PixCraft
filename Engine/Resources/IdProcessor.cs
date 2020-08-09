@@ -1,16 +1,79 @@
 ﻿using Engine.Engine.models;
 using PixBlocks.PythonIron.Tools.Integration;
+using System;
+using System.Collections.Generic;
 
 namespace Engine.Resources
 {
     public interface IIdProcessor
     {
-        void ProcessSprite(SpriteOverlay overlay, BlockType Id);
+        void ProcessSprite(Block overlay, BlockType Id);
+        void ProcessSprite(Foliage overlay, BlockType Id);
+        void ProcessSprite(Fluid overlay, BlockType Id);
     }
 
     public class BlockIdProcessor : IIdProcessor
     {
-        public void ProcessSprite(SpriteOverlay overlay, BlockType Id)
+        private List<BlockType> MinableBlocks = new List<BlockType>() { BlockType.Stone};
+        private List<BlockType> AxeableBlocks = new List<BlockType>() { BlockType.Wood};
+        private List<BlockType> ShovelableBlocks = new List<BlockType>() { BlockType.Dirt};
+
+        public void ProcessSprite(Block overlay, BlockType Id)
+        {
+            ProcessColor(overlay, Id);
+            if (MinableBlocks.Contains(Id)) overlay.tool = ToolType.Pixaxe;
+            if (ShovelableBlocks.Contains(Id)) overlay.tool = ToolType.Shovel;
+            if (AxeableBlocks.Contains(Id)) overlay.tool = ToolType.Axe;
+            ProcessDyrablity(overlay, Id);
+        }
+
+        private void ProcessDyrablity(Block block,BlockType type)
+        {
+            block.Durablity = 20;
+            switch (type)
+            {
+                case BlockType.Grass:
+                    block.Durablity = 20;
+                    break;
+                case BlockType.Dirt:
+                    block.Durablity = 20;
+                    break;
+                case BlockType.Stone:
+                    break;
+                case BlockType.Wood:
+                    break;
+                case BlockType.Leaves:
+                    break;
+                case BlockType.CoalOre:
+                    break;
+                case BlockType.IronOre:
+                    break;
+                case BlockType.GoldOre:
+                    break;
+                case BlockType.DiamondOre:
+                    break;
+                case BlockType.Planks:
+                    break;
+                case BlockType.CraftingTable:
+                    break;
+                case BlockType.Furnance:
+                    break;
+                case BlockType.Sand:
+                    break;
+            }
+        }
+
+        public void ProcessSprite(Foliage overlay, BlockType Id)
+        {
+            ProcessColor(overlay, Id);
+        }
+
+        public void ProcessSprite(Fluid overlay, BlockType Id)
+        {
+            ProcessColor(overlay, Id);
+        }
+
+        private void ProcessColor(SpriteOverlay overlay, BlockType Id)
         {
             switch (Id)
             {
@@ -74,7 +137,6 @@ namespace Engine.Resources
 
     public enum BlockType
     {
-
         None,
         Grass,
         Dirt,
@@ -93,6 +155,8 @@ namespace Engine.Resources
         IronBar,
         Water,
         Sand,
-        Lava
+        Lava,
+        WoodPixaxe,
+        WoodAxe,
     }
 }

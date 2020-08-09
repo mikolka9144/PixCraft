@@ -80,13 +80,20 @@
     <Compile Include="GUI\Forms\NewWorldForm.cs" />
     <Compile Include="GUI\Forms\PauseForm.cs" />
     <Compile Include="GUI\Forms\SaveWorldForm.cs" />
+    <Compile Include="Resources\Parameters\IDrawerParameters.cs" />
+    <Compile Include="Resources\Parameters\IGeneratorParameters.cs" />
     <Compile Include="IStoppableSpriteOverlay.cs" />
+    <Compile Include="Resources\Parameters\ITileManagerParameters.cs" />
+    <Compile Include="Resources\Parameters\IMovableObjectParameters.cs" />
+    <Compile Include="Resources\Parameters\IPlayerStatusParameters.cs" />
+    <Compile Include="Resources\Parameters\IPointerControllerParameters.cs" />
+    <Compile Include="Logic\MobSpawner.cs" />
     <Compile Include="Logic\models\CraftingEntry.cs" />
     <Compile Include="Logic\CraftingModule.cs" />
-    <Compile Include="Models\Positon.cs" />
-    <Compile Include="PixBlocks Implementations\Sound\ISound.cs" />
+    <Compile Include="Logic\models\Positon.cs" />
+    <Compile Include="Logic\models\ISound.cs" />
     <Compile Include="PixBlocks Implementations\Sound\PixSound.cs" />
-    <Compile Include="PixBlocks Implementations\Sound\SoundType.cs" />
+    <Compile Include="Logic\models\SoundType.cs" />
     <Compile Include="Resources\Craftings.cs" />
     <Compile Include="Resources\PlockProperties.cs" />
     <Compile Include="Resources\Sounds.cs" />
@@ -113,7 +120,7 @@
     <Compile Include="Resources\directions.cs" />
     <Compile Include="Engine\Models\OreEntry.cs" />
     <Compile Include="Resources\Ores.cs" />
-    <Compile Include="Resources\Paramters.cs" />
+    <Compile Include="Resources\Parameters\Paramters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Engine\Models\SpriteOverlay.cs" />
   </ItemGroup>

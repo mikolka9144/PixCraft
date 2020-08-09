@@ -16,6 +16,7 @@ namespace Engine.Resources
             list.Add(new CraftingEntry(new Item[] { new Item(4, BlockType.Planks) }, new Item(1, BlockType.CraftingTable),BlockType.None));
 
             list.Add(new CraftingEntry(new Item[] { new Item(8, BlockType.Stone) }, new Item(1, BlockType.Furnance),BlockType.CraftingTable));
+            list.Add(new CraftingEntry(new Item[] { }, new Item(1, BlockType.WoodAxe),BlockType.None));
 
             list.Add(new CraftingEntry(new Item[] { new Item(1, BlockType.IronOre),new Item(1,BlockType.Planks) }, new Item(1, BlockType.IronBar),BlockType.Furnance));
             list.Add(new CraftingEntry(new Item[] { new Item(1, BlockType.GoldBar), new Item(1, BlockType.Planks) }, new Item(1, BlockType.GoldBar),BlockType.Furnance));

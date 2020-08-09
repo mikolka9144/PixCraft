@@ -1,7 +1,6 @@
 ﻿using Engine.GUI.Models;
 using Engine.Logic;
 using Engine.Logic.models;
-using Engine.Resources;
 using PixBlocks.PythonIron.Tools.Integration;
 
 namespace Engine.GUI
@@ -25,7 +24,7 @@ namespace Engine.GUI
         private void InitFromPresent(PlayerStatus currentItems)
         {
             Inventory = currentItems;
-            HpLabel.text = $"HP:{currentItems.health}/{Parameters.BaseHealth}";
+            HpLabel.text = $"HP:{currentItems.health}/{Inventory.parameters.BaseHealth}";
             list.Initalize(currentItems.Inventory,25);
             if (list.radios.Count-1 >= SelectedIndex) list.radios[SelectedIndex].Active = true;
         }

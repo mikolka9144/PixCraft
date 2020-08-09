@@ -17,7 +17,7 @@ namespace Engine.Logic
 
         public IMover Mover { get; }
 
-        public Player(PauseForm pauseMenu, IActiveElements activeElements, PointerController pointer, IMoveDefiner definer, PlayerStatus status,IDrawer drawer,IMover mover,IPixSound sound) : base(activeElements, drawer, definer, status,sound)
+        public Player(PauseForm pauseMenu, IActiveElements activeElements, PointerController pointer, IMoveDefiner definer, PlayerStatus status,IDrawer drawer,IMover mover,IPixSound sound,IMovableObjectParameters parameters) : base(activeElements, drawer, definer, status,sound,parameters)
         {
             position = new PixBlocks.PythonIron.Tools.Integration.Vector(0, 0);
             size = 10;

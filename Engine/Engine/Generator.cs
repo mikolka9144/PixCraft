@@ -14,13 +14,16 @@ namespace Engine.Engine
         private int size;
         private readonly IDrawer drawer;
 
-        public Generator(ITileManager manager, IOreTable oreTable,IDrawer drawer)
+        public IGeneratorParameters parameters { get; }
+
+        public Generator(ITileManager manager, IOreTable oreTable,IDrawer drawer,IGeneratorParameters parameters)
         {
             
             this.manager = manager;
             this.oreTable = oreTable;
             this.drawer = drawer;
-            CanGenerateTree = Parameters.TreeSpread;
+            this.parameters = parameters;
+            CanGenerateTree = this.parameters.TreeSpread;
         }
 
         public void GenerateWorld(int seed,int size)
@@ -78,12 +81,12 @@ namespace Engine.Engine
             foreach (var item in manager.Blocks.FindAll(s => s.Id == BlockType.Grass))
             {
                 var size = Parameters.BlockSize;
-                var ranSel = randomizer.Next(0, Parameters.treeChance) == 0;
-                var HasSize = item.Position.Y >= Parameters.minimumFillarHeightForTree * Parameters.BlockSize;
+                var ranSel = randomizer.Next(0, parameters.treeChance) == 0;
+                var HasSize = item.Position.Y >= parameters.minimumFillarHeightForTree * Parameters.BlockSize;
                 var IsAwayFromTrees = CanGenerateTree == 3;
 
                 if (ranSel && HasSize && IsAwayFromTrees) generateTree(item.Position.X / size, item.Position.Y / size);
-                else if (CanGenerateTree != Parameters.TreeSpread) CanGenerateTree++;
+                else if (CanGenerateTree != parameters.TreeSpread) CanGenerateTree++;
             }
         }
 
@@ -92,7 +95,7 @@ namespace Engine.Engine
             for (int X = -size; X < size; X++)
             {
                 bool FirstBlock = true;
-                for (int i = Parameters.WaterLevel; i > -1; i--)
+                for (int i = parameters.WaterLevel; i > -1; i--)
                 {
                     var placedFluid = manager.AddFluid(X, i, BlockType.Water,false);                 
                     if (!placedFluid) 
@@ -128,7 +131,7 @@ namespace Engine.Engine
 
         private void GenerateCollumnOfStone(int X)
         {
-            for (int Y = -1; Y > -Parameters.sizeOfStoneCollumn; Y--)
+            for (int Y = -1; Y > -parameters.sizeOfStoneCollumn; Y--)
             {
                 manager.AddBlockTile(X, Y, BlockType.Stone);
             }
@@ -136,7 +139,7 @@ namespace Engine.Engine
 
         private void GenerateOres(BlockType type)
         {
-            var offset = Parameters.ChunkSize;
+            var offset = parameters.ChunkSize;
             var count = oreTable.GetCount(type);
             var GenerateAsFluid = oreTable.IsFluid(type);
             var pointer = -size;
@@ -148,7 +151,7 @@ namespace Engine.Engine
                 for (int i = 0; i < count; i++)
                 {
                     var X = randomizer.Next(pointer, pointer + offset);
-                    var Y = randomizer.Next(-Parameters.sizeOfStoneCollumn, -oreTable.GetMinimumDepth(type));
+                    var Y = randomizer.Next(-parameters.sizeOfStoneCollumn, -oreTable.GetMinimumDepth(type));
                     GenerateOre(X, Y, type, oreTable.GetChance(type),GenerateAsFluid);
                 }
                 pointer += offset;

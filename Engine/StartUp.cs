@@ -1,6 +1,5 @@
 ﻿using Engine.Engine;
 using Engine.Engine.models;
-using Engine.Entities;
 using Engine.GUI;
 using Engine.Logic;
 using Engine.PixBlocks_Implementations;
@@ -44,22 +43,24 @@ namespace Engine
 
         private static void ConfigureDependencies(out PixSound Sound, out PointerController pointerController, out Player player,out Generator generator,out Engine.Engine engine)
         {
+            var parameters = new Parameters();
             Sound = new PixSound(new Sounds(new Sound()));
-            var Drawer = new Drawer();
+            var Drawer = new Drawer(parameters);
             var IdProcessor = new BlockIdProcessor();
-            var tileManager = new TileManager(Drawer, IdProcessor);
+            var tileManager = new TileManager(Drawer, IdProcessor,parameters);
             engine = new Engine.Engine(tileManager, Drawer);
+            GameScene.gameSceneStatic.add(new MobSpawner(engine, tileManager, Drawer, Sound));
             var craftingSystem = new CraftingModule(Craftings.GetCraftings(), tileManager);
             var StatusWindow = new InventoryForm(craftingSystem,engine);
-            var playerstatus = new PlayerStatus(StatusWindow);
+            var playerstatus = new PlayerStatus(StatusWindow,parameters);
             var blockConverter = new BlockConverter(Drawer, IdProcessor);
             var moveDefiner = new PlayerMoveDefiner();
             SaveManager = new SaveManager(tileManager, playerstatus, blockConverter, engine.Center, engine);
             var pauseMenu = new PauseForm(engine,SaveManager);
             var oreTable = new OreTable(OreResource.InitOreTable());
-            pointerController = new PointerController(playerstatus, tileManager, moveDefiner, Drawer, Sound);
-            player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus, Drawer, engine, Sound);
-            generator = new Generator(tileManager, oreTable, Drawer);
+            pointerController = new PointerController(playerstatus, tileManager, moveDefiner, Drawer, Sound,parameters);
+            player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus, Drawer, engine, Sound,parameters);
+            generator = new Generator(tileManager, oreTable, Drawer,parameters);
         }
 
         internal static void InitGame(string text)
@@ -91,7 +92,7 @@ namespace Engine
         {
             var game = GameScene.gameSceneStatic;
             engine.Add(pointerController);
-            engine.Add(new Zombie(engine.manager, new Drawer(), Sound));
+            
             game.background = new Color(102, 51, 204);
 
             engine.Render();

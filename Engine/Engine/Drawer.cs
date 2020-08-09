@@ -1,13 +1,8 @@
 ﻿using Engine.Engine.models;
-using Engine.Logic;
-using Engine.Resources;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Threading;
-using System.Windows;
-using System.Windows.Threading;
 using Vector = PixBlocks.PythonIron.Tools.Integration.Vector;
 
 namespace Engine.Engine
@@ -15,15 +10,18 @@ namespace Engine.Engine
     internal class Drawer : IDrawer
     {
         public List<Sprite> GameScenesSprites { get; }
+        public IDrawerParameters Parameters { get; }
+
         private SpriteCollector garbageCollector;
 
-        public Drawer()
+        public Drawer(IDrawerParameters parameters)
         {
             #region SetStolenSpriteList
             GameScenesSprites = GameScene.gameSceneStatic.GetType().GetField("gameObjects", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(GameScene.gameSceneStatic) as List<Sprite>;
             #endregion
             garbageCollector = new SpriteCollector();
             GameScenesSprites.Insert(0,garbageCollector);
+            Parameters = parameters;
         }
         public void Draw(SpriteOverlay sprite)
         {

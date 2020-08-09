@@ -24,7 +24,7 @@ namespace EngineTets.Logic
         [Test]
         public void tryCraftItem_neededItemIn1Slot()
         {
-            CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, new Item(1, BlockType.DiamondOre),BlockType.None));
+            CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, new Item(1, BlockType.DiamondOre),BlockType.WoodPixaxe));
             Inventory.Inventory.Add(new Item(3, BlockType.Dirt));
 
             var flag = Instance.Craft(Inventory, BlockType.DiamondOre);
@@ -37,7 +37,7 @@ namespace EngineTets.Logic
         [Test]
         public void tryCraftItem_neededItemIn1Slot2()
         {
-            CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, new Item(1, BlockType.DiamondOre), BlockType.None));
+            CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, new Item(1, BlockType.DiamondOre), BlockType.WoodPixaxe));
             Inventory.Inventory.Add(new Item(4, BlockType.Dirt));
 
             var flag = Instance.Craft(Inventory, BlockType.DiamondOre);
@@ -50,7 +50,7 @@ namespace EngineTets.Logic
         [Test]
         public void tryCraftItem_neededItemInManySlots()
         {
-            CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, new Item(1, BlockType.DiamondOre), BlockType.None));
+            CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, new Item(1, BlockType.DiamondOre), BlockType.WoodPixaxe));
             Inventory.Inventory.Add(new Item(2, BlockType.Dirt));
             Inventory.Inventory.Add(new Item(2, BlockType.Dirt));
 
@@ -64,7 +64,7 @@ namespace EngineTets.Logic
         [Test]
         public void tryCraftItem_WithNotNeededItems()
         {
-            CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, new Item(1, BlockType.DiamondOre), BlockType.None));
+            CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, new Item(1, BlockType.DiamondOre), BlockType.WoodPixaxe));
             Inventory.Inventory.Add(new Item(2, BlockType.Dirt));
 
             var flag = Instance.Craft(Inventory, BlockType.DiamondOre);
@@ -81,7 +81,7 @@ namespace EngineTets.Logic
             {
                 CanStack = false
             };
-            CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, craftedItem, BlockType.None));
+            CraftingEntries.Add(new CraftingEntry(new[] { new Item(3, BlockType.Dirt) }, craftedItem, BlockType.WoodPixaxe));
             Inventory.Inventory.Add(new Item(3, BlockType.Dirt));
 
             var flag = Instance.Craft(Inventory, BlockType.CoalOre);
