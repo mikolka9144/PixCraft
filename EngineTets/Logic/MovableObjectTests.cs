@@ -10,6 +10,7 @@ namespace EngineTets.Logic
 {
     class MovableObjectTests
     {
+        private Parameters parameters;
         private Elements ActiveElements;
         private PlayerStatus playerStatus;
         private MovableObject Instance;
@@ -17,9 +18,10 @@ namespace EngineTets.Logic
         [SetUp]
         public void Setup()
         {
+            parameters = new Parameters();
             ActiveElements = new Elements();
-            playerStatus = new PlayerStatus(null);
-            Instance = new MovableObject(ActiveElements, null, null,playerStatus,new TestSound());
+            playerStatus = new PlayerStatus(null,parameters);
+            Instance = new MovableObject(ActiveElements, null, null,playerStatus,new TestSound(),parameters);
 
             Instance.IsDestroyed = false;
             Instance.IsVisible = true;
@@ -36,13 +38,13 @@ namespace EngineTets.Logic
         [Test]
         public void DrowningTest()
         {
-            Assert.AreEqual(Parameters.MaxBreath, playerStatus.breath);
+            Assert.AreEqual(parameters.MaxBreath, playerStatus.breath);
             for (int i = 0; i < 20; i++)
             {
 
                 Instance.CheckIfUnderwater();
             }
-            Assert.AreEqual(Parameters.MaxBreath-1, playerStatus.breath);
+            Assert.AreEqual(parameters.MaxBreath-1, playerStatus.breath);
         }
     }
     class Elements : IActiveElements

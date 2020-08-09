@@ -31,15 +31,15 @@ namespace EngineTets.Logic
             Instance.AddElement(new Item(3, BlockType.Grass));
 
             Displayer.SelectedIndex = 0;
-            var first = Instance.GetBlockToPlace();
+            var first = Instance.GetItem();
             Displayer.SelectedIndex = 1;
-            var secound = Instance.GetBlockToPlace();
+            var secound = Instance.GetItem();
             Displayer.SelectedIndex = 2;
-            var third = Instance.GetBlockToPlace();
+            var third = Instance.GetItem();
 
-            Assert.AreEqual(BlockType.DiamondOre, first);
-            Assert.AreEqual(BlockType.WoodPixaxe, secound);
-            Assert.AreEqual(BlockType.Grass, third);
+            Assert.AreEqual(BlockType.DiamondOre, first.type);
+            Assert.AreEqual(BlockType.stick, secound.type);
+            Assert.AreEqual(BlockType.Grass, third.type);
         }
         [Test]
         public void CheckDrowning()

@@ -4,6 +4,7 @@ using Engine.PixBlocks_Implementations;
 using Engine.Resources;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -105,14 +106,15 @@ namespace Engine.Logic
             var blockType = status.GetItem();
             if(BreakingTicks > 0)
             {
-                if (blockType is null) BreakingTicks+=1;
-                else if (blockToBreak.tool == blockType.TooltType)
-                    BreakingTicks += blockType.Power;
-                if(BreakingTicks>= blockToBreak.Durablity)
+                if (blockToBreak.tool == blockType.TooltType) BreakingTicks += blockType.Power;
+                else BreakingTicks += 1;
+
+                if (BreakingTicks>= blockToBreak.Durablity)
                 {
-                    status.AddElement(new Item(1, blockToBreak.Id));
+                    CheckMinPower(blockType);
                     Tiles.RemoveTile(blockToBreak);
                     Sound.PlaySound(SoundType.Break);
+                    DamageTool(blockType);
                     BreakingTicks = 0;
                     return;
                 }
@@ -126,6 +128,23 @@ namespace Engine.Logic
                     break;
                 }
             }
+        }
+
+        private void CheckMinPower(Item blockType)
+        {
+            if(blockToBreak.MinimumPower != 0)
+            {
+                if (blockToBreak.tool != blockType.TooltType || blockToBreak.MinimumPower > blockType.Power) return;
+            }
+            status.AddElement(new Item(1, blockToBreak.Id));
+        }
+
+        private void DamageTool(Item blockType)
+        {
+            if (blockType.TooltType == ToolType.None) return;
+            if (blockType != null) blockType.Durablity--;
+            else return;
+            if (blockType.Durablity <= 0) status.Inventory.Remove(blockType);
         }
 
         private void ChangeStateOfPointer()

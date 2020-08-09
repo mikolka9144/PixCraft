@@ -30,7 +30,7 @@ namespace Engine.Logic
 
         public override void update()
         {
-            if(Randomizer.Next(50) == 0 && Engine.entities.Count < 5)
+            if(Randomizer.Next(200) == 0 && Engine.entities.Count < 2)
             {
                 var zombie = new Zombie(ActiveElements, Drawer, Sound, new Parameters());
                 zombie.status.OnKill = () => Kill(zombie);

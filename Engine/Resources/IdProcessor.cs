@@ -25,6 +25,29 @@ namespace Engine.Resources
             if (ShovelableBlocks.Contains(Id)) overlay.tool = ToolType.Shovel;
             if (AxeableBlocks.Contains(Id)) overlay.tool = ToolType.Axe;
             ProcessDyrablity(overlay, Id);
+            ProcessRequirements(overlay);
+        }
+
+        private void ProcessRequirements(Block overlay)
+        {
+            switch (overlay.Id)
+            {
+                case BlockType.Stone:
+                    overlay.MinimumPower = 10;
+                    break;
+                case BlockType.CoalOre:
+                    overlay.MinimumPower = 10;
+                    break;
+                case BlockType.IronOre:
+                    break;
+                case BlockType.GoldOre:
+                    break;
+                case BlockType.DiamondOre:
+                    break;
+                case BlockType.Furnance:
+                    overlay.MinimumPower = 15;
+                    break;
+            }
         }
 
         private void ProcessDyrablity(Block block,BlockType type)
@@ -36,7 +59,7 @@ namespace Engine.Resources
                     block.Durablity = 20;
                     break;
                 case BlockType.Dirt:
-                    block.Durablity = 20;
+                    block.Durablity = 10;
                     break;
                 case BlockType.Stone:
                     break;
@@ -158,5 +181,6 @@ namespace Engine.Resources
         Lava,
         WoodPixaxe,
         WoodAxe,
+        WoodShovel,
     }
 }

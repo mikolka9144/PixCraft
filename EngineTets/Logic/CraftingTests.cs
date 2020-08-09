@@ -16,7 +16,7 @@ namespace EngineTets.Logic
         [SetUp]
         public void Setup()
         {
-            Inventory = new PlayerStatus(null);
+            Inventory = new PlayerStatus(null,new Parameters());
             CraftingEntries = new List<CraftingEntry>();
             Instance = new CraftingModule(CraftingEntries,new NearbyBlockCheckTest());
         }

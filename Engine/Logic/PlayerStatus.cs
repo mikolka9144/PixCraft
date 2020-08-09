@@ -84,10 +84,10 @@ namespace Engine.Logic
             }
         }
 
-        internal Item GetItem()
+        public Item GetItem()
         {
             var index = Displayer.SelectedIndex;
-            if (index < 0 || Inventory.Count - 1 < index) return null;
+            if (index < 0 || Inventory.Count - 1 < index) return new Item(1,BlockType.None);
             var selection = Inventory[index];
             //Decrement(selection.type, 1);
             return selection;

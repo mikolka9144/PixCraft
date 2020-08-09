@@ -20,7 +20,7 @@ namespace Engine.GUI
             this.inventory = inventory;
 
             controls.Add(new Label(new Vector(-80, 90), "Rcepies", 30));
-            allCraftings = new RadioList(new Vector(-80,70), 7);
+            allCraftings = new RadioList(new Vector(-80,70), 6);
             allCraftings.OnSelectionChange += AllCraftings_OnSelectionChange;
             controls.Add(allCraftings);
 
