@@ -51,7 +51,7 @@ namespace Engine.Logic
             {
                 for (int i = 0; i < item.Count; i++)
                 {
-                    Inventory.Add(new Item(1, item.type));
+                    Inventory.Add(new Item(1, item.Type));
                 }
             }
             else
@@ -109,7 +109,7 @@ namespace Engine.Logic
 
         public void Decrement(BlockType selection, int count)
         {
-            var allItemsOfKind = Inventory.FindAll(s => s.type == selection);
+            var allItemsOfKind = Inventory.FindAll(s => s.Type == selection);
             for (int i = 0; i < allItemsOfKind.Count; i++)
             {
                 if (allItemsOfKind[i].Count - count <= 0)

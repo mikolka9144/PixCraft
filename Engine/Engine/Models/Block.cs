@@ -1,5 +1,4 @@
 ﻿using Engine.Resources;
-using System;
 
 namespace Engine.Engine.models
 {

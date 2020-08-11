@@ -1,5 +1,4 @@
 ﻿using Engine.Engine;
-using Engine.Engine.models;
 using Engine.Entities;
 using Engine.Logic.models;
 using Engine.PixBlocks_Implementations;
@@ -39,7 +38,7 @@ namespace Engine.Logic
             }
         }
 
-        private void Kill(SpriteOverlay sprite)
+        private void Kill(MovableObject sprite)
         {
             Engine.entities.Remove(sprite);
             Drawer.remove(sprite);

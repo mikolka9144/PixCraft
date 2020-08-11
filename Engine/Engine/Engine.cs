@@ -13,7 +13,7 @@ namespace Engine.Engine
         private readonly IDrawer drawer;
 
         public ITileManager manager { get; }
-        public List<SpriteOverlay> entities { get; } = new List<SpriteOverlay>();
+        public List<IStoppableSpriteOverlay> entities { get; } = new List<IStoppableSpriteOverlay>();
 
         public Engine(ITileManager tileManager, IDrawer drawer)
         {
@@ -26,6 +26,14 @@ namespace Engine.Engine
         {
             Sprites.Add(sprite);
         }
+
+        internal void Stop()
+        {
+            Sprites.ForEach(s => s.Active = false);
+            entities.ForEach(s => s.Active = false);
+
+        }
+
         public void Render()
         {
             foreach (var item in manager.Blocks)
@@ -40,6 +48,12 @@ namespace Engine.Engine
             {
                 drawer.Draw(item);
             }
+        }
+
+        internal void Start()
+        {
+            Sprites.ForEach(s => s.Active = true);
+            entities.ForEach(s => s.Active = true);
         }
 
         public void Move(roation roation, int lenght)

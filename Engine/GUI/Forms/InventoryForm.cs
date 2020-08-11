@@ -50,12 +50,12 @@ namespace Engine.GUI
         public override void Close()
         {
             base.Close();
-            engine.Sprites.ForEach(s => s.Active = true);
+            engine.Start();
         }
 
         public override void Show()
         {
-            engine.Sprites.ForEach(s => s.Active = false);
+            engine.Stop();
             InitFromPresent(Inventory);
             base.Show();
         }

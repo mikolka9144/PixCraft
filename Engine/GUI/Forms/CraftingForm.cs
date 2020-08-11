@@ -39,7 +39,7 @@ namespace Engine.GUI
         private void CraftItem(PixControl obj)
         {
             var item = allCraftings.radios[allCraftings.Selection].ObjectToRepresent as Item;
-            craftingSystem.Craft(inventory, item.type);
+            craftingSystem.Craft(inventory, item.Type);
             RefreshInventory();
             Thread.Sleep(100);
         }

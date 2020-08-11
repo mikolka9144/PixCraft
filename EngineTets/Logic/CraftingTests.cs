@@ -30,8 +30,8 @@ namespace EngineTets.Logic
             var flag = Instance.Craft(Inventory, BlockType.DiamondOre);
 
             Assert.IsTrue(flag);
-            Assert.IsTrue(Inventory.Inventory.Find(s => s.type == BlockType.DiamondOre).Count == 1);
-            Assert.IsNull(Inventory.Inventory.FirstOrDefault(s => s.type == BlockType.Dirt));
+            Assert.IsTrue(Inventory.Inventory.Find(s => s.Type == BlockType.DiamondOre).Count == 1);
+            Assert.IsNull(Inventory.Inventory.FirstOrDefault(s => s.Type == BlockType.Dirt));
         }
 
         [Test]
@@ -43,8 +43,8 @@ namespace EngineTets.Logic
             var flag = Instance.Craft(Inventory, BlockType.DiamondOre);
 
             Assert.IsTrue(flag);
-            Assert.IsTrue(Inventory.Inventory.Find(s => s.type == BlockType.DiamondOre).Count == 1);
-            Assert.IsNotNull(Inventory.Inventory.First(s => s.type == BlockType.Dirt));
+            Assert.IsTrue(Inventory.Inventory.Find(s => s.Type == BlockType.DiamondOre).Count == 1);
+            Assert.IsNotNull(Inventory.Inventory.First(s => s.Type == BlockType.Dirt));
         }
 
         [Test]
@@ -57,8 +57,8 @@ namespace EngineTets.Logic
             var flag = Instance.Craft(Inventory, BlockType.DiamondOre);
 
             Assert.IsTrue(flag);
-            Assert.IsTrue(Inventory.Inventory.Find(s => s.type == BlockType.DiamondOre).Count == 1);
-            Assert.IsTrue(Inventory.Inventory.Find(s => s.type == BlockType.Dirt).Count == 1);
+            Assert.IsTrue(Inventory.Inventory.Find(s => s.Type == BlockType.DiamondOre).Count == 1);
+            Assert.IsTrue(Inventory.Inventory.Find(s => s.Type == BlockType.Dirt).Count == 1);
         }
 
         [Test]
@@ -70,8 +70,8 @@ namespace EngineTets.Logic
             var flag = Instance.Craft(Inventory, BlockType.DiamondOre);
 
             Assert.IsFalse(flag);
-            Assert.IsNull(Inventory.Inventory.Find(s => s.type == BlockType.DiamondOre));
-            Assert.IsTrue(Inventory.Inventory.Find(s => s.type == BlockType.Dirt).Count == 2);
+            Assert.IsNull(Inventory.Inventory.Find(s => s.Type == BlockType.DiamondOre));
+            Assert.IsTrue(Inventory.Inventory.Find(s => s.Type == BlockType.Dirt).Count == 2);
         }
 
         [Test]

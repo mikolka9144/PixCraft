@@ -37,9 +37,9 @@ namespace EngineTets.Logic
             Displayer.SelectedIndex = 2;
             var third = Instance.GetItem();
 
-            Assert.AreEqual(BlockType.DiamondOre, first.type);
-            Assert.AreEqual(BlockType.stick, secound.type);
-            Assert.AreEqual(BlockType.Grass, third.type);
+            Assert.AreEqual(BlockType.DiamondOre, first.Type);
+            Assert.AreEqual(BlockType.stick, secound.Type);
+            Assert.AreEqual(BlockType.Grass, third.Type);
         }
         [Test]
         public void CheckDrowning()

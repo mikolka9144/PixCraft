@@ -13,7 +13,7 @@ namespace Engine.Logic
             Power = Properties.power;
             Durablity = Properties.durablity;
             Count = count;
-            this.type = type;
+            this.Type = type;
         }
 
         public Item()
@@ -23,15 +23,15 @@ namespace Engine.Logic
         public bool CanStack { get; set; }
         public bool IsPlaceable { get; set; }
         public int Count { get; set; }
-        public BlockType type { get; set; }
+        public BlockType Type { get; set; }
         public ToolType TooltType { get; set; }
         public int Power { get; set; }
         public int Durablity { get; set; }
-        public string Name { get => type.ToString(); }
+        public string Name { get => Type.ToString(); }
 
         public bool Compare(Item item)
         {
-            return item.type == type;
+            return item.Type == Type;
         }
         public override string ToString() => $"{Name} X:{Count}";
 

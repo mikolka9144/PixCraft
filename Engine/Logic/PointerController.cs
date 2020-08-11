@@ -4,7 +4,6 @@ using Engine.PixBlocks_Implementations;
 using Engine.Resources;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -89,8 +88,8 @@ namespace Engine.Logic
             {
                 if (collide(b)) return;
             }
-            Tiles.PlaceBlock(Position.X, Position.Y, blockType.type);
-            status.Decrement(blockType.type, 1);
+            Tiles.PlaceBlock(Position.X, Position.Y, blockType.Type);
+            status.Decrement(blockType.Type, 1);
             RemoveOverlappingWater();
             Sound.PlaySound(SoundType.Place);
         }

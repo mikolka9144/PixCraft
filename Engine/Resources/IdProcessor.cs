@@ -1,6 +1,5 @@
 ﻿using Engine.Engine.models;
 using PixBlocks.PythonIron.Tools.Integration;
-using System;
 using System.Collections.Generic;
 
 namespace Engine.Resources

@@ -21,7 +21,7 @@ namespace Engine.GUI
 
         public override void Show()
         {
-            engine.Sprites.ForEach(s => s.Active = false);
+            engine.Stop();
             base.Show();
         }
         private void Save()
@@ -33,7 +33,7 @@ namespace Engine.GUI
 
         private void Resume()
         {
-            engine.Sprites.ForEach(s => s.Active = true);
+            engine.Start();
             Hide();
         }
     }

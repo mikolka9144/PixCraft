@@ -31,23 +31,23 @@ namespace Engine.Logic
 
         public bool Craft(PlayerStatus inventory, BlockType blockType)
         {
-            var craft = _craftingEntries.Find(s => s.CraftedItem.type == blockType);
+            var craft = _craftingEntries.Find(s => s.CraftedItem.Type == blockType);
 
             foreach (var item in craft.NeededItems)
             {
-                if (item.Count > inventory.Inventory.FindAll(s => s.type == item.type).Select(s => s.Count).Sum()) return false;
+                if (item.Count > inventory.Inventory.FindAll(s => s.Type == item.Type).Select(s => s.Count).Sum()) return false;
             }
 
             foreach (var item in craft.NeededItems)
             {
-                var requiredCount = craft.NeededItems.First(s => s.type == item.type).Count;
-                var materil = inventory.Inventory.FindAll(s => s.type == item.type);
+                var requiredCount = craft.NeededItems.First(s => s.Type == item.Type).Count;
+                var materil = inventory.Inventory.FindAll(s => s.Type == item.Type);
                 if (materil.First().Count < requiredCount)
                 {
                     requiredCount -= materil.First().Count;
                     inventory.Inventory.Remove(materil.First());
                 }
-                inventory.Decrement(item.type, requiredCount);
+                inventory.Decrement(item.Type, requiredCount);
             }
             inventory.AddElement(craft.CraftedItem.Duplicate());
             return true;
