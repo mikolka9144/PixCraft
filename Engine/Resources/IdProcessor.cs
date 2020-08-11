@@ -38,13 +38,16 @@ namespace Engine.Resources
                     overlay.MinimumPower = 10;
                     break;
                 case BlockType.IronOre:
+                    overlay.MinimumPower = 15;
                     break;
                 case BlockType.GoldOre:
+                    overlay.MinimumPower = 15;
                     break;
                 case BlockType.DiamondOre:
+                    overlay.MinimumPower = 20;
                     break;
                 case BlockType.Furnance:
-                    overlay.MinimumPower = 15;
+                    overlay.MinimumPower = 10;
                     break;
             }
         }
@@ -55,30 +58,39 @@ namespace Engine.Resources
             switch (type)
             {
                 case BlockType.Grass:
-                    block.Durablity = 20;
                     break;
                 case BlockType.Dirt:
                     block.Durablity = 10;
                     break;
                 case BlockType.Stone:
+                    block.Durablity = 30;
                     break;
                 case BlockType.Wood:
+                    block.Durablity = 25;
                     break;
                 case BlockType.Leaves:
+                    block.Durablity = 5;
                     break;
                 case BlockType.CoalOre:
+                    block.Durablity = 40;
                     break;
                 case BlockType.IronOre:
+                    block.Durablity = 50;
                     break;
                 case BlockType.GoldOre:
+                    block.Durablity = 50;
                     break;
                 case BlockType.DiamondOre:
+                    block.Durablity = 50;
                     break;
                 case BlockType.Planks:
+                    block.Durablity = 25;
                     break;
                 case BlockType.CraftingTable:
+                    block.Durablity = 25;
                     break;
                 case BlockType.Furnance:
+                    block.Durablity = 30;
                     break;
                 case BlockType.Sand:
                     break;
@@ -181,5 +193,22 @@ namespace Engine.Resources
         WoodPixaxe,
         WoodAxe,
         WoodShovel,
+        WoodSword,
+        StoneSword,
+        StoneAxe,
+        StoneShovel,
+        StonePixaxe,
+        DiamondSword,
+        DiamondAxe,
+        DiamondShovel,
+        DiamondPixaxe,
+        GoldSword,
+        GoldAxe,
+        GoldShovel,
+        GoldPixaxe,
+        IronSword,
+        IronAxe,
+        IronShovel,
+        IronPixaxe,
     }
 }

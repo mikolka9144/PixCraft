@@ -19,19 +19,21 @@ namespace Engine.Logic
         private int BreakingTicks;
         private Block blockToBreak;
 
-        public PointerController(PlayerStatus status, ITileManager engine, IMoveDefiner moveDefiner,IDrawer drawer,IPixSound sound,IPointerControllerParameters parameters):base(drawer)
+        public PointerController(PlayerStatus status, ITileManager engine, IMoveDefiner moveDefiner,IDrawer drawer,IPixSound sound,IPointerControllerParameters parameters,IEntitiesData entities):base(drawer)
         {
             this.status = status;
             Tiles = engine;
             this.moveDefiner = moveDefiner;
             Sound = sound;
             Parameters = parameters;
+            Entities = entities;
             ChangeStateOfPointerTask = new Task(ChangeStateOfPointer);
         }
 
         public ITileManager Tiles { get; }
         public IPixSound Sound { get; }
         public IPointerControllerParameters Parameters { get; }
+        public IEntitiesData Entities { get; }
         public bool Active { get; set; } = true;
 
         public override void update()
@@ -103,6 +105,7 @@ namespace Engine.Logic
         private void DestroyBlock()
         {
             var blockType = status.GetItem();
+            if (blockType.TooltType == ToolType.Sword) DamageMonster(blockType);
             if(BreakingTicks > 0)
             {
                 if (blockToBreak.tool == blockType.TooltType) BreakingTicks += blockType.Power;
@@ -127,6 +130,20 @@ namespace Engine.Logic
                     break;
                 }
             }
+        }
+
+        private void DamageMonster(Item blockType)
+        {
+            foreach (var item  in Entities.entities)
+            {
+                var entity = item as MovableObject;
+                if (entity.Collide(this,20)) 
+                { 
+                    entity.DealAttackDamage(blockType.Power);
+                    DamageTool(blockType);
+                    break;
+                }
+            } 
         }
 
         private void CheckMinPower(Item blockType)

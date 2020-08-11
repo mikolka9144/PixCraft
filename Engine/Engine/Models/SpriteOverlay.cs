@@ -50,9 +50,9 @@ namespace Engine.Engine.models
             return !IsNotInRange;
         }
         public bool IsInRange(int Range) => IsInRange(Range, new Positon(0, 0));
-        public bool collide(SpriteOverlay sprite)
+        public bool Collide(SpriteOverlay sprite, double hitbox)
         {
-            double num = size * 0.5 + sprite.size * 0.5;
+            double num = hitbox * 0.5 + sprite.size * 0.5;
             if (Math.Abs(sprite.Position.X - Position.X) > num || Math.Abs(sprite.Position.Y - Position.Y) > num)
             {
                 return false;
@@ -62,6 +62,10 @@ namespace Engine.Engine.models
                 return true;
             }
             return false;
+        }
+        public bool Collide(SpriteOverlay sprite)
+        {
+            return Collide(sprite, size);
         }
     }
 }

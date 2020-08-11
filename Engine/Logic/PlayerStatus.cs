@@ -93,7 +93,7 @@ namespace Engine.Logic
             return selection;
         }
 
-        private void Deal(int v)
+        internal void Deal(int v)
         {
             if (health <= v) OnKill();
             health -= v;
@@ -131,5 +131,7 @@ namespace Engine.Logic
             }
         }
         internal Action OnKill;
+
+
     }
 }

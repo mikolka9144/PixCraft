@@ -1,6 +1,8 @@
 ﻿using Engine.GUI.Models;
 using Engine.Logic;
+using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
+using System;
 using System.Linq;
 using System.Threading;
 
@@ -33,27 +35,38 @@ namespace Engine.GUI
             controls.Add(havedItems);
 
             controls.Add(new Button(new Vector(-50, -90), "Craft", 20, CraftItem) { color = new Color(204, 51, 153) });
+            controls.Add(new Button(new Vector(-50, -60), "Filter", 20, Filter) { color = new Color(104, 51, 153) });
             InitData();
+        }
+
+        private void Filter(PixControl obj)
+        {
+            var text = GameScene.gameSceneStatic.PythonCodeRunner.show("Enter query for filter").ToLower();
+            var filtredCraftings = craftingSystem.craftingEntries.Where(s => s.CraftedItem.Name.ToLower().Contains(text));
+            allCraftings.Hide();
+            allCraftings.Initalize(filtredCraftings, 10);
+            allCraftings.Show();
         }
 
         private void CraftItem(PixControl obj)
         {
-            var item = allCraftings.radios[allCraftings.Selection].ObjectToRepresent as Item;
-            craftingSystem.Craft(inventory, item.Type);
+            var item = allCraftings.radios[allCraftings.Selection].ObjectToRepresent as CraftingEntry;
+            craftingSystem.Craft(inventory, item.CraftedItem.Type);
             RefreshInventory();
             Thread.Sleep(100);
         }
 
         private void AllCraftings_OnSelectionChange(object sender,SelectionEventArgs args)
         {
+            var obj = args.radio.ObjectToRepresent as CraftingEntry;
             neededItems.Hide();
-            neededItems.Initalize(craftingSystem.craftingEntries[args.radio.Index].NeededItems,6);
+            neededItems.Initalize(obj.NeededItems,6);
             neededItems.Show();
         }
 
         private void InitData()
         {
-            allCraftings.Initalize(craftingSystem.craftingEntries.Select(s => s.CraftedItem),11);
+            allCraftings.Initalize(craftingSystem.craftingEntries,11);
             havedItems.Initalize(inventory.Inventory,12);
         }
 

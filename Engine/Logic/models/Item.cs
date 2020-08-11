@@ -13,7 +13,7 @@ namespace Engine.Logic
             Power = Properties.power;
             Durablity = Properties.durablity;
             Count = count;
-            this.Type = type;
+            Type = type;
         }
 
         public Item()

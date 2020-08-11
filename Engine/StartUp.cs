@@ -7,9 +7,10 @@ using Engine.Resources;
 using Engine.Saves;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
+using PixBlocks.TopPanel.Components.Basic;
 using System;
 using System.Threading;
-using System.Windows.Forms;
+using System.Windows;
 using MainMenu = Engine.GUI.MainMenu;
 using Sound = Engine.PixBlocks_Implementations.Sound;
 
@@ -35,10 +36,13 @@ namespace Engine
             catch (Exception ex)
             {
                 if (ex is ThreadInterruptedException) return;
-                MessageBox.Show(ex.Message);
-                MessageBox.Show(ex.GetType().FullName);
-                MessageBox.Show(ex.StackTrace);
+                Application.Current.Dispatcher.Invoke(new Action(() => ShowError(ex)));               
             }
+        }
+
+        private void ShowError(Exception ex)
+        {
+            CustomMessageBox.Show($"A folowing exeption occurded:\n{ex.Message}\n{ex.StackTrace}\nPlease send me a screenshot of this message");
         }
 
         private static void ConfigureDependencies(out PixSound Sound, out PointerController pointerController, out Player player,out Generator generator,out Engine.Engine engine)
@@ -49,7 +53,6 @@ namespace Engine
             var IdProcessor = new BlockIdProcessor();
             var tileManager = new TileManager(Drawer, IdProcessor,parameters);
             engine = new Engine.Engine(tileManager, Drawer);
-            GameScene.gameSceneStatic.add(new MobSpawner(engine, tileManager, Drawer, Sound));
             var craftingSystem = new CraftingModule(Craftings.GetCraftings(), tileManager);
             var StatusWindow = new InventoryForm(craftingSystem,engine);
             var playerstatus = new PlayerStatus(StatusWindow,parameters);
@@ -58,8 +61,9 @@ namespace Engine
             SaveManager = new SaveManager(tileManager, playerstatus, blockConverter, engine.Center, engine);
             var pauseMenu = new PauseForm(engine,SaveManager);
             var oreTable = new OreTable(OreResource.InitOreTable());
-            pointerController = new PointerController(playerstatus, tileManager, moveDefiner, Drawer, Sound,parameters);
+            pointerController = new PointerController(playerstatus, tileManager, moveDefiner, Drawer, Sound,parameters,engine);
             player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus, Drawer, engine, Sound,parameters);
+            GameScene.gameSceneStatic.add(new MobSpawner(engine, tileManager, Drawer, Sound,player));
             generator = new Generator(tileManager, oreTable, Drawer,parameters);
         }
 

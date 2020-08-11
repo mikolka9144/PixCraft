@@ -74,7 +74,7 @@ namespace Engine.Logic
 
         private void PlayMoveSound()
         {
-            if(ActiveElements.GetActiveToppings(Position).Any(s => collide(s)))
+            if(ActiveElements.GetActiveToppings(Position).Any(s => Collide(s)))
             {
                 Sound.PlaySound(SoundType.Walking);
             }
@@ -82,14 +82,14 @@ namespace Engine.Logic
 
         private void CheckIfTouchesFluid(BlockType lava)
         {
-            if (ActiveElements.GetActiveFluids(Position).FindAll(s => s.Id == lava).Any(s => collide(s))) status.DealDamageFromLava();
+            if (ActiveElements.GetActiveFluids(Position).FindAll(s => s.Id == lava).Any(s => Collide(s))) status.DealDamageFromLava();
         }
 
         public void CheckIfUnderwater()
         {
             foreach (var item in ActiveElements.GetActiveFluids(Position))
             {
-                if(collide(item))
+                if(Collide(item))
                 {
                     if (!IsInWater)
                     {
@@ -117,7 +117,7 @@ namespace Engine.Logic
         {
             foreach (var b in ActiveElements.GetActiveBlocks(Position))
             {
-                if (collide(b))
+                if (Collide(b))
                 {
                     if (speed > 0)
                     {
@@ -125,7 +125,7 @@ namespace Engine.Logic
                         TicksElapsedForMove = 0;
                         speed = -speed;
                     }
-                    else if (collide(b.foliage) && TicksElapsed == Parameters.BlocksCollisionDelay) 
+                    else if (Collide(b.foliage) && TicksElapsed == Parameters.BlocksCollisionDelay) 
                     move(roation.Up, Parameters.StandUpSpeed);
                 }
             }
@@ -135,7 +135,7 @@ namespace Engine.Logic
 
         private void ApplyGravity()
         {
-            var touchesFluid = ActiveElements.GetActiveFluids(Position).Any(s => collide(s));
+            var touchesFluid = ActiveElements.GetActiveFluids(Position).Any(s => Collide(s));
             if (moveDefiner.key(command.Jump) && Grounded)
             {
                 Grounded = false;
@@ -144,7 +144,7 @@ namespace Engine.Logic
             }
             foreach (var block in ActiveElements.GetActiveToppings(Position))
             {
-                if (collide(block) && TicksElapsed >= Parameters.BlocksCollisionDelay)
+                if (Collide(block) && TicksElapsed >= Parameters.BlocksCollisionDelay)
                 {
                     Grounded = true;
                     if (speed < 0) speed = 0;
@@ -156,6 +156,19 @@ namespace Engine.Logic
             move(roation.Up, speed);
             ChangeMoveSpeed(touchesFluid);
             
+        }
+
+        internal void DealAttackDamage(int power)
+        {
+            if (flip)
+            {
+                MoveRight();
+            }
+            else
+            {
+                MoveLeft();
+            }
+            status.Deal(power);
         }
 
         private void ChangeMoveSpeed(bool touchesWater)
@@ -181,7 +194,7 @@ namespace Engine.Logic
             move(roation.Right, Parameters.moveSpeed);
             foreach (var b in ActiveElements.GetActiveBlocks(Position))
             {
-                if (collide(b))
+                if (Collide(b))
                 {
                     move(roation.Left, Parameters.moveSpeed);
                     OnWallHit?.Invoke(this, null);
@@ -196,7 +209,7 @@ namespace Engine.Logic
             move(roation.Left, Parameters.moveSpeed);
             foreach (var b in ActiveElements.GetActiveBlocks(Position))
             {
-                if (collide(b))
+                if (Collide(b))
                 {
                     move(roation.Right, Parameters.moveSpeed);
                     OnWallHit?.Invoke(this, null);

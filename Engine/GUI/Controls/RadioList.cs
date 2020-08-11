@@ -33,7 +33,7 @@ namespace Engine.GUI.Models
                     Xpos += 40;
                     Ypos = position.y;
                 }
-                var radio = new IndexedButton(new Vector(Xpos, Ypos),item, 30, changeSelection, i);
+                var radio = new IndexedButton(new Vector(Xpos, Ypos),item, 30, changeSelection);
                 radios.Add(radio);
                 Ypos -= 30;
                 i++;
@@ -48,7 +48,7 @@ namespace Engine.GUI.Models
             radios.ForEach(s => s.Active = false);
             var radio = obj as IndexedButton;
             radio.Active = true;
-            Selection = radio.Index;
+            Selection = radios.IndexOf(radio);
             OnSelectionChange?.Invoke(this,new SelectionEventArgs(radio));
         }
         public override void Show()

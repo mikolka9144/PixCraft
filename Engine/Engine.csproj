@@ -80,6 +80,7 @@
     <Compile Include="GUI\Forms\NewWorldForm.cs" />
     <Compile Include="GUI\Forms\PauseForm.cs" />
     <Compile Include="GUI\Forms\SaveWorldForm.cs" />
+    <Compile Include="Engine\Models\IEntitiesData.cs" />
     <Compile Include="Resources\Parameters\IDrawerParameters.cs" />
     <Compile Include="Resources\Parameters\IGeneratorParameters.cs" />
     <Compile Include="IStoppableSpriteOverlay.cs" />
@@ -87,7 +88,7 @@
     <Compile Include="Resources\Parameters\IMovableObjectParameters.cs" />
     <Compile Include="Resources\Parameters\IPlayerStatusParameters.cs" />
     <Compile Include="Resources\Parameters\IPointerControllerParameters.cs" />
-    <Compile Include="Logic\MobSpawner.cs" />
+    <Compile Include="Entities\MobSpawner.cs" />
     <Compile Include="Logic\models\CraftingEntry.cs" />
     <Compile Include="Logic\CraftingModule.cs" />
     <Compile Include="Logic\models\Positon.cs" />
@@ -95,7 +96,7 @@
     <Compile Include="PixBlocks Implementations\Sound\PixSound.cs" />
     <Compile Include="Logic\models\SoundType.cs" />
     <Compile Include="Resources\Craftings.cs" />
-    <Compile Include="Resources\PlockProperties.cs" />
+    <Compile Include="Resources\ItemsProperties.cs" />
     <Compile Include="Resources\Sounds.cs" />
     <Compile Include="Saves\Models\FluidTemplate.cs" />
     <Compile Include="Saves\Models\WorldEntry.cs" />
@@ -109,9 +110,9 @@
     <Compile Include="Engine\Models\IOreTable.cs" />
     <Compile Include="Logic\models\Interfances.cs" />
     <Compile Include="Resources\IMoveDefiner.cs" />
-    <Compile Include="Logic\Movable object.cs" />
-    <Compile Include="Logic\Player.cs" />
-    <Compile Include="Logic\PointerController.cs" />
+    <Compile Include="Entities\Movable object.cs" />
+    <Compile Include="Entities\Player.cs" />
+    <Compile Include="Entities\PointerController.cs" />
     <Compile Include="Saves\BlockConverter.cs" />
     <Compile Include="Saves\Models\BlockTemplate.cs" />
     <Compile Include="Saves\Models\Save.cs" />

@@ -15,5 +15,7 @@ namespace Engine.Logic
         public IEnumerable<Item> NeededItems { get; }
         public Item CraftedItem { get; }
         public BlockType Station { get; }
+        public override string ToString() => CraftedItem.ToString();
+        
     }
 }

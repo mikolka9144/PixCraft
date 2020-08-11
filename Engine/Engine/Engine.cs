@@ -1,18 +1,19 @@
 ﻿using Engine.Engine.models;
+using Engine.Logic;
 using Engine.Resources;
 using System.Collections.Generic;
 
 namespace Engine.Engine
 {
-    public class Engine : IMover
+    public class Engine : IMover,IEntitiesData
     {
         public BlockIdProcessor IdProcessor = new BlockIdProcessor();
-        public List<IStoppableSpriteOverlay> Sprites = new List<IStoppableSpriteOverlay>();
 
         public Center Center;
         private readonly IDrawer drawer;
 
         public ITileManager manager { get; }
+        public List<IStoppableSpriteOverlay> Sprites { get; } = new List<IStoppableSpriteOverlay>();
         public List<IStoppableSpriteOverlay> entities { get; } = new List<IStoppableSpriteOverlay>();
 
         public Engine(ITileManager tileManager, IDrawer drawer)
