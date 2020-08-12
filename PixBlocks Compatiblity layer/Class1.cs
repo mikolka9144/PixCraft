@@ -6,6 +6,7 @@ using PixBlocks.TopPanel.Components.Basic;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Windows;
 
 namespace PixBlocks_Compatiblity_layer
 {
@@ -58,6 +59,16 @@ namespace PixBlocks_Compatiblity_layer
         {
 
             garbageCollector.SpritesToRemove.Add(sprite);
+        }
+
+        public void stop()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowMessage(string v)
+        {
+            throw new NotImplementedException();
         }
     }
     internal class SpriteCollector : Sprite
