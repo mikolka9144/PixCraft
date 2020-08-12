@@ -23,11 +23,9 @@ namespace EngineTets.Logic
             playerStatus = new PlayerStatus(null,parameters);
             Instance = new MovableObject(ActiveElements, null, null,playerStatus,new TestSound(),parameters);
 
-            Instance.IsDestroyed = false;
             Instance.IsVisible = true;
 
             var fluid = new Fluid(0, -1, BlockType.Water, null, new BlockIdProcessor());
-            fluid.IsDestroyed = false;
             fluid.IsVisible = true;
 
             ActiveElements.SetActiveFluids(new List<Fluid>(1));

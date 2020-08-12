@@ -30,7 +30,7 @@ namespace Engine.GUI.Models
         public override void update()
         {
             if (OnClick is null) return;
-            if (collide(Mouse.position) && Mouse.pressed) OnClick(this);
+            if (CollideSystem.collide(Mouse.position,10,position,size) && Mouse.pressed) OnClick(this);
         }
 
         

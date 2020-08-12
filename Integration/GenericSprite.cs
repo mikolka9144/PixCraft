@@ -11,7 +11,7 @@ namespace Integration
         public Color color { get;  set; }
         public string text { get;  set; }
         public bool IsVisible { get; set; }
-
+        public double angle { get; set; }
         public bool flip;
     }
 }

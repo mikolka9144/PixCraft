@@ -37,21 +37,21 @@ namespace Engine
             var tileManager = new TileManager(Drawer, IdProcessor, parameters);
             engine = new Engine.Engine(tileManager, Drawer);
             var craftingSystem = new CraftingModule(Craftings.GetCraftings(), tileManager);
-            var StatusWindow = new InventoryForm(craftingSystem, engine);
+            var StatusWindow = new InventoryForm(craftingSystem, engine,mouse,Drawer,gameScene);
             var playerstatus = new PlayerStatus(StatusWindow, parameters);
             var blockConverter = new BlockConverter(Drawer, IdProcessor);
             var moveDefiner = new PlayerMoveDefiner(gameScene,mouse);
             SaveManager = new SaveManager(tileManager, playerstatus, blockConverter, engine.Center, engine);
-            var pauseMenu = new PauseForm(engine, SaveManager);
+            var pauseMenu = new PauseForm(engine, SaveManager,mouse,Drawer,gameScene);
             var oreTable = new OreTable(OreResource.InitOreTable());
-            pointerController = new PointerController(playerstatus, tileManager, moveDefiner, Drawer, Sound, parameters, engine);
-            player = new Player(pauseMenu, tileManager, pointerController, moveDefiner, playerstatus, Drawer, engine, Sound, parameters);
+            pointerController = new PointerController(playerstatus, tileManager, moveDefiner, Drawer, Sound, parameters, engine,mouse);
+            player = new Player(pauseMenu, tileManager, moveDefiner, playerstatus, Drawer, engine, Sound, parameters,gameScene);
             MobSpawner = new MobSpawner(engine, tileManager, Drawer, Sound, player);
             Generator = new Generator(tileManager, oreTable, Drawer, parameters);
         }
         private void ShowMainMenu()
         {
-            var MainMenu = new MainMenu(Mouse,Drawer);
+            var MainMenu = new MainMenu(Mouse,Drawer,GameScene,this);
             MainMenu.Show();
             GameScene.start();     
         }
