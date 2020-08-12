@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>PixBlocks_Compatiblity_layer</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IronPython" Version="2.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Integration\Integration.csproj" />
+    <ProjectReference Include="..\PixCraft\PixCraft.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PixBlocks">
+      <HintPath>..\PixBlocks.exe</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
