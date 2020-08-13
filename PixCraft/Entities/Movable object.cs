@@ -75,7 +75,7 @@ namespace Engine.Logic
 
         private void PlayMoveSound()
         {
-            if(ActiveElements.GetActiveToppings(Position).Any(s => Collide(s)))
+            if(ActiveElements.GetActiveToppings(position).Any(s => Collide(s)))
             {
                 Sound.PlaySound(SoundType.Walking);
             }
@@ -83,12 +83,12 @@ namespace Engine.Logic
 
         private void CheckIfTouchesFluid(BlockType lava)
         {
-            if (ActiveElements.GetActiveFluids(Position).FindAll(s => s.Id == lava).Any(s => Collide(s))) status.DealDamageFromLava();
+            if (ActiveElements.GetActiveFluids(position).FindAll(s => s.Id == lava).Any(s => Collide(s))) status.DealDamageFromLava();
         }
 
         public void CheckIfUnderwater()
         {
-            foreach (var item in ActiveElements.GetActiveFluids(Position))
+            foreach (var item in ActiveElements.GetActiveFluids(position))
             {
                 if(Collide(item))
                 {
@@ -116,7 +116,7 @@ namespace Engine.Logic
 
         private void ApplyBlocksCollisions()
         {
-            foreach (var b in ActiveElements.GetActiveBlocks(Position))
+            foreach (var b in ActiveElements.GetActiveBlocks(position))
             {
                 if (Collide(b))
                 {
@@ -136,14 +136,14 @@ namespace Engine.Logic
 
         private void ApplyGravity()
         {
-            var touchesFluid = ActiveElements.GetActiveFluids(Position).Any(s => Collide(s));
+            var touchesFluid = ActiveElements.GetActiveFluids(position).Any(s => Collide(s));
             if (moveDefiner.key(command.Jump) && Grounded)
             {
                 Grounded = false;
                 
                 speed = touchesFluid?Parameters.WaterJumpSpeed:Parameters.MaxFallSpeed;
             }
-            foreach (var block in ActiveElements.GetActiveToppings(Position))
+            foreach (var block in ActiveElements.GetActiveToppings(position))
             {
                 if (Collide(block) && TicksElapsed >= Parameters.BlocksCollisionDelay)
                 {
@@ -193,7 +193,7 @@ namespace Engine.Logic
         {
             flip = false;
             move(roation.Right, Parameters.moveSpeed);
-            foreach (var b in ActiveElements.GetActiveBlocks(Position))
+            foreach (var b in ActiveElements.GetActiveBlocks(position))
             {
                 if (Collide(b))
                 {
@@ -208,7 +208,7 @@ namespace Engine.Logic
         {
             flip = true;
             move(roation.Left, Parameters.moveSpeed);
-            foreach (var b in ActiveElements.GetActiveBlocks(Position))
+            foreach (var b in ActiveElements.GetActiveBlocks(position))
             {
                 if (Collide(b))
                 {

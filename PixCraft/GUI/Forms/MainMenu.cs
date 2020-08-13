@@ -28,9 +28,9 @@ namespace Engine.GUI
         {
             var options = new Box[] { new Box("Start", SwichToNewWorldForm), new Box("Load World", SwichToLoadWorldForm) };
 
-            controls.Add(new Label(new Vector(0, 80), "PixCraft", 200,drawer,mouse));
-            controls.Add(new Label(new Vector(90, -90), "V.2.0", 20, drawer, mouse));
-            optionsWindow = new SelectBox(new Vector(0, 0), options, drawer, mouse);
+            controls.Add(new Label(new Vector2(0, 80), "PixCraft", 200,drawer,mouse));
+            controls.Add(new Label(new Vector2(90, -90), "V.2.0", 20, drawer, mouse));
+            optionsWindow = new SelectBox(new Vector2(0, 0), options, drawer, mouse);
             controls.Add(optionsWindow);
             LoadWorldform = new LoadWorldForm(this,mouse,drawer,scene,init);
             NewWorldForm = new NewWorldForm(this,init, mouse, drawer, scene);

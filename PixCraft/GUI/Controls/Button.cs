@@ -7,7 +7,7 @@ namespace Engine.GUI.Models
 {
     public class Button:PixControl
     {
-        public Button(Vector vector,string text,int size,Action<PixControl> taskToRepresent,IDrawer drawer,IMouse mouse):base(drawer,mouse)
+        public Button(Vector2 vector,string text,int size,Action<PixControl> taskToRepresent,IDrawer drawer,IMouse mouse):base(drawer,mouse)
         {
             label = new Label(vector, text, size,drawer,mouse);
             label.color = new Color(100, 100, 100);

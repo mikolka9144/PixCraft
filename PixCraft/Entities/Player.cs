@@ -17,7 +17,7 @@ namespace Engine.Logic
 
         public Player(PauseForm pauseMenu, IActiveElements activeElements,IMoveDefiner definer, PlayerStatus status,IDrawer drawer,IMover mover,IPixSound sound,IMovableObjectParameters parameters,IGameScene scene) : base(activeElements, drawer, definer, status,sound,parameters)
         {
-            position = new Vector(0, 0);
+            position = new Vector2(0, 0);
             size = 10;
             image = 0;
             status.OnKill = KillPlayer;
@@ -38,15 +38,15 @@ namespace Engine.Logic
 
         private void MoveCamera()
         {
-            if (Position.X != 0)
+            if (position.x != 0)
             {
-                Mover.Move(roation.Left, Position.X);
-                Position.X = 0;
+                Mover.Move(roation.Left, position.x);
+                position.x = 0;
             }
-            if (Position.Y != 0)
+            if (position.y != 0)
             {
-                Mover.Move(roation.Down, Position.Y);
-                Position.Y = 0;
+                Mover.Move(roation.Down, position.y);
+                position.y = 0;
             }
         }
 

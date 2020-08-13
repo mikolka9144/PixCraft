@@ -6,11 +6,11 @@ namespace Engine.Logic.models
 {
     public interface IActiveElements
     {
-        List<Block> GetActiveBlocks(Positon sprite);
+        List<Block> GetActiveBlocks(Vector2 sprite);
 
-        List<Foliage> GetActiveToppings(Positon sprite);
+        List<Foliage> GetActiveToppings(Vector2 sprite);
 
-        List<Fluid> GetActiveFluids(Positon sprite);
+        List<Fluid> GetActiveFluids(Vector2 sprite);
 
         List<Block> VisiableBlocks { get; }
     }

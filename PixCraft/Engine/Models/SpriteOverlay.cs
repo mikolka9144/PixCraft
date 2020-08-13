@@ -1,4 +1,5 @@
-﻿using Integration;
+﻿using Engine.Logic;
+using Integration;
 using System;
 
 namespace Engine.Engine.models
@@ -7,7 +8,7 @@ namespace Engine.Engine.models
     {
         public SpriteOverlay(int x, int y, IDrawer engine)
         {
-            Position = new Positon(x, y);
+            position = new Vector2(x, y);
             Engine = engine;
         }
 
@@ -24,41 +25,40 @@ namespace Engine.Engine.models
             switch (roation)
             {
                 case roation.Up:
-                    Position.Y += lenght;
+                    position.y += lenght;
                     break;
 
                 case roation.Left:
-                    Position.X -= lenght;
+                    position.x -= lenght;
                     break;
 
                 case roation.Right:
-                    Position.X += lenght;
+                    position.x += lenght;
                     break;
 
                 case roation.Down:
-                    Position.Y -= lenght;
+                    position.y -= lenght;
                     break;
             }
         }
 
-        public Positon Position { get; private set; }
         public bool IsActive { get; internal set; }
         
 
-        public bool IsInRange( int Range,Positon offset)
+        public bool IsInRange( int Range,Vector2 offset)
         {
-            bool IsNotInRange = Position.X > Range+offset.X || Position.X < -Range+ offset.X || Position.Y > Range+ offset.Y || Position.Y < -Range+ offset.Y;
+            bool IsNotInRange = position.x > Range+offset.x || position.x < -Range+ offset.x || position.y > Range+ offset.y || position.y < -Range+ offset.y;
             return !IsNotInRange;
         }
-        public bool IsInRange(int Range) => IsInRange(Range, new Positon(0, 0));
+        public bool IsInRange(int Range) => IsInRange(Range, new Vector2(0, 0));
         public bool Collide(SpriteOverlay sprite, double hitbox)
         {
             double num = hitbox * 0.5 + sprite.size * 0.5;
-            if (Math.Abs(sprite.Position.X - Position.X) > num || Math.Abs(sprite.Position.Y - Position.Y) > num)
+            if (Math.Abs(sprite.position.x - position.x) > num || Math.Abs(sprite.position.y - position.y) > num)
             {
                 return false;
             }
-            if (Math.Sqrt((sprite.Position.X - Position.X) * (sprite.Position.X - Position.X) + (sprite.Position.Y - Position.Y) * (sprite.Position.Y - Position.Y)) < num)
+            if (Math.Sqrt((sprite.position.x - position.x) * (sprite.position.x - position.x) + (sprite.position.y - position.y) * (sprite.position.y - position.y)) < num)
             {
                 return true;
             }

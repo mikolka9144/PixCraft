@@ -60,7 +60,7 @@ namespace Engine.Logic
         {
             if (!IsInRange(Parameters.PointerRange))
             {
-                position = Tiles.VisiableBlocks.First().position;
+                position = Tiles.VisiableBlocks.First().position.Clone();
             }
         }
 
@@ -91,7 +91,7 @@ namespace Engine.Logic
             {
                 if (CollideSystem.collide(b,this)) return;
             }
-            Tiles.PlaceBlock(Position.X, Position.Y, blockType.Type);
+            Tiles.PlaceBlock(position.x, position.y, blockType.Type);
             status.Decrement(blockType.Type, 1);
             RemoveOverlappingWater();
             Sound.PlaySound(SoundType.Place);
@@ -172,15 +172,15 @@ namespace Engine.Logic
             Thread.Sleep(Parameters.PointerStatusChangeDelay);
         }
 
-        private void MovePointer(Vector MousePos)
+        private void MovePointer(Vector2 MousePos)
         {
-            var Xlen = MousePos.x - Position.X;
-            var Ylen = MousePos.y - Position.Y;
+            var Xlen = MousePos.x - position.x;
+            var Ylen = MousePos.y - position.y;
             var YtoMove = (int)(Ylen / 10) * 20;
             var XtoMove = (int)(Xlen / 10) * 20;
 
-            bool IsNotInXZone = Position.X + XtoMove > Parameters.PointerRange || Position.X + XtoMove < -Parameters.PointerRange;
-            bool IsNotInYZone = Position.Y + YtoMove > Parameters.PointerRange || Position.Y + YtoMove < -Parameters.PointerRange;
+            bool IsNotInXZone = position.x + XtoMove > Parameters.PointerRange || position.x + XtoMove < -Parameters.PointerRange;
+            bool IsNotInYZone = position.y + YtoMove > Parameters.PointerRange || position.y + YtoMove < -Parameters.PointerRange;
             if (!IsNotInXZone) move(roation.Right, XtoMove);
             if (!IsNotInYZone) move(roation.Up, YtoMove);
         }

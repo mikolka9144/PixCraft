@@ -21,22 +21,22 @@ namespace Engine.GUI
             this.craftingSystem = craftingSystem;
             this.inventory = inventory;
             Scene = scene;
-            controls.Add(new Label(new Vector(-80, 90), "Rcepies", 30,drawer,mouse));
-            allCraftings = new RadioList(new Vector(-80,70), 6, drawer, mouse);
+            controls.Add(new Label(new Vector2(-80, 90), "Rcepies", 30,drawer,mouse));
+            allCraftings = new RadioList(new Vector2(-80,70), 6, drawer, mouse);
             allCraftings.OnSelectionChange += AllCraftings_OnSelectionChange;
             controls.Add(allCraftings);
 
-            controls.Add(new Label(new Vector(0, 95), "Requirements", 30, drawer, mouse));
-            neededItems = new RadioList(new Vector(0, 75), 2, drawer, mouse, true);
+            controls.Add(new Label(new Vector2(0, 95), "Requirements", 30, drawer, mouse));
+            neededItems = new RadioList(new Vector2(0, 75), 2, drawer, mouse, true);
             controls.Add(neededItems);
 
-            controls.Add(new Label(new Vector(0, 20), "Inventory", 30, drawer, mouse));
-            havedItems = new RadioList(new Vector(0, 0), 4, drawer, mouse, true);
+            controls.Add(new Label(new Vector2(0, 20), "Inventory", 30, drawer, mouse));
+            havedItems = new RadioList(new Vector2(0, 0), 4, drawer, mouse, true);
             controls.Add(havedItems);
 
-            controls.Add(new Button(new Vector(-50, -90), "Craft", 20, CraftItem, drawer, mouse) { color = new Color(204, 51, 153) });
-            controls.Add(new Button(new Vector(-50, -60), "Filter", 20, Filter, drawer, mouse) { color = new Color(104, 51, 153) });
-            InitData();
+            controls.Add(new Button(new Vector2(-50, -90), "Craft", 20, CraftItem, drawer, mouse) { color = new Color(204, 51, 153) });
+            controls.Add(new Button(new Vector2(-50, -60), "Filter", 20, Filter, drawer, mouse) { color = new Color(104, 51, 153) });
+            
         }
 
         private void Filter(PixControl obj)
@@ -75,6 +75,11 @@ namespace Engine.GUI
             havedItems.Hide();
             havedItems.Initalize(inventory.Inventory,12);
             havedItems.Show();
+        }
+        public override void Show()
+        {
+            InitData();
+            base.Show();
         }
     }
 }

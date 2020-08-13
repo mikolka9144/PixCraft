@@ -37,7 +37,7 @@ namespace Engine.Logic
             {
                 var zombie = new Zombie(ActiveElements, Drawer, Sound, new Parameters(),Player);
                 zombie.status.OnKill = () => Kill(zombie);
-                zombie.Position.X = Randomizer.Next(-110, 110);
+                zombie.position.x = Randomizer.Next(-110, 110);
                 Engine.entities.Add(zombie);
             }
         }

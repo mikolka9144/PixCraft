@@ -29,7 +29,7 @@ namespace EngineTets.Logic
             fluid.IsVisible = true;
 
             ActiveElements.SetActiveFluids(new List<Fluid>(1));
-            ActiveElements.GetActiveFluids(new Positon(0,0)).Add(fluid);
+            ActiveElements.GetActiveFluids(new Vector2(0,0)).Add(fluid);
             
         }
 
@@ -49,17 +49,17 @@ namespace EngineTets.Logic
     {
         public List<Block> VisiableBlocks => throw new System.NotImplementedException();
 
-        public List<Block> GetActiveBlocks(Positon sprite)
+        public List<Block> GetActiveBlocks(Vector2 sprite)
         {
             throw new System.NotImplementedException();
         }
 
-        public List<Fluid> GetActiveFluids(Positon sprite)
+        public List<Fluid> GetActiveFluids(Vector2 sprite)
         {
             throw new System.NotImplementedException();
         }
 
-        public List<Foliage> GetActiveToppings(Positon sprite)
+        public List<Foliage> GetActiveToppings(Vector2 sprite)
         {
             throw new System.NotImplementedException();
         }

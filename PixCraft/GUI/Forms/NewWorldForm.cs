@@ -19,9 +19,9 @@ namespace Engine.GUI
                 new Box("0", StaticExtensions.configureAsTextBox(true,scene)),
                 new Box("Generate", GenerateWorld) 
             };
-            controls.Add(new Label(new Vector(-30, 20), "size", 20,drawer,mouse));
-            controls.Add(new Label(new Vector(-30, -10), "seed", 20, drawer, mouse));
-            parameters = new SelectBox(new Vector(0, 20), PreBoxs, drawer, mouse);
+            controls.Add(new Label(new Vector2(-30, 20), "size", 20,drawer,mouse));
+            controls.Add(new Label(new Vector2(-30, -10), "seed", 20, drawer, mouse));
+            parameters = new SelectBox(new Vector2(0, 20), PreBoxs, drawer, mouse);
             controls.Add(parameters);
             this.init = init;
         }

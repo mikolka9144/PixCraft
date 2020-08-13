@@ -15,7 +15,7 @@ namespace Engine.GUI
             image = 63;
             this.color = color;
             FormToClose = previousForm;
-            if(previousForm != null||IsCloseAble) controls.Add(new CloseButton(new Vector(90, 90), 20, (s) =>Close(),drawer,mouse));
+            if(previousForm != null||IsCloseAble) controls.Add(new CloseButton(new Vector2(90, 90), 20, (s) =>Close(),drawer,mouse));
         }
         public List<PixControl> controls = new List<PixControl>();
 

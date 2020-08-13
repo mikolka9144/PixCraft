@@ -7,7 +7,7 @@ namespace Integration
 {
     public static class CollideSystem
     {
-        public static bool collide(Vector position1,double size1,Vector position2,double size2)
+        public static bool collide(Vector2 position1,double size1,Vector2 position2,double size2)
         {
             double num = size1 * 0.5 + size2 * 0.5;
             if (Math.Abs(position1.x - position2.x) > num || Math.Abs(position1.y - position2.y) > num)

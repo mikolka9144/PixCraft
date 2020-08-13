@@ -15,7 +15,7 @@ namespace Engine.GUI
         public PauseForm(Engine.Engine engine,SaveManager manager, Integration.IMouse mouse, Engine.IDrawer drawer,IGameScene scene) : base(new Color(204, 153, 51), 150,null,mouse,drawer)
         {
             var list = new Box[] { new Box("Resume", Resume), new Box("Save", Save) };
-            selectBox = new SelectBox(new Vector(0, 20), list,drawer,mouse);
+            selectBox = new SelectBox(new Vector2(0, 20), list,drawer,mouse);
             controls.Add(selectBox);
             this.engine = engine;
             this.manager = manager;

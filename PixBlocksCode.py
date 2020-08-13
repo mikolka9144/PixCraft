@@ -1,7 +1,8 @@
 from System.Reflection import Assembly
 from System import Convert
-code = Assembly.Load(Convert.FromBase64String(input[0]))
+clr.AddReference('PixBlocks_Compatiblity_layer');
+from PixBlocks_Compatiblity_layer import StartUpScript;
 
-manager = code.CreateInstance("Engine.StartUp",True);
+manager = StartUpScript();
 manager.Init();
 "game."

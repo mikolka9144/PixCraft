@@ -82,10 +82,10 @@ namespace Engine.Engine
             {
                 var size = Parameters.BlockSize;
                 var ranSel = randomizer.Next(0, parameters.treeChance) == 0;
-                var HasSize = item.Position.Y >= parameters.minimumFillarHeightForTree * Parameters.BlockSize;
+                var HasSize = item.position.y >= parameters.minimumFillarHeightForTree * Parameters.BlockSize;
                 var IsAwayFromTrees = CanGenerateTree == 3;
 
-                if (ranSel && HasSize && IsAwayFromTrees) generateTree(item.Position.X / size, item.Position.Y / size);
+                if (ranSel && HasSize && IsAwayFromTrees) generateTree(item.position.x / size, item.position.y / size);
                 else if (CanGenerateTree != parameters.TreeSpread) CanGenerateTree++;
             }
         }

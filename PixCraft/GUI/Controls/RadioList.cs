@@ -15,7 +15,7 @@ namespace Engine.GUI.Models
         public bool DisableSelection { get; }
         public event EventHandler<SelectionEventArgs> OnSelectionChange;
 
-        public RadioList(Vector vector,int itemsInCollumn, IDrawer drawer, IMouse mouse, bool DisableSelection = false) :base(drawer,mouse)
+        public RadioList(Vector2 vector,int itemsInCollumn, IDrawer drawer, IMouse mouse, bool DisableSelection = false) :base(drawer,mouse)
         {
             position = vector;
             size = 0;
@@ -37,7 +37,7 @@ namespace Engine.GUI.Models
                     Xpos += 40;
                     Ypos = position.y;
                 }
-                var radio = new IndexedButton(new Vector(Xpos, Ypos),item, 30, changeSelection,Drawer,Mouse);
+                var radio = new IndexedButton(new Vector2(Xpos, Ypos),item, 30, changeSelection,Drawer,Mouse);
                 radios.Add(radio);
                 Ypos -= 30;
                 i++;

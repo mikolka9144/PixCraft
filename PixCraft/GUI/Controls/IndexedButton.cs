@@ -7,7 +7,7 @@ namespace Engine.GUI.Models
     public class IndexedButton : Button
     {
 
-        public IndexedButton(Vector vector, object objectToRepresent, int size, Action<PixControl> taskToRepresent, Engine.IDrawer drawer, IMouse mouse) : base(vector, objectToRepresent.ToString(), size, taskToRepresent,drawer,mouse)
+        public IndexedButton(Vector2 vector, object objectToRepresent, int size, Action<PixControl> taskToRepresent, Engine.IDrawer drawer, IMouse mouse) : base(vector, objectToRepresent.ToString(), size, taskToRepresent,drawer,mouse)
         {
             ObjectToRepresent = objectToRepresent;
         }

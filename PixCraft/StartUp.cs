@@ -48,6 +48,7 @@ namespace Engine
             player = new Player(pauseMenu, tileManager, moveDefiner, playerstatus, Drawer, engine, Sound, parameters,gameScene);
             MobSpawner = new MobSpawner(engine, tileManager, Drawer, Sound, player);
             Generator = new Generator(tileManager, oreTable, Drawer, parameters);
+
         }
         private void ShowMainMenu()
         {

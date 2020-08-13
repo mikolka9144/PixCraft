@@ -8,13 +8,13 @@ namespace Engine.GUI.Models
     public class SelectBox:PixControl
     {
 
-        public SelectBox(Vector vector,IList<Box> boxes, Engine.IDrawer drawer, Integration.IMouse mouse) :base(drawer,mouse)
+        public SelectBox(Vector2 vector,IList<Box> boxes, Engine.IDrawer drawer, Integration.IMouse mouse) :base(drawer,mouse)
         {
             size = 0;
             ItemsList = new List<Button>();
             for (int i = 0; i < boxes.Count(); i++)
             {
-                var localVector = new Vector(vector.x,vector.y-(30*i));
+                var localVector = new Vector2(vector.x,vector.y-(30*i));
                 ItemsList.Add(
                     new Button(localVector, boxes[i].Name,30,boxes[i].Task,drawer,mouse));
             }

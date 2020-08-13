@@ -19,13 +19,13 @@ namespace Engine.Entities
             switch (command)
             {
                 case command.Left:
-                    if(Sprite.Position.X > 0)
+                    if(Sprite.position.x > 0)
                     {
                         return true;
                     }
                     break;
                 case command.Right:
-                    if(Sprite.Position.X < 0)
+                    if(Sprite.position.x < 0)
                     {
                         return true;
                     }

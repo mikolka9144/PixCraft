@@ -49,5 +49,19 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Integration\Integration.csproj">
+      <Project>{b3bfc85a-c539-49dc-b31a-47857454436a}</Project>
+      <Name>Integration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PixBlocks Compatiblity layer\PixBlocks Compatiblity layer.csproj">
+      <Project>{457deb71-59cc-4e49-982c-6e7416f1fd62}</Project>
+      <Name>PixBlocks Compatiblity layer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PixCraft\PixCraft.csproj">
+      <Project>{4c5af3c3-b6be-47bb-9749-26839f5e5b5b}</Project>
+      <Name>PixCraft</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

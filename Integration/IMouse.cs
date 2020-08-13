@@ -4,7 +4,7 @@ namespace Integration
 {
     public interface IMouse
     {
-        Vector position { get; }
+        Vector2 position { get; }
         bool pressed { get; }
     }
 }
