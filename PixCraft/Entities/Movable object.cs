@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace Engine.Logic
 {
-    public class MovableObject : SpriteOverlay,IStoppableSpriteOverlay
+    public class MovableObject : SpriteOverlay, IStoppableSpriteOverlay
     {
-        protected  IMoveDefiner moveDefiner;
-        internal  PlayerStatus status;
+        protected IMoveDefiner moveDefiner;
+        internal PlayerStatus status;
         protected event EventHandler OnWallHit;
 
         public virtual void OnDamageDeal()
@@ -33,9 +33,9 @@ namespace Engine.Logic
         private int DistanceFalled;
         private int WaterTicks = 0;
         private bool IsInWater;
-        
 
-        public MovableObject(IActiveElements ActiveElements,IDrawer drawer, IMoveDefiner moveDefiner, PlayerStatus status,IPixSound sound,IMovableObjectParameters parameters):base(0,0,drawer)
+
+        public MovableObject(IActiveElements ActiveElements, IDrawer drawer, IMoveDefiner moveDefiner, PlayerStatus status, IPixSound sound, IMovableObjectParameters parameters) : base(0, 0, drawer)
         {
             status.OnDamageDeal = OnDamageDeal;
             this.ActiveElements = ActiveElements;
@@ -52,7 +52,7 @@ namespace Engine.Logic
         public IPixSound Sound { get; }
         public IMovableObjectParameters Parameters { get; }
         public bool Active { get; set; } = true;
-        
+
 
         public override void update()
         {
@@ -75,7 +75,7 @@ namespace Engine.Logic
 
         private void PlayMoveSound()
         {
-            if(ActiveElements.GetActiveToppings(position).Any(s => Collide(s)))
+            if (ActiveElements.GetActiveToppings(position).Any(s => Collide(s)))
             {
                 Sound.PlaySound(SoundType.Walking);
             }
@@ -90,7 +90,7 @@ namespace Engine.Logic
         {
             foreach (var item in ActiveElements.GetActiveFluids(position))
             {
-                if(Collide(item))
+                if (Collide(item))
                 {
                     if (!IsInWater)
                     {
@@ -111,7 +111,7 @@ namespace Engine.Logic
                 Sound.PlaySound(SoundType.WaterExit);
                 IsInWater = false;
             }
-            status.RestoreBreath();      
+            status.RestoreBreath();
         }
 
         private void ApplyBlocksCollisions()
@@ -126,8 +126,8 @@ namespace Engine.Logic
                         TicksElapsedForMove = 0;
                         speed = -speed;
                     }
-                    else if (Collide(b.foliage) && TicksElapsed == Parameters.BlocksCollisionDelay) 
-                    move(roation.Up, Parameters.StandUpSpeed);
+                    else if (Collide(b.foliage) && TicksElapsed == Parameters.BlocksCollisionDelay)
+                        move(roation.Up, Parameters.StandUpSpeed);
                 }
             }
             if (TicksElapsed != Parameters.BlocksCollisionDelay) TicksElapsed++;
@@ -140,8 +140,8 @@ namespace Engine.Logic
             if (moveDefiner.key(command.Jump) && Grounded)
             {
                 Grounded = false;
-                
-                speed = touchesFluid?Parameters.WaterJumpSpeed:Parameters.MaxFallSpeed;
+
+                speed = touchesFluid ? Parameters.WaterJumpSpeed : Parameters.MaxFallSpeed;
             }
             foreach (var block in ActiveElements.GetActiveToppings(position))
             {
@@ -156,7 +156,7 @@ namespace Engine.Logic
             }
             move(roation.Up, speed);
             ChangeMoveSpeed(touchesFluid);
-            
+
         }
 
         internal void DealAttackDamage(int power)

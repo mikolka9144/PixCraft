@@ -47,16 +47,14 @@ namespace EngineTets.Logic
     }
     class Elements : IActiveElements
     {
-        public List<Block> VisiableBlocks => throw new System.NotImplementedException();
+        public List<Block> VisiableBlocks { get; set; } = new List<Block>();
+        public List<Fluid> Fluids { get; private set; }
 
-        public List<Block> GetActiveBlocks(Vector2 sprite)
-        {
-            throw new System.NotImplementedException();
-        }
+        public List<Block> GetActiveBlocks(Vector2 sprite) => VisiableBlocks;
 
         public List<Fluid> GetActiveFluids(Vector2 sprite)
         {
-            throw new System.NotImplementedException();
+            return Fluids;
         }
 
         public List<Foliage> GetActiveToppings(Vector2 sprite)
@@ -66,7 +64,7 @@ namespace EngineTets.Logic
 
         internal void SetActiveFluids(List<Fluid> lists)
         {
-            throw new NotImplementedException();
+            Fluids = lists;
         }
     }
 }
