@@ -59,6 +59,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter.cs" />
     <Compile Include="GameScene.cs" />
     <Compile Include="PixMouse.cs" />
     <Compile Include="PixSprite.cs" />

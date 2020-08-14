@@ -14,8 +14,9 @@ namespace Engine.Logic
 
         public IMover Mover { get; }
         public IGameScene Scene { get; }
+        public PointerController Pointer { get; }
 
-        public Player(PauseForm pauseMenu, IActiveElements activeElements,IMoveDefiner definer, PlayerStatus status,IDrawer drawer,IMover mover,IPixSound sound,IMovableObjectParameters parameters,IGameScene scene) : base(activeElements, drawer, definer, status,sound,parameters)
+        public Player(PauseForm pauseMenu, IActiveElements activeElements,IMoveDefiner definer, PlayerStatus status,IDrawer drawer,IMover mover,IPixSound sound,IMovableObjectParameters parameters,IGameScene scene,PointerController pointer) : base(activeElements, drawer, definer, status,sound,parameters)
         {
             position = new Vector2(0, 0);
             size = 10;
@@ -24,6 +25,7 @@ namespace Engine.Logic
             settingsForm = pauseMenu;
             Mover = mover;
             Scene = scene;
+            Pointer = pointer;
         }
        
 
@@ -34,6 +36,7 @@ namespace Engine.Logic
             if (moveDefiner.key(command.Pause)) Pause();
             if (moveDefiner.key(command.OpenInventory)) status.OpenInventory();
             MoveCamera();
+            Pointer.ResetPointer();
         }
 
         private void MoveCamera()

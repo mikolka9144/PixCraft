@@ -45,7 +45,7 @@ namespace Engine
             var pauseMenu = new PauseForm(engine, SaveManager,mouse,Drawer,gameScene);
             var oreTable = new OreTable(OreResource.InitOreTable());
             pointerController = new PointerController(playerstatus, tileManager, moveDefiner, Drawer, Sound, parameters, engine,mouse);
-            player = new Player(pauseMenu, tileManager, moveDefiner, playerstatus, Drawer, engine, Sound, parameters,gameScene);
+            player = new Player(pauseMenu, tileManager, moveDefiner, playerstatus, Drawer, engine, Sound, parameters,gameScene,pointerController);
             MobSpawner = new MobSpawner(engine, tileManager, Drawer, Sound, player);
             Generator = new Generator(tileManager, oreTable, Drawer, parameters);
 
@@ -91,7 +91,7 @@ namespace Engine
             engine.Add(pointerController);
             
             GameScene.background = new Color(102, 51, 204);
-
+            GameScene.add(MobSpawner);
             engine.Render();
 
             engine.Add(player);

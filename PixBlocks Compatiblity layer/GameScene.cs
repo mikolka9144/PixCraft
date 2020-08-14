@@ -1,15 +1,12 @@
 ﻿
 using Integration;
-using PixBlocks.PythonIron.Tools;
 using PixBlocks.PythonIron.Tools.Game;
 using PixBlocks.PythonIron.Tools.Integration;
 using PixBlocks.TopPanel.Components.Basic;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Threading;
 using System.Windows;
-using System.Windows.Threading;
 
 namespace PixBlocks_Compatiblity_layer
 {
@@ -29,14 +26,14 @@ namespace PixBlocks_Compatiblity_layer
         public List<Sprite> GameScenesSprites { get; }
 
         private SpriteCollector garbageCollector;
-        public Integration.Color background { get; set; }
+        public Integration.Color background { get => null/*BRUH*/; set => GameScene.gameSceneStatic.background = value.Convert(); }
         public Dictionary<GenericSprite, PixSprite> SpriteViews { get; } = new Dictionary<GenericSprite, PixSprite>();
         internal SpriteRefresher SpriteRefresher { get; }
         public string GetInput(string v) => GameScene.gameSceneStatic.PythonCodeRunner.show(v);
 
-        public static void ShowErrorStatic(Exception ex)
+        public void ShowErrorStatic(Exception ex)
         {
-            Application.Current.Dispatcher.Invoke(new Action(() => Show(ex)));
+            ShowMessage($"A folowing exeption occurded:\n{ex.Message}\nPlease send me a screenshot of this messages ");
             MessageBox.Show($"Here is StackTrace:\n{ex.StackTrace}");
         }
         public void ShowError(Exception ex) => ShowErrorStatic(ex);
@@ -44,9 +41,9 @@ namespace PixBlocks_Compatiblity_layer
         {
             GameScene.gameSceneStatic.start();
         }
-        private static void Show(Exception ex)
+        private static void Show(string v)
         {
-            CustomMessageBox.Show($"A folowing exeption occurded:\n{ex.Message}\nPlease send me a screenshot of this messages ");
+            CustomMessageBox.Show(v);
         }
 
         public bool key(string v)
@@ -86,7 +83,7 @@ namespace PixBlocks_Compatiblity_layer
 
         public void ShowMessage(string v)
         {
-            //throw new NotImplementedException();
+            Application.Current.Dispatcher.Invoke(new Action(() => Show(v)));
         }
     }
     internal class SpriteCollector : Sprite

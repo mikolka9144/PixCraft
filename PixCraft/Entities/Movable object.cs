@@ -29,7 +29,6 @@ namespace Engine.Logic
         private bool Grounded;
         private int TicksElapsed;
         private int speed;
-        private int TicksElapsedForMove;
         private int DistanceFalled;
         private int WaterTicks = 0;
         private bool IsInWater;
@@ -45,7 +44,6 @@ namespace Engine.Logic
             Parameters = parameters;
             speed = 0;
             TicksElapsed = Parameters.BlocksCollisionDelay;
-            TicksElapsedForMove = Parameters.MoveDelay;
         }
 
         public IActiveElements ActiveElements { get; }
@@ -57,12 +55,12 @@ namespace Engine.Logic
         public override void update()
         {
             if (!Active) return;
-            if (moveDefiner.key(command.Left) && TicksElapsedForMove >= Parameters.MoveDelay)
+            if (moveDefiner.key(command.Left))
             {
                 MoveLeft();
                 PlayMoveSound();
             }
-            else if (moveDefiner.key(command.Right) && TicksElapsedForMove >= Parameters.MoveDelay)
+            else if (moveDefiner.key(command.Right))
             {
                 MoveRight();
                 PlayMoveSound();
@@ -123,7 +121,6 @@ namespace Engine.Logic
                     if (speed > 0)
                     {
                         TicksElapsed = 0;
-                        TicksElapsedForMove = 0;
                         speed = -speed;
                     }
                     else if (Collide(b.foliage) && TicksElapsed == Parameters.BlocksCollisionDelay)
@@ -131,7 +128,6 @@ namespace Engine.Logic
                 }
             }
             if (TicksElapsed != Parameters.BlocksCollisionDelay) TicksElapsed++;
-            if (TicksElapsedForMove != Parameters.MoveDelay) TicksElapsedForMove++;
         }
 
         private void ApplyGravity()

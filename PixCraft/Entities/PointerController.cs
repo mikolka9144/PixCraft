@@ -44,7 +44,6 @@ namespace Engine.Logic
             CheckBlocksOperations();
             ChangeState();
             image = IsInRange(Parameters.BreakingRange) ? 56 : 55;
-            ResetPointer();
         }
 
         private void ChangeState()
@@ -56,7 +55,7 @@ namespace Engine.Logic
             }
         }
 
-        private void ResetPointer()
+        public void ResetPointer()
         {
             if (!IsInRange(Parameters.PointerRange))
             {

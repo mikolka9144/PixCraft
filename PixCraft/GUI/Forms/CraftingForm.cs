@@ -66,7 +66,7 @@ namespace Engine.GUI
 
         private void InitData()
         {
-            allCraftings.Initalize(craftingSystem.craftingEntries,11);
+            allCraftings.Initalize(craftingSystem.craftingEntries,10);
             havedItems.Initalize(inventory.Inventory,12);
         }
 

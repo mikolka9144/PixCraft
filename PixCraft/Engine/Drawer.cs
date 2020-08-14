@@ -1,13 +1,10 @@
 ﻿using Engine.Engine.models;
-using Engine.Logic;
 using Integration;
-using System.Collections.Generic;
 
 namespace Engine.Engine
 {
     internal class Drawer : IDrawer
     {
-        public List<GenericSprite> GameScenesSprites { get; }
         public IDrawerParameters Parameters { get; }
         public IGameScene GameScene { get; }
 
@@ -43,8 +40,6 @@ namespace Engine.Engine
         public void remove(GenericSprite sprite)
         {
             GameScene.remove(sprite);
-            
-
         }
     }
 }
