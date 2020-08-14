@@ -34,7 +34,7 @@ namespace Engine.Resources
         public int minimumBlocksForFall { get; } = 3;
         public int PointerStatusChangeDelay { get; } = 300;
         //colors
-        public Color DefaultColor { get; } = new Color(15, 142, 255);
+        public Color DefaultColor { get; set; } = new Color(15, 142, 255);
         public Color RedColor { get; } = new Color(255, 51, 0);
         public int MaxBreath { get; } = 10;
         public int LavaDamage { get; } = 5;

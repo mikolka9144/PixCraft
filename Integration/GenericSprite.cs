@@ -13,5 +13,14 @@ namespace Integration
         public bool IsVisible { get;  set; }
         public double angle { get; set; }
         public bool flip;
+        public bool Collide(GenericSprite sprite, double hitbox)
+        {
+
+            return CollideSystem.collide(position, size, sprite.position, hitbox);
+        }
+        public bool Collide(GenericSprite sprite)
+        {
+            return CollideSystem.collide(sprite,this);
+        }
     }
 }

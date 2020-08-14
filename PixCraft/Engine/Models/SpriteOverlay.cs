@@ -51,22 +51,6 @@ namespace Engine.Engine.models
             return !IsNotInRange;
         }
         public bool IsInRange(int Range) => IsInRange(Range, new Vector2(0, 0));
-        public bool Collide(SpriteOverlay sprite, double hitbox)
-        {
-            double num = hitbox * 0.5 + sprite.size * 0.5;
-            if (Math.Abs(sprite.position.x - position.x) > num || Math.Abs(sprite.position.y - position.y) > num)
-            {
-                return false;
-            }
-            if (Math.Sqrt((sprite.position.x - position.x) * (sprite.position.x - position.x) + (sprite.position.y - position.y) * (sprite.position.y - position.y)) < num)
-            {
-                return true;
-            }
-            return false;
-        }
-        public bool Collide(SpriteOverlay sprite)
-        {
-            return Collide(sprite, size);
-        }
+        
     }
 }

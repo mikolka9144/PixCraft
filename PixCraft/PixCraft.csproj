@@ -8,8 +8,4 @@
     <ProjectReference Include="..\Integration\Integration.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="PixBlocks Implementations\Sound\" />
-  </ItemGroup>
-
 </Project>

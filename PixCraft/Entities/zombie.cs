@@ -15,6 +15,8 @@ namespace Engine.Entities
         {
             size = 10;
             parameters.moveSpeed = 3;
+            parameters.DefaultColor = new Color(204, 51, 102);
+            color = parameters.DefaultColor;
             var logic = new Monster_AI(this);
             OnWallHit += logic.Zombie_OnWallHit;
             moveDefiner = logic;
