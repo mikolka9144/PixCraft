@@ -40,6 +40,14 @@ namespace Engine.Logic
                 zombie.position.x = Randomizer.Next(-110, 110);
                 Engine.entities.Add(zombie);
             }
+            for (int i = 0; i < Engine.entities.Count; i++)
+            {
+                var monster = Engine.entities[i] as MovableObject;
+                if (!monster.IsInRange(150))
+                {
+                    Engine.entities.Remove(monster);
+                }
+            }
         }
 
         private void Kill(MovableObject sprite)
