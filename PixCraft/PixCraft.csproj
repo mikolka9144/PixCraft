@@ -32,8 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IronPython">
+    <Reference Include="IronPython, Version=2.6.10920.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\IronPython.2.6.1\lib\Net40\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Modules, Version=2.6.10920.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.6.1\lib\Net40\IronPython.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.6.1\lib\Net40\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPython.2.6.1\lib\Net40\Microsoft.Scripting.dll</HintPath>
     </Reference>
     <Reference Include="PixBlocks">
       <HintPath>..\PixBlocks.exe</HintPath>
@@ -74,7 +83,6 @@
     <Compile Include="PixCraft\Engine\Models\Block.cs" />
     <Compile Include="PixCraft\Engine\Models\Center.cs" />
     <Compile Include="PixCraft\Engine\Models\Fluid.cs" />
-    <Compile Include="PixCraft\Engine\Models\Foliage.cs" />
     <Compile Include="PixCraft\Engine\Models\IEntitiesData.cs" />
     <Compile Include="PixCraft\Engine\Models\IMover.cs" />
     <Compile Include="PixCraft\Engine\Models\IOreTable.cs" />
@@ -135,6 +143,9 @@
     <Compile Include="PixCraft\Saves\SaveManager.cs" />
     <Compile Include="PixCraft\StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

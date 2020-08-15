@@ -15,7 +15,7 @@ namespace PixBlocks_Compatiblity_layer
         {
             try
             {
-                PixScene = new PixScene();
+                var PixScene = new PixScene();
                 Init = new StartUp(PixScene, new PixMouse(), new Sound());
             }
             catch (Exception ex)

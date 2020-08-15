@@ -5,6 +5,7 @@ using Engine.PixBlocks_Implementations;
 using Engine.Resources;
 using Integration;
 using System;
+using System.Linq;
 
 namespace Engine.Logic
 {
@@ -38,15 +39,13 @@ namespace Engine.Logic
                 var zombie = new Zombie(ActiveElements, Drawer, Sound, new Parameters(),Player);
                 zombie.status.OnKill = () => Kill(zombie);
                 zombie.position.x = Randomizer.Next(-110, 110);
-                Engine.entities.Add(zombie);
+                zombie.position.y = 70;
+                if(!ActiveElements.GetActiveBlocks(zombie.position).Any(s =>s.Collide(zombie)))Engine.entities.Add(zombie);
             }
-            for (int i = 0; i < Engine.entities.Count; i++)
+            for (int i = 0; i < Engine.entities.Count(); i++)
             {
-                var monster = Engine.entities[i] as MovableObject;
-                if (!monster.IsInRange(150))
-                {
-                    Engine.entities.Remove(monster);
-                }
+                var zombie = Engine.entities[i] as MovableObject;
+                if (!zombie.IsInRange(150)) Engine.entities.Remove(zombie);
             }
         }
 

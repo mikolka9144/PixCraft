@@ -38,6 +38,10 @@ namespace Engine.Resources
         public Color RedColor { get; } = new Color(255, 51, 0);
         public int MaxBreath { get; } = 10;
         public int LavaDamage { get; } = 5;
+
+        public int blockTypeBorder => -8;
+
+        public double blockSizeOffset => 2;
     }
 
     public struct RangeBox

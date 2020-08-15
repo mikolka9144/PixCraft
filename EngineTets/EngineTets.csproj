@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Engine\Engine.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="PixBlocks">
       <HintPath>..\PixBlocks.exe</HintPath>
     </Reference>

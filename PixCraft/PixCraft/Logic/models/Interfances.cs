@@ -8,7 +8,7 @@ namespace Engine.Logic.models
     {
         List<Block> GetActiveBlocks(Vector2 sprite);
 
-        List<Foliage> GetActiveToppings(Vector2 sprite);
+        List<Block> GetActiveToppings(Vector2 sprite);
 
         List<Fluid> GetActiveFluids(Vector2 sprite);
 

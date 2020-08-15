@@ -1,6 +1,9 @@
 ﻿using Engine.Engine.models;
+using Engine.Logic;
 using Engine.Resources;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Engine.Engine
 {
@@ -12,6 +15,7 @@ namespace Engine.Engine
         private readonly ITileManager manager;
         private readonly IOreTable oreTable;
         private int size;
+        private List<Vector2> OrePositions = new List<Vector2>();
         private readonly IDrawer drawer;
 
         public IGeneratorParameters parameters { get; }
@@ -34,12 +38,12 @@ namespace Engine.Engine
             GenerateTerrian();
             GenerateWater();
             GenerateTrees();
-            CreateUnderGround();
             GenerateOres(BlockType.CoalOre);
             GenerateOres(BlockType.IronOre);
             GenerateOres(BlockType.GoldOre);
             GenerateOres(BlockType.DiamondOre);
             GenerateOres(BlockType.Lava);
+            CreateUnderGround();
         }
         private void GenerateTerrian()
         {
@@ -133,6 +137,7 @@ namespace Engine.Engine
         {
             for (int Y = -1; Y > -parameters.sizeOfStoneCollumn; Y--)
             {
+                if (OrePositions.Any(s => s.x == X && s.y == Y)) continue;
                 manager.AddBlockTile(X, Y, BlockType.Stone);
             }
         }
@@ -172,8 +177,10 @@ namespace Engine.Engine
 
         private void AddOreNode(int X, int Y, BlockType type,bool GenerateAsFluid)
         {
-            if (GenerateAsFluid) manager.AddFluid(X, Y, type,true,true);          
-                else manager.AddBlockTile(X, Y, type, true,true);          
+            if (Math.Abs(X) > size||Math.Abs(Y)>=parameters.sizeOfStoneCollumn) return;
+            if (GenerateAsFluid) manager.AddFluid(X, Y, type);          
+                else manager.AddBlockTile(X, Y, type);
+            OrePositions.Add(new Vector2(X, Y));
         }
 
         private void GenerateBit(int X, int Y, BlockType type, int spawnChance,bool IsFluid)
