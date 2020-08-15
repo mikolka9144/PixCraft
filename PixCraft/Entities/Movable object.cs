@@ -124,8 +124,6 @@ namespace Engine.Logic
                         TicksElapsed = 0;
                         speed = -speed;
                     }
-                    else if (Collide(b) && TicksElapsed == Parameters.BlocksCollisionDelay)//TODO
-                        move(roation.Up, Parameters.StandUpSpeed);
                 }
             }
             if (TicksElapsed != Parameters.BlocksCollisionDelay) TicksElapsed++;

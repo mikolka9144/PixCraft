@@ -85,7 +85,7 @@ namespace Engine.Engine
             return GetActiveBlocks(new Vector2(0,0)).Any(s => s.Id == station);
         }
 
-        public bool AddFluid(int BlockX, int BlockY, BlockType Id, bool replace, bool forceReplace = false, bool Draw = false)
+        public bool AddFluid(int BlockX, int BlockY, BlockType Id, bool replace)
         {
             var x = Parameters.BlockSize;
             var currentBlock = Blocks.Find(s => (s.position.x / x) == BlockX && s.position.y / x == BlockY);
@@ -100,10 +100,6 @@ namespace Engine.Engine
                 {
                     return false;
                 }
-            }
-            else if (forceReplace)
-            {
-                return false;
             }
             AddFluid(new Fluid(BlockX * x, BlockY * x, Id, drawer, processor));
             return true;
@@ -130,6 +126,12 @@ namespace Engine.Engine
         public List<Fluid> GetActiveFluids(Vector2 sprite)
         {
             return Fluids.FindAll(s => s.IsInRange(parameters.hitboxArea,sprite)).ToList();
+        }
+
+        public void AddFluid(int x, int y, BlockType type)
+        {
+            int size = Parameters.BlockSize;
+            AddFluid(new Fluid(x * size, y * size, type, drawer, processor));
         }
     }
 }
