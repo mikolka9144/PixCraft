@@ -95,7 +95,7 @@ namespace Engine
             engine.Render();
 
             engine.Add(player);
-            player.move(roation.Up, 0);
+            player.move(roation.Up, 50);
             Sound.PlaySound(SoundType.Music);
         }
         

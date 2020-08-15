@@ -42,10 +42,6 @@ namespace Engine.Engine
             {
                 drawer.Draw(item);
             }
-            foreach (var item in manager.Toppings)
-            {
-                drawer.Draw(item);
-            }
             foreach (var item in manager.Fluids)
             {
                 drawer.Draw(item);
@@ -71,10 +67,6 @@ namespace Engine.Engine
             foreach (SpriteOverlay spriteOverlay in entities)
             {
                 spriteOverlay.move(roation, lenght);
-            }
-            foreach (Foliage foliage in manager.Toppings)
-            {
-                foliage.move(roation, lenght);
             }
             foreach (var item in manager.Fluids)
             {

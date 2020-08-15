@@ -13,5 +13,6 @@ namespace Engine.Logic
         int MaxFallSpeed { get; }
         int moveSpeed { get; }
         int MaxWaterFallSpeed { get; }
+        double blockSizeOffset { get; }
     }
 }

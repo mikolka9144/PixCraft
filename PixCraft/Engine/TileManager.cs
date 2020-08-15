@@ -13,8 +13,6 @@ namespace Engine.Engine
 
         public List<Block> Blocks { get; } = new List<Block>();
 
-        public List<Foliage> Toppings { get; } = new List<Foliage>();
-
         
         public List<Fluid> Fluids { get; } = new List<Fluid>();
         public ITileManagerParameters parameters { get; }
@@ -39,7 +37,6 @@ namespace Engine.Engine
                 {
                     
                     Blocks.Remove(currentBlock);
-                    Toppings.Remove(currentBlock.foliage);
                 }
                 else
                 {
@@ -64,20 +61,16 @@ namespace Engine.Engine
         public void AddBlockTile(Block block, bool ShouldDraw)
         {
             Blocks.Add(block);
-            Toppings.Add(block.foliage);
             if (ShouldDraw)
             {
                 drawer.Draw(block);
-                drawer.Draw(block.foliage);
             }
         }
 
         public void RemoveTile(Block tile)
         {
             drawer.remove(tile);
-            drawer.remove(tile.foliage);
             Blocks.Remove(tile);
-            Toppings.Remove(tile.foliage);
         }
 
         public void PlaceBlock(int x, int y, BlockType blockType)
@@ -102,7 +95,6 @@ namespace Engine.Engine
                 {
 
                     Blocks.Remove(currentBlock);
-                    Toppings.Remove(currentBlock.foliage);
                 }
                 else
                 {
@@ -127,11 +119,11 @@ namespace Engine.Engine
         
         public List<Block> GetActiveBlocks(Vector2 sprite)
         {
-            return Blocks.FindAll(s => s.IsInRange(parameters.hitboxArea, sprite)).ToList();
+            return Blocks.FindAll(s => s.IsInRange(parameters.hitboxArea, sprite) && s.position.y > parameters.blockTypeBorder + sprite.y);
         }
-        public List<Foliage> GetActiveToppings(Vector2 sprite)
+        public List<Block> GetActiveToppings(Vector2 sprite)
         {
-            return Toppings.FindAll(s => s.IsInRange(parameters.hitboxArea, sprite)).ToList();
+            return Blocks.FindAll(s => s.IsInRange(parameters.hitboxArea, sprite) && s.position.y <= parameters.blockTypeBorder+sprite.y);
         }
 
 

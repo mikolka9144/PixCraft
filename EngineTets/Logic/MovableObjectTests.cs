@@ -57,7 +57,7 @@ namespace EngineTets.Logic
             return Fluids;
         }
 
-        public List<Foliage> GetActiveToppings(Vector2 sprite)
+        public List<Block> GetActiveToppings(Vector2 sprite)
         {
             throw new System.NotImplementedException();
         }

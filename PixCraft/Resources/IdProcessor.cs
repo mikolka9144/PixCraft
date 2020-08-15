@@ -7,7 +7,6 @@ namespace Engine.Resources
     public interface IIdProcessor
     {
         void ProcessSprite(Block overlay, BlockType Id);
-        void ProcessSprite(Foliage overlay, BlockType Id);
         void ProcessSprite(Fluid overlay, BlockType Id);
     }
 
@@ -95,11 +94,6 @@ namespace Engine.Resources
                 case BlockType.Sand:
                     break;
             }
-        }
-
-        public void ProcessSprite(Foliage overlay, BlockType Id)
-        {
-            ProcessColor(overlay, Id);
         }
 
         public void ProcessSprite(Fluid overlay, BlockType Id)

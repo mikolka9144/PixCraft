@@ -3,6 +3,7 @@ using Engine.Engine.models;
 using Engine.Logic.models;
 using Engine.PixBlocks_Implementations;
 using Engine.Resources;
+using Integration;
 using System;
 using System.Linq;
 using System.Threading;
@@ -116,14 +117,14 @@ namespace Engine.Logic
         {
             foreach (var b in ActiveElements.GetActiveBlocks(position))
             {
-                if (Collide(b))
+                if (Collide(b as GenericSprite))
                 {
                     if (speed > 0)
                     {
                         TicksElapsed = 0;
                         speed = -speed;
                     }
-                    else if (Collide(b.foliage) && TicksElapsed == Parameters.BlocksCollisionDelay)
+                    else if (Collide(b) && TicksElapsed == Parameters.BlocksCollisionDelay)//TODO
                         move(roation.Up, Parameters.StandUpSpeed);
                 }
             }
@@ -184,7 +185,8 @@ namespace Engine.Logic
                 if (speed > -Parameters.MaxFallSpeed) speed -= 1;
             }
         }
-
+        public bool Collide(Block block) => CollideSystem.collide(block.position, block.size + Parameters.blockSizeOffset, position, size);
+        
         private void MoveRight()
         {
             flip = false;

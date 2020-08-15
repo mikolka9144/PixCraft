@@ -7,7 +7,6 @@ namespace Engine.Engine.models
     public interface ITileManager:IActiveElements
     {
         List<Block> Blocks { get; }
-        List<Foliage> Toppings { get; }
         List<Fluid> Fluids { get; }
         void RemoveFluid(Fluid fluid);
         void AddBlockTile(Block block, bool ShouldDraw);
