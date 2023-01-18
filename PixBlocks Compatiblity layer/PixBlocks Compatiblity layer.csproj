@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -59,14 +58,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converter.cs" />
-    <Compile Include="GameScene.cs" />
-    <Compile Include="PixMouse.cs" />
-    <Compile Include="PixSprite.cs" />
+    <Compile Include="Runner-PixBlocks\Converter.cs" />
+    <Compile Include="Runner-PixBlocks\GameScene.cs" />
+    <Compile Include="Runner-PixBlocks\PixMouse.cs" />
+    <Compile Include="Runner-PixBlocks\PixSprite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sound.cs" />
-    <Compile Include="SrriteRefresher.cs" />
-    <Compile Include="StartUpScript.cs" />
+    <Compile Include="Runner-PixBlocks\Sound.cs" />
+    <Compile Include="Runner-PixBlocks\SrriteRefresher.cs" />
+    <Compile Include="Runner-PixBlocks\StartUpScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Integration\Integration.csproj">
@@ -80,6 +79,81 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Compile Include="PixCraft\Engine\Models\Block.cs" />
+    <Compile Include="PixCraft\Engine\Models\Center.cs" />
+    <Compile Include="PixCraft\Engine\Models\Fluid.cs" />
+    <Compile Include="PixCraft\Engine\Models\IEntitiesData.cs" />
+    <Compile Include="PixCraft\Engine\Models\IMover.cs" />
+    <Compile Include="PixCraft\Engine\Models\IOreTable.cs" />
+    <Compile Include="PixCraft\Engine\Models\ITileManager.cs" />
+    <Compile Include="PixCraft\Engine\Models\OreEntry.cs" />
+    <Compile Include="PixCraft\Engine\Models\Pointer.cs" />
+    <Compile Include="PixCraft\Engine\Models\SpriteOverlay.cs" />
+    <Compile Include="PixCraft\Engine\Drawer.cs" />
+    <Compile Include="PixCraft\Engine\Engine.cs" />
+    <Compile Include="PixCraft\Engine\Generator.cs" />
+    <Compile Include="PixCraft\Engine\OreTable.cs" />
+    <Compile Include="PixCraft\Engine\TileManager.cs" />
+    <Compile Include="PixCraft\Entities\MobSpawner.cs" />
+    <Compile Include="PixCraft\Entities\Monster AI.cs" />
+    <Compile Include="PixCraft\Entities\Movable object.cs" />
+    <Compile Include="PixCraft\Entities\Player.cs" />
+    <Compile Include="PixCraft\Entities\PointerController.cs" />
+    <Compile Include="PixCraft\Entities\zombie.cs" />
+    <Compile Include="PixCraft\GUI\Controls\Button.cs" />
+    <Compile Include="PixCraft\GUI\Controls\CloseButton.cs" />
+    <Compile Include="PixCraft\GUI\Controls\IndexedButton.cs" />
+    <Compile Include="PixCraft\GUI\Controls\Label.cs" />
+    <Compile Include="PixCraft\GUI\Controls\RadioList.cs" />
+    <Compile Include="PixCraft\GUI\Controls\SelectBox.cs" />
+    <Compile Include="PixCraft\GUI\Forms\CraftingForm.cs" />
+    <Compile Include="PixCraft\GUI\Forms\InventoryForm.cs" />
+    <Compile Include="PixCraft\GUI\Forms\LoadWorldForm.cs" />
+    <Compile Include="PixCraft\GUI\Forms\MainMenu.cs" />
+    <Compile Include="PixCraft\GUI\Forms\NewWorldForm.cs" />
+    <Compile Include="PixCraft\GUI\Forms\PauseForm.cs" />
+    <Compile Include="PixCraft\GUI\Forms\SaveWorldForm.cs" />
+    <Compile Include="PixCraft\GUI\Models\Form.cs" />
+    <Compile Include="PixCraft\GUI\Models\PixControl.cs" />
+    <Compile Include="PixCraft\GUI\Models\SelectionEventArgs.cs" />
+    <Compile Include="PixCraft\GUI\Models\StaticExtensions.cs" />
+    <Compile Include="PixCraft\Logic\models\CraftingEntry.cs" />
+    <Compile Include="PixCraft\Logic\models\Interfances.cs" />
+    <Compile Include="PixCraft\Logic\models\Item.cs" />
+    <Compile Include="PixCraft\Logic\CraftingModule.cs" />
+    <Compile Include="PixCraft\Logic\PlayerStatus.cs" />
+    <Compile Include="PixCraft\Resources\Parameters\IDrawerParameters.cs" />
+    <Compile Include="PixCraft\Resources\Parameters\IGeneratorParameters.cs" />
+    <Compile Include="PixCraft\Resources\Parameters\IMovableObjectParameters.cs" />
+    <Compile Include="PixCraft\Resources\Parameters\IPlayerStatusParameters.cs" />
+    <Compile Include="PixCraft\Resources\Parameters\IPointerControllerParameters.cs" />
+    <Compile Include="PixCraft\Resources\Parameters\ITileManagerParameters.cs" />
+    <Compile Include="PixCraft\Resources\Parameters\Paramters.cs" />
+    <Compile Include="PixCraft\Resources\Craftings.cs" />
+    <Compile Include="PixCraft\Resources\directions.cs" />
+    <Compile Include="PixCraft\Resources\IdProcessor.cs" />
+    <Compile Include="PixCraft\Resources\IMoveDefiner.cs" />
+    <Compile Include="PixCraft\Resources\ItemsProperties.cs" />
+    <Compile Include="PixCraft\Resources\Ores.cs" />
+    <Compile Include="PixCraft\Resources\Sounds.cs" />
+    <Compile Include="PixCraft\Saves\Models\BlockTemplate.cs" />
+    <Compile Include="PixCraft\Saves\Models\FluidTemplate.cs" />
+    <Compile Include="PixCraft\Saves\Models\Save.cs" />
+    <Compile Include="PixCraft\Saves\Models\WorldEntry.cs" />
+    <Compile Include="PixCraft\Saves\BlockConverter.cs" />
+    <Compile Include="PixCraft\Saves\SaveManager.cs" />
+    <Compile Include="PixCraft\IStoppableSpriteOverlay.cs" />
+    <Compile Include="PixCraft\StartUp.cs" />
+    <Compile Include="Generic\Sound\IPixSound.cs" />
+    <Compile Include="Generic\Sound\ISound.cs" />
+    <Compile Include="Generic\Sound\PixSound.cs" />
+    <Compile Include="Generic\Sound\SoundType.cs" />
+    <Compile Include="Generic\CollideSystem.cs" />
+    <Compile Include="Generic\Color.cs" />
+    <Compile Include="Generic\IGameScene.cs" />
+    <Compile Include="Generic\IMouse.cs" />
+    <Compile Include="Generic\Vector2.cs" />
+    <Compile Include="Generic\GenericSprite.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
