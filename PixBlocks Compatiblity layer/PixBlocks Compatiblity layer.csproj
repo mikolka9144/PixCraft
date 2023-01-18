@@ -30,23 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IronPython, Version=2.6.10920.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.6.1\lib\Net40\IronPython.dll</HintPath>
-    </Reference>
-    <Reference Include="IronPython.Modules, Version=2.6.10920.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.6.1\lib\Net40\IronPython.Modules.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Dynamic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.6.1\lib\Net40\Microsoft.Dynamic.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Scripting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.6.1\lib\Net40\Microsoft.Scripting.dll</HintPath>
-    </Reference>
     <Reference Include="PixBlocks">
-      <HintPath>..\PixBlocks.exe</HintPath>
+      <HintPath>..\PixDeps\PixBlocks.exe</HintPath>
     </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <Reference Include="IronPython">
+      <HintPath>..\PixDeps\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" >
+      <HintPath>..\PixDeps\PresentationCore.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" >
+      <HintPath>..\PixDeps\PresentationFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -66,16 +61,6 @@
     <Compile Include="Runner-PixBlocks\Sound.cs" />
     <Compile Include="Runner-PixBlocks\SrriteRefresher.cs" />
     <Compile Include="Runner-PixBlocks\StartUpScript.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Integration\Integration.csproj">
-      <Project>{B3BFC85A-C539-49DC-B31A-47857454436A}</Project>
-      <Name>Integration</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PixCraft\PixCraft.csproj">
-      <Project>{4C5AF3C3-B6BE-47BB-9749-26839F5E5B5B}</Project>
-      <Name>PixCraft</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
