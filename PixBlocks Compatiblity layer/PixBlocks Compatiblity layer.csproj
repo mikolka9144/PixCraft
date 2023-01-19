@@ -36,10 +36,10 @@
     <Reference Include="IronPython">
       <HintPath>..\PixDeps\IronPython.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationCore" >
+    <Reference Include="PresentationCore">
       <HintPath>..\PixDeps\PresentationCore.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationFramework" >
+    <Reference Include="PresentationFramework">
       <HintPath>..\PixDeps\PresentationFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -63,7 +63,6 @@
     <Compile Include="Runner-PixBlocks\StartUpScript.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <Compile Include="PixCraft\Engine\Models\Block.cs" />
     <Compile Include="PixCraft\Engine\Models\Center.cs" />
     <Compile Include="PixCraft\Engine\Models\Fluid.cs" />

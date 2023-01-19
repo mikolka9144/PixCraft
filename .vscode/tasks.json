@@ -4,10 +4,11 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "build_Pix",
             "type": "shell",
             "command": "msbuild",
             "args": [
+                "./PixBlocks Compatiblity layer/PixBlocks Compatiblity layer.csproj",
                 // Ask msbuild to generate full paths for file names.
                 "/property:GenerateFullPaths=true",
                 "/t:build",
@@ -20,7 +21,28 @@
                 "reveal": "silent"
             },
             // Use the standard MS compiler pattern to detect errors, warnings and infos
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            
+        },
+        {
+            "label": "build",
+            "dependsOn":[
+                "build_Pix"
+            ],
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "build",
+                // Ask msbuild to generate full paths for file names.
+                "${workspaceFolder}/Base64Compiler/Base64Compiler.csproj"
+            ],
+            "group": "build",
+            "presentation": {
+                // Reveal the output only if unrecognized errors occur.
+                "reveal": "silent"
+            },
+            // Use the standard MS compiler pattern to detect errors, warnings and infos
+            "problemMatcher": "$msCompile",
         }
     ]
 }

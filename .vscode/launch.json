@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/<target-framework>/<project-name.dll>",
+            "program": "${workspaceFolder}/Base64Compiler/bin/Debug/net7.0/Base64Compiler.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
