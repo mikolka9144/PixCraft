@@ -11,10 +11,10 @@ namespace Engine.Engine
     {
         public List<Block> VisiableBlocks => Blocks.FindAll(s =>s.IsVisible).ToList();
 
-        public List<Block> Blocks { get; } = new List<Block>();
+        public List<List<Block>> Blocks { get; } = new List<List<Block>>();
 
         
-        public List<Fluid> Fluids { get; } = new List<Fluid>();
+        public List<Block>
         public ITileManagerParameters parameters { get; }
 
         private readonly IDrawer drawer;
@@ -60,7 +60,7 @@ namespace Engine.Engine
 
         public void AddBlockTile(Block block, bool ShouldDraw)
         {
-            Blocks.Add(block);
+            Blocks
             if (ShouldDraw)
             {
                 drawer.Draw(block);
@@ -85,33 +85,7 @@ namespace Engine.Engine
             return GetActiveBlocks(new Vector2(0,0)).Any(s => s.Id == station);
         }
 
-        public bool AddFluid(int BlockX, int BlockY, BlockType Id, bool replace)
-        {
-            var x = Parameters.BlockSize;
-            var currentBlock = Blocks.Find(s => (s.position.x / x) == BlockX && s.position.y / x == BlockY);
-            if (currentBlock != null)
-            {
-                if (replace)
-                {
-
-                    Blocks.Remove(currentBlock);
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            AddFluid(new Fluid(BlockX * x, BlockY * x, Id, drawer, processor));
-            return true;
-        }
-        public void RemoveFluid(Fluid fluid)
-        {
-            Fluids.Remove(fluid);
-            drawer.remove(fluid);
-        }
-
-        public void AddFluid(Fluid block) => Fluids.Add(block);
-
+        
         
         public List<Block> GetActiveBlocks(Vector2 sprite)
         {

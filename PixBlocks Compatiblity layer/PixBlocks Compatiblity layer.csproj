@@ -138,6 +138,7 @@
     <Compile Include="Generic\IMouse.cs" />
     <Compile Include="Generic\Vector2.cs" />
     <Compile Include="Generic\GenericSprite.cs" />
+    <Compile Include="PixCraft\Engine\Models\BlockType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -68,10 +68,6 @@ namespace Engine.Engine
             {
                 spriteOverlay.move(roation, lenght);
             }
-            foreach (var item in manager.Fluids)
-            {
-                item.move(roation, lenght);
-            }
             Center.move(roation, lenght);
         }
     }

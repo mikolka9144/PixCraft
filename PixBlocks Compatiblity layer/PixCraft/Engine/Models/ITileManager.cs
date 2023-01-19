@@ -6,9 +6,7 @@ namespace Engine.Engine.models
 {
     public interface ITileManager:IActiveElements
     {
-        List<Block> Blocks { get; }
-        List<Fluid> Fluids { get; }
-        void RemoveFluid(Fluid fluid);
+        List<List<Block>> Blocks { get; }
         void AddBlockTile(Block block, bool ShouldDraw);
         void AddFluid(Fluid block);
 
@@ -16,7 +14,6 @@ namespace Engine.Engine.models
         ///Creates a block with collision check
         ///</summary>
         void AddBlockTile(int BlockX, int BlockY, BlockType Id, bool replace, bool forceReplace = false, bool Draw = false);
-        bool AddFluid(int BlockX, int BlockY, BlockType Id, bool replace);
 
         ///<summary>
         ///Creates a block without collision check
@@ -26,6 +23,6 @@ namespace Engine.Engine.models
         void RemoveTile(Block tile);
 
         void PlaceBlock(int x, int y, BlockType blockType);
-        void AddFluid(int x, int y, BlockType type);
+
     }
 }
