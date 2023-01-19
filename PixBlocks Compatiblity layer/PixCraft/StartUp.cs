@@ -21,7 +21,7 @@ namespace Engine
         public Engine.Engine engine { get; }
         public PointerController pointerController { get; }
         internal Player player { get; }
-        internal MobSpawner MobSpawner { get; }
+        // internal MobSpawner MobSpawner { get; }
         public IPixSound Sound { get; }
         internal Drawer Drawer { get; }
         internal Generator Generator { get; }
@@ -46,7 +46,7 @@ namespace Engine
             var oreTable = new OreTable(OreResource.InitOreTable());
             pointerController = new PointerController(playerstatus, tileManager, moveDefiner, Drawer, Sound, parameters, engine,mouse);
             player = new Player(pauseMenu, tileManager, moveDefiner, playerstatus, Drawer, engine, Sound, parameters,gameScene,pointerController);
-            MobSpawner = new MobSpawner(engine, tileManager, Drawer, Sound, player);
+            // MobSpawner = new MobSpawner(engine, tileManager, Drawer, Sound, player);
             Generator = new Generator(tileManager, oreTable, Drawer, parameters);
 
         }
@@ -91,7 +91,7 @@ namespace Engine
             engine.Add(pointerController);
             
             GameScene.background = new Color(102, 51, 204);
-            GameScene.add(MobSpawner);
+            // GameScene.add(MobSpawner);
             engine.Render();
 
             engine.Add(player);
