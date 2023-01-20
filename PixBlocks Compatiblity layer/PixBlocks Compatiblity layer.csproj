@@ -65,7 +65,6 @@
   <ItemGroup>
     <Compile Include="PixCraft\Engine\Models\LEDBlockTile.cs" />
     <Compile Include="PixCraft\Engine\Models\Center.cs" />
-    <Compile Include="PixCraft\Engine\Models\Fluid.cs" />
     <Compile Include="PixCraft\Engine\Models\IEntitiesData.cs" />
     <Compile Include="PixCraft\Engine\Models\IMover.cs" />
     <Compile Include="PixCraft\Engine\Models\IOreTable.cs" />

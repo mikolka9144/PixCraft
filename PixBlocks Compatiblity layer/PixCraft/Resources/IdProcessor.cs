@@ -8,7 +8,7 @@ namespace Engine.Resources
     public interface IIdProcessor
     {
         void ProcessSprite(LEDBlockTile overlay, BlockType Id);
-        void ProcessSprite(Fluid overlay, BlockType Id);
+
     }
 
     public class BlockIdProcessor : IIdProcessor
@@ -21,7 +21,6 @@ namespace Engine.Resources
         {
             if(Id == BlockType.None){
                 overlay.size = 0;
-                return;
             }
             else
             {
@@ -125,10 +124,6 @@ namespace Engine.Resources
             }
         }
 
-        public void ProcessSprite(Fluid overlay, BlockType Id)
-        {
-            ProcessColor(overlay, Id);
-        }
 
         private void ProcessColor(SpriteOverlay overlay, BlockType Id)
         {

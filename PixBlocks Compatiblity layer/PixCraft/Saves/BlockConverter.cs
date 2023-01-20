@@ -17,40 +17,22 @@ namespace Engine.Saves
         public IDrawer Drawer { get; }
         public IIdProcessor Processor { get; }
 
-        public List<Fluid> Convert(List<FluidTemplate> blocks, int CenterX, int CenterY)
+        public List<BlockData> Convert(List<BlockTemplate> blocks)
         {
-            var list = new List<Fluid>();
+            var list = new List<BlockData>();
             foreach (var item in blocks)
             {
-                list.Add(new Fluid(item.X - CenterX, item.Y - CenterY, item.Id, Drawer, Processor));
-            }
-            return list;
-        }
-        public List<LEDBlockTile> Convert(List<BlockTemplate> blocks, int CenterX, int CenterY)
-        {
-            var list = new List<LEDBlockTile>();
-            foreach (var item in blocks)
-            {
-               //! list.Add(new Block(item.X - CenterX, item.Y - CenterY, item.Id, Drawer, Processor));
+                list.Add(new BlockData(item.X , item.Y , item.Id));
             }
             return list;
         }
 
-        public List<BlockTemplate> Convert(List<LEDBlockTile> blocks)
+        public List<BlockTemplate> Convert(List<BlockData> blocks)
         {
             var list = new List<BlockTemplate>();
             foreach (var item in blocks)
             {
-                list.Add(new BlockTemplate(item.Id, item.position.y, item.position.x));
-            }
-            return list;
-        }
-        public List<FluidTemplate> Convert(List<Fluid> blocks)
-        {
-            var list = new List<FluidTemplate>();
-            foreach (var item in blocks)
-            {
-                list.Add(new FluidTemplate(item.Id, item.position.y, item.position.x));
+                list.Add(new BlockTemplate(item.Type, item.Y, item.X));
             }
             return list;
         }
