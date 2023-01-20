@@ -88,7 +88,8 @@ namespace Engine.Logic
 
             foreach (var b in Tiles.LEDBlocks)
             {
-                if (CollideSystem.collide(b,this) && b.Data.Type == BlockType.None){
+                if (CollideSystem.collide(b.position,Resources.Parameters.BlockSize,this.position,this.size) && b.Data.Type == BlockType.None)
+                {
                     Tiles.AddBlockTile(b.Data.X,b.Data.Y,blockType.Type);
                     status.Decrement(blockType.Type, 1);
                     Sound.PlaySound(SoundType.Place);
@@ -110,7 +111,7 @@ namespace Engine.Logic
                 if (BreakingTicks>= blockToBreak.Durablity)
                 {
                     CheckMinPower(blockType);
-                    Tiles.RemoveTile(blockToBreak);
+                    Tiles.DestroyTileAt(blockToBreak);
                     Sound.PlaySound(SoundType.Break);
                     DamageTool(blockType);
                     BreakingTicks = 0;

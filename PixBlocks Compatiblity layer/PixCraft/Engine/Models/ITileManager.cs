@@ -19,7 +19,7 @@ namespace Engine.Engine.models
         ///</summary>
         void AddBlockTile(int BlockX, int BlockY, BlockType Id);
 
-        void RemoveTile(LEDBlockTile tile);
+        void DestroyTileAt(LEDBlockTile tile);
 
     }
 }

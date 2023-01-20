@@ -35,7 +35,7 @@ namespace Engine.Engine
             this.size = size;
 
             GenerateTerrian(); //* no water for YOU
-           // GenerateWater(); 
+            GenerateWater(); 
             GenerateTrees();
             GenerateOres(BlockType.CoalOre);
             GenerateOres(BlockType.IronOre);
@@ -93,24 +93,25 @@ namespace Engine.Engine
             }
         }
 
-        // private void GenerateWater()
-        // {           
-        //     for (int X = -size; X < size; X++)
-        //     {
-        //         bool FirstBlock = true;
-        //         for (int i = parameters.WaterLevel; i > -1; i--)
-        //         {
-        //             var placedFluid = manager.AddFluid(X, i, BlockType.Water,false);                 
-        //             if (!placedFluid) 
-        //             {
-        //                 if (FirstBlock) break;
-        //                 manager.World.SetBlock(X, i, BlockType.Sand,true,true);
-        //                 break;
-        //             }
-        //             FirstBlock = false;
-        //         }
-        //     }
-        // }
+        private void GenerateWater()
+        {           
+            for (int X = -size; X < size; X++)
+            {
+                bool FirstBlock = true;
+                for (int i = parameters.WaterLevel; i > -1; i--)
+                {
+                    var placedFluid = world.SetBlock(X, i, BlockType.Water);                 
+                    if (!placedFluid) 
+                    {
+                        if (FirstBlock) break;
+                        world.RemoveBlock(world.GetBlock(X,i));
+                        world.SetBlock(X, i, BlockType.Sand);
+                        break;
+                    }
+                    FirstBlock = false;
+                }
+            }
+        }
 
         private void generateTree(int X, int Y)
         {

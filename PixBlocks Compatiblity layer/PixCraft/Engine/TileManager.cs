@@ -109,10 +109,11 @@ namespace Engine.Engine
             }
             
         }
-        public void RemoveTile(LEDBlockTile tile)
+        public void DestroyTileAt(LEDBlockTile tile)
         {
             World.RemoveBlock(tile.Data);
             tile.morphInto(World.GetBlock(tile.Data.X,tile.Data.Y),processor);
+            
         }
 
         public bool IsStationNearby(BlockType station)
@@ -125,21 +126,17 @@ namespace Engine.Engine
         
         public List<LEDBlockTile> GetActiveBlocks(Vector2 sprite)
         {
-            return LEDBlocks.FindAll(s => s.Data.Type != BlockType.None).FindAll(s => s.IsInRange(parameters.hitboxArea, sprite) && s.position.y > parameters.blockTypeBorder + sprite.y);
+            return LEDBlocks.FindAll(s => s.Data.Type != BlockType.None && !s.IsFluid).FindAll(s => s.IsInRange(parameters.hitboxArea, sprite) && s.position.y > parameters.blockTypeBorder + sprite.y);
         }
         public List<LEDBlockTile> GetActiveToppings(Vector2 sprite)
         {
-            return LEDBlocks.FindAll(s => s.Data.Type != BlockType.None).FindAll(s => s.IsInRange(parameters.hitboxArea, sprite) && s.position.y <= parameters.blockTypeBorder+sprite.y);
+            return LEDBlocks.FindAll(s => s.Data.Type != BlockType.None && !s.IsFluid).FindAll(s => s.IsInRange(parameters.hitboxArea, sprite) && s.position.y <= parameters.blockTypeBorder+sprite.y);
         }
 
         public List<LEDBlockTile> GetActiveFluids(Vector2 sprite)
         {
             //return Fluids.FindAll(s => s.IsInRange(parameters.hitboxArea,sprite)).ToList();
-            return LEDBlocks.FindAll(s => s.IsInRange(parameters.hitboxArea,sprite)
-            &&
-                s.Data.Type == BlockType.Lava || 
-                s.Data.Type == BlockType.Water)
-            .ToList();
+            return LEDBlocks.FindAll(s => s.IsInRange(parameters.hitboxArea,sprite)&& s.IsFluid).ToList();
         }
     }
 }

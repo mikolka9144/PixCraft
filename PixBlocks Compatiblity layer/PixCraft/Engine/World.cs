@@ -9,7 +9,7 @@ namespace Engine.Engine
 {
     public class World
     {
-        private List<BlockData> baseWorld = new List<BlockData>();
+        private HashSet<BlockData> baseWorld = new HashSet<BlockData>(new BlockDataCompare());
 
         /// Gets block at specifyed position or returns null if absent
         public BlockData GetBlock(int blockX, int blockY)
@@ -19,19 +19,32 @@ namespace Engine.Engine
             if(block == null) return new BlockData(blockX,blockY,BlockType.None);
             else return block;
         }
-        public List<BlockData> GetAllThat(Predicate<BlockData> predicate){
-            return baseWorld.FindAll(predicate);
+        public List<BlockData> GetAllThat(Func<BlockData,bool> predicate){
+            return baseWorld.Where(predicate).ToList();
         }
-        public void SetBlock(int BlockX,int BlockY,BlockType type){
-            baseWorld.Add(new BlockData(BlockX,BlockY,type));
+        public bool SetBlock(int BlockX,int BlockY,BlockType type){
+            return baseWorld.Add(new BlockData(BlockX,BlockY,type));
         }
-        public void SetBlock(BlockData block){
-            baseWorld.Add(block);
+        public bool SetBlock(BlockData block){
+            return baseWorld.Add(block);
         }
         public void RemoveBlock(BlockData block){
             baseWorld.Remove(block);
         }
+        private class BlockDataCompare : IEqualityComparer<BlockData>
+        {
+            public bool Equals(BlockData x, BlockData y)
+            {
+                return x.X == y.X && x.Y == x.Y;
+            }
+
+            public int GetHashCode(BlockData obj)
+            {
+                return obj.X.GetHashCode()+obj.Y.GetHashCode();
+            }
+        }
     }
+    
 }
 
 

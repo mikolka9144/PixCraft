@@ -19,7 +19,14 @@ namespace Engine.Resources
 
         public void ProcessSprite(LEDBlockTile overlay, BlockType Id)
         {
-            overlay.IsInvisible = Id == BlockType.None;
+            if(Id == BlockType.None){
+                overlay.size = 0;
+                return;
+            }
+            else
+            {
+                overlay.size = Parameters.BlockSize;
+            }
             ProcessColor(overlay, Id);
             if (MinableBlocks.Contains(Id)) overlay.tool = ToolType.Pixaxe;
             if (ShovelableBlocks.Contains(Id)) overlay.tool = ToolType.Shovel;

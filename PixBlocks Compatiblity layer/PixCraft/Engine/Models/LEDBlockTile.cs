@@ -11,8 +11,6 @@ namespace Engine.Engine.models
         public LEDBlockTile(int x, int y, BlockData data, IDrawer engine, IIdProcessor processor) : base(x, y, engine)
         {
             this.Data = data;
-            size = Parameters.BlockSize;
-            if (data.Type == BlockType.None) image = 2;
             processor.ProcessSprite(this, Id);
         }
         public void morphInto(BlockData data,IIdProcessor processor){
