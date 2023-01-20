@@ -1,5 +1,6 @@
 using Engine.Engine.models;
 using Engine.Logic;
+using Engine.Resources;
 using Engine.Saves.Models;
 using System.IO;
 using System.Xml.Serialization;
@@ -56,10 +57,12 @@ namespace Engine.Saves
             Status.LoadState(save.Hp, save.Items);
             foreach (var item in Converter.Convert(save.Tiles))
             {
-                 Manager.World.SetBlock(item);
+                 Manager.World.SetBlock(new BlockData(
+                    item.X+(save.CenterX/Parameters.BlockSize),
+                    item.Y+(save.CenterY/Parameters.BlockSize),
+                    item.Type
+                    ));
             }
-
-            MoveScene(save.CenterX/20, save.CenterY/20 );
         }
 
         private void MoveScene(int X, int Y)
