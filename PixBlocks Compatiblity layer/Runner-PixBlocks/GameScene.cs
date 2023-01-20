@@ -55,7 +55,7 @@ namespace PixBlocks_Compatiblity_layer
         {
             if (!SpriteViews.ContainsKey(sprite)) CreateSprite(sprite);
             GameScene.gameSceneStatic.add(SpriteViews[sprite]);
-            sprite.IsVisible = true;
+            sprite.IsInvisible = true;
             GameScenesSprites.Remove(SpriteRefresher);
             GameScenesSprites.Add(SpriteRefresher);
         }
@@ -71,7 +71,7 @@ namespace PixBlocks_Compatiblity_layer
         {
             if (!SpriteViews.ContainsKey(sprite)) return;
             GameScene.gameSceneStatic.remove(SpriteViews[sprite]);
-            sprite.IsVisible = false;
+            sprite.IsInvisible = false;
             garbageCollector.SpritesToRemove.Add(SpriteViews[sprite]);
             SpriteViews.Remove(sprite);
         }

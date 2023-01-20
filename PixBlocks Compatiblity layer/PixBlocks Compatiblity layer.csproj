@@ -63,7 +63,7 @@
     <Compile Include="Runner-PixBlocks\StartUpScript.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PixCraft\Engine\Models\Block.cs" />
+    <Compile Include="PixCraft\Engine\Models\LEDBlockTile.cs" />
     <Compile Include="PixCraft\Engine\Models\Center.cs" />
     <Compile Include="PixCraft\Engine\Models\Fluid.cs" />
     <Compile Include="PixCraft\Engine\Models\IEntitiesData.cs" />
@@ -138,7 +138,8 @@
     <Compile Include="Generic\IMouse.cs" />
     <Compile Include="Generic\Vector2.cs" />
     <Compile Include="Generic\GenericSprite.cs" />
-    <Compile Include="PixCraft\Engine\Models\BlockType.cs" />
+    <Compile Include="PixCraft\Engine\Models\BlockData.cs" />
+    <Compile Include="PixCraft\Engine\World.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

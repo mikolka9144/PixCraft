@@ -6,23 +6,20 @@ namespace Engine.Engine.models
 {
     public interface ITileManager:IActiveElements
     {
-        List<List<Block>> Blocks { get; }
-        void AddBlockTile(Block block, bool ShouldDraw);
-        void AddFluid(Fluid block);
+        World World { get; }
+        List<LEDBlockTile> LEDBlocks { get; }
 
         ///<summary>
         ///Creates a block with collision check
         ///</summary>
-        void AddBlockTile(int BlockX, int BlockY, BlockType Id, bool replace, bool forceReplace = false, bool Draw = false);
+        void AddBlockTile(int BlockX, int BlockY, BlockType Id, bool replace, bool forceReplace = false);
 
         ///<summary>
         ///Creates a block without collision check
         ///</summary>
-        void AddBlockTile(int BlockX, int BlockY, BlockType Id, bool Draw = false);
+        void AddBlockTile(int BlockX, int BlockY, BlockType Id);
 
-        void RemoveTile(Block tile);
-
-        void PlaceBlock(int x, int y, BlockType blockType);
+        void RemoveTile(LEDBlockTile tile);
 
     }
 }

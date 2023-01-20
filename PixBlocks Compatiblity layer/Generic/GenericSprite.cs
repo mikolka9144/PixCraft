@@ -14,7 +14,7 @@ namespace Integration
         public int image { get; set; } 
         public Color color { get; set; } = new Color(15, 142, 255);
         public string text { get;  set; }
-        public bool IsVisible { get;  set; }
+        public bool IsInvisible { get;  set; }
         public double angle { get; set; }
         public bool IsDestroyAble { get; }
 

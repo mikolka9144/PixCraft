@@ -18,6 +18,7 @@ namespace Engine
 
         public IGameScene GameScene { get; }
         public IMouse Mouse { get; }
+        public TileManager tileManager { get; }
         public Engine.Engine engine { get; }
         public PointerController pointerController { get; }
         internal Player player { get; }
@@ -34,7 +35,7 @@ namespace Engine
             Sound = new PixSound(new Sounds(sound));
             Drawer = new Drawer(parameters,gameScene);
             var IdProcessor = new BlockIdProcessor();
-            var tileManager = new TileManager(Drawer, IdProcessor, parameters);
+            tileManager = new TileManager(Drawer, IdProcessor, parameters);
             engine = new Engine.Engine(tileManager, Drawer);
             var craftingSystem = new CraftingModule(Craftings.GetCraftings(), tileManager);
             var StatusWindow = new InventoryForm(craftingSystem, engine,mouse,Drawer,gameScene);
@@ -47,7 +48,7 @@ namespace Engine
             pointerController = new PointerController(playerstatus, tileManager, moveDefiner, Drawer, Sound, parameters, engine,mouse);
             player = new Player(pauseMenu, tileManager, moveDefiner, playerstatus, Drawer, engine, Sound, parameters,gameScene,pointerController);
             // MobSpawner = new MobSpawner(engine, tileManager, Drawer, Sound, player);
-            Generator = new Generator(tileManager, oreTable, Drawer, parameters);
+            Generator = new Generator(tileManager.World, oreTable, Drawer, parameters);
 
         }
         private void ShowMainMenu()
@@ -92,6 +93,8 @@ namespace Engine
             
             GameScene.background = new Color(102, 51, 204);
             // GameScene.add(MobSpawner);
+            GameScene.add(tileManager);
+            tileManager.populateBoard();
             engine.Render();
 
             engine.Add(player);

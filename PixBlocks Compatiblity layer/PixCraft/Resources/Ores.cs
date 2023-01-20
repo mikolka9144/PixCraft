@@ -12,7 +12,7 @@ namespace Engine.Resources
                 new OreEntry(1,4,3,BlockType.IronOre),
                 new OreEntry(10,5,2,BlockType.GoldOre),
                 new OreEntry(15,6,1,BlockType.DiamondOre),
-                new OreEntry(10,4,2,BlockType.Lava,true)
+                new OreEntry(10,4,2,BlockType.Lava)
             };
             return list;
         }

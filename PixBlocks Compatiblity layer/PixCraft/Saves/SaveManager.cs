@@ -34,7 +34,7 @@ namespace Engine.Saves
         public void SaveToStream(Stream SaveDest)
         {
             var save = new Save();
-            save.SetUp(Converter.Convert(Manager.Blocks),Converter.Convert(Manager.Fluids), Status.health, Status.Inventory, Center.position.x, Center.position.y);
+            //! save.SetUp(Converter.Convert(Manager.World),Converter.Convert(Manager.Fluids), Status.health, Status.Inventory, Center.position.x, Center.position.y);
             Serializer.Serialize(SaveDest, save);
         }
 
@@ -56,11 +56,11 @@ namespace Engine.Saves
             Status.LoadState(save.Hp, save.Items);
             foreach (var item in Converter.Convert(save.Tiles, save.CenterX, save.CenterY))
             {
-                Manager.AddBlockTile(item, false);
+                //! Manager.AddBlockTile(item, false);
             }
             foreach (var item in Converter.Convert(save.Fluids, save.CenterX, save.CenterY))
             {
-                Manager.AddFluid(item);
+               //! Manager.AddFluid(item);
             }
             MoveScene(save.CenterX / 20 * 20, -(save.CenterY / 20 * 20));
         }

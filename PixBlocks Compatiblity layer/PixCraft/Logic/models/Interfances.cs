@@ -6,13 +6,11 @@ namespace Engine.Logic.models
 {
     public interface IActiveElements
     {
-        List<Block> GetActiveBlocks(Vector2 sprite);
+        List<LEDBlockTile> GetActiveBlocks(Vector2 sprite);
 
-        List<Block> GetActiveToppings(Vector2 sprite);
+        List<LEDBlockTile> GetActiveToppings(Vector2 sprite);
 
-        List<Fluid> GetActiveFluids(Vector2 sprite);
-
-        List<Block> VisiableBlocks { get; }
+        List<LEDBlockTile> GetActiveFluids(Vector2 sprite);
     }
     public interface INearbyBlockCheck
     {

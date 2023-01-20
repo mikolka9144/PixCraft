@@ -12,7 +12,7 @@ namespace Engine.Engine
 
         public Center Center;
         private readonly IDrawer drawer;
-
+        
         public ITileManager manager { get; }
         public List<IStoppableSpriteOverlay> Sprites { get; } = new List<IStoppableSpriteOverlay>();
         public List<IStoppableSpriteOverlay> entities { get; } = new List<IStoppableSpriteOverlay>();
@@ -38,14 +38,11 @@ namespace Engine.Engine
 
         public void Render()
         {
-            foreach (var item in manager.Blocks)
+            foreach (var item in manager.LEDBlocks)
             {
                 drawer.Draw(item);
             }
-            foreach (var item in manager.Fluids)
-            {
-                drawer.Draw(item);
-            }
+
         }
 
         internal void Start()
@@ -56,7 +53,7 @@ namespace Engine.Engine
 
         public void Move(roation roation, int lenght)
         {
-            foreach (Block block in manager.Blocks)
+            foreach (LEDBlockTile block in manager.LEDBlocks)
             {
                 block.move(roation, lenght);
             }

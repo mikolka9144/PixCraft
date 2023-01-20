@@ -1,12 +1,13 @@
 using Engine.Engine.models;
 using Integration;
+using System;
 using System.Collections.Generic;
 
 namespace Engine.Resources
 {
     public interface IIdProcessor
     {
-        void ProcessSprite(Block overlay, BlockType Id);
+        void ProcessSprite(LEDBlockTile overlay, BlockType Id);
         void ProcessSprite(Fluid overlay, BlockType Id);
     }
 
@@ -16,17 +17,38 @@ namespace Engine.Resources
         private List<BlockType> AxeableBlocks = new List<BlockType>() { BlockType.Wood};
         private List<BlockType> ShovelableBlocks = new List<BlockType>() { BlockType.Dirt};
 
-        public void ProcessSprite(Block overlay, BlockType Id)
+        public void ProcessSprite(LEDBlockTile overlay, BlockType Id)
         {
+            overlay.IsInvisible = Id == BlockType.None;
             ProcessColor(overlay, Id);
             if (MinableBlocks.Contains(Id)) overlay.tool = ToolType.Pixaxe;
             if (ShovelableBlocks.Contains(Id)) overlay.tool = ToolType.Shovel;
             if (AxeableBlocks.Contains(Id)) overlay.tool = ToolType.Axe;
             ProcessDyrablity(overlay, Id);
+            ProcessFluidabling(overlay,Id);
             ProcessRequirements(overlay);
         }
 
-        private void ProcessRequirements(Block overlay)
+        private void ProcessFluidabling(LEDBlockTile overlay, BlockType id)
+        {
+            switch (id)
+            {
+                case BlockType.Water:
+                    overlay.image = 88;
+                    overlay.IsFluid = true;
+                    return;
+                case BlockType.Lava:
+                    overlay.IsFluid = true;
+                    overlay.image = 88;
+                    return;
+                default:
+                    overlay.IsFluid = false;
+                    overlay.image = 63;
+                    return;
+            }
+        }
+
+        private void ProcessRequirements(LEDBlockTile overlay)
         {
             switch (overlay.Id)
             {
@@ -51,7 +73,7 @@ namespace Engine.Resources
             }
         }
 
-        private void ProcessDyrablity(Block block,BlockType type)
+        private void ProcessDyrablity(LEDBlockTile block,BlockType type)
         {
             block.Durablity = 20;
             switch (type)

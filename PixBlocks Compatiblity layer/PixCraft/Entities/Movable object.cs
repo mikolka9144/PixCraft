@@ -183,7 +183,7 @@ namespace Engine.Logic
                 if (speed > -Parameters.MaxFallSpeed) speed -= 1;
             }
         }
-        public bool Collide(Block block) => CollideSystem.collide(block.position, block.size + Parameters.blockSizeOffset, position, size);
+        public bool Collide(LEDBlockTile block) => CollideSystem.collide(block.position, block.size + Parameters.blockSizeOffset, position, size);
         
         private void MoveRight()
         {

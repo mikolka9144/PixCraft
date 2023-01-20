@@ -2,19 +2,17 @@ using Engine.Engine.models;
 using Engine.Logic;
 using Engine.Logic.models;
 using Engine.Resources;
+using Integration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Engine.Engine
 {
-    public class TileManager :ITileManager,INearbyBlockCheck
+    public class TileManager :GenericSprite,ITileManager,INearbyBlockCheck
     {
-        public List<Block> VisiableBlocks => Blocks.FindAll(s =>s.IsVisible).ToList();
-
-        public List<List<Block>> Blocks { get; } = new List<List<Block>>();
-
-        
-        public List<Block>
+        public List<LEDBlockTile> LEDBlocks {get;} = new List<LEDBlockTile>(100);
+        public World World { get; } = new World();
         public ITileManagerParameters parameters { get; }
 
         private readonly IDrawer drawer;
@@ -22,21 +20,33 @@ namespace Engine.Engine
 
         public TileManager(IDrawer drawer, IIdProcessor processor,ITileManagerParameters parameters)
         {
+            IsInvisible = true;
             this.drawer = drawer;
             this.processor = processor;
             this.parameters = parameters;
         }
 
-        public void AddBlockTile(int BlockX, int BlockY, BlockType Id, bool replace, bool forceReplace = false, bool Draw = false)
+        public void populateBoard()
+        {
+            for (int x = 0; x < 10; x++)
+            {
+                for (int y = 0; y < 10; y++)
+                {
+                    LEDBlocks.Add(new LEDBlockTile(100-(x*20),100-(y*20), World.GetBlock(5-x,5-y),drawer,processor));
+                }
+            }
+        }
+
+        public void AddBlockTile(int BlockX, int BlockY, BlockType Id, bool replace, bool forceReplace = false)
         {
             int x = Parameters.BlockSize;
-            var currentBlock = Blocks.Find(s => (s.position.x / x) == BlockX && s.position.y / x == BlockY);
+            var currentBlock = World.GetBlock(BlockX,BlockY);
             if (currentBlock != null)
             {
                 if (replace)
                 {
                     
-                    Blocks.Remove(currentBlock);
+                    World.RemoveBlock(currentBlock);
                 }
                 else
                 {
@@ -48,35 +58,61 @@ namespace Engine.Engine
                 return;
             }
 
-            AddBlockTile(BlockX, BlockY, Id, Draw);
+            AddBlockTile(BlockX, BlockY, Id);
         }
 
-        public void AddBlockTile(int BlockX, int BlockY, BlockType Id, bool Draw = false)
+        public void AddBlockTile(int BlockX, int BlockY, BlockType Id)
         {
             var x = Parameters.BlockSize;
-            var block = new Block(BlockX * x, BlockY * x, Id, drawer, processor);
-            AddBlockTile(block, Draw);
-        }
-
-        public void AddBlockTile(Block block, bool ShouldDraw)
-        {
-            Blocks
-            if (ShouldDraw)
+            World.SetBlock(BlockX,BlockY,Id);
+            foreach (var led in LEDBlocks)
             {
-                drawer.Draw(block);
+                if(led.Data.X == BlockX && led.Data.Y == BlockY)
+                {
+                    led.morphInto(World.GetBlock(led.Data.X,led.Data.Y),processor);
+                }
             }
         }
 
-        public void RemoveTile(Block tile)
+        public override void update()
         {
-            drawer.remove(tile);
-            Blocks.Remove(tile);
-        }
+            base.update();
+            foreach (var led in LEDBlocks)
+            {
+                
+                    var IsNotInLeftBorder = led.position.x < -parameters.border.Left;
+                    var IsNotInRightBorder =  led.position.x > parameters.border.Right; 
+                    var IsNotInUpBorder = led.position.y > parameters.border.Up; 
+                    var IsNotInDownBorder = led.position.y < -parameters.border.Down;
 
-        public void PlaceBlock(int x, int y, BlockType blockType)
+                    if (IsNotInUpBorder)
+                    {
+                        led.morphInto(World.GetBlock(led.Data.X,led.Data.Y-10),processor);
+                        led.move(roation.Down,Parameters.BlockSize*10);
+                    }
+                    else if (IsNotInDownBorder)
+                    {
+                        led.morphInto(World.GetBlock(led.Data.X,led.Data.Y+10),processor);
+                        led.move(roation.Up,Parameters.BlockSize*10);
+                    }
+                    else if (IsNotInLeftBorder)
+                    {
+                        led.morphInto(World.GetBlock(led.Data.X+10,led.Data.Y),processor);
+                        led.move(roation.Right,Parameters.BlockSize*10);
+                    }
+                    else if (IsNotInRightBorder)
+                    {
+                        led.morphInto(World.GetBlock(led.Data.X-10,led.Data.Y),processor);
+                        led.move(roation.Left,Parameters.BlockSize*10);
+                    }
+                
+            }
+            
+        }
+        public void RemoveTile(LEDBlockTile tile)
         {
-            var block = new Block(x, y, blockType, drawer, processor);
-            AddBlockTile(block, true);
+            World.RemoveBlock(tile.Data);
+            tile.morphInto(World.GetBlock(tile.Data.X,tile.Data.Y),processor);
         }
 
         public bool IsStationNearby(BlockType station)
@@ -87,25 +123,23 @@ namespace Engine.Engine
 
         
         
-        public List<Block> GetActiveBlocks(Vector2 sprite)
+        public List<LEDBlockTile> GetActiveBlocks(Vector2 sprite)
         {
-            return Blocks.FindAll(s => s.IsInRange(parameters.hitboxArea, sprite) && s.position.y > parameters.blockTypeBorder + sprite.y);
+            return LEDBlocks.FindAll(s => s.Data.Type != BlockType.None).FindAll(s => s.IsInRange(parameters.hitboxArea, sprite) && s.position.y > parameters.blockTypeBorder + sprite.y);
         }
-        public List<Block> GetActiveToppings(Vector2 sprite)
+        public List<LEDBlockTile> GetActiveToppings(Vector2 sprite)
         {
-            return Blocks.FindAll(s => s.IsInRange(parameters.hitboxArea, sprite) && s.position.y <= parameters.blockTypeBorder+sprite.y);
-        }
-
-
-        public List<Fluid> GetActiveFluids(Vector2 sprite)
-        {
-            return Fluids.FindAll(s => s.IsInRange(parameters.hitboxArea,sprite)).ToList();
+            return LEDBlocks.FindAll(s => s.Data.Type != BlockType.None).FindAll(s => s.IsInRange(parameters.hitboxArea, sprite) && s.position.y <= parameters.blockTypeBorder+sprite.y);
         }
 
-        public void AddFluid(int x, int y, BlockType type)
+        public List<LEDBlockTile> GetActiveFluids(Vector2 sprite)
         {
-            int size = Parameters.BlockSize;
-            AddFluid(new Fluid(x * size, y * size, type, drawer, processor));
+            //return Fluids.FindAll(s => s.IsInRange(parameters.hitboxArea,sprite)).ToList();
+            return LEDBlocks.FindAll(s => s.IsInRange(parameters.hitboxArea,sprite)
+            &&
+                s.Data.Type == BlockType.Lava || 
+                s.Data.Type == BlockType.Water)
+            .ToList();
         }
     }
 }

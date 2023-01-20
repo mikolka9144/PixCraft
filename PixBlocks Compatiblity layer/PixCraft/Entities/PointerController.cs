@@ -16,7 +16,7 @@ namespace Engine.Logic
         private Task ChangeStateOfPointerTask;
         private bool DestroyModeActive;
         private int BreakingTicks;
-        private Block blockToBreak;
+        private LEDBlockTile blockToBreak;
 
         public PointerController(PlayerStatus status, ITileManager engine, IMoveDefiner moveDefiner,IDrawer drawer,IPixSound sound,IPointerControllerParameters parameters,IEntitiesData entities,IMouse mouse):base(drawer)
         {
@@ -59,7 +59,7 @@ namespace Engine.Logic
         {
             if (!IsInRange(Parameters.PointerRange))
             {
-                position = Tiles.VisiableBlocks.First().position.Clone();
+                position = Tiles.LEDBlocks.First().position.Clone();
             }
         }
 
@@ -86,20 +86,16 @@ namespace Engine.Logic
             if (blockType is null) return;
             if (!blockType.IsPlaceable) return;
 
-            foreach (var b in Tiles.VisiableBlocks)
+            foreach (var b in Tiles.LEDBlocks)
             {
-                if (CollideSystem.collide(b,this)) return;
+                if (CollideSystem.collide(b,this) && b.Data.Type == BlockType.None){
+                    Tiles.AddBlockTile(b.Data.X,b.Data.Y,blockType.Type);
+                    status.Decrement(blockType.Type, 1);
+                    Sound.PlaySound(SoundType.Place);
+                    return;
+                }
             }
-            Tiles.PlaceBlock(position.x, position.y, blockType.Type);
-            status.Decrement(blockType.Type, 1);
-            RemoveOverlappingWater();
-            Sound.PlaySound(SoundType.Place);
-        }
-
-        private void RemoveOverlappingWater()
-        {
-            var fluidToRemove = Tiles.Fluids.Find(s => CollideSystem.collide(s,this));
-            if (fluidToRemove != null) Tiles.RemoveFluid(fluidToRemove);
+            
         }
 
         private void DestroyBlock()
@@ -121,9 +117,9 @@ namespace Engine.Logic
                     return;
                 }
             }
-            foreach (var b in Tiles.VisiableBlocks)
+            foreach (var b in Tiles.LEDBlocks)
             {
-                if (CollideSystem.collide(b,this))
+                if (CollideSystem.collide(b,this) && b.Data.Type != BlockType.None)
                 {
                     blockToBreak = b;
                     BreakingTicks++;

@@ -31,7 +31,7 @@ namespace Engine.Engine
         // Token: 0x0600001A RID: 26 RVA: 0x000026D8 File Offset: 0x000008D8
         private void AddSpriteToGame(GenericSprite sprite)
         {
-            if (!sprite.IsVisible)
+            if (!sprite.IsInvisible)
             {
                 GameScene.add(sprite);
             }

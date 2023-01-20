@@ -3,7 +3,7 @@ using Engine.Engine.models;
 using Engine.Resources;
 using Engine.Saves.Models;
 using System.Collections.Generic;
-
+//TODO Fix Saving
 namespace Engine.Saves
 {
     public class BlockConverter
@@ -26,17 +26,17 @@ namespace Engine.Saves
             }
             return list;
         }
-        public List<Block> Convert(List<BlockTemplate> blocks, int CenterX, int CenterY)
+        public List<LEDBlockTile> Convert(List<BlockTemplate> blocks, int CenterX, int CenterY)
         {
-            var list = new List<Block>();
+            var list = new List<LEDBlockTile>();
             foreach (var item in blocks)
             {
-                list.Add(new Block(item.X - CenterX, item.Y - CenterY, item.Id, Drawer, Processor));
+               //! list.Add(new Block(item.X - CenterX, item.Y - CenterY, item.Id, Drawer, Processor));
             }
             return list;
         }
 
-        public List<BlockTemplate> Convert(List<Block> blocks)
+        public List<BlockTemplate> Convert(List<LEDBlockTile> blocks)
         {
             var list = new List<BlockTemplate>();
             foreach (var item in blocks)
